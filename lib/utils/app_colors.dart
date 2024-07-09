@@ -157,4 +157,10 @@ class AppColors {
       Color(0xff4f4f52),
     ],
   );
+
+
+  /// from figma
+  static const hintColor = Color.fromRGBO(164, 164, 164, 1);
+  static const fieldColor = Color.fromRGBO(242, 242, 242, 1);
+  static const errorColor = Color.fromRGBO(193, 18, 31, 1);
 }

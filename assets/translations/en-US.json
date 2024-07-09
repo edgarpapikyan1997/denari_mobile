@@ -1,5 +1,13 @@
 {
+  "app_name": "Denari",
   "main" : {
     "homePage" : "Home Page"
+  },
+  "sign" : {
+    "welcome_to": "Welcome to",
+    "sms_description": "We'll send you an SMS to complete your registration",
+    "email": "Email",
+    "password": "Password",
+    "phone": "Phone"
   }
 }

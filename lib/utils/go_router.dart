@@ -1,11 +1,9 @@
-import 'package:denari_app/presenter/screens/gift_cards_screen.dart';
-import 'package:denari_app/presenter/screens/notification_screen.dart';
-import 'package:denari_app/presenter/screens/settings_screen.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter/material.dart';
-
-import '../presenter/screens/main_screen_screen.dart';
-import '../presenter/widgets/scaffold_nav_bar.dart';
+import '../view/screens/gift_cards_screen.dart';
+import '../view/screens/main_screen_screen.dart';
+import '../view/screens/notification_screen.dart';
+import '../view/screens/settings_screen.dart';
+import '../view/widgets/scaffold_nav_bar.dart';
 
 final GoRouter router = GoRouter(routes: [
   ShellRoute(

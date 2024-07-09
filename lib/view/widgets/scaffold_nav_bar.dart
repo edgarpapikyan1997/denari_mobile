@@ -1,4 +1,9 @@
+import 'package:denari_app/utils/extensions/context_extension.dart';
+import 'package:denari_app/utils/themes/app_colors.dart';
+import 'package:denari_app/utils/themes/dark_theme.dart';
+import 'package:denari_app/utils/themes/light_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
 
 class ScaffoldNavBar extends StatefulWidget {
@@ -12,13 +17,23 @@ class ScaffoldNavBar extends StatefulWidget {
 
 class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
   int selectedValue = 0;
-  PageController pageController = PageController(initialPage:0);
+  PageController pageController = PageController(initialPage: 0);
+  ThemeData theme = SchedulerBinding.instance.platformDispatcher
+      .platformBrightness == Brightness.dark ? darkTheme : lightTheme;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: theme.navigationBarTheme.backgroundColor,
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: TextStyle(color: Colors.blue,),
         unselectedLabelStyle: TextStyle(color: Colors.black),

@@ -4,10 +4,22 @@
     "homePage" : "Home Page"
   },
   "sign" : {
+    "in": "Sign in",
+    "out": "Sign out",
     "welcome_to": "Welcome to",
     "sms_description": "We'll send you an SMS to complete your registration",
     "email": "Email",
     "password": "Password",
-    "phone": "Phone"
+    "phone": "Phone",
+    "name": "Name",
+    "optional": "optional",
+    "create_now": "Create now",
+    "already_account": "Already have an account?",
+    "or_continue": "Or continue with",
+    "with_google": "Sign In with Google",
+    "with_facebook": "Sign In with Facebook",
+    "sent_code": "We sent you an SMS code",
+    "on_number": "On number",
+    "incorrect_code": "Incorrect code"
   }
 }

@@ -1,16 +1,18 @@
 import 'package:denari_app/utils/app_colors.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 
 import 'decoration_field.dart';
 
-class EditField extends StatefulWidget {
+class PhoneField extends StatefulWidget {
   final TextEditingController? controller;
   final String hint;
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<PhoneNumber>? onChanged;
   final bool optional;
 
-  const EditField({
+  const PhoneField({
     super.key,
     required this.hint,
     this.controller,
@@ -19,10 +21,10 @@ class EditField extends StatefulWidget {
   });
 
   @override
-  State<EditField> createState() => _EditFieldState();
+  State<PhoneField> createState() => _PhoneFieldState();
 }
 
-class _EditFieldState extends State<EditField> {
+class _PhoneFieldState extends State<PhoneField> {
   late final TextEditingController _controller;
 
   String get _hint =>
@@ -42,11 +44,12 @@ class _EditFieldState extends State<EditField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return IntlPhoneField(
       controller: _controller,
       style: context.theme.headline5.copyWith(
         color: AppColors.dark,
       ),
+      disableLengthCheck: true,
       onChanged: widget.onChanged,
       decoration: DecorationField(
         context: context,

@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import '../view/screens/gift_cards_screen.dart';
-import '../view/screens/main_screen_screen.dart';
+import '../view/screens/main_screen.dart';
 import '../view/screens/notification_screen.dart';
 import '../view/screens/settings_screen.dart';
 import '../view/widgets/scaffold_nav_bar.dart';

@@ -48,7 +48,7 @@ extension ThemeDataHelper on ThemeData {
         color: AppColors.black,
         fontFamily: FontFamily.onest,
         fontWeight: FontWeight.w600,
-        fontSize: 18,
+        fontSize: 20,
         height: 1.20,
       );
 
@@ -58,6 +58,14 @@ extension ThemeDataHelper on ThemeData {
         fontWeight: FontWeight.w600,
         fontSize: 16,
         height: 1.20,
+      );
+
+  TextStyle get headline5 => const TextStyle(
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w700,
+        fontSize: 22,
+        height: 1.26,
       );
 
   TextStyle get body1 => const TextStyle(

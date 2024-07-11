@@ -17,6 +17,9 @@ class $AssetsMediaGen {
 
   /// Directory path: assets/media/icons
   $AssetsMediaIconsGen get icons => const $AssetsMediaIconsGen();
+
+  /// Directory path: assets/media/images
+  $AssetsMediaImagesGen get images => const $AssetsMediaImagesGen();
 }
 
 class $AssetsTranslationsGen {
@@ -32,6 +35,24 @@ class $AssetsTranslationsGen {
 class $AssetsMediaIconsGen {
   const $AssetsMediaIconsGen();
 
+  /// File path: assets/media/icons/Activities.svg
+  SvgGenImage get activities =>
+      const SvgGenImage('assets/media/icons/Activities.svg');
+
+  /// File path: assets/media/icons/Beauty.svg
+  SvgGenImage get beauty => const SvgGenImage('assets/media/icons/Beauty.svg');
+
+  /// File path: assets/media/icons/Clothing.svg
+  SvgGenImage get clothing =>
+      const SvgGenImage('assets/media/icons/Clothing.svg');
+
+  /// File path: assets/media/icons/Groceries.svg
+  SvgGenImage get groceries =>
+      const SvgGenImage('assets/media/icons/Groceries.svg');
+
+  /// File path: assets/media/icons/Other.svg
+  SvgGenImage get other => const SvgGenImage('assets/media/icons/Other.svg');
+
   /// File path: assets/media/icons/Token.svg
   SvgGenImage get token => const SvgGenImage('assets/media/icons/Token.svg');
 
@@ -39,11 +60,53 @@ class $AssetsMediaIconsGen {
   SvgGenImage get creditCard1 =>
       const SvgGenImage('assets/media/icons/credit-card-1.svg');
 
+  /// File path: assets/media/icons/credit-card-sync.svg
+  SvgGenImage get creditCardSync =>
+      const SvgGenImage('assets/media/icons/credit-card-sync.svg');
+
+  /// File path: assets/media/icons/drawer-send.svg
+  SvgGenImage get drawerSend =>
+      const SvgGenImage('assets/media/icons/drawer-send.svg');
+
+  /// File path: assets/media/icons/food.svg
+  SvgGenImage get food => const SvgGenImage('assets/media/icons/food.svg');
+
+  /// File path: assets/media/icons/qr-code.svg
+  SvgGenImage get qrCode => const SvgGenImage('assets/media/icons/qr-code.svg');
+
   /// File path: assets/media/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/media/icons/search.svg');
 
+  /// File path: assets/media/icons/travel.svg
+  SvgGenImage get travel => const SvgGenImage('assets/media/icons/travel.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [token, creditCard1, search];
+  List<SvgGenImage> get values => [
+        activities,
+        beauty,
+        clothing,
+        groceries,
+        other,
+        token,
+        creditCard1,
+        creditCardSync,
+        drawerSend,
+        food,
+        qrCode,
+        search,
+        travel
+      ];
+}
+
+class $AssetsMediaImagesGen {
+  const $AssetsMediaImagesGen();
+
+  /// File path: assets/media/images/Coffe.png
+  AssetGenImage get coffe =>
+      const AssetGenImage('assets/media/images/Coffe.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [coffe];
 }
 
 class Assets {
@@ -51,6 +114,87 @@ class Assets {
 
   static const $AssetsMediaGen media = $AssetsMediaGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
+}
+
+class AssetGenImage {
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
+
+  final String _assetName;
+
+  final Size? size;
+  final Set<String> flavors;
+
+  Image image({
+    Key? key,
+    AssetBundle? bundle,
+    ImageFrameBuilder? frameBuilder,
+    ImageErrorWidgetBuilder? errorBuilder,
+    String? semanticLabel,
+    bool excludeFromSemantics = false,
+    double? scale,
+    double? width,
+    double? height,
+    Color? color,
+    Animation<double>? opacity,
+    BlendMode? colorBlendMode,
+    BoxFit? fit,
+    AlignmentGeometry alignment = Alignment.center,
+    ImageRepeat repeat = ImageRepeat.noRepeat,
+    Rect? centerSlice,
+    bool matchTextDirection = false,
+    bool gaplessPlayback = false,
+    bool isAntiAlias = false,
+    String? package,
+    FilterQuality filterQuality = FilterQuality.low,
+    int? cacheWidth,
+    int? cacheHeight,
+  }) {
+    return Image.asset(
+      _assetName,
+      key: key,
+      bundle: bundle,
+      frameBuilder: frameBuilder,
+      errorBuilder: errorBuilder,
+      semanticLabel: semanticLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      scale: scale,
+      width: width,
+      height: height,
+      color: color,
+      opacity: opacity,
+      colorBlendMode: colorBlendMode,
+      fit: fit,
+      alignment: alignment,
+      repeat: repeat,
+      centerSlice: centerSlice,
+      matchTextDirection: matchTextDirection,
+      gaplessPlayback: gaplessPlayback,
+      isAntiAlias: isAntiAlias,
+      package: package,
+      filterQuality: filterQuality,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
+    );
+  }
+
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
 }
 
 class SvgGenImage {

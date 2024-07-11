@@ -1,4 +1,5 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
+import 'package:denari_app/utils/extensions/widget_extension.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:denari_app/utils/themes/dark_theme.dart';
 import 'package:denari_app/utils/themes/light_theme.dart';

@@ -1,7 +1,6 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
-import '../../gen/assets.gen.dart';
 import '../../utils/themes/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget {

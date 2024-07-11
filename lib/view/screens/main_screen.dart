@@ -3,6 +3,7 @@ import 'package:denari_app/view/widgets/main_screen_widgets/main_screen_field.da
 import 'package:denari_app/view/widgets/main_screen_widgets/product_advertisement_widget.dart';
 import 'package:flutter/material.dart';
 import '../../gen/assets.gen.dart';
+import '../../store/categories_state/categories_state.dart';
 import '../../utils/themes/app_colors.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/category/category_field_generator.dart';
@@ -34,6 +35,44 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Define the categories list
+    final categories = [
+      {
+        'categoryName': 'main.food'.tr(),
+        'categoryIcon': Assets.media.icons.food.svg()
+      },
+      {
+        'categoryName': 'main.beauty'.tr(),
+        'categoryIcon': Assets.media.icons.beauty.svg()
+      },
+      {
+        'categoryName': 'main.clothing'.tr(),
+        'categoryIcon': Assets.media.icons.clothing.svg()
+      },
+      {
+        'categoryName': 'main.activities'.tr(),
+        'categoryIcon': Assets.media.icons.activities.svg()
+      },
+      {
+        'categoryName': 'main.groceries'.tr(),
+        'categoryIcon': Assets.media.icons.groceries.svg()
+      },
+      {
+        'categoryName': 'main.travel'.tr(),
+        'categoryIcon': Assets.media.icons.travel.svg()
+      },
+      {
+        'categoryName': 'main.other'.tr(),
+        'categoryIcon': Assets.media.icons.other.svg()
+      },
+      // Add more categories as needed
+    ];
+
+    // Initialize the CategoriesState with the first category
+    final categoriesState = CategoriesState(
+      initialCategory: categories[0]['categoryName'].toString(),
+    );
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(0, 104),
@@ -46,121 +85,95 @@ class MainScreen extends StatelessWidget {
       body: Container(
         width: context.width,
         color: AppColors.white,
-        child: Column(
-          children: [
-            Container(
-                decoration:
-                    BoxDecoration(color: AppColors.yellowLight, boxShadow: [
-                  BoxShadow(
-                    color: AppColors.greyDark.withOpacity(0.6),
-                    blurRadius: 8,
-                    blurStyle: BlurStyle.outer,
-                    spreadRadius: 0,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                      color: AppColors.yellowLight,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.greyDark.withOpacity(0.6),
+                          blurRadius: 8,
+                          blurStyle: BlurStyle.outer,
+                          spreadRadius: 0,
+                        ),
+                      ]),
+                  child: mainScreenFields()),
+              Column(
+                children: [
+                  ProductAdvertisementWidget(
+                    image: Assets.media.images.coffe.provider(),
+                    radius: 10,
+                  ).paddingOnly(
+                    top: 24,
+                    bottom: 32,
                   ),
-                ]),
-                child: mainScreenFields()),
-            Column(
-              children: [
-                ProductAdvertisementWidget(
-                  image: Assets.media.images.coffe.provider(),
-                  radius: 10,
-                ).paddingOnly(
-                  top: 24,
-                  bottom: 32,
-                ),
-                PreviewBanner(
-                  leadingBanner: Text(
-                    'main.topCategories'.tr(),
-                    style: context.theme.headline5,
-                  ),
-                  textButton: TextButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all<EdgeInsets>(
-                          EdgeInsets.zero),
-                      minimumSize: MaterialStateProperty.all<Size>(Size.zero),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  PreviewBanner(
+                    leadingBanner: Text(
+                      'main.topCategories'.tr(),
+                      style: context.theme.headline5.bold,
                     ),
-                    child: Text(
-                      'main.seeAll'.tr(),
-                      style: context.theme.headline4.regular.yellowDark,
+                    textButton: TextButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsets>(
+                            EdgeInsets.zero),
+                        minimumSize: MaterialStateProperty.all<Size>(Size.zero),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      child: Text(
+                        'main.seeAll'.tr(),
+                        style: context.theme.headline4.regular.yellowDark,
+                      ),
                     ),
-                  ),
-                ).paddingOnly(bottom: 16),
-                CategoryFieldGenerator(
-                  categories: [
-                    {
-                      'categoryName': 'main.food'.tr(),
-                      'categoryIcon': Assets.media.icons.food.svg()
-                    },
-                    {
-                      'categoryName': 'main.beauty'.tr(),
-                      'categoryIcon': Assets.media.icons.beauty.svg()
-                    },
-                    {
-                      'categoryName': 'main.clothing'.tr(),
-                      'categoryIcon': Assets.media.icons.clothing.svg()
-                    },
-                    {
-                      'categoryName': 'main.activities'.tr(),
-                      'categoryIcon': Assets.media.icons.activities.svg()
-                    },
-                    {
-                      'categoryName': 'main.groceries'.tr(),
-                      'categoryIcon': Assets.media.icons.groceries.svg()
-                    },
-                    {
-                      'categoryName': 'main.travel'.tr(),
-                      'categoryIcon': Assets.media.icons.travel.svg()
-                    },
-                    {
-                      'categoryName': 'main.other'.tr(),
-                      'categoryIcon': Assets.media.icons.other.svg()
-                    },
-                    // Add more categories as needed
-                  ],
-                ).paddingOnly(bottom: 24),
-                PreviewBanner(
-                  leadingBanner: Text(
-                    'main.popularStores'.tr(),
-                    style: context.theme.headline3.semiBold,
-                  ),
-                  textButton: TextButton(
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all<EdgeInsets>(
-                          EdgeInsets.zero),
-                      minimumSize: MaterialStateProperty.all<Size>(Size.zero),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ).paddingOnly(bottom: 16),
+                  CategoryFieldGenerator(
+                    categoriesState: categoriesState,
+                    categories: categories,
+                  ).paddingOnly(bottom: 24),
+                  PreviewBanner(
+                    leadingBanner: Text(
+                      'main.popularStores'.tr(),
+                      style: context.theme.headline3.semiBold,
                     ),
-                    child: Text(
-                      'main.seeAll'.tr(),
-                      style: context.theme.headline4.regular.yellowDark,
+                    textButton: TextButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsets>(
+                            EdgeInsets.zero),
+                        minimumSize: MaterialStateProperty.all<Size>(Size.zero),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      child: Text(
+                        'main.seeAll'.tr(),
+                        style: context.theme.headline4.regular.yellowDark,
+                      ),
                     ),
+                  ).paddingOnly(bottom: 16),
+                  StoreFieldGenerator(
+                    storeFieldList: [
+                      {
+                        'asset': Assets.media.images.coffe.image(),
+                        'title': 'Name shop',
+                        'description': 'Description'
+                      },
+                      {
+                        'asset': Assets.media.images.coffe.image(),
+                        'title': 'Name Shop',
+                        'description': 'Description'
+                      },
+                      {
+                        'asset': Assets.media.images.coffe.image(),
+                        'title': 'Title',
+                        'description': 'Description'
+                      },
+                    ],
                   ),
-                ).paddingOnly(bottom: 16),
-                StoreFieldGenerator(
-                  storeFieldList: [
-                    {
-                      'asset': Assets.media.images.coffe.image(),
-                      'title' : 'Title',
-                      'description' : 'Description'
-                    },
-                    {
-                      'asset': Assets.media.images.coffe.image(),
-                      'title' : 'Title',
-                      'description' : 'Description'
-                    },
-                    {
-                      'asset': Assets.media.images.coffe.image(),
-                      'title' : 'Title',
-                      'description' : 'Description'
-                    },
-                  ],
-                ),
-              ],
-            ).paddingOnly(left: 16, right: 16),
-          ],
+                ],
+              ).paddingOnly(left: 16, right: 16),
+            ],
+          ),
         ),
       ),
     );

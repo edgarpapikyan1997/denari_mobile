@@ -15,9 +15,10 @@ class StoreFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.only(right: 8),
+          margin: EdgeInsets.only(right: 8, bottom: 16),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8), color: Colors.grey),
           width: 128,
@@ -25,11 +26,11 @@ class StoreFieldWidget extends StatelessWidget {
         ),
         Text(
           title ?? '',
-          style: context.theme.headline2,
+          style: context.theme.headline3,
         ),
         Text(
           description ?? '',
-          style: context.theme.headline4,
+          style: context.theme.body1.lightGreyText,
         )
       ],
     );

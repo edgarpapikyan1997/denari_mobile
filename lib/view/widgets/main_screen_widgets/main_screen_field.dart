@@ -14,11 +14,12 @@ class MainScreenField extends StatelessWidget {
     return SizedBox(
       child: Column(
         children: [
-          CircleAvatar(backgroundColor: AppColors.white, radius: 29, child: SizedBox(
+          CircleAvatar(
+              backgroundColor: AppColors.white, radius: 32, child: SizedBox(
             height: 32,
               width: 32,
               child: asset))
-              .paddingOnly(bottom: 4),
+              .paddingOnly(bottom: 8),
           SizedBox(
               child: Text(
                 title,

@@ -1,5 +1,4 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
-import 'package:denari_app/utils/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 
 class PreviewBanner extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
-import '../view/screens/gift_cards_screen.dart';
+import '../view/screens/shop_screen.dart';
 import '../view/screens/main_screen.dart';
 import '../view/screens/notification_screen.dart';
-import '../view/screens/settings_screen.dart';
+import '../view/screens/profile_screen.dart';
 import '../view/widgets/scaffold_nav_bar.dart';
 
 final GoRouter router = GoRouter(routes: [
@@ -18,21 +18,21 @@ final GoRouter router = GoRouter(routes: [
         },
       ),
       GoRoute(
-        path: '/giftCards',
-        builder: (context, state) {
-          return GiftCardsScreen();
-        },
-      ),
-      GoRoute(
         path: '/notifications',
         builder: (context, state) {
           return NotificationScreen();
         },
       ),
       GoRoute(
-        path: '/settings',
+        path: '/shopScreen',
         builder: (context, state) {
-          return SettingsScreen();
+          return ShopScreen();
+        },
+      ),
+      GoRoute(
+        path: '/profile',
+        builder: (context, state) {
+          return ProfileScreen();
         },
       ),
     ],

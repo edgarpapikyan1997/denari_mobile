@@ -14,6 +14,9 @@
     "activities": "Activities",
     "groceries": "Groceries",
     "travel": "Travel",
-    "other": "Other"
+    "other": "Other",
+    "profile" : "Profile",
+    "notifications" : "Notifications",
+    "store" : "Store"
   }
 }

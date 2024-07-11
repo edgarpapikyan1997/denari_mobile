@@ -1,8 +1,6 @@
 import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/themes/dark_theme.dart';
 import 'package:denari_app/utils/themes/light_theme.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import '../utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';

@@ -40,7 +40,7 @@ extension ThemeDataHelper on ThemeData {
         color: AppColors.black,
         fontFamily: FontFamily.onest,
         fontWeight: FontWeight.w600,
-        fontSize: 24,
+        fontSize: 22,
         height: 1.20,
       );
 
@@ -64,7 +64,7 @@ extension ThemeDataHelper on ThemeData {
         color: AppColors.black,
         fontFamily: FontFamily.onest,
         fontWeight: FontWeight.w700,
-        fontSize: 22,
+        fontSize: 24,
         height: 1.26,
       );
 
@@ -89,7 +89,15 @@ extension ThemeDataHelper on ThemeData {
         fontFamily: FontFamily.onest,
         fontWeight: FontWeight.w400,
         fontSize: 14,
-        height: 1.40,
+        height: 1.18,
+      );
+
+  TextStyle get body4 => const TextStyle(
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w400,
+        fontSize: 18,
+        height: 1.18,
       );
 
   TextStyle get caption => const TextStyle(
@@ -104,8 +112,8 @@ extension ThemeDataHelper on ThemeData {
         color: AppColors.black,
         fontFamily: FontFamily.onest,
         fontWeight: FontWeight.w500,
-        height: 1.20,
         fontSize: 11,
+        height: 1.20,
       );
 
   TextStyle get button => const TextStyle(
@@ -234,6 +242,8 @@ extension TextStyleHelpers on TextStyle {
   TextStyle get greyDark => copyWith(color: AppColors.greyDark);
 
   TextStyle get alertRed => copyWith(color: AppColors.alertRed);
+
+  TextStyle get lightGreyText => copyWith(color: AppColors.lightGreyText);
 
   TextStyle size([double? fontSize]) => copyWith(fontSize: fontSize);
 

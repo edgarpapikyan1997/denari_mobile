@@ -56,6 +56,13 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/Token.svg
   SvgGenImage get token => const SvgGenImage('assets/media/icons/Token.svg');
 
+  /// File path: assets/media/icons/bell.svg
+  SvgGenImage get bell => const SvgGenImage('assets/media/icons/bell.svg');
+
+  /// File path: assets/media/icons/circle-user-round.svg
+  SvgGenImage get circleUserRound =>
+      const SvgGenImage('assets/media/icons/circle-user-round.svg');
+
   /// File path: assets/media/icons/credit-card-1.svg
   SvgGenImage get creditCard1 =>
       const SvgGenImage('assets/media/icons/credit-card-1.svg');
@@ -71,11 +78,21 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/food.svg
   SvgGenImage get food => const SvgGenImage('assets/media/icons/food.svg');
 
+  /// File path: assets/media/icons/house.svg
+  SvgGenImage get house => const SvgGenImage('assets/media/icons/house.svg');
+
   /// File path: assets/media/icons/qr-code.svg
   SvgGenImage get qrCode => const SvgGenImage('assets/media/icons/qr-code.svg');
 
+  /// File path: assets/media/icons/scan-line.svg
+  SvgGenImage get scanLine =>
+      const SvgGenImage('assets/media/icons/scan-line.svg');
+
   /// File path: assets/media/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/media/icons/search.svg');
+
+  /// File path: assets/media/icons/store.svg
+  SvgGenImage get store => const SvgGenImage('assets/media/icons/store.svg');
 
   /// File path: assets/media/icons/travel.svg
   SvgGenImage get travel => const SvgGenImage('assets/media/icons/travel.svg');
@@ -88,12 +105,17 @@ class $AssetsMediaIconsGen {
         groceries,
         other,
         token,
+        bell,
+        circleUserRound,
         creditCard1,
         creditCardSync,
         drawerSend,
         food,
+        house,
         qrCode,
+        scanLine,
         search,
+        store,
         travel
       ];
 }

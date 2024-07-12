@@ -6,7 +6,7 @@
     "transactionHistory": "Transaction\n History",
     "rangeOfProducts": "The entire range of products",
     "topCategories": "Top shop categories",
-    "popularStores" : "Popular stores ",
+    "popularStores": "Popular stores ",
     "seeAll": "See all",
     "food": "Food",
     "beauty": "Beauty",
@@ -15,8 +15,13 @@
     "groceries": "Groceries",
     "travel": "Travel",
     "other": "Other",
-    "profile" : "Profile",
-    "notifications" : "Notifications",
-    "store" : "Store"
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "store": "Store"
+  },
+  "balance" : {
+    "tokenBalance": "Token Balance",
+    "viewEarnedToken" : "View your earned token",
+    "tokens" : "Tokens"
   }
 }

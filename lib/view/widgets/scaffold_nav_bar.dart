@@ -39,85 +39,83 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       body: widget.child,
-      bottomNavigationBar: Observer(
-        builder: (_) {
-          return BottomNavigationBar(
-            backgroundColor: theme.navigationBarTheme.backgroundColor,
-            type: BottomNavigationBarType.fixed,
-            selectedLabelStyle: context.theme.navBar,
-            unselectedLabelStyle: context.theme.navBar.regular,
-            currentIndex: bottomNavBarState.index,
-            // Change to your desired selected color
-            unselectedItemColor: AppColors.lightGreyText,
-            selectedItemColor: AppColors.black,
-            // currentIndex: selectedValue,
-            items: [
-              BottomNavigationBarItem(
-                  icon: Assets.media.icons.circleUserRound
-                      .svg(
-                        height: 24,
-                        width: 24,
-                      )
-                      .paddingSymmetric(vertical: 8),
-                  label: 'main.profile'.tr()),
-              BottomNavigationBarItem(
-                  icon: Assets.media.icons.bell
-                      .svg(
-                        height: 24,
-                        width: 24,
-                      )
-                      .paddingSymmetric(vertical: 8),
-                  label: 'main.notifications'.tr()),
-              BottomNavigationBarItem(
-                  icon: CircleAvatar(
-                    backgroundColor: AppColors.alertRed,
-                    child: Assets.media.icons.scanLine.svg(
+      bottomNavigationBar: Observer(builder: (_) {
+        return BottomNavigationBar(
+          backgroundColor: theme.navigationBarTheme.backgroundColor,
+          type: BottomNavigationBarType.fixed,
+          selectedLabelStyle: context.theme.navBar,
+          unselectedLabelStyle: context.theme.navBar.regular,
+          currentIndex: bottomNavBarState.index,
+          // Change to your desired selected color
+          unselectedItemColor: AppColors.lightGreyText,
+          selectedItemColor: AppColors.black,
+          // currentIndex: selectedValue,
+          items: [
+            BottomNavigationBarItem(
+                icon: Assets.media.icons.circleUserRound
+                    .svg(
                       height: 24,
                       width: 24,
-                    ),
+                    )
+                    .paddingSymmetric(vertical: 8),
+                label: 'main.profile'.tr()),
+            BottomNavigationBarItem(
+                icon: Assets.media.icons.bell
+                    .svg(
+                      height: 24,
+                      width: 24,
+                    )
+                    .paddingSymmetric(vertical: 8),
+                label: 'main.notifications'.tr()),
+            BottomNavigationBarItem(
+                icon: CircleAvatar(
+                  backgroundColor: AppColors.alertRed,
+                  child: Assets.media.icons.scanLine.svg(
+                    height: 24,
+                    width: 24,
                   ),
-                  label: ''),
-              BottomNavigationBarItem(
-                  icon: Assets.media.icons.store
-                      .svg(
-                        height: 24,
-                        width: 24,
-                      )
-                      .paddingSymmetric(vertical: 8),
-                  label: 'main.store'.tr()),
-              BottomNavigationBarItem(
-                  icon: Assets.media.icons.house
-                      .svg(
-                        height: 24,
-                        width: 24,
-                      )
-                      .paddingSymmetric(vertical: 8),
-                  label: 'Home'),
-            ],
-            onTap: (index) {
-              bottomNavBarState.changeIndex(index);
-              switch (index) {
-                case 0:
-                  context.go('/profile');
-                  break;
-                case 1:
-                  context.go('/notifications');
-                  break;
-                case 2:
-                  break;
-                case 3:
-                  context.go('/shopScreen');
-                  break;
-                case 4:
-                  context.go('/');
-                  break;
-                default:
-                  context.go('/');
-              }
-            },
-          );
-        }
-      ),
+                ),
+                label: ''),
+            BottomNavigationBarItem(
+                icon: Assets.media.icons.store
+                    .svg(
+                      height: 24,
+                      width: 24,
+                    )
+                    .paddingSymmetric(vertical: 8),
+                label: 'main.store'.tr()),
+            BottomNavigationBarItem(
+                icon: Assets.media.icons.house
+                    .svg(
+                      height: 24,
+                      width: 24,
+                    )
+                    .paddingSymmetric(vertical: 8),
+                label: 'Home'),
+          ],
+          onTap: (index) {
+            bottomNavBarState.changeIndex(index);
+            switch (index) {
+              case 0:
+                context.go('/profile');
+                break;
+              case 1:
+                context.go('/notifications');
+                break;
+              case 2:
+                break;
+              case 3:
+                context.go('/shopScreen');
+                break;
+              case 4:
+                context.go('/');
+                break;
+              default:
+                context.go('/');
+            }
+          },
+        );
+      }),
     );
   }
 }

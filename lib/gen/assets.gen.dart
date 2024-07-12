@@ -59,6 +59,10 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/bell.svg
   SvgGenImage get bell => const SvgGenImage('assets/media/icons/bell.svg');
 
+  /// File path: assets/media/icons/chevron-left.svg
+  SvgGenImage get chevronLeft =>
+      const SvgGenImage('assets/media/icons/chevron-left.svg');
+
   /// File path: assets/media/icons/circle-user-round.svg
   SvgGenImage get circleUserRound =>
       const SvgGenImage('assets/media/icons/circle-user-round.svg');
@@ -106,6 +110,7 @@ class $AssetsMediaIconsGen {
         other,
         token,
         bell,
+        chevronLeft,
         circleUserRound,
         creditCard1,
         creditCardSync,

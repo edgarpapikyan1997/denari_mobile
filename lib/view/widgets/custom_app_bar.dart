@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../utils/themes/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget {
+  final Color? appBarColor;
   final Widget? leadingIcon;
   final String? tokenCount;
   final Text? title;
@@ -14,7 +15,7 @@ class CustomAppBar extends StatelessWidget {
       this.leadingIcon,
       this.tokenCount,
       this.title,
-      this.tealIcon});
+      this.tealIcon, this.appBarColor});
 
   Widget tokenAppBar(BuildContext context) {
     return Row(
@@ -42,7 +43,8 @@ class CustomAppBar extends StatelessWidget {
       children: [
         leadingIcon != null
             ? SizedBox(height: 28, width: 26, child: leadingIcon)
-            : const SizedBox(
+            :
+        const SizedBox(
                 width: 24,
                 height: 24,
               ),
@@ -62,7 +64,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.yellowLight,
+      color: appBarColor,
       width: context.width,
       child: tokenCount != null ? tokenAppBar(context) : defaultAppBar(),
     );

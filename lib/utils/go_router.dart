@@ -1,6 +1,8 @@
+import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../view/screens/shop_screen.dart';
-import '../view/screens/main_screen.dart';
+import '../view/screens/main_screen/main_screen.dart';
 import '../view/screens/notification_screen.dart';
 import '../view/screens/profile_screen.dart';
 import '../view/widgets/scaffold_nav_bar.dart';
@@ -16,6 +18,14 @@ final GoRouter router = GoRouter(routes: [
         builder: (context, state) {
           return MainScreen();
         },
+        routes: [
+          GoRoute(
+            path: 'tokenBalance',
+            builder: (BuildContext context, GoRouterState state) {
+              return const TokenBalanceScreen();
+            },
+          ),
+        ],
       ),
       GoRoute(
         path: '/notifications',

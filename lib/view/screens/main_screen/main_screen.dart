@@ -1,16 +1,21 @@
+import 'package:denari_app/store/token_balance_state/token_balance_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/main_screen_field.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/product_advertisement_widget.dart';
 import 'package:flutter/material.dart';
-import '../../gen/assets.gen.dart';
-import '../../store/categories_state/categories_state.dart';
-import '../../utils/themes/app_colors.dart';
-import '../widgets/custom_app_bar.dart';
-import '../widgets/category/category_field_generator.dart';
-import '../widgets/preview_banner/preview_banner.dart';
-import '../widgets/sotre_fields/store_field_generator.dart';
+import '../../../gen/assets.gen.dart';
+import '../../../store/categories_state/categories_state.dart';
+import '../../../utils/themes/app_colors.dart';
+import '../../widgets/custom_app_bar.dart';
+import '../../widgets/category/category_field_generator.dart';
+import '../../widgets/preview_banner/preview_banner.dart';
+import '../../widgets/sotre_fields/store_field_generator.dart';
+
+final token = TokenBalanceState();
+
 
 class MainScreen extends StatelessWidget {
+
   const MainScreen({super.key});
 
   Widget mainScreenFields() {
@@ -65,20 +70,18 @@ class MainScreen extends StatelessWidget {
         'categoryName': 'main.other'.tr(),
         'categoryIcon': Assets.media.icons.other.svg()
       },
-      // Add more categories as needed
     ];
-
-    // Initialize the CategoriesState with the first category
     final categoriesState = CategoriesState(
       initialCategory: categories[0]['categoryName'].toString(),
     );
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(0, 104),
+        preferredSize: const Size(0, 104),
         child: CustomAppBar(
+          appBarColor: AppColors.yellowLight,
           leadingIcon: Assets.media.icons.token.svg(),
-          tokenCount: '400', // should be changed to data from backEnd
+          tokenCount: token.earnedToken.toString(), // should be changed to data from backEnd
           tealIcon: Assets.media.icons.search.svg(),
         ),
       ),
@@ -89,16 +92,15 @@ class MainScreen extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                  decoration: BoxDecoration(
-                      color: AppColors.yellowLight,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.greyDark.withOpacity(0.6),
-                          blurRadius: 8,
-                          blurStyle: BlurStyle.outer,
-                          spreadRadius: 0,
-                        ),
-                      ]),
+                  decoration:
+                      BoxDecoration(color: AppColors.yellowLight, boxShadow: [
+                    BoxShadow(
+                      color: AppColors.greyDark.withOpacity(0.6),
+                      blurRadius: 8,
+                      blurStyle: BlurStyle.outer,
+                      spreadRadius: 0,
+                    ),
+                  ]),
                   child: mainScreenFields()),
               Column(
                 children: [

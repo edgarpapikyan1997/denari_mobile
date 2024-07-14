@@ -85,6 +85,9 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/house.svg
   SvgGenImage get house => const SvgGenImage('assets/media/icons/house.svg');
 
+  /// File path: assets/media/icons/image-8.svg
+  SvgGenImage get image8 => const SvgGenImage('assets/media/icons/image-8.svg');
+
   /// File path: assets/media/icons/qr-code.svg
   SvgGenImage get qrCode => const SvgGenImage('assets/media/icons/qr-code.svg');
 
@@ -117,6 +120,7 @@ class $AssetsMediaIconsGen {
         drawerSend,
         food,
         house,
+        image8,
         qrCode,
         scanLine,
         search,
@@ -132,8 +136,16 @@ class $AssetsMediaImagesGen {
   AssetGenImage get coffe =>
       const AssetGenImage('assets/media/images/Coffe.png');
 
+  /// File path: assets/media/images/crypto-currency-namecoin.png
+  AssetGenImage get cryptoCurrencyNamecoin =>
+      const AssetGenImage('assets/media/images/crypto-currency-namecoin.png');
+
+  /// File path: assets/media/images/toy_story.png
+  AssetGenImage get toyStory =>
+      const AssetGenImage('assets/media/images/toy_story.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [coffe];
+  List<AssetGenImage> get values => [coffe, cryptoCurrencyNamecoin, toyStory];
 }
 
 class Assets {

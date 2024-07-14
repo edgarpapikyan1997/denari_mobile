@@ -19,9 +19,12 @@
     "notifications": "Notifications",
     "store": "Store"
   },
-  "balance" : {
+  "balance": {
     "tokenBalance": "Token Balance",
-    "viewEarnedToken" : "View your earned token",
-    "tokens" : "Tokens"
+    "viewEarnedToken": "View your earned token",
+    "tokens": "Tokens",
+    "ld": "LD",
+    "emptyBalance": "Balance is empty",
+    "emptyBalanceDescription" : "To receive tokens, you must make a purchase using a gift card."
   }
 }

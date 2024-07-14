@@ -14,7 +14,7 @@ class MainScreenField extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.go('/tokenBalance');
+        // context.go('/tokenBalance');
       },
       child: SizedBox(
         child: Column(

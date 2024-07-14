@@ -32,11 +32,7 @@ class CategoryFieldGenerator extends StatelessWidget {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
-      child: Observer(
-          builder: (context) {
-            return createWidgetCollection();
-          }
-      ),
+      child: createWidgetCollection(),
     );
   }
 }

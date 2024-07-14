@@ -29,22 +29,11 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
       ActionController(name: '_TokenBalanceState', context: context);
 
   @override
-  void getTokenBalance() {
-    final _$actionInfo = _$_TokenBalanceStateActionController.startAction(
-        name: '_TokenBalanceState.getTokenBalance');
-    try {
-      return super.getTokenBalance();
-    } finally {
-      _$_TokenBalanceStateActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  int getTokenBalanceByBrand(String brand) {
+  String getTokenBalanceByBrand({String? brand}) {
     final _$actionInfo = _$_TokenBalanceStateActionController.startAction(
         name: '_TokenBalanceState.getTokenBalanceByBrand');
     try {
-      return super.getTokenBalanceByBrand(brand);
+      return super.getTokenBalanceByBrand(brand: brand);
     } finally {
       _$_TokenBalanceStateActionController.endAction(_$actionInfo);
     }

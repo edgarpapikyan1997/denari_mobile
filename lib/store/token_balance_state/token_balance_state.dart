@@ -15,18 +15,18 @@ abstract class _TokenBalanceState with Store {
 
 
 
-  @action
-  void getTokenBalance() {
-    /// some operation getting token balance needed
-    Random random = Random();
-    earnedToken = random.nextInt(200);
-  }
+  // @action
+  // void getTokenBalance() {
+  //   /// some operation getting token balance needed
+  //   Random random = Random();
+  //   earnedToken = random.nextInt(200);
+  // }
 
   @action
-  int getTokenBalanceByBrand(String brand) {
-    /// some operation getting token balance needed
+  String getTokenBalanceByBrand({String? brand}) {
+
     Random random = Random();
-    int brandToken = random.nextInt(1000);
-    return brandToken;
+    int brandToken = random.nextInt(100);
+    return brandToken.toString();
   }
 }

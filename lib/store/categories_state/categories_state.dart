@@ -1,4 +1,3 @@
-// categories_state.dart
 import 'package:mobx/mobx.dart';
 
 part 'categories_state.g.dart';

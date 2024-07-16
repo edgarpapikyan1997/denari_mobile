@@ -7,10 +7,10 @@ ThemeData lightTheme = ThemeData(
   primaryColor: AppColors.yellowLight,
   scaffoldBackgroundColor: AppColors.white,
   canvasColor: AppColors.white,
-  buttonTheme: ButtonThemeData(
+  buttonTheme: const ButtonThemeData(
     buttonColor: Colors.red
   ),
-  navigationBarTheme: NavigationBarThemeData(
+  navigationBarTheme: const NavigationBarThemeData(
     backgroundColor: AppColors.white,
 
   ),

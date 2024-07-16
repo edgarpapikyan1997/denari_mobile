@@ -16,7 +16,7 @@ final GoRouter router = GoRouter(routes: [
       GoRoute(
         path: '/',
         builder: (context, state) {
-          return MainScreen();
+          return const MainScreen();
         },
         routes: [
           GoRoute(
@@ -30,19 +30,19 @@ final GoRouter router = GoRouter(routes: [
       GoRoute(
         path: '/notifications',
         builder: (context, state) {
-          return NotificationScreen();
+          return const NotificationScreen();
         },
       ),
       GoRoute(
         path: '/shopScreen',
         builder: (context, state) {
-          return ShopScreen();
+          return const ShopScreen();
         },
       ),
       GoRoute(
         path: '/profile',
         builder: (context, state) {
-          return ProfileScreen();
+          return const ProfileScreen();
         },
       ),
     ],

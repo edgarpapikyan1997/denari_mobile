@@ -22,9 +22,9 @@ class PreviewBanner extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            leadingBanner ?? SizedBox(),
-            middleBanner ?? SizedBox(),
-            textButton ?? SizedBox(),
+            leadingBanner ?? const SizedBox(),
+            middleBanner ?? const SizedBox(),
+            textButton ?? const SizedBox(),
           ],
         ),
         bannerUnderText != null

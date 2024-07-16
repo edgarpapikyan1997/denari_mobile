@@ -1,11 +1,6 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
-
-import '../../../gen/assets.gen.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../../widgets/balance_widget.dart';
 
@@ -40,7 +35,7 @@ class BrandItemWidget extends StatelessWidget {
                   ),
                   border: Border.all(width: 1, color: AppColors.borderColor)),
             ),
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
             lastUpdate != null
@@ -66,17 +61,17 @@ class BrandItemWidget extends StatelessWidget {
               balance: tokenBalance,
               textStyle: context.theme.headline4,
             ),
-            tealButton ?? SizedBox(),
+            tealButton ?? const SizedBox(),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
-        Divider(
+       const Divider(
           height: 1,
           color: AppColors.borderColor,
         ),
-        SizedBox(
+       const SizedBox(
           height: 16,
         ),
       ],

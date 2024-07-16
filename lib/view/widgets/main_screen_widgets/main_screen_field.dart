@@ -7,14 +7,15 @@ import '../../../utils/themes/app_colors.dart';
 class MainScreenField extends StatelessWidget {
   final Widget asset;
   final String title;
+  final String navigationTitle;
 
-  const MainScreenField({super.key, required this.asset, required this.title});
+  const MainScreenField({super.key, required this.asset, required this.title, required this.navigationTitle});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // context.go('/tokenBalance');
+        context.go(navigationTitle);
       },
       child: SizedBox(
         child: Column(

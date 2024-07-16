@@ -14,6 +14,11 @@ abstract class _TokenBalanceState with Store {
   int earnedToken = 100;
 
 
+  @observable
+  int giftCardLD = 33;
+
+
+
 
   // @action
   // void getTokenBalance() {

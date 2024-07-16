@@ -5,8 +5,10 @@ import 'brand_item_widget.dart';
 
 class BrandItemList extends StatefulWidget {
   final List<BrandItemWidget> brandItems;
+  final int? itemsToLoad;
 
-  const BrandItemList({super.key, required this.brandItems});
+  const BrandItemList(
+      {super.key, required this.brandItems, this.itemsToLoad = 8});
 
   @override
   _BrandItemListState createState() => _BrandItemListState();
@@ -15,15 +17,15 @@ class BrandItemList extends StatefulWidget {
 class _BrandItemListState extends State<BrandItemList> {
   final ScrollController _scrollController = ScrollController();
   List<BrandItemWidget> _displayedItems = [];
-  final int _itemsToLoad = 7;
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _displayedItems = widget.brandItems.take(_itemsToLoad).toList();
+    _displayedItems = widget.brandItems.take(widget.itemsToLoad!).toList();
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
         _loadMoreItems();
       }
     });
@@ -47,7 +49,10 @@ class _BrandItemListState extends State<BrandItemList> {
     await Future.delayed(const Duration(seconds: 1));
 
     setState(() {
-      final nextItems = widget.brandItems.skip(_displayedItems.length).take(_itemsToLoad).toList();
+      final nextItems = widget.brandItems
+          .skip(_displayedItems.length)
+          .take(widget.itemsToLoad!)
+          .toList();
       _displayedItems.addAll(nextItems);
       _isLoading = false;
     });
@@ -63,7 +68,7 @@ class _BrandItemListState extends State<BrandItemList> {
         slivers: [
           SliverList(
             delegate: SliverChildBuilderDelegate(
-                  (context, index) {
+              (context, index) {
                 return _displayedItems[index];
               },
               childCount: _displayedItems.length,

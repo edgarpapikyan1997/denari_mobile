@@ -5,6 +5,7 @@
   },
   "sign" : {
     "in": "Sign in",
+    "up": "Sign up",
     "out": "Sign out",
     "welcome_to": "Welcome to",
     "sms_description": "We'll send you an SMS to complete your registration",
@@ -20,6 +21,11 @@
     "with_facebook": "Sign In with Facebook",
     "sent_code": "We sent you an SMS code",
     "on_number": "On number",
-    "incorrect_code": "Incorrect code"
+    "incorrect_code": "Incorrect code",
+    "log_in": "Log in",
+    "don_t_account": "Don’t have an account?",
+    "forgot_password": "Forgot Password",
+    "forgot_description": "Please enter your phone number to password recovery.",
+    "send": "Send"
   }
 }

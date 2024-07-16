@@ -7,14 +7,14 @@ import 'package:denari_app/view/widgets/text_with_link.dart';
 import 'package:denari_app/view/widgets/welcome_text.dart';
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,11 +29,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const Delimiter(2),
               Text('sign.sms_description'.tr()),
               const Delimiter(24),
-              EditField(
-                hint: 'sign.name'.tr(),
-                onChanged: (value) {},
-              ),
-              const Delimiter(),
               PhoneField(
                 hint: 'sign.phone'.tr(),
                 onChanged: (value) {},
@@ -44,20 +39,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 onChanged: (value) {},
               ),
               const Delimiter(),
-              EditField(
-                hint: 'sign.email'.tr(),
-                optional: true,
-                onChanged: (value) {},
+              SelectableText(
+                '${'sign.forgot_password'.tr()}?',
+                style: context.theme.bodyText1.copyWith(
+                  color: context.theme.primaryColor,
+                ),
+                onTap: () => {},
               ),
               const Delimiter(24),
               ButtonPrimary(
-                label: 'sign.create_now'.tr(),
+                label: 'sign.log_in'.tr(),
               ),
               const Delimiter(),
               Center(
                 child: TextWithLink(
-                  text: 'sign.already_account'.tr(),
-                  link: 'sign.in'.tr(),
+                  text: 'sign.don_t_account'.tr(),
+                  link: 'sign.up'.tr(),
                   onTap: () {},
                 ),
               ),

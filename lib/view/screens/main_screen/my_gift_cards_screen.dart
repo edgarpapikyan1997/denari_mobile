@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../store/token_balance_state/token_balance_state.dart';
-import '../../widgets/bottom_sheet/custom_bottom_sheet.dart';
+import '../../widgets/bottom_sheet/Item_info_bottom_sheet.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/no_data_widget.dart';
 import '../../widgets/preview_banner/preview_banner.dart';
@@ -21,40 +21,40 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
   final _tokenBalanceState = TokenBalanceState();
   final brandName = 'Disney Toy Store';
   final purchaseDate = 'July 24, 2024';
-  final List<BrandItemWidget> brandItems = [];
+  // final List<BrandItemWidget> brandItems = [];
 
   @override
   Widget build(BuildContext context) {
-    // final brandItems = [
-    //   for (var i = 0; i < 10; ++i)
-    //     BrandItemWidget(
-    //       avatar: Assets.media.images.toyStory.path,
-    //       brandName: brandName,
-    //       tokenBalance: _tokenBalanceState.giftCardLD.toString(),
-    //       tealButton: GestureDetector(
-    //         onTap: () {
-    //           showItemInfoBottomSheet(
-    //             /// must be changed to data from backend
-    //           context: context,
-    //             onConfirm: () {
-    //               context.pop();
-    //             },
-    //             addButtons: true,
-    //             addCloseButton: true,
-    //             image: Assets.media.images.image9.path,
-    //             itemTitle: brandName,
-    //             itemTitleChevronRight: true,
-    //             underInfoCostText: Text(
-    //               'Purchase date: $purchaseDate',
-    //               style: context.theme.caption.lightGreyText,
-    //             ),
-    //             itemInfoCost: _tokenBalanceState.giftCardLD.toString(),
-    //           );
-    //         },
-    //         child: Assets.media.icons.chevronRight.svg(),
-    //       ),
-    //     ),
-    // ];
+    final brandItems = [
+      for (var i = 0; i < 10; ++i)
+        BrandItemWidget(
+          avatar: Assets.media.images.toyStory.path,
+          brandName: '$brandName$i',
+          tokenBalance: _tokenBalanceState.giftCardLD.toString(),
+          tealButton: GestureDetector(
+            onTap: () {
+              showItemInfoBottomSheet(
+                /// must be changed to data from backend
+              context: context,
+                onConfirm: () {
+                  context.pop();
+                },
+                addButtons: true,
+                addCloseButton: true,
+                image: Assets.media.images.image9.path,
+                itemTitle: brandName,
+                itemTitleChevronRight: true,
+                underInfoCostText: Text(
+                  'Purchase date: $purchaseDate',
+                  style: context.theme.caption.lightGreyText,
+                ),
+                itemInfoCost: _tokenBalanceState.giftCardLD.toString(),
+              );
+            },
+            child: Assets.media.icons.chevronRight.svg(),
+          ),
+        ),
+    ];
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size(0, 88),

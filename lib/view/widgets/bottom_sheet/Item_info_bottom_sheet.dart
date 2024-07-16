@@ -1,7 +1,6 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../gen/assets.gen.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../custom_button.dart';

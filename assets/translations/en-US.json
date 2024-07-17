@@ -1,7 +1,21 @@
 {
   "app_name": "Denari",
-  "main" : {
-    "homePage" : "Home Page"
+  "main": {
+    "myGiftCards": "My Gift\n Cards",
+    "sendGift": "Send\n Gift",
+    "myQRCode": "My QR\n Code",
+    "transactionHistory": "Transaction\n History",
+    "rangeOfProducts": "The entire range of products",
+    "topCategories": "Top shop categories",
+    "popularStores" : "Popular stores ",
+    "seeAll": "See all",
+    "food": "Food",
+    "beauty": "Beauty",
+    "clothing": "Clothing",
+    "activities": "Activities",
+    "groceries": "Groceries",
+    "travel": "Travel",
+    "other": "Other"
   },
   "sign" : {
     "in": "Sign in",

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
-import '../app_colors.dart';
-
+import '../../gen/fonts.gen.dart';
+import '../themes/app_colors.dart';
 
 extension BuildContextExtensions on BuildContext {
   ThemeData get theme => Theme.of(this);
 
   MediaQueryData get media => MediaQuery.of(this);
+
+  SchedulerBinding get schedulerBinding => SchedulerBinding.instance;
 
   double get height => media.size.height;
 
@@ -19,84 +22,99 @@ extension BuildContextExtensions on BuildContext {
   double get bottomPadding => media.padding.bottom;
 
   bool get isDarkMode => media.platformBrightness == Brightness.dark;
+
+  bool get isDarkModeNoContextCheck =>
+      schedulerBinding.platformDispatcher.platformBrightness == Brightness.dark;
 }
 
 extension ThemeDataHelper on ThemeData {
   TextStyle get headline1 => const TextStyle(
-    color: AppColors.white,
-    // fontFamily: FontFamily.Nunito,
-    fontSize: 30,
-    height: 1.40,
-  );
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w600,
+        fontSize: 32,
+        height: 1.20,
+      );
 
   TextStyle get headline2 => const TextStyle(
-    color: AppColors.white,
-    // fontFamily: FontFamily.Nunito,
-    fontWeight: FontWeight.w400,
-    fontSize: 24,
-    height: 1.32,
-  );
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w600,
+        fontSize: 24,
+        height: 1.20,
+      );
 
   TextStyle get headline3 => const TextStyle(
-    color: AppColors.white,
-    // fontFamily: FontFamily.Nunito,
-    fontWeight: FontWeight.w400,
-    fontSize: 20,
-    height: 1.27,
-  );
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w600,
+        fontSize: 20,
+        height: 1.20,
+      );
 
   TextStyle get headline4 => const TextStyle(
-    color: AppColors.white,
-    // fontFamily: FontFamily.Nunito,
-    fontWeight: FontWeight.w400,
-    fontSize: 18,
-    height: 1.24,
-  );
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w600,
+        fontSize: 16,
+        height: 1.20,
+      );
 
   TextStyle get headline5 => const TextStyle(
-    // fontFamily: FontFamily.Nunito,
-    color: AppColors.white,
-    fontWeight: FontWeight.w400,
-    fontSize: 16,
-    height: 1.21,
-  );
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w700,
+        fontSize: 22,
+        height: 1.26,
+      );
 
-  TextStyle get headline6 => const TextStyle(
-    // fontFamily: FontFamily.Nunito,
-    color: AppColors.white,
-    fontWeight: FontWeight.w400,
-    fontSize: 14,
-    height: 1.19,
-  );
+  TextStyle get body1 => const TextStyle(
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
+        height: 1.40,
+      );
 
-  TextStyle get headline7 => const TextStyle(
-      // fontFamily: FontFamily.Nunito,
-      fontWeight: FontWeight.w400,
-      color: AppColors.white,
-      fontSize: 12,
-      height: 1.16,
-      decoration: TextDecoration.underline
-  );
+  TextStyle get body2 => const TextStyle(
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w500,
+        fontSize: 14,
+        height: 1.40,
+      );
 
-  TextStyle get headline8 => const TextStyle(
-      // fontFamily: FontFamily.Nunito,
-      fontWeight: FontWeight.w400,
-      color: AppColors.white,
-      fontSize: 13,
-      height: 1.16,
+  TextStyle get body3 => const TextStyle(
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w400,
+        fontSize: 14,
+        height: 1.40,
+      );
 
-      decorationColor: AppColors.lightBlue,
-      decorationThickness: 2,
-      decoration: TextDecoration.underline
-  );
+  TextStyle get caption => const TextStyle(
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w400,
+        fontSize: 12,
+        height: 1.0,
+      );
 
-  TextStyle get headline9 => const TextStyle(
-    // fontFamily: FontFamily.Nunito,
-    fontWeight: FontWeight.w500,
-    color: AppColors.white,
-    fontSize: 10,
-  );
+  TextStyle get navBar => const TextStyle(
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w500,
+        height: 1.20,
+        fontSize: 11,
+      );
 
+  TextStyle get button => const TextStyle(
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w500,
+        height: 1.20,
+        fontSize: 16,
+      );
 
   TextStyle get subtitle1 => textTheme.titleMedium!;
 
@@ -104,29 +122,29 @@ extension ThemeDataHelper on ThemeData {
 
   TextStyle get subtitle3 => textTheme.titleSmall!
       .copyWith(
-    fontSize: 14,
-    letterSpacing: -0.01,
-  )
+        fontSize: 14,
+        letterSpacing: -0.01,
+      )
       .medium;
 
   TextStyle get button1 => textTheme.labelLarge!;
 
   TextStyle get button2 => textTheme.labelLarge!.copyWith(
-    fontSize: 16,
-    height: 1.25,
-  );
+        fontSize: 16,
+        height: 1.25,
+      );
 
   TextStyle get button3 => textTheme.labelLarge!.copyWith(
-    fontWeight: FontWeight.w500,
-    fontSize: 16,
-    height: 1,
-  );
+        fontWeight: FontWeight.w500,
+        fontSize: 16,
+        height: 1,
+      );
 
   TextStyle get button4 => textTheme.labelLarge!.copyWith(
-    fontWeight: FontWeight.w500,
-    fontSize: 14,
-    height: 1,
-  );
+        fontWeight: FontWeight.w500,
+        fontSize: 14,
+        height: 1,
+      );
 
   TextStyle get bodyText1 => textTheme.bodyLarge!;
 
@@ -149,16 +167,16 @@ extension ThemeDataHelper on ThemeData {
 
 extension ElevatedButtonHelper on ButtonStyle {
   ButtonStyle buttonColor(Color color) => copyWith(
-    shadowColor: MaterialStateProperty.all(color),
-    foregroundColor: MaterialStateProperty.all(AppColors.white),
-    backgroundColor: MaterialStateProperty.resolveWith(
+        shadowColor: MaterialStateProperty.all(color),
+        foregroundColor: MaterialStateProperty.all(AppColors.white),
+        backgroundColor: MaterialStateProperty.resolveWith(
           (states) {
-        return states.contains(MaterialState.disabled)
-            ? color.withOpacity(0.5)
-            : color;
-      },
-    ),
-  );
+            return states.contains(MaterialState.disabled)
+                ? color.withOpacity(0.5)
+                : color;
+          },
+        ),
+      );
 
   ButtonStyle elevationSize(double elevation) {
     return copyWith(
@@ -185,14 +203,14 @@ extension ElevatedButtonHelper on ButtonStyle {
   }
 
   ButtonStyle get removePaddings => copyWith(
-    padding: MaterialStateProperty.all(
-      EdgeInsets.zero,
-    ),
-  );
+        padding: MaterialStateProperty.all(
+          EdgeInsets.zero,
+        ),
+      );
 
   ButtonStyle textColor(
-      Color color,
-      ) {
+    Color color,
+  ) {
     return copyWith(
       foregroundColor: MaterialStateProperty.all(
         color,
@@ -205,63 +223,42 @@ extension ElevatedButtonHelper on ButtonStyle {
 extension TextStyleHelpers on TextStyle {
   TextStyle get white => copyWith(color: AppColors.white);
 
-  TextStyle get yellow => copyWith(color: AppColors.yellow);
+  TextStyle get black => copyWith(color: AppColors.black);
 
-  TextStyle get gray => copyWith(color: AppColors.gray);
+  TextStyle get yellowLight => copyWith(color: AppColors.yellowLight);
 
-  TextStyle get grayOption => copyWith(color: AppColors.gray.withOpacity(0.5));
+  TextStyle get yellowDark => copyWith(color: AppColors.yellowDark);
 
-  TextStyle get nickel => copyWith(color: AppColors.nickel);
+  TextStyle get grayLight => copyWith(color: AppColors.greyLight);
 
-  TextStyle get darkGray => copyWith(color: AppColors.darkGray);
+  TextStyle get greyDark => copyWith(color: AppColors.greyDark);
 
-  TextStyle get mediumGray => copyWith(color: AppColors.grayMedium);
-
-  TextStyle get green => copyWith(color: AppColors.green);
-
-  TextStyle get charcoal => copyWith(color: AppColors.charcoal);
-
-  TextStyle get red => copyWith(color: AppColors.red);
-
-  TextStyle get chalkboardBlack => copyWith(color: AppColors.chalkboardBlack);
-
-  TextStyle get burgundy => copyWith(color: AppColors.burgundy);
-
-  TextStyle get lightGray => copyWith(color: AppColors.lightGray);
-
-  TextStyle get error => copyWith(color: AppColors.error);
-
-  TextStyle get orange => copyWith(color: AppColors.orange);
-
-  TextStyle get flamingo => copyWith(color: AppColors.flamingo);
-
-
-
+  TextStyle get alertRed => copyWith(color: AppColors.alertRed);
 
   TextStyle size([double? fontSize]) => copyWith(fontSize: fontSize);
 
   TextStyle get regular => copyWith(fontWeight: FontWeight.w400);
 
-  TextStyle get medium => copyWith(fontWeight: FontWeight.w600);
+  TextStyle get medium => copyWith(fontWeight: FontWeight.w500);
 
   TextStyle get semiBold => copyWith(fontWeight: FontWeight.w600);
 
   TextStyle get bold => copyWith(fontWeight: FontWeight.w700);
 
   TextStyle get regularItalic => copyWith(
-    fontWeight: FontWeight.w400,
-    fontStyle: FontStyle.italic,
-  );
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.italic,
+      );
 
   TextStyle get mediumItalic => copyWith(
-    fontWeight: FontWeight.w500,
-    fontStyle: FontStyle.italic,
-  );
+        fontWeight: FontWeight.w500,
+        fontStyle: FontStyle.italic,
+      );
 
   TextStyle get semiBoldItalic => copyWith(
-    fontWeight: FontWeight.w600,
-    fontStyle: FontStyle.italic,
-  );
+        fontWeight: FontWeight.w600,
+        fontStyle: FontStyle.italic,
+      );
 }
 
 extension GlobalKeyEx on GlobalKey {

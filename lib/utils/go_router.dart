@@ -2,6 +2,7 @@ import 'package:denari_app/view/screens/main_screen/my_qr_code.dart';
 import 'package:denari_app/view/screens/main_screen/send_gift_screen.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
 import 'package:denari_app/view/screens/main_screen/transaction_history.dart';
+import 'package:denari_app/view/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../view/screens/main_screen/my_gift_cards_screen.dart';
@@ -56,21 +57,27 @@ final GoRouter router = GoRouter(routes: [
         ],
       ),
       GoRoute(
+        path: '/searchScreen',
+        builder: (context, state) {
+          return const SearchScreen();
+        },
+      ),
+      GoRoute(
         path: '/notifications',
         builder: (context, state) {
-          return NotificationScreen();
+          return const NotificationScreen();
         },
       ),
       GoRoute(
         path: '/shopScreen',
         builder: (context, state) {
-          return ShopScreen();
+          return const ShopScreen();
         },
       ),
       GoRoute(
         path: '/profile',
         builder: (context, state) {
-          return ProfileScreen();
+          return const ProfileScreen();
         },
       ),
     ],

@@ -86,8 +86,7 @@ void showItemInfoBottomSheet({
               style: context.theme.headline1,
             ).paddingOnly(bottom: 8),
             underInfoCostText ?? const SizedBox(),
-            addButtons
-                ? Row(
+            addButtons ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(

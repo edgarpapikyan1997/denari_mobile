@@ -17,7 +17,8 @@
     "other": "Other",
     "profile": "Profile",
     "notifications": "Notifications",
-    "store": "Store"
+    "store": "Store",
+    "search" : "Search"
   },
   "balance": {
     "tokenBalance": "Token Balance",

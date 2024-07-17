@@ -47,7 +47,6 @@ class _BrandItemListState extends State<BrandItemList> {
 
     // Simulate network delay
     await Future.delayed(const Duration(seconds: 1));
-
     setState(() {
       final nextItems = widget.brandItems
           .skip(_displayedItems.length)

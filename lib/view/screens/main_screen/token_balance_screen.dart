@@ -1,15 +1,13 @@
 import 'package:denari_app/store/token_balance_state/token_balance_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
-import 'package:denari_app/view/screens/brand_item/brand_item_list.dart';
-import 'package:denari_app/view/screens/brand_item/brand_item_widget.dart';
 import 'package:denari_app/view/widgets/custom_app_bar.dart';
 import 'package:denari_app/view/widgets/preview_banner/preview_banner.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
 import '../../widgets/balance_widget.dart';
+import '../../widgets/brand_item/brand_item_list.dart';
+import '../../widgets/brand_item/brand_item_widget.dart';
 import '../../widgets/no_data_widget.dart';
 
 class TokenBalanceScreen extends StatefulWidget {
@@ -25,112 +23,14 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
   /// Must et list of models
 
   final brandItems = [
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-
+    for (var i = 0; i < 10; ++i)
+      BrandItemWidget(
+        avatar: Assets.media.images.toyStory.path,
+        brandName: 'McDonalds$i',
+        lastUpdate: 'June 16, 2024, 18:23',
+        tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
+        // tealButton: Icon(Icons.chevron_right),
+      ),
   ];
 
   @override
@@ -183,7 +83,11 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                   SizedBox(
                     height: 16,
                   ),
-                  Expanded(child: BrandItemList(brandItems: brandItems, itemsToLoad: 8,))
+                  Expanded(
+                      child: BrandItemList(
+                    brandItems: brandItems,
+                    itemsToLoad: 8,
+                  ))
                 ],
               ),
             )
@@ -193,8 +97,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                 width: 96,
               ),
               title: "balance.emptyBalance".tr(),
-              description: "balance.emptyBalanceDescription".tr()
-            ),
+              description: "balance.emptyBalanceDescription".tr()),
     );
   }
 }

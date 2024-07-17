@@ -1,5 +1,5 @@
-import 'package:denari_app/utils/app_colors.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'decoration_field.dart';
@@ -45,7 +45,7 @@ class _EditFieldState extends State<EditField> {
     return TextFormField(
       controller: _controller,
       style: context.theme.headline5.copyWith(
-        color: AppColors.dark,
+        color: AppColors.black,
       ),
       onChanged: widget.onChanged,
       decoration: DecorationField(

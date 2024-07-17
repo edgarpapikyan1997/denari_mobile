@@ -1,5 +1,5 @@
-import 'package:denari_app/utils/app_colors.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
@@ -47,7 +47,7 @@ class _PhoneFieldState extends State<PhoneField> {
     return IntlPhoneField(
       controller: _controller,
       style: context.theme.headline5.copyWith(
-        color: AppColors.dark,
+        color: AppColors.black,
       ),
       disableLengthCheck: true,
       onChanged: widget.onChanged,

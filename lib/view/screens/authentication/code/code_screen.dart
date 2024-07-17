@@ -1,5 +1,5 @@
-import 'package:denari_app/utils/app_colors.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:denari_app/view/widgets/fields/code_field.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class _CodeScreenState extends State<CodeScreen> {
             children: [
               Text(
                 'sign.sent_code'.tr(),
-                style: context.theme.headline1.copyWith(color: AppColors.dark),
+                style: context.theme.headline1.copyWith(color: AppColors.black),
               ),
               const Delimiter(2),
               Text(_numberText),

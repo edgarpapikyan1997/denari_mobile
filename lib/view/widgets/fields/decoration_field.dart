@@ -1,5 +1,5 @@
-import 'package:denari_app/utils/app_colors.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class DecorationField extends InputDecoration {
@@ -23,7 +23,7 @@ class DecorationField extends InputDecoration {
           ),
           filled: true,
           fillColor: AppColors.fieldColor,
-          errorStyle: context.theme.headline6.copyWith(
+          errorStyle: context.theme.headline5.copyWith(
             color: AppColors.errorColor,
           ),
           suffixIcon: controller.text.isNotEmpty

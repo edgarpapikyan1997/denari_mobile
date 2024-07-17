@@ -1,4 +1,5 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/view/widgets/buttons/button_primary.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:denari_app/view/widgets/fields/edit_field.dart';
@@ -6,6 +7,7 @@ import 'package:denari_app/view/widgets/fields/phone_field.dart';
 import 'package:denari_app/view/widgets/text_with_link.dart';
 import 'package:denari_app/view/widgets/welcome_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -52,13 +54,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const Delimiter(24),
               ButtonPrimary(
                 label: 'sign.create_now'.tr(),
+                onPressed: () => context.goNamed(Routes.code, extra: '+44442344'),
               ),
               const Delimiter(),
               Center(
                 child: TextWithLink(
                   text: 'sign.already_account'.tr(),
                   link: 'sign.in'.tr(),
-                  onTap: () {},
+                  onTap: () => context.goNamed(Routes.signIn),
                 ),
               ),
             ],

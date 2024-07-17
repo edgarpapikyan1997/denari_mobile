@@ -158,13 +158,23 @@ class $AssetsMediaImagesGen {
   AssetGenImage get image9 =>
       const AssetGenImage('assets/media/images/image 9.png');
 
+  /// File path: assets/media/images/task-list-clock.png
+  AssetGenImage get taskListClock =>
+      const AssetGenImage('assets/media/images/task-list-clock.png');
+
   /// File path: assets/media/images/toy_story.png
   AssetGenImage get toyStory =>
       const AssetGenImage('assets/media/images/toy_story.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [coffe, creditCard1, cryptoCurrencyNamecoin, image9, toyStory];
+  List<AssetGenImage> get values => [
+        coffe,
+        creditCard1,
+        cryptoCurrencyNamecoin,
+        image9,
+        taskListClock,
+        toyStory
+      ];
 }
 
 class Assets {

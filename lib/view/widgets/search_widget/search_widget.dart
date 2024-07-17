@@ -1,5 +1,7 @@
 import 'package:denari_app/store/search_field_state/search_field_state.dart';
+import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
+import 'package:denari_app/view/widgets/no_data_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -50,6 +52,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         return Column(
           children: [
             TextField(
+
               onTap: () {
                 searchState.showCancel = true;
                 searchState.showSuggestion = true;
@@ -88,7 +91,6 @@ class _SearchWidgetState extends State<SearchWidget> {
                         : const SizedBox()),
                 suffixIconConstraints:
                     const BoxConstraints(minWidth: 24.0, minHeight: 24.0),
-                // contentPadding: const EdgeInsets.symmetric(horizontal: 20),
                 fillColor: AppColors.searchBarColor,
                 filled: true,
                 border: UnderlineInputBorder(
@@ -97,6 +99,15 @@ class _SearchWidgetState extends State<SearchWidget> {
                 ),
               ),
             ),
+            if (searchState.filteredSuggestions.isEmpty &&
+                _textEditingController.text != '')
+              Expanded(
+                child: NoDataWidget(
+                  title: 'main.nothingFound'.tr(),
+                  asset: Assets.media.images.taskListClock.image(),
+                  description: 'main.trySearchAgain'.tr(),
+                ),
+              ),
             if (searchState.showSuggestion)
               Expanded(
                 child: ListView.builder(

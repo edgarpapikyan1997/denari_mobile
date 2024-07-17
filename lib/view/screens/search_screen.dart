@@ -1,17 +1,11 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import '../../gen/assets.gen.dart';
-import '../widgets/brand_item/brand_item_widget.dart';
 import '../widgets/custom_app_bar.dart';
-import '../widgets/search_widget/custom_search_delegate.dart';
 import '../widgets/search_widget/search_widget.dart';
 
 class SearchScreen extends StatelessWidget {
-  // final List<BrandItemWidget>? items;
-
   const SearchScreen({
     super.key,
   });

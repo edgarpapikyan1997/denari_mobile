@@ -18,7 +18,9 @@
     "profile": "Profile",
     "notifications": "Notifications",
     "store": "Store",
-    "search" : "Search"
+    "search" : "Search",
+    "nothingFound" : "Nothing found",
+    "trySearchAgain" : "Try searching again."
   },
   "balance": {
     "tokenBalance": "Token Balance",

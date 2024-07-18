@@ -23,12 +23,12 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: '/',
           builder: (context, state) {
-            return constMainScreen();
+            return const MainScreen();
           },
         routes: [
         GoRoute(
           path: 'tokenBalance',
-          builder: (BuildContext context, GoRouterStatestate) {
+          builder: (BuildContext context, GoRouterState state) {
             return const TokenBalanceScreen();
             },
           ),
@@ -37,7 +37,7 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: '/notifications',
           builder: (context, state) {
-            return constNotificationScreen();
+            return const NotificationScreen();
           },
         ),
         GoRoute(

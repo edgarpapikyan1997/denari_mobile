@@ -72,7 +72,7 @@ class TokenInterceptor extends QueuedInterceptor {
     }
 
     await setToken(refreshedToken);
-    final client = di.get<Dio>()!;
+    final client = di.get<Dio>();
     client.options.baseUrl = response.requestOptions.baseUrl;
     return client.request<dynamic>(
       response.requestOptions.path,
@@ -126,8 +126,8 @@ class TokenInterceptor extends QueuedInterceptor {
       response?.statusCode == 401;
 
   static Future<ApiToken> _refreshToken(token) async {
-    final response = await di.get<Dio>()!.post(
-      '${di.get<Config>()!.host}/refresh_token/',
+    final response = await di.get<Dio>().post(
+      '${di.get<Config>().host}/refresh_token/',
       data: FormData.fromMap({'refresh_token': token?.refreshToken ?? ''}),
     );
     return response.item(ApiToken.fromJson);

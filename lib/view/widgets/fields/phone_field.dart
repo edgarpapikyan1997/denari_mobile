@@ -11,6 +11,7 @@ class PhoneField extends StatefulWidget {
   final String hint;
   final ValueChanged<PhoneNumber>? onChanged;
   final bool optional;
+  final String? error;
 
   const PhoneField({
     super.key,
@@ -18,6 +19,7 @@ class PhoneField extends StatefulWidget {
     this.controller,
     this.onChanged,
     this.optional = false,
+    this.error,
   });
 
   @override
@@ -26,6 +28,7 @@ class PhoneField extends StatefulWidget {
 
 class _PhoneFieldState extends State<PhoneField> {
   late final TextEditingController _controller;
+  String? _error;
 
   String get _hint =>
       widget.hint + (widget.optional ? ' (${'optional'.tr()})' : '');
@@ -33,7 +36,14 @@ class _PhoneFieldState extends State<PhoneField> {
   @override
   void initState() {
     _controller = widget.controller ?? TextEditingController();
+    _error = widget.error;
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant PhoneField oldWidget) {
+    _error = widget.error;
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -55,6 +65,7 @@ class _PhoneFieldState extends State<PhoneField> {
         context: context,
         controller: _controller,
         hint: _hint,
+        error: _error,
       ),
     );
   }

@@ -11,6 +11,7 @@ class DecorationField extends InputDecoration {
     required this.context,
     required this.controller,
     this.hint,
+    String? error,
   }) : super(
           isDense: true,
           border: FieldBorder(),
@@ -23,6 +24,7 @@ class DecorationField extends InputDecoration {
           ),
           filled: true,
           fillColor: AppColors.fieldColor,
+          errorText: error,
           errorStyle: context.theme.headline5.copyWith(
             color: AppColors.errorColor,
           ),

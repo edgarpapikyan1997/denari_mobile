@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:denari_app/data/authentication/model/login_model.dart';
 import 'package:denari_app/data/authentication/model/reg_model.dart';
 import 'package:denari_app/utils/env/config.dart';
@@ -26,18 +28,18 @@ final class ImplAuthRepository extends AuthRepository {
 
   @override
   Future<bool> register(RegModel data) async {
-    final result = await _client.get(
+    final result = await _client.post(
       '${_config.host}/register',
-      data: data,
+      data: jsonEncode(data.toJson()),
     );
     return result.statusCode == 200;
   }
 
   @override
   Future<bool> verify(String phone) async {
-    final result = await _client.get(
-      '${_config.host}/register',
-      data: {'phone': phone},
+    final result = await _client.post(
+      '${_config.host}/verify',
+      data: jsonEncode({'phone': phone}),
     );
     return result.statusCode == 200;
   }

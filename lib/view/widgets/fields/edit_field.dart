@@ -9,6 +9,7 @@ class EditField extends StatefulWidget {
   final String hint;
   final ValueChanged<String>? onChanged;
   final bool optional;
+  final String? error;
 
   const EditField({
     super.key,
@@ -16,6 +17,7 @@ class EditField extends StatefulWidget {
     this.controller,
     this.onChanged,
     this.optional = false,
+    this.error,
   });
 
   @override
@@ -24,6 +26,7 @@ class EditField extends StatefulWidget {
 
 class _EditFieldState extends State<EditField> {
   late final TextEditingController _controller;
+  String? _error;
 
   String get _hint =>
       widget.hint + (widget.optional ? ' (${'optional'.tr()})' : '');
@@ -31,7 +34,14 @@ class _EditFieldState extends State<EditField> {
   @override
   void initState() {
     _controller = widget.controller ?? TextEditingController();
+    _error = widget.error;
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant EditField oldWidget) {
+    _error = widget.error;
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -52,6 +62,7 @@ class _EditFieldState extends State<EditField> {
         context: context,
         controller: _controller,
         hint: _hint,
+        error: _error,
       ),
     );
   }

@@ -1,13 +1,15 @@
+import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:denari_app/view/screens/authentication/code/code_screen.dart';
 import 'package:denari_app/view/screens/authentication/forgot/forgot_screen.dart';
 import 'package:denari_app/view/screens/authentication/password/create_password_screen.dart';
 import 'package:denari_app/view/screens/authentication/sign_in/sign_in_screen.dart';
 import 'package:denari_app/view/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:go_router/go_router.dart';
-import '../view/screens/gift_cards_screen.dart';
-import '../view/screens/main_screen.dart';
+import '../view/screens/shop_screen.dart';
+import '../view/screens/main_screen/main_screen.dart';
 import '../view/screens/notification_screen.dart';
-import '../view/screens/settings_screen.dart';
+import '../view/screens/profile_screen.dart';
 import '../view/widgets/scaffold_nav_bar.dart';
 import 'listeners/auth_listener.dart';
 
@@ -21,25 +23,33 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: '/',
           builder: (context, state) {
-            return MainScreen();
+            return constMainScreen();
           },
-        ),
+        routes: [
         GoRoute(
-          path: '/giftCards',
-          builder: (context, state) {
-            return GiftCardsScreen();
-          },
+          path: 'tokenBalance',
+          builder: (BuildContext context, GoRouterStatestate) {
+            return const TokenBalanceScreen();
+            },
+          ),
+          ],
         ),
         GoRoute(
           path: '/notifications',
           builder: (context, state) {
-            return NotificationScreen();
+            return constNotificationScreen();
           },
         ),
         GoRoute(
-          path: '/settings',
+          path: '/shopScreen',
+        builder: (context, state) {
+          return const ShopScreen();
+        },
+      ),
+      GoRoute(
+        path: '/profile',
           builder: (context, state) {
-            return SettingsScreen();
+            return const ProfileScreen();
           },
         ),
       ],

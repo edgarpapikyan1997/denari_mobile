@@ -22,7 +22,7 @@ class ProductAdvertisementWidget extends StatelessWidget {
               blurRadius: 3,
               blurStyle: BlurStyle.normal,
               spreadRadius: 2.5,
-              offset: Offset(0, 3)),
+              offset: const Offset(0, 3)),
         ],
         color: AppColors.greyLight.withOpacity(0.2),
         image: image != null

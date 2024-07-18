@@ -9,6 +9,7 @@ class AppColors {
   static const borderColor = Color(0xffE6E5E5);
   static const greyLight = Color(0xffCDCACA);
   static const greyDark = Color(0xff9E9D9D);
+  static const lightGreyText = Color(0xff7B7B7B);
   static const black = Color(0xff000000);
   static const alertRed = Color(0xffC1121F);
   static const yellowLight = Color(0xffE8CF78);

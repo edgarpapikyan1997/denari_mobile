@@ -1,7 +1,5 @@
-import 'package:denari_app/view/widgets/sotre_fields/store_field_widget.dart';
+import 'package:denari_app/view/widgets/store_fields/store_field_widget.dart';
 import 'package:flutter/material.dart';
-
-import '../../../gen/assets.gen.dart';
 
 class StoreFieldGenerator extends StatelessWidget {
   final List<Map<String, dynamic>> storeFieldList;

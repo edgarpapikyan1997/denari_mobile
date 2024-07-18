@@ -7,7 +7,7 @@
     "transactionHistory": "Transaction\n History",
     "rangeOfProducts": "The entire range of products",
     "topCategories": "Top shop categories",
-    "popularStores" : "Popular stores ",
+    "popularStores": "Popular stores ",
     "seeAll": "See all",
     "food": "Food",
     "beauty": "Beauty",
@@ -15,7 +15,18 @@
     "activities": "Activities",
     "groceries": "Groceries",
     "travel": "Travel",
-    "other": "Other"
+    "other": "Other",
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "store": "Store"
+  },
+  "balance": {
+    "tokenBalance": "Token Balance",
+    "viewEarnedToken": "View your earned token",
+    "tokens": "Tokens",
+    "ld": "LD",
+    "emptyBalance": "Balance is empty",
+    "emptyBalanceDescription" : "To receive tokens, you must make a purchase using a gift card."
   },
   "sign" : {
     "in": "Sign in",

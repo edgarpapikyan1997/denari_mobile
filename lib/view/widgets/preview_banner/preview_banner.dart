@@ -1,5 +1,4 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
-import 'package:denari_app/utils/extensions/widget_extension.dart';
 import 'package:flutter/material.dart';
 
 class PreviewBanner extends StatelessWidget {
@@ -23,9 +22,9 @@ class PreviewBanner extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            leadingBanner ?? SizedBox(),
-            middleBanner ?? SizedBox(),
-            textButton ?? SizedBox(),
+            leadingBanner ?? const SizedBox(),
+            middleBanner ?? const SizedBox(),
+            textButton ?? const SizedBox(),
           ],
         ),
         bannerUnderText != null

@@ -68,6 +68,14 @@ extension ThemeDataHelper on ThemeData {
         height: 1.26,
       );
 
+  TextStyle get headline6 => const TextStyle(
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w600,
+        fontSize: 26,
+        height: 1.20,
+      );
+
   TextStyle get body1 => const TextStyle(
         color: AppColors.black,
         fontFamily: FontFamily.onest,
@@ -254,6 +262,9 @@ extension TextStyleHelpers on TextStyle {
   TextStyle get semiBold => copyWith(fontWeight: FontWeight.w600);
 
   TextStyle get bold => copyWith(fontWeight: FontWeight.w700);
+
+  TextStyle get extraBold => copyWith(fontWeight: FontWeight.w800);
+
 
   TextStyle get regularItalic => copyWith(
         fontWeight: FontWeight.w400,

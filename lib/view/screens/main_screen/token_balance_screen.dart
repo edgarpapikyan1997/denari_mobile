@@ -41,7 +41,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
         child: CustomAppBar(
           leadingIcon: GestureDetector(
               onTap: () {
-                context.pop();
+                context.go('/');
               },
               child: Assets.media.icons.chevronLeft.svg()),
           title: Text(

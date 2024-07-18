@@ -11,7 +11,7 @@ class TokenBalanceState = _TokenBalanceState with _$TokenBalanceState;
 abstract class _TokenBalanceState with Store {
 
   @observable
-  int earnedToken = 100;
+  int earnedToken = 50;
 
 
   @observable

@@ -61,7 +61,7 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
         child: CustomAppBar(
           leadingIcon: GestureDetector(
             onTap: () {
-              context.pop();
+              context.go('/');
             },
             child: Assets.media.icons.chevronLeft.svg(),
           ),

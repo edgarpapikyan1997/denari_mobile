@@ -3,7 +3,9 @@ import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/main_screen_field.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/product_advertisement_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../model/qr_id.dart';
 import '../../../store/categories_state/categories_state.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../../widgets/custom_app_bar.dart';
@@ -21,6 +23,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final qrIdReceiver = GetIt.instance<QRIdReceiver>();
+
   final _token = TokenBalanceState();
   final categories = [
     {
@@ -57,7 +61,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    // _token.getTokenBalance();
     initCategories();
   }
 
@@ -85,6 +88,8 @@ class _MainScreenState extends State<MainScreen> {
           asset: Assets.media.icons.qrCode.svg(),
           title: 'main.myQRCode'.tr(),
           navigationTitle: '/myQRCode',
+          userID: qrIdReceiver.id,
+          token: _token.earnedToken.toString(),
         ),
         MainScreenField(
           asset: Assets.media.icons.creditCardSync.svg(),

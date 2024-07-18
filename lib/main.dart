@@ -1,4 +1,5 @@
 import 'package:denari_app/utils/go_router.dart';
+import 'package:denari_app/utils/services/get_it.dart';
 import 'package:denari_app/utils/themes/dark_theme.dart';
 import 'package:denari_app/utils/themes/light_theme.dart';
 import 'package:flutter/services.dart';
@@ -8,11 +9,15 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  ServiceLocator.configure();
 
   runApp(EasyLocalization(supportedLocales: const [
     Locale('en', 'US'),
   ], path: 'assets/translations', child: const App()));
 }
+
+
+
 
 class App extends StatelessWidget {
   const App({super.key});

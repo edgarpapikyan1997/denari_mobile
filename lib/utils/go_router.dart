@@ -25,18 +25,6 @@ final GoRouter router = GoRouter(routes: [
         },
         routes: [
           GoRoute(
-            path: 'tokenBalance',
-            builder: (BuildContext context, GoRouterState state) {
-              return const TokenBalanceScreen();
-            },
-          ),
-          GoRoute(
-            path: 'myGiftCards',
-            builder: (BuildContext context, GoRouterState state) {
-              return const MyGiftCardsScreen();
-            },
-          ),
-          GoRoute(
             path: 'sendGift',
             builder: (BuildContext context, GoRouterState state) {
               return const SendGiftScreen();
@@ -57,12 +45,6 @@ final GoRouter router = GoRouter(routes: [
         ],
       ),
       GoRoute(
-        path: '/searchScreen',
-        builder: (context, state) {
-          return const SearchScreen();
-        },
-      ),
-      GoRoute(
         path: '/notifications',
         builder: (context, state) {
           return const NotificationScreen();
@@ -81,5 +63,23 @@ final GoRouter router = GoRouter(routes: [
         },
       ),
     ],
+  ),
+  GoRoute(
+    path: '/tokenBalance',
+    builder: (BuildContext context, GoRouterState state) {
+      return const TokenBalanceScreen();
+    },
+  ),
+  GoRoute(
+    path: '/myGiftCards',
+    builder: (BuildContext context, GoRouterState state) {
+      return const MyGiftCardsScreen();
+    },
+  ),
+  GoRoute(
+    path: '/searchScreen',
+    builder: (context, state) {
+      return const SearchScreen();
+    },
   ),
 ]);

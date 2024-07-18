@@ -20,12 +20,14 @@
     "store": "Store",
     "search" : "Search",
     "nothingFound" : "Nothing found",
-    "trySearchAgain" : "Try searching again."
+    "trySearchAgain" : "Try searching again.",
+    "navBarQR" : "My QR code",
+    "getTokens" : "To get tokens for a purchase or use the accumulated points, show the screen to the seller in the store."
   },
   "balance": {
     "tokenBalance": "Token Balance",
     "viewEarnedToken": "View your earned token",
-    "tokens": "Tokens",
+    "tokens": "tokens",
     "ld": "LD",
     "emptyBalance": "Balance is empty",
     "emptyBalanceDescription" : "To receive tokens, you must make a purchase using a gift card."
@@ -36,5 +38,15 @@
     "manageGifts" : "Manage and explore your gift cards.",
     "noGiftCards" : "No gift cards",
     "chooseGiftCardInApp" : "Choose gift cards in our application and purchase from the store checkout."
+  },
+  "buttons" : {
+    "close" : "Close"
+  },
+  "bottomSheet" : {
+    "congratsEaredToken" : "Congratulations! You’ve Earned Tokens!",
+    "yourPurchase" : "Your purchase of $",
+    "at" : "at",
+    "earnedYou" : "earned you",
+    "wouldYouRate" : "How would you rate your experience?"
   }
 }

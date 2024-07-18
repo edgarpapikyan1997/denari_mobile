@@ -5,10 +5,12 @@ import '../../gen/assets.gen.dart';
 
 class BalanceWidget extends StatelessWidget {
   final bool isTokenBalance;
+  final bool addPlusChar;
   final double tokenIconHeight;
   final double tokenIconWidth;
   final String balance;
   final TextStyle textStyle;
+  final String title;
 
   const BalanceWidget({
     super.key,
@@ -17,6 +19,8 @@ class BalanceWidget extends StatelessWidget {
     required this.balance,
     this.tokenIconHeight = 25,
     this.tokenIconWidth = 28,
+    this.addPlusChar = false,
+    this.title = "",
   });
 
   @override
@@ -29,7 +33,7 @@ class BalanceWidget extends StatelessWidget {
                   .svg(height: tokenIconHeight, width: tokenIconWidth),
               const SizedBox(width: 4),
               Text(
-                balance,
+                addPlusChar ? "+$balance $title" : balance,
                 style: textStyle,
               )
             ],

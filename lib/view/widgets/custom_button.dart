@@ -23,8 +23,7 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: context.width,
-        margin: EdgeInsets.only(top: 32),
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           vertical: 16,
         ),
         decoration: BoxDecoration(

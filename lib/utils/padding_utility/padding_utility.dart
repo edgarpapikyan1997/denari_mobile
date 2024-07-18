@@ -22,10 +22,10 @@ class PaddingUtility extends Padding {
 
   PaddingUtility.only({
     super.key,
-    double top = defaultSize,
-    double bottom = defaultSize,
-    double left = defaultSize,
-    double right = defaultSize,
+    double top = 0,
+    double bottom = 0,
+    double left = 0,
+    double right = 0,
     required Widget super.child,
   }) : super(
             padding: EdgeInsets.only(

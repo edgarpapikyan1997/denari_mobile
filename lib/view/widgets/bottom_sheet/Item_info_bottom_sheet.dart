@@ -1,9 +1,11 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../custom_button.dart';
+import 'bottom_sheet_upper_piece.dart';
 
 void showItemInfoBottomSheet({
   required BuildContext context,
@@ -31,14 +33,7 @@ void showItemInfoBottomSheet({
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 4),
-              height: 4,
-              width: 40,
-              decoration: BoxDecoration(
-                  color: AppColors.bottomSheetPieceGrey,
-                  borderRadius: BorderRadius.circular(4)),
-            ),
+            const BottomSheetUpperPiece(),
             addCloseButton
                 ? Align(
                         alignment: Alignment.topRight,
@@ -85,8 +80,10 @@ void showItemInfoBottomSheet({
               '$itemInfoCost LD',
               style: context.theme.headline1,
             ).paddingOnly(bottom: 8),
-            underInfoCostText ?? const SizedBox(),
-            addButtons ? Row(
+            PaddingUtility.only(
+                bottom: 32, child: underInfoCostText ?? const SizedBox()),
+            addButtons
+                ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
@@ -94,8 +91,7 @@ void showItemInfoBottomSheet({
                         title: 'Send',
                         isEnabled: false,
                         isWhite: true,
-                        onTap: () {
-                        },
+                        onTap: () {},
                       )),
                       const SizedBox(
                         width: 8,
@@ -105,8 +101,7 @@ void showItemInfoBottomSheet({
                         title: 'Use',
                         isEnabled: false,
                         isWhite: false,
-                        onTap: () {
-                        },
+                        onTap: () {},
                       )),
                     ],
                   )

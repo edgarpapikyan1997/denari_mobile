@@ -180,7 +180,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                   const SizedBox(
                     height: 16,
                   ),
-                  Expanded(child: BrandItemList(brandItems: brandItems))
+                  Expanded(child: BrandItemList(brandItems: brandItems, itemsToLoad: 8,))
                 ],
               ),
             )

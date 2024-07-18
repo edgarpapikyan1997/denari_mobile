@@ -26,5 +26,12 @@
     "ld": "LD",
     "emptyBalance": "Balance is empty",
     "emptyBalanceDescription" : "To receive tokens, you must make a purchase using a gift card."
+  },
+  "giftCard" : {
+    "myGiftCards" : "My Gift Cards",
+    "giftCards" : "Gift cards",
+    "manageGifts" : "Manage and explore your gift cards.",
+    "noGiftCards" : "No gift cards",
+    "chooseGiftCardInApp" : "Choose gift cards in our application and purchase from the store checkout."
   }
 }

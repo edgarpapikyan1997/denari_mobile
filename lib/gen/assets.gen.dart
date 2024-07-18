@@ -63,6 +63,10 @@ class $AssetsMediaIconsGen {
   SvgGenImage get chevronLeft =>
       const SvgGenImage('assets/media/icons/chevron-left.svg');
 
+  /// File path: assets/media/icons/chevron-right.svg
+  SvgGenImage get chevronRight =>
+      const SvgGenImage('assets/media/icons/chevron-right.svg');
+
   /// File path: assets/media/icons/circle-user-round.svg
   SvgGenImage get circleUserRound =>
       const SvgGenImage('assets/media/icons/circle-user-round.svg');
@@ -98,6 +102,10 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/media/icons/search.svg');
 
+  /// File path: assets/media/icons/slose center.svg
+  SvgGenImage get sloseCenter =>
+      const SvgGenImage('assets/media/icons/slose center.svg');
+
   /// File path: assets/media/icons/store.svg
   SvgGenImage get store => const SvgGenImage('assets/media/icons/store.svg');
 
@@ -114,6 +122,7 @@ class $AssetsMediaIconsGen {
         token,
         bell,
         chevronLeft,
+        chevronRight,
         circleUserRound,
         creditCard1,
         creditCardSync,
@@ -124,6 +133,7 @@ class $AssetsMediaIconsGen {
         qrCode,
         scanLine,
         search,
+        sloseCenter,
         store,
         travel
       ];
@@ -136,23 +146,36 @@ class $AssetsMediaImagesGen {
   AssetGenImage get coffe =>
       const AssetGenImage('assets/media/images/Coffe.png');
 
+  /// File path: assets/media/images/credit-card-1.png
+  AssetGenImage get creditCard1 =>
+      const AssetGenImage('assets/media/images/credit-card-1.png');
+
   /// File path: assets/media/images/crypto-currency-namecoin.png
   AssetGenImage get cryptoCurrencyNamecoin =>
       const AssetGenImage('assets/media/images/crypto-currency-namecoin.png');
+
+  /// File path: assets/media/images/image 9.png
+  AssetGenImage get image9 =>
+      const AssetGenImage('assets/media/images/image 9.png');
 
   /// File path: assets/media/images/toy_story.png
   AssetGenImage get toyStory =>
       const AssetGenImage('assets/media/images/toy_story.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [coffe, cryptoCurrencyNamecoin, toyStory];
+  List<AssetGenImage> get values =>
+      [coffe, creditCard1, cryptoCurrencyNamecoin, image9, toyStory];
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsMediaGen media = $AssetsMediaGen();
+  static const AssetGenImage splash = AssetGenImage('assets/splash.png');
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
+
+  /// List of all assets
+  static List<AssetGenImage> get values => [splash];
 }
 
 class AssetGenImage {

@@ -17,6 +17,7 @@ class PreviewBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,7 +36,7 @@ class PreviewBanner extends StatelessWidget {
         bannerUnderText != null
             ? Text(
                 bannerUnderText!,
-                style: context.theme.headline4.regular.yellowDark,
+                style: context.theme.headline4.regular.lightGreyText,
               )
             : const SizedBox()
       ],

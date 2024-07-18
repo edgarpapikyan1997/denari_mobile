@@ -1,6 +1,10 @@
+import 'package:denari_app/view/screens/main_screen/my_qr_code.dart';
+import 'package:denari_app/view/screens/main_screen/send_gift_screen.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
+import 'package:denari_app/view/screens/main_screen/transaction_history.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../view/screens/main_screen/my_gift_cards_screen.dart';
 import '../view/screens/shop_screen.dart';
 import '../view/screens/main_screen/main_screen.dart';
 import '../view/screens/notification_screen.dart';
@@ -23,6 +27,30 @@ final GoRouter router = GoRouter(routes: [
             path: 'tokenBalance',
             builder: (BuildContext context, GoRouterState state) {
               return const TokenBalanceScreen();
+            },
+          ),
+          GoRoute(
+            path: 'myGiftCards',
+            builder: (BuildContext context, GoRouterState state) {
+              return const MyGiftCardsScreen();
+            },
+          ),
+          GoRoute(
+            path: 'sendGift',
+            builder: (BuildContext context, GoRouterState state) {
+              return const SendGiftScreen();
+            },
+          ),
+          GoRoute(
+            path: 'myQRCode',
+            builder: (BuildContext context, GoRouterState state) {
+              return const MyQRCode();
+            },
+          ),
+          GoRoute(
+            path: 'transactionHistory',
+            builder: (BuildContext context, GoRouterState state) {
+              return const TransactionHistoryScreen();
             },
           ),
         ],

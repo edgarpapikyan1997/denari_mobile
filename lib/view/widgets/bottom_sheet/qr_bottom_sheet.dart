@@ -23,7 +23,7 @@ void showQRBottomSheet({
     builder: (context) {
       return Container(
         width: context.width,
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           top: 8,
           left: 16,
           right: 16,

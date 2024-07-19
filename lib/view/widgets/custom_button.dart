@@ -34,8 +34,8 @@ class CustomButton extends StatelessWidget {
                     : AppColors.black,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
-              width: 1,
-            )),
+                width: isEnabled ? 0 : 1,
+                color: isEnabled ? AppColors.white : AppColors.black)),
         // width: context.width,
         child: Center(
           child: Text(

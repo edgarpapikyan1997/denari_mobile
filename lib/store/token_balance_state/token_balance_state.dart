@@ -17,16 +17,6 @@ abstract class _TokenBalanceState with Store {
   @observable
   int giftCardLD = 33;
 
-
-
-
-  // @action
-  // void getTokenBalance() {
-  //   /// some operation getting token balance needed
-  //   Random random = Random();
-  //   earnedToken = random.nextInt(200);
-  // }
-
   @action
   String getTokenBalanceByBrand({String? brand}) {
 

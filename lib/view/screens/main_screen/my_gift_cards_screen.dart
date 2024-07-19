@@ -4,11 +4,11 @@ import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../store/token_balance_state/token_balance_state.dart';
 import '../../widgets/bottom_sheet/Item_info_bottom_sheet.dart';
+import '../../widgets/brand_item/brand_item_list.dart';
+import '../../widgets/brand_item/brand_item_widget.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/no_data_widget.dart';
 import '../../widgets/preview_banner/preview_banner.dart';
-import '../brand_item/brand_item_list.dart';
-import '../brand_item/brand_item_widget.dart';
 
 class MyGiftCardsScreen extends StatefulWidget {
   const MyGiftCardsScreen({super.key});

@@ -1,4 +1,5 @@
 {
+  "app_name": "Denari",
   "main": {
     "myGiftCards": "My Gift\n Cards",
     "sendGift": "Send\n Gift",
@@ -6,7 +7,7 @@
     "transactionHistory": "Transaction\n History",
     "rangeOfProducts": "The entire range of products",
     "topCategories": "Top shop categories",
-    "popularStores" : "Popular stores ",
+    "popularStores": "Popular stores ",
     "seeAll": "See all",
     "food": "Food",
     "beauty": "Beauty",
@@ -14,6 +15,46 @@
     "activities": "Activities",
     "groceries": "Groceries",
     "travel": "Travel",
-    "other": "Other"
+    "other": "Other",
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "store": "Store"
+  },
+  "balance": {
+    "tokenBalance": "Token Balance",
+    "viewEarnedToken": "View your earned token",
+    "tokens": "Tokens",
+    "ld": "LD",
+    "emptyBalance": "Balance is empty",
+    "emptyBalanceDescription" : "To receive tokens, you must make a purchase using a gift card."
+  },
+  "sign" : {
+    "in": "Sign in",
+    "up": "Sign up",
+    "out": "Sign out",
+    "welcome_to": "Welcome to",
+    "sms_description": "We'll send you an SMS to complete your registration",
+    "email": "Email",
+    "password": "Password",
+    "phone": "Phone",
+    "name": "Name",
+    "optional": "optional",
+    "create_now": "Create now",
+    "already_account": "Already have an account?",
+    "or_continue": "Or continue with",
+    "with_google": "Sign In with Google",
+    "with_facebook": "Sign In with Facebook",
+    "sent_code": "We sent you an SMS code",
+    "on_number": "On number",
+    "incorrect_code": "Incorrect code",
+    "log_in": "Log in",
+    "don_t_account": "Don’t have an account?",
+    "forgot_password": "Forgot Password",
+    "forgot_description": "Please enter your phone number to password recovery.",
+    "send": "Send",
+    "email_error": "incorrect mail",
+    "password_error": "incorrect password",
+    "phone_error": "incorrect phone",
+    "code_error": "incorrect code"
   }
 }

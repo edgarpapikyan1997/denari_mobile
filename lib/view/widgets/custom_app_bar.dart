@@ -1,9 +1,13 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/extensions/widget_extension.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../utils/themes/app_colors.dart';
+import 'package:go_router/go_router.dart';
+
+import 'balance_widget.dart';
 
 class CustomAppBar extends StatelessWidget {
+  final Color? appBarColor;
   final Widget? leadingIcon;
   final String? tokenCount;
   final Text? title;
@@ -14,22 +18,25 @@ class CustomAppBar extends StatelessWidget {
       this.leadingIcon,
       this.tokenCount,
       this.title,
-      this.tealIcon});
+      this.tealIcon,
+      this.appBarColor});
 
   Widget tokenAppBar(BuildContext context) {
     return Row(
       children: [
-        leadingIcon != null
-            ? SizedBox(height: 28, width: 26, child: leadingIcon)
-            : const SizedBox(),
-        const SizedBox(
-          width: 8,
+        GestureDetector(
+          onTap: () {
+            context.go('/tokenBalance');
+          },
+          child: BalanceWidget(
+            isTokenBalance: tokenCount != null ? true : false,
+            tokenIconHeight: 28,
+            tokenIconWidth: 26,
+            balance: tokenCount!,
+            textStyle: context.theme.headline2.bold,
+          ),
         ),
-        Text(
-          tokenCount ?? '',
-          style: context.theme.headline2.bold,
-        ),
-        Spacer(),
+        const Spacer(),
         tealIcon != null
             ? SizedBox(width: 24, height: 24, child: tealIcon)
             : const SizedBox(),
@@ -46,9 +53,9 @@ class CustomAppBar extends StatelessWidget {
                 width: 24,
                 height: 24,
               ),
-        Spacer(),
-        title ?? SizedBox(),
-        Spacer(),
+        const Spacer(),
+        title ?? const SizedBox(),
+        const Spacer(),
         tealIcon != null
             ? SizedBox(child: tealIcon)
             : const SizedBox(
@@ -62,7 +69,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.yellowLight,
+      color: appBarColor,
       width: context.width,
       child: tokenCount != null ? tokenAppBar(context) : defaultAppBar(),
     );

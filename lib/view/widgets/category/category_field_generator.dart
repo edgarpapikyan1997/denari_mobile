@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import '../../../store/categories_state/categories_state.dart';
 import 'category_widget.dart';
 
 class CategoryFieldGenerator extends StatelessWidget {
   final List<Map<String, dynamic>> categories;
+  final CategoriesState categoriesState;
 
   const CategoryFieldGenerator({
     super.key,
     required this.categories,
+    required this.categoriesState,
   });
 
   Widget createWidgetCollection() {
@@ -17,6 +20,7 @@ class CategoryFieldGenerator extends StatelessWidget {
         return CategoryWidget(
           categoryName: categoryName,
           categoryIcon: categoryIcon,
+          categoriesState: categoriesState,
         );
       }).toList(),
     );
@@ -24,7 +28,6 @@ class CategoryFieldGenerator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(categories.toString());
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,

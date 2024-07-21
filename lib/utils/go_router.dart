@@ -25,13 +25,13 @@ final GoRouter router = GoRouter(
           builder: (context, state) {
             return const MainScreen();
           },
-          routes: [
-            GoRoute(
-              path: 'tokenBalance',
-              builder: (BuildContext context, GoRouterState state) {
-                return const TokenBalanceScreen();
-              },
-            ),
+        routes: [
+        GoRoute(
+          path: 'tokenBalance',
+          builder: (BuildContext context, GoRouterState state) {
+            return const TokenBalanceScreen();
+            },
+          ),
           ],
         ),
         GoRoute(
@@ -42,46 +42,12 @@ final GoRouter router = GoRouter(
         ),
         GoRoute(
           path: '/shopScreen',
-          GoRoute(
-            path: 'myGiftCards',
-            builder: (BuildContext context, GoRouterState state) {
-              return const MyGiftCardsScreen();
-            },
-          ),
-          GoRoute(
-            path: 'sendGift',
-            builder: (BuildContext context, GoRouterState state) {
-              return const SendGiftScreen();
-            },
-          ),
-          GoRoute(
-            path: 'myQRCode',
-            builder: (BuildContext context, GoRouterState state) {
-              return const MyQRCode();
-            },
-          ),
-          GoRoute(
-            path: 'transactionHistory',
-            builder: (BuildContext context, GoRouterState state) {
-              return const TransactionHistoryScreen();
-            },
-          ),
-        ],
-      ),
-      GoRoute(
-        path: '/notifications',
         builder: (context, state) {
-          return const NotificationScreen();
+          return const ShopScreen();
         },
       ),
       GoRoute(
-        path: '/shopScreen',
-          builder: (context, state) {
-            return const ShopScreen();
-          },
-        ),
-        GoRoute(
-          path: '/profile',
+        path: '/profile',
           builder: (context, state) {
             return const ProfileScreen();
           },

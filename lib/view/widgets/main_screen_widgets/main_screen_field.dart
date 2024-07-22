@@ -29,12 +29,12 @@ class MainScreenField extends StatelessWidget {
       onTap: () {
         if (navigationTitle == "/myQRCode") {
           showQRBottomSheet(
-            context: context,
-            title: 'main.navBarQR'.tr(),
-            description: 'main.getTokens'.tr(),
-            userID: userID!,
-            token: token,
-          );
+              context: context,
+              title: 'main.navBarQR'.tr(),
+              description: 'main.getTokens'.tr(),
+              userID: userID!,
+              token: token,
+              isEnabled: true);
         } else {
           context.go(navigationTitle);
         }

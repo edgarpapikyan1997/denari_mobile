@@ -15,6 +15,7 @@ void showQRBottomSheet({
   required String title,
   required String description,
   required String userID,
+  bool isEnabled = false,
   String? token,
 }) {
   showModalBottomSheet(
@@ -63,20 +64,22 @@ void showQRBottomSheet({
               ),
             ),
             CustomButton(
-              isEnabled: false,
+              isEnabled: isEnabled,
               isWhite: false,
               title: 'buttons.close'.tr(),
               onTap: () {
-                context.pop();
-                customBottomSheet(
-                  context: context,
-                  type: BottomSheetType.congrats,
-                  title: 'bottomSheet.congratsEaredToken'.tr(),
-                  description: 'Description',
-                  asset: Assets.media.images.fireworks.path,
-                  tokens: token,
-                  balance: '100',
-                );
+                if (isEnabled == true) {
+                  context.pop();
+                  customBottomSheet(
+                    context: context,
+                    type: BottomSheetType.congrats,
+                    title: 'bottomSheet.congratsEaredToken'.tr(),
+                    description: 'Description',
+                    asset: Assets.media.images.fireworks.path,
+                    tokens: token,
+                    balance: '100',
+                  );
+                }
               },
             ),
           ],

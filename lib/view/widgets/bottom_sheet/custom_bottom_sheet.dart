@@ -9,6 +9,7 @@ import '../balance_widget.dart';
 import '../custom_button.dart';
 import '../rate_widget/rate_widget.dart';
 import 'bottom_sheet_upper_piece.dart';
+import 'custom_buttom_sheet_moods/congrats_mood.dart';
 
 void customBottomSheet({
   required BuildContext context,
@@ -50,108 +51,11 @@ Widget _buildCongratsBottomSheet(
   String? tokens,
   String? balance,
 ) {
-  return Container(
-    width: context.width,
-    padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
-    decoration: const BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const BottomSheetUpperPiece(),
-        PaddingUtility.only(
-          top: 36,
-          bottom: 24,
-          child: asset != null && asset.isNotEmpty
-              ? Image.asset(asset)
-              : const SizedBox(),
-        ),
-        PaddingUtility.only(
-          left: 35,
-          right: 35,
-          bottom: 16,
-          child: Text(
-            title!,
-            style: context.theme.headline2.bold,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        tokens != null
-            ? Container(
-                margin: const EdgeInsets.only(bottom: 16),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-                decoration: BoxDecoration(
-                  color: AppColors.searchBarColor,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: IntrinsicWidth(
-                  child: BalanceWidget(
-                    balance: tokens,
-                    textStyle: context.theme.headline4.medium,
-                    isTokenBalance: true,
-                    tokenIconWidth: 13,
-                    tokenIconHeight: 14,
-                    addPlusChar: true,
-                    title: 'tokens',
-                  ),
-                ),
-              )
-            : const SizedBox(),
-        PaddingUtility.only(
-          left: 35,
-          right: 35,
-          bottom: 64,
-          child: Text(
-            "${'bottomSheet.yourPurchase'.tr()}$balance ${"bottomSheet.at".tr()} [User Name] ${"bottomSheet.earnedYou".tr()} $tokens ${'balance.tokens'.tr()}",
-            style: context.theme.headline4.regular.lightGreyText,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Text(
-          'bottomSheet.wouldYouRate'.tr(),
-          style: context.theme.headline4.regular,
-        ),
-        PaddingUtility.only(
-          top: 16,
-          bottom: 64,
-          child: RateWidget(),
-        ),
-        PaddingUtility.only(
-          bottom: 16,
-          child: Builder(builder: (context) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                    child: CustomButton(
-                  title: 'Close',
-                  isEnabled: false,
-                  isWhite: true,
-                  onTap: () {
-                    context.pop();
-                    Future.delayed(const Duration(seconds: 1))
-                        .then((value) => rateAppState.setIndex(0));
-                  },
-                )),
-                const SizedBox(
-                  width: 8,
-                ),
-                Expanded(
-                    child: CustomButton(
-                  title: 'Submit',
-                  isEnabled: rateAppState.isSubmitEnabled,
-                  isWhite: false,
-                  onTap: () {},
-                )),
-              ],
-            );
-          }),
-        )
-      ],
-    ),
+  return CongratsMood(
+    asset: asset!,
+    title: title,
+    tokens: tokens!,
+    balance: balance,
   );
 }
 

@@ -8,14 +8,6 @@ abstract class _RateAppState with Store {
   @observable
   int index = 0;
 
-  @observable
-  bool isSubmitEnabled = true;
-
-  @action
-  void setEnable() {
-    index == 0 ? isSubmitEnabled = false : isSubmitEnabled = true;
-  }
-
   @action
   void setIndex(int newIndex) {
     index = newIndex;

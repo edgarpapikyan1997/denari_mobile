@@ -1,3 +1,4 @@
+import 'package:denari_app/store/custom_button_state/custom_button_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -28,23 +29,23 @@ class CustomButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
             color: isEnabled
-                ? AppColors.greyLight
-                : isWhite
+                ? isWhite
                     ? AppColors.white
-                    : AppColors.black,
+                    : AppColors.black
+                : AppColors.greyLight,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
-                width: isEnabled ? 0 : 1,
-                color: isEnabled ? AppColors.white : AppColors.black)),
+                width: isEnabled ? 1 : 0,
+                color: isEnabled ? AppColors.black : AppColors.white)),
         // width: context.width,
         child: Center(
           child: Text(
             title,
             style: isEnabled
-                ? context.theme.headline4.lightGreyText
-                : isWhite
+                ? isWhite
                     ? context.theme.headline4
-                    : context.theme.headline4.white,
+                    : context.theme.headline4.white
+                : context.theme.headline4.lightGreyText,
           ),
         ),
       ),

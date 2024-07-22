@@ -145,6 +145,10 @@ class $AssetsMediaImagesGen {
   AssetGenImage get coffe =>
       const AssetGenImage('assets/media/images/Coffe.png');
 
+  /// File path: assets/media/images/credit-card-1.png
+  AssetGenImage get creditCard1 =>
+      const AssetGenImage('assets/media/images/credit-card-1.png');
+
   /// File path: assets/media/images/crypto-currency-namecoin.png
   AssetGenImage get cryptoCurrencyNamecoin =>
       const AssetGenImage('assets/media/images/crypto-currency-namecoin.png');
@@ -154,7 +158,8 @@ class $AssetsMediaImagesGen {
       const AssetGenImage('assets/media/images/toy_story.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [coffe, cryptoCurrencyNamecoin, toyStory];
+  List<AssetGenImage> get values =>
+      [coffe, creditCard1, cryptoCurrencyNamecoin, toyStory];
 }
 
 class Assets {

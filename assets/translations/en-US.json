@@ -26,9 +26,9 @@
     "tokens": "Tokens",
     "ld": "LD",
     "emptyBalance": "Balance is empty",
-    "emptyBalanceDescription" : "To receive tokens, you must make a purchase using a gift card."
+    "emptyBalanceDescription": "To receive tokens, you must make a purchase using a gift card."
   },
-  "sign" : {
+  "sign": {
     "in": "Sign in",
     "up": "Sign up",
     "out": "Sign out",
@@ -57,9 +57,12 @@
     "phone_error": "incorrect phone",
     "code_error": "incorrect code"
   },
-  "giftCard" : {
-    "giftCard"  : "Gift card",
-    "giftCartTokens" : "Send Gift Card / Tokens",
-    "selectGift" : "Select a gift card to send"
+  "giftCard": {
+    "giftCard": "Gift card",
+    "giftCartTokens": "Send Gift Card / Tokens",
+    "selectGift": "Select a gift card to send",
+    "continue": "Continue",
+    "noGiftCards": "No Gift Cards",
+    "chooseGiftCards": "Choose gift cards in our application and purchase from the store checkout."
   }
 }

@@ -255,6 +255,9 @@ extension TextStyleHelpers on TextStyle {
 
   TextStyle get bold => copyWith(fontWeight: FontWeight.w700);
 
+  TextStyle get bold2 => copyWith(fontWeight: FontWeight.w800);
+
+
   TextStyle get regularItalic => copyWith(
         fontWeight: FontWeight.w400,
         fontStyle: FontStyle.italic,

@@ -15,18 +15,21 @@ class NoDataWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: context.height,
       width: context.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           asset,
-          const SizedBox(height: 24,),
+          const SizedBox(
+            height: 24,
+          ),
           Text(
             title,
             style: context.theme.headline2.bold,
           ),
-          const SizedBox(height: 8,),
+          const SizedBox(
+            height: 8,
+          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: context.width / 7),
             child: Text(

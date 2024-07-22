@@ -1,12 +1,8 @@
-import 'package:denari_app/view/screens/main_screen/send_gift_screen.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
+import 'package:denari_app/view/screens/send_gift_screen/send_gift_card_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:denari_app/view/screens/authentication/code/code_screen.dart';
-import 'package:denari_app/view/screens/authentication/forgot/forgot_screen.dart';
-import 'package:denari_app/view/screens/authentication/password/create_password_screen.dart';
-import 'package:denari_app/view/screens/authentication/sign_in/sign_in_screen.dart';
-import 'package:denari_app/view/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:go_router/go_router.dart';
+import '../view/screens/send_gift_screen/send_gift_screen.dart';
 import '../view/screens/shop_screen.dart';
 import '../view/screens/main_screen/main_screen.dart';
 import '../view/screens/notification_screen.dart';
@@ -59,6 +55,14 @@ final GoRouter router = GoRouter(
       builder: (context, state) {
         return const SendGiftScreen();
       },
+      routes: [
+        GoRoute(
+          path: 'sendGiftCardScreen',
+          builder: (context, state) {
+            return const SendGiftCardScreen();
+          },
+        ),
+      ]
     ),
     // GoRoute(
     //   name: Routes.signIn,

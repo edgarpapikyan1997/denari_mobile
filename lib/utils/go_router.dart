@@ -1,7 +1,7 @@
 import 'package:denari_app/view/screens/main_screen/my_qr_code.dart';
 import 'package:denari_app/view/screens/main_screen/send_gift_screen.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
-import 'package:denari_app/view/screens/main_screen/transaction_history.dart';
+import 'package:denari_app/view/screens/main_screen/transaction_history_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../view/screens/main_screen/my_gift_cards_screen.dart';
@@ -23,36 +23,7 @@ final GoRouter router = GoRouter(routes: [
           return MainScreen();
         },
         routes: [
-          GoRoute(
-            path: 'tokenBalance',
-            builder: (BuildContext context, GoRouterState state) {
-              return const TokenBalanceScreen();
-            },
-          ),
-          GoRoute(
-            path: 'myGiftCards',
-            builder: (BuildContext context, GoRouterState state) {
-              return const MyGiftCardsScreen();
-            },
-          ),
-          GoRoute(
-            path: 'sendGift',
-            builder: (BuildContext context, GoRouterState state) {
-              return const SendGiftScreen();
-            },
-          ),
-          GoRoute(
-            path: 'myQRCode',
-            builder: (BuildContext context, GoRouterState state) {
-              return const MyQRCode();
-            },
-          ),
-          GoRoute(
-            path: 'transactionHistory',
-            builder: (BuildContext context, GoRouterState state) {
-              return const TransactionHistoryScreen();
-            },
-          ),
+
         ],
       ),
       GoRoute(
@@ -74,5 +45,35 @@ final GoRouter router = GoRouter(routes: [
         },
       ),
     ],
+  ),
+  GoRoute(
+    path: '/tokenBalance',
+    builder: (BuildContext context, GoRouterState state) {
+      return const TokenBalanceScreen();
+    },
+  ),
+  GoRoute(
+    path: '/myGiftCards',
+    builder: (BuildContext context, GoRouterState state) {
+      return const MyGiftCardsScreen();
+    },
+  ),
+  GoRoute(
+    path: '/sendGift',
+    builder: (BuildContext context, GoRouterState state) {
+      return const SendGiftScreen();
+    },
+  ),
+  GoRoute(
+    path: '/myQRCode',
+    builder: (BuildContext context, GoRouterState state) {
+      return const MyQRCode();
+    },
+  ),
+  GoRoute(
+    path: '/transactionHistory',
+    builder: (BuildContext context, GoRouterState state) {
+      return const TransactionHistoryScreen();
+    },
   ),
 ]);

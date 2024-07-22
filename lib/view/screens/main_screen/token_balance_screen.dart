@@ -1,15 +1,13 @@
 import 'package:denari_app/store/token_balance_state/token_balance_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
-import 'package:denari_app/view/screens/brand_item/brand_item_list.dart';
-import 'package:denari_app/view/screens/brand_item/brand_item_widget.dart';
 import 'package:denari_app/view/widgets/custom_app_bar.dart';
 import 'package:denari_app/view/widgets/preview_banner/preview_banner.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
 import '../../widgets/balance_widget.dart';
+import '../../widgets/brand_item/brand_item_list.dart';
+import '../../widgets/brand_item/brand_item_widget.dart';
 import '../../widgets/no_data_widget.dart';
 
 class TokenBalanceScreen extends StatefulWidget {
@@ -22,7 +20,7 @@ class TokenBalanceScreen extends StatefulWidget {
 class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
   final _tokenBalanceState = TokenBalanceState();
 
-  /// Must et list of models
+  /// Must set list of models
 
   final brandItems = [
     BrandItemWidget(
@@ -141,7 +139,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
         child: CustomAppBar(
           leadingIcon: GestureDetector(
               onTap: () {
-                context.pop();
+                context.go('/');
               },
               child: Assets.media.icons.chevronLeft.svg()),
           title: Text(
@@ -152,12 +150,12 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
       ),
       body: _tokenBalanceState.earnedToken != 0
           ? Container(
-              margin: EdgeInsets.only(left: 16, right: 16),
+              margin: const EdgeInsets.only(left: 16, right: 16),
               width: context.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   BalanceWidget(
@@ -167,11 +165,11 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                     balance: '100',
                     textStyle: context.theme.headline1,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
                   Text("balance.viewEarnedToken".tr()),
-                  SizedBox(
+                  const SizedBox(
                     height: 32,
                   ),
                   PreviewBanner(
@@ -180,7 +178,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                       style: context.theme.headline2.bold,
                     ),
                   ),
-                  SizedBox(
+                 const SizedBox(
                     height: 16,
                   ),
                   Expanded(child: BrandItemList(brandItems: brandItems, itemsToLoad: 8,))

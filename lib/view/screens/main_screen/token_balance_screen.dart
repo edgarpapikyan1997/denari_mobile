@@ -25,109 +25,108 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: 'June 16, 2024, 18:23',
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
-
   ];
 
   @override
@@ -154,7 +153,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                 const SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   BalanceWidget(
@@ -168,7 +167,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                     height: 8,
                   ),
                   Text("balance.viewEarnedToken".tr()),
-                 const SizedBox(
+                  const SizedBox(
                     height: 32,
                   ),
                   PreviewBanner(
@@ -190,8 +189,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                 width: 96,
               ),
               title: "balance.emptyBalance".tr(),
-              description: "balance.emptyBalanceDescription".tr()
-            ),
+              description: "balance.emptyBalanceDescription".tr()),
     );
   }
 }

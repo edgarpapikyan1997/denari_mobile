@@ -56,5 +56,10 @@
     "password_error": "incorrect password",
     "phone_error": "incorrect phone",
     "code_error": "incorrect code"
+  },
+  "giftCard" : {
+    "giftCard"  : "Gift card",
+    "giftCartTokens" : "Send Gift Card / Tokens",
+    "selectGift" : "Select a gift card to send"
   }
 }

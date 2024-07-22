@@ -14,12 +14,13 @@ class BrandItemList extends StatefulWidget {
 class _BrandItemListState extends State<BrandItemList> {
   final ScrollController _scrollController = ScrollController();
   List<BrandItemWidget> _displayedItems = [];
-  final int _itemsToLoad = 7;
+  final int _itemsToLoad = 9;
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
+
     _displayedItems = widget.brandItems.take(_itemsToLoad).toList();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {

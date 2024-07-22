@@ -59,6 +59,9 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/bell.svg
   SvgGenImage get bell => const SvgGenImage('assets/media/icons/bell.svg');
 
+  /// File path: assets/media/icons/card.svg
+  SvgGenImage get card => const SvgGenImage('assets/media/icons/card.svg');
+
   /// File path: assets/media/icons/chevron-left.svg
   SvgGenImage get chevronLeft =>
       const SvgGenImage('assets/media/icons/chevron-left.svg');
@@ -101,6 +104,10 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/store.svg
   SvgGenImage get store => const SvgGenImage('assets/media/icons/store.svg');
 
+  /// File path: assets/media/icons/tokenWhite.svg
+  SvgGenImage get tokenWhite =>
+      const SvgGenImage('assets/media/icons/tokenWhite.svg');
+
   /// File path: assets/media/icons/travel.svg
   SvgGenImage get travel => const SvgGenImage('assets/media/icons/travel.svg');
 
@@ -113,6 +120,7 @@ class $AssetsMediaIconsGen {
         other,
         token,
         bell,
+        card,
         chevronLeft,
         circleUserRound,
         creditCard1,
@@ -125,6 +133,7 @@ class $AssetsMediaIconsGen {
         scanLine,
         search,
         store,
+        tokenWhite,
         travel
       ];
 }

@@ -72,21 +72,29 @@ class _MainScreenState extends State<MainScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         MainScreenField(
-            asset: Assets.media.icons.creditCard1.svg(),
-            title: 'main.myGiftCards'.tr()),
+          asset: Assets.media.icons.creditCard1.svg(),
+          title: 'main.myGiftCards'.tr(),
+          navigationTitle: '/myGiftCards',
+        ),
         MainScreenField(
-            asset: Assets.media.icons.drawerSend.svg(),
-            title: 'main.sendGift'.tr()),
+          asset: Assets.media.icons.drawerSend.svg(),
+          title: 'main.sendGift'.tr(),
+          navigationTitle: '/sendGift',
+        ),
         MainScreenField(
-            asset: Assets.media.icons.qrCode.svg(),
-            title: 'main.myQRCode'.tr()),
+          asset: Assets.media.icons.qrCode.svg(),
+          title: 'main.myQRCode'.tr(),
+          navigationTitle: '/myQRCode',
+          token: _token.earnedToken.toString(),
+        ),
         MainScreenField(
-            asset: Assets.media.icons.creditCardSync.svg(),
-            title: 'main.transactionHistory'.tr()),
+          asset: Assets.media.icons.creditCardSync.svg(),
+          title: 'main.transactionHistory'.tr(),
+          navigationTitle: '/transactionHistory',
+        ),
       ],
     ).paddingOnly(bottom: 16, left: 16, right: 16);
   }
-
   @override
   Widget build(BuildContext context) {
     // Define the categories list

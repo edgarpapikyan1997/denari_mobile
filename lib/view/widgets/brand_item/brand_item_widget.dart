@@ -7,7 +7,7 @@ import '../../widgets/balance_widget.dart';
 class BrandItemWidget extends StatelessWidget {
   final String avatar;
   final String brandName;
-  final String? secondaryInfo;
+  final Widget? secondaryInfo;
   final String? tokenBalance;
   final Widget? tealButton;
 
@@ -45,15 +45,12 @@ class BrandItemWidget extends StatelessWidget {
                     children: [
                       Text(
                         brandName,
-                        style: context.theme.headline4.medium,
+                        style: context.theme.body1,
                       ),
                       const SizedBox(
                         height: 2,
                       ),
-                      Text(
                         secondaryInfo!,
-                        style: context.theme.body3.lightGreyText,
-                      ),
                     ],
                   )
                 : Text(

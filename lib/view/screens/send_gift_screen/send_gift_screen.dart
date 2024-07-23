@@ -1,16 +1,16 @@
+import 'package:denari_app/store/brand_item_select_state/brand_item_select_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/view/screens/send_gift_screen/gift_card_categories_widgets/item_selector_widget.dart';
+import 'package:denari_app/view/widgets/balance_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../store/categories_state/categories_state.dart';
 import '../../../../utils/themes/app_colors.dart';
-import '../../widgets/brand_item/brand_item_list.dart';
-import '../../widgets/brand_item/brand_item_widget.dart';
 import '../../widgets/category/category_field_generator.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/custom_button.dart';
-import '../../widgets/no_data_widget.dart';
-import '../../widgets/preview_banner/preview_banner.dart';
 
 class SendGiftScreen extends StatefulWidget {
   const SendGiftScreen({super.key});
@@ -20,7 +20,11 @@ class SendGiftScreen extends StatefulWidget {
 }
 
 class _SendGiftScreenState extends State<SendGiftScreen> {
-  List<BrandItemWidget> items = [];
+  final BrandItemSelectState brandItemSelectState = BrandItemSelectState();
+  final BrandItemSelectState tokenItemSelectState = BrandItemSelectState();
+  CategoriesState? categoriesState;
+
+  int? items = 15;
   final categories = [
     {
       'categoryName': 'giftCard.giftCard'.tr(),
@@ -31,54 +35,17 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
       'categoryIcon': Assets.media.icons.tokenWhite.svg()
     },
   ];
-  CategoriesState? categoriesState;
 
   @override
   void initState() {
     super.initState();
     initCategories();
-    getItems();
   }
 
   initCategories() {
     categoriesState = CategoriesState(
       initialCategory: categories[0]['categoryName'].toString(),
     );
-  }
-
-  int value = 0;
-
-  List<BrandItemWidget> getItems() {
-    items = List.generate(
-      24,
-      (index) => BrandItemWidget(
-        avatar: Assets.media.images.toyStory.path,
-        brandName: 'McDonalds',
-        secondaryInfo: '50 LD',
-        tealButton: SizedBox(
-          height: 24,
-          width: 24,
-          child: Radio(
-            value: index,
-            groupValue: value,
-            fillColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.selected)) {
-                  return AppColors.black; // Selected color
-                }
-                return AppColors.greyLight; // Unselected color
-              },
-            ),
-            onChanged: (index) {
-              setState(() {
-                value = index!;
-              });
-            },
-          ),
-        ),
-      ),
-    );
-    return items;
   }
 
   @override
@@ -98,65 +65,60 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
           ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CategoryFieldGenerator(
-            categories: categories,
-            categoriesState: categoriesState!,
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          PreviewBanner(
-            leadingBanner: Text(
-              'giftCard.selectGift'.tr(),
-              style: context.theme.headline2.bold,
+      body: Observer(builder: (context) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CategoryFieldGenerator(
+              categories: categories,
+              categoriesState: categoriesState!,
             ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          items.isNotEmpty
-              ? Expanded(
-                  child: BrandItemList(
-                    brandItems: getItems(),
-                  ),
-                )
-              : Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      NoDataWidget(
-                          asset: Assets.media.images.creditCard1.image(
-                            height: 96,
-                            width: 96,
-                          ),
-                          title: "giftCard.noGiftCards".tr(),
-                          description: "giftCard.chooseGiftCards".tr()),
-                      const SizedBox(),
-                    ],
-                  ),
-                ),
-          items.isNotEmpty
-              ? Container(
-                  height: 84,
-                  width: context.width,
-                  color: AppColors.white,
-                  child: Center(
-                    child: CustomButton(
-                      isEnabled: true,
-                      isWhite: false,
-                      title: 'giftCard.continue'.tr(),
-                      onTap: () {
-                        context.go('/sendGift/sendGiftCardScreen');
-                      },
+            const SizedBox(
+              height: 24,
+            ),
+            categoriesState?.selectedCategory ==
+                    categories[0]['categoryName'].toString()
+                ? Expanded(
+                    child: ItemSelectorWidget(
+                      items: items,
+                      brandItemSelectState: brandItemSelectState,
+                      isToken: false,
+                      previewTitle: 'giftCard.selectGift'.tr(),
+                    ),
+                  )
+                : Expanded(
+                    child: ItemSelectorWidget(
+                      items: items,
+                      brandItemSelectState: tokenItemSelectState,
+                      isToken: true,
+                      previewTitle: 'giftCard.totalBalanceTokens'.tr(),
+                      tealButton: BalanceWidget(
+                        isTokenBalance: true,
+                        balance: '50',
+                        textStyle: context.theme.headline2.bold,
+                        tokenIconHeight: 20,
+                        tokenIconWidth: 18,
+                      ),
                     ),
                   ),
-                )
-              : const SizedBox(),
-        ],
-      ).paddingOnly(left: 16, right: 16),
+            Container(
+              height: 84,
+              width: context.width,
+              color: AppColors.white,
+              child: Center(
+                child: CustomButton(
+                  isEnabled: true,
+                  isWhite: false,
+                  title: 'giftCard.continue'.tr(),
+                  onTap: () {
+                    context.go('/sendGift/sendGiftCardScreen');
+                  },
+                ),
+              ),
+            )
+          ],
+        ).paddingOnly(left: 16, right: 16);
+      }),
     );
   }
 }

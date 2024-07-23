@@ -1,0 +1,122 @@
+import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/view/widgets/balance_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import '../../../../gen/assets.gen.dart';
+import '../../../../store/brand_item_select_state/brand_item_select_state.dart';
+import '../../../widgets/brand_item/brand_item_widget.dart';
+import '../../../widgets/no_data_widget.dart';
+import '../../../widgets/preview_banner/preview_banner.dart';
+
+class ItemSelectorWidget extends StatelessWidget {
+  final bool isToken;
+  final int? items;
+  final BrandItemSelectState brandItemSelectState;
+  final String previewTitle;
+  final Widget? tealButton;
+
+  const ItemSelectorWidget({
+    super.key,
+    this.items,
+    required this.brandItemSelectState,
+    required this.isToken,
+    required this.previewTitle,
+    this.tealButton,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(builder: (context) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          items != null ? PreviewBanner(
+            leadingBanner: Text(
+              previewTitle,
+              style: context.theme.headline2.bold,
+            ),
+            tealButton: tealButton,
+          ) : const SizedBox(),
+          const SizedBox(
+            height: 24,
+          ),
+          items != null
+              ? Expanded(
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        for (var i = 0; i < items!; ++i)
+                          BrandItemWidget(
+                            avatar: Assets.media.images.toyStory.path,
+                            brandName: 'McDonalds',
+                            secondaryInfo: isToken
+                                ? Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 14,
+                                        width: 13,
+                                        child: Assets.media.icons.token.svg(),
+                                      ),
+                                      const SizedBox(
+                                        width: 4,
+                                      ),
+                                      Text(
+                                        "50 LD",
+                                        style:
+                                            context.theme.body3.lightGreyText,
+                                      ),
+                                    ],
+                                  )
+                                : Text(
+                                    "50 LD",
+                                    style: context.theme.body3.lightGreyText,
+                                  ),
+                            tealButton: SizedBox(
+                              height: 24,
+                              width: 24,
+                              child: GestureDetector(
+                                onTap: () {
+                                  brandItemSelectState.selectItem(i);
+                                },
+                                child: Radio(
+                                    value: i,
+                                    groupValue: brandItemSelectState.index,
+                                    onChanged: (index) {
+                                      brandItemSelectState.selectItem(index!);
+                                    }),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                )
+              : Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      NoDataWidget(
+                          asset: isToken
+                              ? Assets.media.images.cryptoCurrencyNamecoin
+                                  .image(
+                                  height: 96,
+                                  width: 96,
+                                )
+                              : Assets.media.images.creditCard1.image(
+                                  height: 96,
+                                  width: 96,
+                                ),
+                          title: isToken ? "giftCard.noTokens".tr() : "giftCard.noGiftCards".tr(),
+                          description: isToken
+                              ? "giftCard.mustMakePurchase".tr()
+                              : "giftCard.chooseGiftCards".tr()),
+                      const SizedBox(),
+                    ],
+                  ),
+                ),
+        ],
+      );
+    });
+  }
+}

@@ -61,8 +61,11 @@
     "giftCard": "Gift card",
     "giftCartTokens": "Send Gift Card / Tokens",
     "selectGift": "Select a gift card to send",
+    "totalBalanceTokens" : "Total balance tokens",
     "continue": "Continue",
     "noGiftCards": "No Gift Cards",
-    "chooseGiftCards": "Choose gift cards in our application and purchase from the store checkout."
+    "chooseGiftCards": "Choose gift cards in our application and purchase from the store checkout.",
+    "mustMakePurchase" : "To receive tokens, you must make a purchase using a gift card.",
+    "noTokens" : "No tokens"
   }
 }

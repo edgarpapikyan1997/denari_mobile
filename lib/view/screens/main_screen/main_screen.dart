@@ -142,7 +142,7 @@ class _MainScreenState extends State<MainScreen> {
                         'main.topCategories'.tr(),
                         style: context.theme.headline5.bold,
                       ),
-                      textButton: TextButton(
+                      tealButton: TextButton(
                         onPressed: () {},
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(
@@ -166,7 +166,7 @@ class _MainScreenState extends State<MainScreen> {
                         'main.popularStores'.tr(),
                         style: context.theme.headline3.semiBold,
                       ),
-                      textButton: TextButton(
+                      tealButton: TextButton(
                         onPressed: () {},
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(

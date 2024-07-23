@@ -8,9 +8,15 @@
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 class $AssetsMediaGen {
   const $AssetsMediaGen();
+
+  /// Directory path: assets/media/icons
+  $AssetsMediaIconsGen get icons => const $AssetsMediaIconsGen();
 
   /// Directory path: assets/media/images
   $AssetsMediaImagesGen get images => const $AssetsMediaImagesGen();
@@ -26,30 +32,150 @@ class $AssetsTranslationsGen {
   List<String> get values => [enUS];
 }
 
+class $AssetsMediaIconsGen {
+  const $AssetsMediaIconsGen();
+
+  /// File path: assets/media/icons/Activities.svg
+  SvgGenImage get activities =>
+      const SvgGenImage('assets/media/icons/Activities.svg');
+
+  /// File path: assets/media/icons/Beauty.svg
+  SvgGenImage get beauty => const SvgGenImage('assets/media/icons/Beauty.svg');
+
+  /// File path: assets/media/icons/Clothing.svg
+  SvgGenImage get clothing =>
+      const SvgGenImage('assets/media/icons/Clothing.svg');
+
+  /// File path: assets/media/icons/Groceries.svg
+  SvgGenImage get groceries =>
+      const SvgGenImage('assets/media/icons/Groceries.svg');
+
+  /// File path: assets/media/icons/Other.svg
+  SvgGenImage get other => const SvgGenImage('assets/media/icons/Other.svg');
+
+  /// File path: assets/media/icons/Token.svg
+  SvgGenImage get token => const SvgGenImage('assets/media/icons/Token.svg');
+
+  /// File path: assets/media/icons/bell.svg
+  SvgGenImage get bell => const SvgGenImage('assets/media/icons/bell.svg');
+
+  /// File path: assets/media/icons/chevron-left.svg
+  SvgGenImage get chevronLeft =>
+      const SvgGenImage('assets/media/icons/chevron-left.svg');
+
+  /// File path: assets/media/icons/chevron-right.svg
+  SvgGenImage get chevronRight =>
+      const SvgGenImage('assets/media/icons/chevron-right.svg');
+
+  /// File path: assets/media/icons/circle-user-round.svg
+  SvgGenImage get circleUserRound =>
+      const SvgGenImage('assets/media/icons/circle-user-round.svg');
+
+  /// File path: assets/media/icons/credit-card-1.svg
+  SvgGenImage get creditCard1 =>
+      const SvgGenImage('assets/media/icons/credit-card-1.svg');
+
+  /// File path: assets/media/icons/credit-card-sync.svg
+  SvgGenImage get creditCardSync =>
+      const SvgGenImage('assets/media/icons/credit-card-sync.svg');
+
+  /// File path: assets/media/icons/drawer-send.svg
+  SvgGenImage get drawerSend =>
+      const SvgGenImage('assets/media/icons/drawer-send.svg');
+
+  /// File path: assets/media/icons/food.svg
+  SvgGenImage get food => const SvgGenImage('assets/media/icons/food.svg');
+
+  /// File path: assets/media/icons/house.svg
+  SvgGenImage get house => const SvgGenImage('assets/media/icons/house.svg');
+
+  /// File path: assets/media/icons/image-8.svg
+  SvgGenImage get image8 => const SvgGenImage('assets/media/icons/image-8.svg');
+
+  /// File path: assets/media/icons/qr-code.svg
+  SvgGenImage get qrCode => const SvgGenImage('assets/media/icons/qr-code.svg');
+
+  /// File path: assets/media/icons/scan-line.svg
+  SvgGenImage get scanLine =>
+      const SvgGenImage('assets/media/icons/scan-line.svg');
+
+  /// File path: assets/media/icons/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/media/icons/search.svg');
+
+  /// File path: assets/media/icons/slose center.svg
+  SvgGenImage get sloseCenter =>
+      const SvgGenImage('assets/media/icons/slose center.svg');
+
+  /// File path: assets/media/icons/store.svg
+  SvgGenImage get store => const SvgGenImage('assets/media/icons/store.svg');
+
+  /// File path: assets/media/icons/travel.svg
+  SvgGenImage get travel => const SvgGenImage('assets/media/icons/travel.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+        activities,
+        beauty,
+        clothing,
+        groceries,
+        other,
+        token,
+        bell,
+        chevronLeft,
+        chevronRight,
+        circleUserRound,
+        creditCard1,
+        creditCardSync,
+        drawerSend,
+        food,
+        house,
+        image8,
+        qrCode,
+        scanLine,
+        search,
+        sloseCenter,
+        store,
+        travel
+      ];
+}
+
 class $AssetsMediaImagesGen {
   const $AssetsMediaImagesGen();
 
-  /// File path: assets/media/images/image0_0.jpg
-  AssetGenImage get image00 =>
-      const AssetGenImage('assets/media/images/image0_0.jpg');
+  /// File path: assets/media/images/Coffe.png
+  AssetGenImage get coffe =>
+      const AssetGenImage('assets/media/images/Coffe.png');
 
-  /// File path: assets/media/images/image0_0_1.jpg
-  AssetGenImage get image001 =>
-      const AssetGenImage('assets/media/images/image0_0_1.jpg');
+  /// File path: assets/media/images/credit-card-1.png
+  AssetGenImage get creditCard1 =>
+      const AssetGenImage('assets/media/images/credit-card-1.png');
 
-  /// File path: assets/media/images/image0_0_2.jpg
-  AssetGenImage get image002 =>
-      const AssetGenImage('assets/media/images/image0_0_2.jpg');
+  /// File path: assets/media/images/crypto-currency-namecoin.png
+  AssetGenImage get cryptoCurrencyNamecoin =>
+      const AssetGenImage('assets/media/images/crypto-currency-namecoin.png');
+
+  /// File path: assets/media/images/image 9.png
+  AssetGenImage get image9 =>
+      const AssetGenImage('assets/media/images/image 9.png');
+
+  /// File path: assets/media/images/toy_story.png
+  AssetGenImage get toyStory =>
+      const AssetGenImage('assets/media/images/toy_story.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [image00, image001, image002];
+  List<AssetGenImage> get values =>
+      [coffe, creditCard1, cryptoCurrencyNamecoin, image9, toyStory];
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsMediaGen media = $AssetsMediaGen();
+  static const AssetGenImage splash = AssetGenImage('assets/splash.png');
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
+
+  /// List of all assets
+  static List<AssetGenImage> get values => [splash];
 }
 
 class AssetGenImage {
@@ -125,6 +251,83 @@ class AssetGenImage {
       _assetName,
       bundle: bundle,
       package: package,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
+}
+
+class SvgGenImage {
+  const SvgGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  }) : _isVecFormat = false;
+
+  const SvgGenImage.vec(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  }) : _isVecFormat = true;
+
+  final String _assetName;
+  final Size? size;
+  final Set<String> flavors;
+  final bool _isVecFormat;
+
+  SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    SvgTheme? theme,
+    ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated bool cacheColorFilter = false,
+  }) {
+    final BytesLoader loader;
+    if (_isVecFormat) {
+      loader = AssetBytesLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+      );
+    } else {
+      loader = SvgAssetLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+        theme: theme,
+      );
+    }
+    return SvgPicture(
+      loader,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      colorFilter: colorFilter ??
+          (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
+      clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
     );
   }
 

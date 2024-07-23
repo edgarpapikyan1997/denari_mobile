@@ -1,15 +1,20 @@
 import 'package:denari_app/utils/go_router.dart';
-import 'package:flutter/cupertino.dart';
-
+import 'package:denari_app/utils/log/logging.dart';
+import 'package:denari_app/utils/themes/dark_theme.dart';
+import 'package:denari_app/utils/themes/light_theme.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import '../utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 
-import 'gen/assets.gen.dart';
+import 'utils/di/config.dart';
+import 'utils/env/config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-
+  setupLogger(kDebugMode);
+  configDi(const Config(env: 'dev', host: 'https://denari.mifort.com'));
   runApp(EasyLocalization(supportedLocales: const [
     Locale('en', 'US'),
   ], path: 'assets/translations', child: const App()));
@@ -17,38 +22,23 @@ void main() async {
 
 class App extends StatelessWidget {
   const App({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: router,
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-
-    );
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          systemNavigationBarColor: lightTheme.canvasColor,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
+        child: MaterialApp.router(
+          routerConfig: router,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          title: 'Denari App',
+          theme: lightTheme,
+          darkTheme: darkTheme,
+        ));
   }
 }
-

@@ -9,19 +9,19 @@ part of 'brand_item_select_state.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$BrandItemSelectState on _BrandItemSelectState, Store {
-  late final _$isSelectedAtom =
-      Atom(name: '_BrandItemSelectState.isSelected', context: context);
+  late final _$brandItemWidgetAtom =
+      Atom(name: '_BrandItemSelectState.brandItemWidget', context: context);
 
   @override
-  bool get isSelected {
-    _$isSelectedAtom.reportRead();
-    return super.isSelected;
+  BrandItemWidget? get brandItemWidget {
+    _$brandItemWidgetAtom.reportRead();
+    return super.brandItemWidget;
   }
 
   @override
-  set isSelected(bool value) {
-    _$isSelectedAtom.reportWrite(value, super.isSelected, () {
-      super.isSelected = value;
+  set brandItemWidget(BrandItemWidget? value) {
+    _$brandItemWidgetAtom.reportWrite(value, super.brandItemWidget, () {
+      super.brandItemWidget = value;
     });
   }
 
@@ -61,11 +61,22 @@ mixin _$BrandItemSelectState on _BrandItemSelectState, Store {
       ActionController(name: '_BrandItemSelectState', context: context);
 
   @override
-  void selectItem(int newValue) {
+  void setItemWidget(BrandItemWidget newValue) {
+    final _$actionInfo = _$_BrandItemSelectStateActionController.startAction(
+        name: '_BrandItemSelectState.setItemWidget');
+    try {
+      return super.setItemWidget(newValue);
+    } finally {
+      _$_BrandItemSelectStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void selectItem(int newIndex) {
     final _$actionInfo = _$_BrandItemSelectStateActionController.startAction(
         name: '_BrandItemSelectState.selectItem');
     try {
-      return super.selectItem(newValue);
+      return super.selectItem(newIndex);
     } finally {
       _$_BrandItemSelectStateActionController.endAction(_$actionInfo);
     }
@@ -85,7 +96,7 @@ mixin _$BrandItemSelectState on _BrandItemSelectState, Store {
   @override
   String toString() {
     return '''
-isSelected: ${isSelected},
+brandItemWidget: ${brandItemWidget},
 index: ${index},
 indexes: ${indexes}
     ''';

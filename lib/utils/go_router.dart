@@ -1,5 +1,6 @@
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
 import 'package:denari_app/view/screens/send_gift_screen/send_gift_card_screen.dart';
+import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../view/screens/send_gift_screen/send_gift_screen.dart';
@@ -21,13 +22,13 @@ final GoRouter router = GoRouter(
           builder: (context, state) {
             return const MainScreen();
           },
-        routes: [
-        GoRoute(
-          path: 'tokenBalance',
-          builder: (BuildContext context, GoRouterState state) {
-            return const TokenBalanceScreen();
-            },
-          ),
+          routes: [
+            GoRoute(
+              path: 'tokenBalance',
+              builder: (BuildContext context, GoRouterState state) {
+                return const TokenBalanceScreen();
+              },
+            ),
           ],
         ),
         GoRoute(
@@ -38,12 +39,12 @@ final GoRouter router = GoRouter(
         ),
         GoRoute(
           path: '/shopScreen',
-        builder: (context, state) {
-          return const ShopScreen();
-        },
-      ),
-      GoRoute(
-        path: '/profile',
+          builder: (context, state) {
+            return const ShopScreen();
+          },
+        ),
+        GoRoute(
+          path: '/profile',
           builder: (context, state) {
             return const ProfileScreen();
           },
@@ -51,19 +52,22 @@ final GoRouter router = GoRouter(
       ],
     ),
     GoRoute(
-      path: '/sendGift',
-      builder: (context, state) {
-        return const SendGiftScreen();
-      },
-      routes: [
-        GoRoute(
-          path: 'sendGiftCardScreen',
-          builder: (context, state) {
-            return const SendGiftCardScreen();
-          },
-        ),
-      ]
-    ),
+        path: '/sendGift',
+        builder: (context, state) {
+          return const SendGiftScreen();
+        },
+        routes: [
+          GoRoute(
+            path: 'sendGiftCardScreen/:brandItemWidget',
+            name: 'sendGiftCardScreen',
+            builder: (context, state) {
+              return SendGiftCardScreen(
+                brandItemWidget:
+                    state.pathParameters['brandItemWidget'] as BrandItemWidget,
+              );
+            },
+          ),
+        ]),
     // GoRoute(
     //   name: Routes.signIn,
     //   path: '/${Routes.signIn}',

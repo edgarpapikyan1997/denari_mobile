@@ -10,6 +10,7 @@ class EditField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final bool optional;
   final String? error;
+  final bool obscure;
 
   const EditField({
     super.key,
@@ -18,6 +19,7 @@ class EditField extends StatefulWidget {
     this.onChanged,
     this.optional = false,
     this.error,
+    this.obscure = false,
   });
 
   @override
@@ -26,6 +28,7 @@ class EditField extends StatefulWidget {
 
 class _EditFieldState extends State<EditField> {
   late final TextEditingController _controller;
+  late bool _obscure;
   String? _error;
 
   String get _hint =>
@@ -35,6 +38,12 @@ class _EditFieldState extends State<EditField> {
   void initState() {
     _controller = widget.controller ?? TextEditingController();
     _error = widget.error;
+    _obscure = widget.obscure ? true : false;
+    _controller.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
     super.initState();
   }
 
@@ -54,7 +63,8 @@ class _EditFieldState extends State<EditField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _controller,
-      style: context.theme.headline5.copyWith(
+      obscureText: _obscure,
+      style: context.theme.body1.copyWith(
         color: AppColors.black,
       ),
       onChanged: widget.onChanged,
@@ -63,6 +73,9 @@ class _EditFieldState extends State<EditField> {
         controller: _controller,
         hint: _hint,
         error: _error,
+        obscure: _obscure,
+        onObscured:
+            widget.obscure ? (value) => setState(() => _obscure = value) : null,
       ),
     );
   }

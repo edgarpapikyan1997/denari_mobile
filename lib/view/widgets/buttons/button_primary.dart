@@ -1,4 +1,5 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'button.dart';
@@ -41,7 +42,7 @@ class ButtonPrimary extends StatelessWidget {
       height: height,
       svg: svg,
       dimension: dimension,
-      buttonColor: context.theme.colorScheme.primary,
+      buttonColor: AppColors.black,
       valuesColor: context.theme.colorScheme.surface,
       borderRadius: borderRadius,
       padding: padding,

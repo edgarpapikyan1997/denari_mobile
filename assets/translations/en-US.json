@@ -55,7 +55,17 @@
     "email_error": "incorrect mail",
     "password_error": "incorrect password",
     "phone_error": "incorrect phone",
-    "code_error": "incorrect code"
+    "code_error": "incorrect code",
+    "can_resend": "You can resend the code after",
+    "did_not_code": "Didn't get the code?",
+    "resend_it": "Resend it",
+    "enter_confirm_code": "Enter the confirmation code",
+    "send_code": "Send code",
+    "create_new_password": "Create a new password",
+    "new_password_description": "Enter a new password and repeat it.",
+    "confirm_password": "Confirm password",
+    "password_mismatch": "Password mismatch",
+    "save_new_password": "Save new password"
   },
   "giftCard" : {
     "myGiftCards" : "My Gift Cards",

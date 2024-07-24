@@ -12,7 +12,7 @@ import 'token_interceptor.dart';
 class Interceptors {
   List<Interceptor> interceptors = [];
 
-  Interceptors(TokenPreferences preferencesRepository) {
+  Interceptors(TokenPreferences tokenPreferences) {
     interceptors.addAll([
       TalkerDioLogger(
         settings: TalkerDioLoggerSettings(
@@ -24,7 +24,7 @@ class Interceptors {
       ),
       SettingsInterceptor(),
       ErrorInterceptor(),
-      TokenInterceptor(preferencesRepository),
+      TokenInterceptor(tokenPreferences),
       DioCacheInterceptor(
         options: CacheOptions(
           store: MemCacheStore(),

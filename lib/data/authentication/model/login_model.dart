@@ -5,12 +5,12 @@ part 'login_model.g.dart';
 @JsonSerializable()
 class LoginModel {
   @JsonKey(defaultValue: '')
-  final String email;
+  final String phone;
   @JsonKey(defaultValue: '')
   final String password;
 
   const LoginModel({
-    required this.email,
+    required this.phone,
     required this.password,
   });
 
@@ -20,11 +20,11 @@ class LoginModel {
   Map<String, dynamic> toJson() => _$LoginModelToJson(this);
 
   LoginModel copyWith({
-    String? email,
+    String? phone,
     String? password,
   }) {
     return LoginModel(
-      email: email ?? this.email,
+      phone: phone ?? this.phone,
       password: password ?? this.password,
     );
   }

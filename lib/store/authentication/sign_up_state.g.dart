@@ -37,13 +37,6 @@ mixin _$SignUpState on _SignUpState, Store {
       (_$isPhoneValidComputed ??= Computed<bool>(() => super.isPhoneValid,
               name: '_SignUpState.isPhoneValid'))
           .value;
-  Computed<bool>? _$isCodeValidComputed;
-
-  @override
-  bool get isCodeValid =>
-      (_$isCodeValidComputed ??= Computed<bool>(() => super.isCodeValid,
-              name: '_SignUpState.isCodeValid'))
-          .value;
   Computed<bool>? _$createButtonEnabledComputed;
 
   @override
@@ -52,19 +45,19 @@ mixin _$SignUpState on _SignUpState, Store {
               name: '_SignUpState.createButtonEnabled'))
       .value;
 
-  late final _$isSignUpAtom =
-      Atom(name: '_SignUpState.isSignUp', context: context);
+  late final _$signUpErrorAtom =
+      Atom(name: '_SignUpState.signUpError', context: context);
 
   @override
-  bool? get isSignUp {
-    _$isSignUpAtom.reportRead();
-    return super.isSignUp;
+  String? get signUpError {
+    _$signUpErrorAtom.reportRead();
+    return super.signUpError;
   }
 
   @override
-  set isSignUp(bool? value) {
-    _$isSignUpAtom.reportWrite(value, super.isSignUp, () {
-      super.isSignUp = value;
+  set signUpError(String? value) {
+    _$signUpErrorAtom.reportWrite(value, super.signUpError, () {
+      super.signUpError = value;
     });
   }
 
@@ -160,19 +153,35 @@ mixin _$SignUpState on _SignUpState, Store {
     });
   }
 
-  late final _$isCodeSentAtom =
-      Atom(name: '_SignUpState.isCodeSent', context: context);
+  late final _$codeSentErrorAtom =
+      Atom(name: '_SignUpState.codeSentError', context: context);
 
   @override
-  bool? get isCodeSent {
-    _$isCodeSentAtom.reportRead();
-    return super.isCodeSent;
+  String? get codeSentError {
+    _$codeSentErrorAtom.reportRead();
+    return super.codeSentError;
   }
 
   @override
-  set isCodeSent(bool? value) {
-    _$isCodeSentAtom.reportWrite(value, super.isCodeSent, () {
-      super.isCodeSent = value;
+  set codeSentError(String? value) {
+    _$codeSentErrorAtom.reportWrite(value, super.codeSentError, () {
+      super.codeSentError = value;
+    });
+  }
+
+  late final _$isCodeValidAtom =
+      Atom(name: '_SignUpState.isCodeValid', context: context);
+
+  @override
+  bool get isCodeValid {
+    _$isCodeValidAtom.reportRead();
+    return super.isCodeValid;
+  }
+
+  @override
+  set isCodeValid(bool value) {
+    _$isCodeValidAtom.reportWrite(value, super.isCodeValid, () {
+      super.isCodeValid = value;
     });
   }
 
@@ -253,19 +262,19 @@ mixin _$SignUpState on _SignUpState, Store {
   @override
   String toString() {
     return '''
-isSignUp: ${isSignUp},
+signUpError: ${signUpError},
 name: ${name},
 email: ${email},
 password: ${password},
 phone: ${phone},
 code: ${code},
 loading: ${loading},
-isCodeSent: ${isCodeSent},
+codeSentError: ${codeSentError},
+isCodeValid: ${isCodeValid},
 isNameValid: ${isNameValid},
 isEmailValid: ${isEmailValid},
 isPasswordValid: ${isPasswordValid},
 isPhoneValid: ${isPhoneValid},
-isCodeValid: ${isCodeValid},
 createButtonEnabled: ${createButtonEnabled}
     ''';
   }

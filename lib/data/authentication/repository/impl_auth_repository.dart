@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:denari_app/data/authentication/model/login_model.dart';
 import 'package:denari_app/data/authentication/model/reg_model.dart';
+import 'package:denari_app/data/authentication/model/reset_model.dart';
 import 'package:denari_app/utils/env/config.dart';
 import 'package:denari_app/utils/network/model/api_token.dart';
 import 'package:denari_app/utils/network/utils/response_helper.dart';
@@ -19,7 +20,7 @@ final class ImplAuthRepository extends AuthRepository {
 
   @override
   Future<ApiToken> login(LoginModel data) async {
-    final result = await _client.get(
+    final result = await _client.post(
       '${_config.host}/login',
       data: data,
     );
@@ -27,12 +28,12 @@ final class ImplAuthRepository extends AuthRepository {
   }
 
   @override
-  Future<bool> register(RegModel data) async {
+  Future<ApiToken> register(RegModel data) async {
     final result = await _client.post(
       '${_config.host}/register',
       data: jsonEncode(data.toJson()),
     );
-    return result.statusCode == 200;
+    return result.item(ApiToken.fromJson);
   }
 
   @override
@@ -40,6 +41,15 @@ final class ImplAuthRepository extends AuthRepository {
     final result = await _client.post(
       '${_config.host}/verify',
       data: jsonEncode({'phone': phone}),
+    );
+    return result.statusCode == 200;
+  }
+
+  @override
+  Future<bool> reset(ResetModel data) async {
+    final result = await _client.post(
+      '${_config.host}/reset-password',
+      data: jsonEncode(data.toJson()),
     );
     return result.statusCode == 200;
   }

@@ -1,6 +1,9 @@
+import 'package:denari_app/data/authentication/model/reg_model.dart';
+import 'package:denari_app/data/authentication/model/reset_model.dart';
+import 'package:denari_app/view/screens/authentication/code/forgot_code_screen.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:denari_app/view/screens/authentication/code/code_screen.dart';
+import 'package:denari_app/view/screens/authentication/code/sign_up_code_screen.dart';
 import 'package:denari_app/view/screens/authentication/forgot/forgot_screen.dart';
 import 'package:denari_app/view/screens/authentication/password/create_password_screen.dart';
 import 'package:denari_app/view/screens/authentication/sign_in/sign_in_screen.dart';
@@ -68,13 +71,13 @@ final GoRouter router = GoRouter(
               name: Routes.forgotCode,
               path: Routes.code,
               builder: (context, state) =>
-                  CodeScreen(phone: state.extra as String),
+                  ForgotCodeScreen(model: state.extra as ResetModel),
               routes: [
                 GoRoute(
                   name: Routes.password,
                   path: Routes.password,
                   builder: (context, state) =>
-                      CreatePasswordScreen(phone: state.extra as String),
+                      CreatePasswordScreen(model: state.extra as ResetModel),
                 ),
               ],
             ),
@@ -90,7 +93,7 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: Routes.code,
           path: Routes.code,
-          builder: (context, state) => CodeScreen(phone: state.extra as String),
+          builder: (context, state) => SignUpCodeScreen(model: state.extra as RegModel),
         ),
       ],
     ),

@@ -6,22 +6,35 @@ class DecorationField extends InputDecoration {
   final BuildContext context;
   final TextEditingController controller;
   final String? hint;
+  final TextStyle? hintStyle;
 
   DecorationField({
     required this.context,
     required this.controller,
     this.hint,
+    this.hintStyle,
     String? error,
   }) : super(
           isDense: true,
-          border: FieldBorder(),
-          enabledBorder: FieldBorder(),
+          border: FieldBorder(
+            borderColor: AppColors.lightGreyText,
+            borderRadius: 12.0,
+          ),
+          focusedBorder: FieldBorder(
+            borderColor: AppColors.lightGreyText,
+            borderRadius: 12.0,
+          ),
+          enabledBorder: FieldBorder(
+            borderColor: AppColors.lightGreyText,
+            borderRadius: 12.0,
+          ),
           disabledBorder: FieldBorder(),
           errorBorder: FieldBorder(borderColor: AppColors.errorColor),
           hintText: hint,
-          hintStyle: context.theme.headline5.copyWith(
-            color: AppColors.hintColor,
-          ),
+          hintStyle: hintStyle ??
+              context.theme.headline5.copyWith(
+                color: AppColors.hintColor,
+              ),
           filled: true,
           fillColor: AppColors.fieldColor,
           errorText: error,
@@ -39,9 +52,11 @@ class DecorationField extends InputDecoration {
 }
 
 class FieldBorder extends OutlineInputBorder {
-  FieldBorder({Color? borderColor})
-      : super(
-    borderSide: BorderSide(color: borderColor ?? AppColors.borderColor),
-    borderRadius: BorderRadius.circular(6.0),
-  );
+  FieldBorder({
+    Color? borderColor,
+    double? borderRadius,
+  }) : super(
+          borderSide: BorderSide(color: borderColor ?? AppColors.borderColor),
+          borderRadius: BorderRadius.circular(borderRadius ?? 6.0),
+        );
 }

@@ -3,6 +3,7 @@ import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:denari_app/view/screens/send_gift_screen/gift_card_categories_widgets/item_selector_widget.dart';
 import 'package:denari_app/view/widgets/balance_widget.dart';
+import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
@@ -21,7 +22,7 @@ class SendGiftScreen extends StatefulWidget {
 }
 
 class _SendGiftScreenState extends State<SendGiftScreen> {
-  final BrandItemSelectState brandItemSelectState = BrandItemSelectState();
+  final BrandItemSelectState sendGiftItemSelectState = BrandItemSelectState();
   final BrandItemSelectState tokenItemSelectState = BrandItemSelectState();
   CategoriesState? categoriesState;
 
@@ -42,7 +43,6 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
     super.initState();
     initCategories();
   }
-
 
   initCategories() {
     categoriesState = CategoriesState(
@@ -85,7 +85,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                   ? Expanded(
                       child: ItemSelectorWidget(
                         items: items,
-                        brandItemSelectState: brandItemSelectState,
+                        brandItemSelectState: sendGiftItemSelectState,
                         isToken: false,
                         previewTitle: 'giftCard.selectGift'.tr(),
                       ),
@@ -103,7 +103,6 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                           tokenIconHeight: 20,
                           tokenIconWidth: 18,
                         ),
-
                       ),
                     ),
               CustomButton(
@@ -111,9 +110,21 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                 isWhite: false,
                 title: 'giftCard.continue'.tr(),
                 onTap: () {
-                  // context.goNamed("/sendGift/sendGiftCardScreen", pathParameters: {'brandItemWidget': });
+                  context.goNamed(
+                    "sendGiftCardScreen",
+                    extra: BrandItemWidget(
+                      avatar: Assets.media.images.toyStory.path,
+                      brandName: 'McDonalds',
+                      tokenBalance: '50',
+                      addDivider: false,
+                      topPadding: 8,
+                      bottomPadding: 8,
+                      leftPadding: 12,
+                      rightPadding: 12,
+                      wrapperColor: AppColors.whiteGrey,
 
-                // context.go('/sendGift/sendGiftCardScreen');
+                    ),
+                  );
                 },
               )
             ],

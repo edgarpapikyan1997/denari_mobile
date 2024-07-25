@@ -67,6 +67,7 @@
     "chooseGiftCards": "Choose gift cards in our application and purchase from the store checkout.",
     "mustMakePurchase" : "To receive tokens, you must make a purchase using a gift card.",
     "noTokens" : "No tokens",
-   "selectAmount" : "Select the amount and the method of sending"
+   "selectAmount" : "Select the amount and the method of sending",
+    "amount" : "Amount"
   }
 }

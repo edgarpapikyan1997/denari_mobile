@@ -1,4 +1,5 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/view/widgets/balance_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../../gen/assets.gen.dart';
@@ -59,6 +60,7 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                       children: List.generate(
                         9,
                         (index) => BrandItemWidget(
+                          topPadding: 16,
                           avatar: Assets.media.images.toyStory.path,
                           brandName: 'McDonalds',
                           secondaryInfo: widget.isToken
@@ -91,6 +93,13 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                                 onChanged: (index) {
                                   widget.brandItemSelectState
                                       .selectItem(index!);
+                                  widget.brandItemSelectState.setItemWidget(
+                                    BrandItemWidget(
+                                        avatar:
+                                            Assets.media.images.toyStory.path,
+                                        brandName: 'McDonalds',
+                                        tokenBalance: '50 LD'),
+                                  );
                                 }),
                           ),
                         ),

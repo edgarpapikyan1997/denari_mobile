@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
 import '../../widgets/custom_app_bar.dart';
+import '../../widgets/fields/decoration_field.dart';
 
 class SendGiftCardScreen extends StatelessWidget {
   final BrandItemWidget brandItemWidget;
@@ -31,14 +32,29 @@ class SendGiftCardScreen extends StatelessWidget {
         body: PaddingUtility(
           all: 16,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'giftCard.selectAmount'.tr(),
-                style: context.theme.body1.lightGreyText,
+              Center(
+                child: Text(
+                  'giftCard.selectAmount'.tr(),
+                  style: context.theme.body1.lightGreyText,
+                ),
               ),
               const SizedBox(
                 height: 16,
               ),
+              brandItemWidget,
+              const SizedBox(
+                height: 32,
+              ),
+              TextField(
+                decoration: DecorationField(
+                  context: context,
+                  controller: TextEditingController(),
+                  hint: 'giftCard.amount'.tr(),
+                  hintStyle: context.theme.body1.lightGreyText,
+                ),
+              )
             ],
           ),
         ));

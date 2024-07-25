@@ -73,7 +73,7 @@ extension ThemeDataHelper on ThemeData {
         fontFamily: FontFamily.onest,
         fontWeight: FontWeight.w400,
         fontSize: 16,
-        height: 1.40,
+        height: 1.22,
       );
 
   TextStyle get body2 => const TextStyle(

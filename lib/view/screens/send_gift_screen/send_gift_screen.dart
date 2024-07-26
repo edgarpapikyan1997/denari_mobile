@@ -25,8 +25,8 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
   final BrandItemSelectState sendGiftItemSelectState = BrandItemSelectState();
   final BrandItemSelectState tokenItemSelectState = BrandItemSelectState();
   CategoriesState? categoriesState;
-
   int? items = 15;
+
   final categories = [
     {
       'categoryName': 'giftCard.giftCard'.tr(),
@@ -98,7 +98,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                         previewTitle: 'giftCard.totalBalanceTokens'.tr(),
                         tealButton: BalanceWidget(
                           isTokenBalance: true,
-                          balance: '50',
+                          balance: 50,
                           textStyle: context.theme.headline2.bold,
                           tokenIconHeight: 20,
                           tokenIconWidth: 18,

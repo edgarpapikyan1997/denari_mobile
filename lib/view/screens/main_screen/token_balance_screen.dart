@@ -65,7 +65,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                     isTokenBalance: true,
                     tokenIconHeight: 26,
                     tokenIconWidth: 28,
-                    balance: '100',
+                    balance: 100,
                     textStyle: context.theme.headline1,
                   ),
                   const SizedBox(

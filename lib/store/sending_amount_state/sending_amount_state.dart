@@ -11,6 +11,12 @@ abstract class _SendingAmountState with Store {
   @observable
   int sendingAmount = 0;
 
+  @observable
+  bool isAmountHigher = true;
+
+  @computed
+  bool get isError => sendingAmount > currentBalance;
+
   @action
   void setCurrentBalance({required int valueFromBalance}) {
     currentBalance = valueFromBalance;
@@ -18,7 +24,7 @@ abstract class _SendingAmountState with Store {
 
   @action
   void setSendingAmount({required int amount}) {
-    if (sendingAmount <= currentBalance) {
+    if (isAmountHigher == true) {
       sendingAmount = amount;
     }
   }

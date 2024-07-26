@@ -42,7 +42,9 @@ class BrandItemWidget extends StatelessWidget {
         left: leftPadding,
       ),
       decoration: BoxDecoration(
-          color: wrapperColor, borderRadius: BorderRadius.circular(16)),
+        color: wrapperColor,
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Column(
         children: [
           Row(
@@ -51,12 +53,13 @@ class BrandItemWidget extends StatelessWidget {
                 height: 48,
                 width: 48,
                 decoration: BoxDecoration(
-                    color: AppColors.white,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage(avatar),
-                    ),
-                    border: Border.all(width: 1, color: AppColors.borderColor)),
+                  color: AppColors.white,
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage(avatar),
+                  ),
+                  border: Border.all(width: 1, color: AppColors.borderColor),
+                ),
               ),
               const SizedBox(
                 width: 8,

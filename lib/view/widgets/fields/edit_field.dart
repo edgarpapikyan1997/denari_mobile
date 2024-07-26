@@ -11,6 +11,7 @@ class EditField extends StatefulWidget {
   final bool optional;
   final String? error;
   final TextStyle? hintStyle;
+  final TextStyle? textStyle;
   final double? borderRadius;
 
   const EditField({
@@ -22,6 +23,7 @@ class EditField extends StatefulWidget {
     this.error,
     this.hintStyle,
     this.borderRadius,
+    this.textStyle,
   });
 
   @override
@@ -61,9 +63,10 @@ class _EditFieldState extends State<EditField> {
         FocusScope.of(context).unfocus();
       },
       controller: _controller,
-      style: context.theme.headline5.copyWith(
-        color: AppColors.black,
-      ),
+      style: widget.textStyle ??
+          context.theme.headline5.copyWith(
+            color: AppColors.black,
+          ),
       onChanged: widget.onChanged,
       decoration: DecorationField(
         context: context,
@@ -71,7 +74,6 @@ class _EditFieldState extends State<EditField> {
         hint: _hint,
         error: _error,
         borderRadius: widget.borderRadius,
-        hintStyle: widget.hintStyle
       ),
     );
   }

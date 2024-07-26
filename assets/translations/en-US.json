@@ -69,6 +69,8 @@
     "noTokens" : "No tokens",
    "selectAmount" : "Select the amount and the method of sending",
     "amount" : "Amount",
-    "specifyAmount" : "Specify the amount to transfer"
+    "specifyAmount" : "Specify the amount to transfer",
+    "sendTo" : "Send Gift Card to:",
+    "phoneOrEmail" : "Phone number or Email address"
   }
 }

@@ -41,6 +41,22 @@ mixin _$SendingAmountState on _SendingAmountState, Store {
     });
   }
 
+  late final _$isAmountHigherAtom =
+      Atom(name: '_SendingAmountState.isAmountHigher', context: context);
+
+  @override
+  bool get isAmountHigher {
+    _$isAmountHigherAtom.reportRead();
+    return super.isAmountHigher;
+  }
+
+  @override
+  set isAmountHigher(bool value) {
+    _$isAmountHigherAtom.reportWrite(value, super.isAmountHigher, () {
+      super.isAmountHigher = value;
+    });
+  }
+
   late final _$_SendingAmountStateActionController =
       ActionController(name: '_SendingAmountState', context: context);
 
@@ -70,7 +86,8 @@ mixin _$SendingAmountState on _SendingAmountState, Store {
   String toString() {
     return '''
 currentBalance: ${currentBalance},
-sendingAmount: ${sendingAmount}
+sendingAmount: ${sendingAmount},
+isAmountHigher: ${isAmountHigher}
     ''';
   }
 }

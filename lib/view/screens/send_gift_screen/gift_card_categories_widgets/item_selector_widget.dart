@@ -98,7 +98,7 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                                         avatar:
                                             Assets.media.images.toyStory.path,
                                         brandName: 'McDonalds',
-                                        tokenBalance: '50 LD'),
+                                        tokenBalance: 50),
                                   );
                                 }),
                           ),

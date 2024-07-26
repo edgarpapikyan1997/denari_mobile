@@ -5,7 +5,7 @@ import 'button.dart';
 
 class ButtonSecondary extends StatelessWidget {
   final String? label;
-  final String? svgImagePath;
+  final String? svg;
   final Function()? onPressed;
   final FocusNode? focusNode;
   final double? height;
@@ -23,13 +23,13 @@ class ButtonSecondary extends StatelessWidget {
     this.focusNode,
     this.width,
     this.height,
-    this.svgImagePath,
+    this.svg,
     this.dimension,
     this.borderRadius,
     this.padding,
     this.fontSize,
     this.align,
-  }) : assert(label != null || svgImagePath != null);
+  }) : assert(label != null || svg != null);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class ButtonSecondary extends StatelessWidget {
       focusNode: focusNode,
       width: width,
       height: height,
-      svg: svgImagePath,
+      svg: svg,
       dimension: dimension,
       buttonColor: context.theme.colorScheme.secondary,
       valuesColor: context.theme.colorScheme.primary,

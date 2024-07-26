@@ -1,4 +1,5 @@
 import 'package:denari_app/utils/go_router.dart';
+import 'package:denari_app/utils/listeners/auth_listener.dart';
 import 'package:denari_app/utils/log/logging.dart';
 import 'package:denari_app/utils/themes/dark_theme.dart';
 import 'package:denari_app/utils/themes/light_theme.dart';
@@ -15,6 +16,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   setupLogger(kDebugMode);
   configDi(const Config(env: 'dev', host: 'https://denari.mifort.com'));
+  authListener.login();
   runApp(EasyLocalization(supportedLocales: const [
     Locale('en', 'US'),
   ], path: 'assets/translations', child: const App()));

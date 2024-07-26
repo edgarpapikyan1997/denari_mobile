@@ -73,5 +73,14 @@
     "manageGifts" : "Manage and explore your gift cards.",
     "noGiftCards" : "No gift cards",
     "chooseGiftCardInApp" : "Choose gift cards in our application and purchase from the store checkout."
+  },
+  "profile" : {
+    "data": "Profile data",
+    "change_password": "Change Password",
+    "notifications": "Notifications",
+    "location_services": "Location Services",
+    "invite_friends": "Invite friends",
+    "delete_account": "Delete Account",
+    "log_out": "Log out"
   }
 }

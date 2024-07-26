@@ -17,6 +17,7 @@ class Button extends StatelessWidget {
   final double borderRadius;
   final EdgeInsets? padding;
   final double? fontSize;
+  final double? iconSize;
   final CrossAxisAlignment crossAlign;
   final Alignment mainAlign;
   final double elevation;
@@ -38,6 +39,7 @@ class Button extends StatelessWidget {
     double? borderRadius,
     this.padding,
     this.fontSize,
+    this.iconSize = 24,
     CrossAxisAlignment? crossAlign,
     Alignment? mainAlign,
     double? elevation,
@@ -92,8 +94,8 @@ class Button extends StatelessWidget {
                 SvgPicture.asset(
                   svg!,
                   fit: BoxFit.fitHeight,
-                  height: 24,
-                  width: 24,
+                  height: iconSize,
+                  width: iconSize,
                   colorFilter: ColorFilter.mode(
                     onPressed != null ? icColor : textDisableColor,
                     BlendMode.srcIn,

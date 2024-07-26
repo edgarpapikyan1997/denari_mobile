@@ -115,14 +115,13 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                     extra: BrandItemWidget(
                       avatar: Assets.media.images.toyStory.path,
                       brandName: 'McDonalds',
-                      tokenBalance: '50',
+                      tokenBalance: 50,
                       addDivider: false,
                       topPadding: 8,
                       bottomPadding: 8,
                       leftPadding: 12,
                       rightPadding: 12,
                       wrapperColor: AppColors.whiteGrey,
-
                     ),
                   );
                 },

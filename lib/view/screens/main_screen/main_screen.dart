@@ -106,7 +106,7 @@ class _MainScreenState extends State<MainScreen> {
           child: CustomAppBar(
             appBarColor: AppColors.yellowLight,
             leadingIcon: Assets.media.icons.token.svg(),
-            tokenCount: _token.earnedToken.toString(),
+            tokenCount: _token.earnedToken,
             // should be changed to data from backEnd
             tealIcon: Assets.media.icons.search.svg(),
           ),

@@ -9,17 +9,18 @@ import 'balance_widget.dart';
 class CustomAppBar extends StatelessWidget {
   final Color? appBarColor;
   final Widget? leadingIcon;
-  final String? tokenCount;
+  final int? tokenCount;
   final Text? title;
   final Widget? tealIcon;
 
-  const CustomAppBar(
-      {super.key,
-      this.leadingIcon,
-      this.tokenCount,
-      this.title,
-      this.tealIcon,
-      this.appBarColor});
+  const CustomAppBar({
+    super.key,
+    this.leadingIcon,
+    this.tokenCount,
+    this.title,
+    this.tealIcon,
+    this.appBarColor,
+  });
 
   Widget tokenAppBar(BuildContext context) {
     return Row(

@@ -9,7 +9,7 @@ class BrandItemWidget extends StatelessWidget {
   final String brandName;
   final Color wrapperColor;
   final Widget? secondaryInfo;
-  final String? tokenBalance;
+  final int? tokenBalance;
   final Widget? tealButton;
   final bool addDivider;
   final double bottomPadding;
@@ -87,6 +87,7 @@ class BrandItemWidget extends StatelessWidget {
                       tokenIconWidth: 18,
                       balance: tokenBalance!,
                       textStyle: context.theme.headline4,
+                      color: wrapperColor,
                     )
                   : const SizedBox(),
               tealButton ?? const SizedBox(),

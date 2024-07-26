@@ -68,6 +68,7 @@
     "mustMakePurchase" : "To receive tokens, you must make a purchase using a gift card.",
     "noTokens" : "No tokens",
    "selectAmount" : "Select the amount and the method of sending",
-    "amount" : "Amount"
+    "amount" : "Amount",
+    "specifyAmount" : "Specify the amount to transfer"
   }
 }

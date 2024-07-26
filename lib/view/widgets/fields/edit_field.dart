@@ -10,6 +10,8 @@ class EditField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final bool optional;
   final String? error;
+  final TextStyle? hintStyle;
+  final double? borderRadius;
 
   const EditField({
     super.key,
@@ -18,6 +20,8 @@ class EditField extends StatefulWidget {
     this.onChanged,
     this.optional = false,
     this.error,
+    this.hintStyle,
+    this.borderRadius,
   });
 
   @override
@@ -53,6 +57,9 @@ class _EditFieldState extends State<EditField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (value) {
+        FocusScope.of(context).unfocus();
+      },
       controller: _controller,
       style: context.theme.headline5.copyWith(
         color: AppColors.black,
@@ -63,6 +70,8 @@ class _EditFieldState extends State<EditField> {
         controller: _controller,
         hint: _hint,
         error: _error,
+        borderRadius: widget.borderRadius,
+        hintStyle: widget.hintStyle
       ),
     );
   }

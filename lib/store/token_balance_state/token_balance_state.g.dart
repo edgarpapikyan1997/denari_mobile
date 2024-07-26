@@ -29,7 +29,7 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
       ActionController(name: '_TokenBalanceState', context: context);
 
   @override
-  String getTokenBalanceByBrand({String? brand}) {
+  int getTokenBalanceByBrand({String? brand}) {
     final _$actionInfo = _$_TokenBalanceStateActionController.startAction(
         name: '_TokenBalanceState.getTokenBalanceByBrand');
     try {

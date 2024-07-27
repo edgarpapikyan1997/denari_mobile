@@ -18,10 +18,13 @@ class CategoryFieldGenerator extends StatelessWidget {
         String categoryName = category['categoryName'] as String;
         Widget categoryIcon = category['categoryIcon'] as Widget;
         return CategoryWidget(
-          categoryName: categoryName,
-          categoryIcon: categoryIcon,
-          categoriesState: categoriesState,
-        );
+            categoryName: categoryName,
+            categoryIcon: categoryIcon,
+            categoriesState: categoriesState,
+            onTap: () {
+              print(categoriesState.currentCategory);
+              categoriesState.selectCategory(categoryName);
+            });
       }).toList(),
     );
   }

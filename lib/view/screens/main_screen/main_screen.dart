@@ -21,6 +21,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  CategoriesState? categoriesState = CategoriesState();
+
   final _token = TokenBalanceState();
   final categories = [
     {
@@ -52,22 +54,19 @@ class _MainScreenState extends State<MainScreen> {
       'categoryIcon': Assets.media.icons.other.svg()
     },
   ];
-  CategoriesState? categoriesState;
 
   @override
   void initState() {
     super.initState();
-    // _token.getTokenBalance();
     initCategories();
   }
 
   initCategories() {
-    categoriesState = CategoriesState(
-      initialCategory: categories[0]['categoryName'].toString(),
-    );
+    categoriesState?.selectCategory(categories[0]['categoryName'] as String);
   }
 
   Widget mainScreenFields() {
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -95,6 +94,7 @@ class _MainScreenState extends State<MainScreen> {
       ],
     ).paddingOnly(bottom: 16, left: 16, right: 16);
   }
+
   @override
   Widget build(BuildContext context) {
     // Define the categories list
@@ -119,7 +119,7 @@ class _MainScreenState extends State<MainScreen> {
               children: [
                 Container(
                     decoration:
-                        BoxDecoration(color: AppColors.yellowLight, boxShadow: [
+                    BoxDecoration(color: AppColors.yellowLight, boxShadow: [
                       BoxShadow(
                         color: AppColors.greyDark.withOpacity(0.6),
                         blurRadius: 8,
@@ -148,7 +148,7 @@ class _MainScreenState extends State<MainScreen> {
                           padding: MaterialStateProperty.all<EdgeInsets>(
                               EdgeInsets.zero),
                           minimumSize:
-                              MaterialStateProperty.all<Size>(Size.zero),
+                          MaterialStateProperty.all<Size>(Size.zero),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                         child: Text(
@@ -172,7 +172,7 @@ class _MainScreenState extends State<MainScreen> {
                           padding: MaterialStateProperty.all<EdgeInsets>(
                               EdgeInsets.zero),
                           minimumSize:
-                              MaterialStateProperty.all<Size>(Size.zero),
+                          MaterialStateProperty.all<Size>(Size.zero),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                         child: Text(

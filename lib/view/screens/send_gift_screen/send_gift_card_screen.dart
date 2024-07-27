@@ -32,7 +32,6 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
   TextEditingController sendInformationController = TextEditingController();
   SendingAmountState sendingAmountState = SendingAmountState();
   CustomButtonState buttonState = CustomButtonState();
-  bool isToken = false;
 
   @override
   void initState() {
@@ -43,8 +42,6 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
 
   @override
   void dispose() {
-    amountController.dispose();
-    sendInformationController.dispose();
     super.dispose();
   }
 
@@ -84,7 +81,7 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                         height: 16,
                       ),
                       BrandItemWidget(
-                        // isToken: true,
+                        isToken: widget.brandItemWidget.isToken,
                         avatar: Assets.media.images.toyStory.path,
                         brandName: 'McDonalds',
                         tokenBalance: 50,
@@ -95,7 +92,7 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                         rightPadding: 12,
                         wrapperColor: AppColors.whiteGrey,
                       ),
-                     // widget.brandItemWidget,
+                      // widget.brandItemWidget,
                       const SizedBox(
                         height: 32,
                       ),
@@ -117,8 +114,6 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                         onChanged: (value) {
                           int newValue = int.tryParse(value) ?? 0;
                           sendingAmountState.setSendingAmount(amount: newValue);
-                          // value = sendingAmountState.sendingAmount.toString();
-
                           sendInformationController.text.isNotEmpty &&
                                   amountController.text.isNotEmpty
                               ? buttonState.isButtonEnabled = true
@@ -133,54 +128,20 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                       ),
                       Row(
                         children: [
-                          BalanceWidget(
-                            textStyle: context.theme.headline4.medium,
-                            balance: 20,
-                            horizontalPadding: 12,
-                            verticalPadding: 6,
-                            color: AppColors.whiteGrey,
-                            onTap: () {
-                              sendingAmountState.setSendingAmount(amount: 20);
-                              amountController.text =
-                                  sendingAmountState.sendingAmount.toString();
-                            },
-                          ),
-                          BalanceWidget(
-                            textStyle: context.theme.headline4.medium,
-                            balance: 30,
-                            horizontalPadding: 12,
-                            verticalPadding: 6,
-                            color: AppColors.whiteGrey,
-                            onTap: () {
-                              sendingAmountState.setSendingAmount(amount: 30);
-                              amountController.text =
-                                  sendingAmountState.sendingAmount.toString();
-                            },
-                          ),
-                          BalanceWidget(
-                            textStyle: context.theme.headline4.medium,
-                            balance: 40,
-                            horizontalPadding: 12,
-                            verticalPadding: 6,
-                            color: AppColors.whiteGrey,
-                            onTap: () {
-                              sendingAmountState.setSendingAmount(amount: 40);
-                              amountController.text =
-                                  sendingAmountState.sendingAmount.toString();
-                            },
-                          ),
-                          BalanceWidget(
-                            textStyle: context.theme.headline4.medium,
-                            balance: 50,
-                            horizontalPadding: 12,
-                            verticalPadding: 6,
-                            color: AppColors.whiteGrey,
-                            onTap: () {
-                              sendingAmountState.setSendingAmount(amount: 50);
-                              amountController.text =
-                                  sendingAmountState.sendingAmount.toString();
-                            },
-                          ),
+                          for (var i = 2; i < 6; ++i)
+                            BalanceWidget(
+                              isTokenBalance: widget.brandItemWidget.isToken,
+                              textStyle: context.theme.headline4.medium,
+                              balance: i * 10,
+                              horizontalPadding: 12,
+                              verticalPadding: 6,
+                              color: AppColors.whiteGrey,
+                              onTap: () {
+                                sendingAmountState.setSendingAmount(amount: 20);
+                                amountController.text =
+                                    sendingAmountState.sendingAmount.toString();
+                              },
+                            ),
                         ],
                       ),
                       const Delimiter(32),

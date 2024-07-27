@@ -60,13 +60,11 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                       children: List.generate(
                         9,
                         (index) => BrandItemWidget(
-                          // isToken: true,
                           topPadding: 16,
                           avatar: Assets.media.images.toyStory.path,
                           brandName: 'McDonalds',
                           secondaryInfo: widget.isToken
-                              ?
-                          Row(
+                              ? Row(
                                   children: [
                                     SizedBox(
                                       height: 14,
@@ -97,7 +95,6 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                                       .selectItem(index!);
                                   widget.brandItemSelectState.setItemWidget(
                                     BrandItemWidget(
-                                      // isToken: false,
                                         avatar:
                                             Assets.media.images.toyStory.path,
                                         brandName: 'McDonalds',

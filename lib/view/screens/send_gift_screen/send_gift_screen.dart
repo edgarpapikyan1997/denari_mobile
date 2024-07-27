@@ -24,8 +24,9 @@ class SendGiftScreen extends StatefulWidget {
 class _SendGiftScreenState extends State<SendGiftScreen> {
   final BrandItemSelectState sendGiftItemSelectState = BrandItemSelectState();
   final BrandItemSelectState tokenItemSelectState = BrandItemSelectState();
-  CategoriesState? categoriesState;
+  CategoriesState? categoriesState = CategoriesState();
   int? items = 15;
+  bool isToken = false;
 
   final categories = [
     {
@@ -45,9 +46,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
   }
 
   initCategories() {
-    categoriesState = CategoriesState(
-      initialCategory: categories[0]['categoryName'].toString(),
-    );
+    categoriesState?.selectCategory(categories[0]['categoryName'] as String);
   }
 
   @override
@@ -80,7 +79,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
               const SizedBox(
                 height: 24,
               ),
-              categoriesState?.selectedCategory ==
+              categoriesState?.currentCategory ==
                       categories[0]['categoryName'].toString()
                   ? Expanded(
                       child: ItemSelectorWidget(
@@ -102,8 +101,8 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                           textStyle: context.theme.headline2.bold,
                           tokenIconHeight: 20,
                           tokenIconWidth: 18,
-                          ),
-                       ),
+                        ),
+                      ),
                     ),
               CustomButton(
                 isEnabled: true,
@@ -113,7 +112,8 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                   context.goNamed(
                     "sendGiftCardScreen",
                     extra: BrandItemWidget(
-                      // isToken: true,
+                      isToken: categoriesState?.currentCategory ==
+                          categories[0]['categoryName'] ? false : true,
                       avatar: Assets.media.images.toyStory.path,
                       brandName: 'McDonalds',
                       tokenBalance: 50,

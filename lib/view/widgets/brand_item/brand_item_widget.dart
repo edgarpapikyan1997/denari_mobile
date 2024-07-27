@@ -7,6 +7,7 @@ import '../../widgets/balance_widget.dart';
 class BrandItemWidget extends StatelessWidget {
   final String avatar;
   final String brandName;
+  final bool isToken;
   final Color wrapperColor;
   final Widget? secondaryInfo;
   final int? tokenBalance;
@@ -21,6 +22,7 @@ class BrandItemWidget extends StatelessWidget {
     super.key,
     required this.avatar,
     required this.brandName,
+    this.isToken = false,
     this.secondaryInfo,
     this.tokenBalance,
     this.tealButton,
@@ -85,7 +87,7 @@ class BrandItemWidget extends StatelessWidget {
               const Spacer(),
               tokenBalance != null
                   ? BalanceWidget(
-                      isTokenBalance: secondaryInfo != null ? true : false,
+                      isTokenBalance: isToken,
                       tokenIconHeight: 20,
                       tokenIconWidth: 18,
                       balance: tokenBalance!,

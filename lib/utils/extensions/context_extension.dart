@@ -245,6 +245,8 @@ extension TextStyleHelpers on TextStyle {
 
   TextStyle get lightGreyText => copyWith(color: AppColors.lightGreyText);
 
+  TextStyle get greyLight => copyWith(color: AppColors.greyLight);
+
   TextStyle size([double? fontSize]) => copyWith(fontSize: fontSize);
 
   TextStyle get regular => copyWith(fontWeight: FontWeight.w400);

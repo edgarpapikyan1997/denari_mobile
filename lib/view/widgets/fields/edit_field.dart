@@ -69,12 +69,13 @@ class _EditFieldState extends State<EditField> {
           ),
       onChanged: widget.onChanged,
       decoration: DecorationField(
-        context: context,
-        controller: _controller,
-        hint: _hint,
-        error: _error,
-        borderRadius: widget.borderRadius,
-      ),
+          context: context,
+          controller: _controller,
+          hint: _hint,
+          error: _error,
+          borderRadius: widget.borderRadius,
+          hintStyle: widget.hintStyle,
+          textStyle: widget.textStyle),
     );
   }
 }

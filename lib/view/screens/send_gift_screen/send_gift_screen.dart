@@ -102,8 +102,8 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                           textStyle: context.theme.headline2.bold,
                           tokenIconHeight: 20,
                           tokenIconWidth: 18,
-                        ),
-                      ),
+                          ),
+                       ),
                     ),
               CustomButton(
                 isEnabled: true,
@@ -113,6 +113,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                   context.goNamed(
                     "sendGiftCardScreen",
                     extra: BrandItemWidget(
+                      // isToken: true,
                       avatar: Assets.media.images.toyStory.path,
                       brandName: 'McDonalds',
                       tokenBalance: 50,

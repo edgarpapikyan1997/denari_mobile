@@ -13,6 +13,8 @@ class DecorationField extends InputDecoration {
     required this.controller,
     this.hint,
     this.borderRadius,
+    TextStyle? hintStyle,
+    TextStyle? textStyle,
     String? error,
   }) : super(
           isDense: true,
@@ -32,12 +34,12 @@ class DecorationField extends InputDecoration {
             borderColor: AppColors.lightGreyText,
             borderRadius: borderRadius,
           ),
+
           errorBorder: FieldBorder(borderColor: AppColors.errorColor),
           hintText: hint,
-          hintStyle: context.theme.headline5.copyWith(
-                color: AppColors.hintColor,
-              ),
-
+          hintStyle: hintStyle ?? context.theme.headline5.copyWith(
+            color: AppColors.hintColor,
+          ),
           filled: true,
           fillColor: AppColors.fieldColor,
           errorText: error,

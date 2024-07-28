@@ -1,4 +1,5 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:denari_app/utils/themes/dark_theme.dart';
 import 'package:denari_app/utils/themes/light_theme.dart';
@@ -97,7 +98,7 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
             bottomNavBarState.changeIndex(index);
             switch (index) {
               case 0:
-                context.go('/profile');
+                context.goNamed(Routes.profile);
                 break;
               case 1:
                 context.go('/notifications');

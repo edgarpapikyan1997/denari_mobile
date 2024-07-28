@@ -6,6 +6,7 @@ import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:denari_app/view/screens/authentication/code/widgets/resend_timer.dart';
+import 'package:denari_app/view/widgets/app_bar/app_bar_page.dart';
 import 'package:denari_app/view/widgets/buttons/button_primary.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:denari_app/view/widgets/fields/code_field.dart';
@@ -42,13 +43,7 @@ class _ForgotCodeScreenState extends State<ForgotCodeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          color: AppColors.black,
-          onPressed: context.pop,
-        ),
-      ),
+      appBar: const AppBarPage(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 14),

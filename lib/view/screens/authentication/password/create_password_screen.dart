@@ -4,11 +4,11 @@ import 'package:denari_app/store/authentication/forgot_state.dart';
 import 'package:denari_app/utils/di/config.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
-import 'package:denari_app/utils/themes/app_colors.dart';
+import 'package:denari_app/view/widgets/app_bar/app_bar_page.dart';
 import 'package:denari_app/view/widgets/buttons/button_primary.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:denari_app/view/widgets/fields/edit_field.dart';
-import 'package:denari_app/view/widgets/fields/phone_field.dart';
+import 'package:denari_app/view/widgets/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
@@ -25,14 +25,14 @@ class CreatePasswordScreen extends StatefulWidget {
 }
 
 class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final ForgotState _state = ForgotState(
     authRepository: di.get<AuthRepository>(),
   );
 
   @override
   void initState() {
-    _state.phone = PhoneNumber.fromCompleteNumber(completeNumber: widget.model.phone);
+    _state.phone =
+        PhoneNumber.fromCompleteNumber(completeNumber: widget.model.phone);
     _state.code = widget.model.code;
     reaction(
       (reaction) => _state.changePasswordError,
@@ -40,9 +40,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
         if (value == null) {
           context.goNamed(Routes.signIn);
         } else {
-          ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(
-            SnackBar(content: Text(value)),
-          );
+          Message.show(value);
         }
       },
       equals: (_, __) => false,
@@ -53,14 +51,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          color: AppColors.black,
-          onPressed: context.pop,
-        ),
-      ),
+      appBar: const AppBarPage(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 14),

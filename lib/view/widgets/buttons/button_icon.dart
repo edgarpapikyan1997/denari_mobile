@@ -7,6 +7,9 @@ class ButtonIcon extends StatelessWidget {
   final Function()? onPressed;
   final FocusNode? focusNode;
   final double? dimension;
+  final Color? buttonColor;
+  final Color? iconColor;
+  final double? iconSize;
 
   const ButtonIcon({
     super.key,
@@ -14,6 +17,9 @@ class ButtonIcon extends StatelessWidget {
     this.onPressed,
     this.focusNode,
     this.dimension = 32,
+    this.buttonColor,
+    this.iconColor,
+    this.iconSize,
   });
 
   @override
@@ -25,10 +31,10 @@ class ButtonIcon extends StatelessWidget {
       dimension: dimension,
       borderRadius: 100,
       innerPadding: 0,
-      iconSize: 18,
+      iconSize: iconSize ?? 18,
       padding: EdgeInsets.zero,
-      buttonColor: AppColors.white,
-      valuesColor: AppColors.yellowLight2,
+      buttonColor: buttonColor ?? AppColors.white,
+      iconColor: iconColor ?? AppColors.yellowLight2,
     );
   }
 }

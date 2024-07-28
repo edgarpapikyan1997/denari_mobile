@@ -14,6 +14,7 @@ class PhoneField extends StatefulWidget {
   final ValueChanged<PhoneNumber>? onChanged;
   final bool optional;
   final String? error;
+  final String? value;
 
   const PhoneField({
     super.key,
@@ -22,6 +23,7 @@ class PhoneField extends StatefulWidget {
     this.onChanged,
     this.optional = false,
     this.error,
+    this.value,
   });
 
   @override
@@ -38,6 +40,9 @@ class _PhoneFieldState extends State<PhoneField> {
   @override
   void initState() {
     _controller = widget.controller ?? TextEditingController();
+    if (widget.value != null) {
+      _controller.text = widget.value!;
+    }
     _error = widget.error;
     _controller.addListener(() {
       if (mounted) {

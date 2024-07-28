@@ -6,8 +6,10 @@ import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/network/data/token_preferences.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
+import 'package:denari_app/view/widgets/app_bar/app_bar_page.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:denari_app/view/widgets/fields/code_field.dart';
+import 'package:denari_app/view/widgets/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
@@ -26,7 +28,6 @@ class SignUpCodeScreen extends StatefulWidget {
 }
 
 class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final SignUpState _state = SignUpState(
     authRepository: di.get<AuthRepository>(),
     tokenPreferences: di.get<TokenPreferences>(),
@@ -44,9 +45,7 @@ class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
         if (value == null) {
           context.goNamed(Routes.password);
         } else {
-          ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(
-            SnackBar(content: Text(value)),
-          );
+          Message.show(value);
         }
       },
       equals: (_, __) => false,
@@ -57,14 +56,7 @@ class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          color: AppColors.black,
-          onPressed: context.pop,
-        ),
-      ),
+      appBar: const AppBarPage(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 14),

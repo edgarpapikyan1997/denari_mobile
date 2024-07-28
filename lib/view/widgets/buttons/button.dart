@@ -107,7 +107,7 @@ class Button extends StatelessWidget {
                 child: Text(
                   label ?? '',
                   overflow: TextOverflow.clip,
-                  style: context.theme.bodyText1.copyWith(
+                  style: context.theme.headline4.copyWith(
                     color: textColor,
                   ),
                 ),

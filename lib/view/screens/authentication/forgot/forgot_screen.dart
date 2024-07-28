@@ -4,10 +4,11 @@ import 'package:denari_app/store/authentication/forgot_state.dart';
 import 'package:denari_app/utils/di/config.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
-import 'package:denari_app/utils/themes/app_colors.dart';
+import 'package:denari_app/view/widgets/app_bar/app_bar_page.dart';
 import 'package:denari_app/view/widgets/buttons/button_primary.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:denari_app/view/widgets/fields/phone_field.dart';
+import 'package:denari_app/view/widgets/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
@@ -21,7 +22,6 @@ class ForgotScreen extends StatefulWidget {
 }
 
 class _ForgotScreenState extends State<ForgotScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final ForgotState _state = ForgotState(
     authRepository: di.get<AuthRepository>(),
   );
@@ -39,9 +39,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                 newPassword: '',
               ));
         } else {
-          ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(
-            SnackBar(content: Text(value)),
-          );
+          Message.show(value);
         }
       },
       equals: (_, __) => false,
@@ -52,14 +50,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          color: AppColors.black,
-          onPressed: context.pop,
-        ),
-      ),
+      appBar: const AppBarPage(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 14),

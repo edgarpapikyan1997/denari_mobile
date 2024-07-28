@@ -1,3 +1,4 @@
+import 'package:denari_app/data/profile/model/profile.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:denari_app/view/screens/profile/widgets/user_data.dart';
 import 'package:denari_app/view/screens/profile/widgets/user_photo.dart';
@@ -5,9 +6,9 @@ import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:flutter/material.dart';
 
 class UserBanner extends StatelessWidget {
-  const UserBanner({
-    super.key,
-  });
+  final Profile profile;
+
+  const UserBanner({super.key, required this.profile});
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +21,11 @@ class UserBanner extends StatelessWidget {
           right: 16,
           bottom: 24,
         ),
-        child: const Row(
+        child: Row(
           children: [
-            UserPhoto(),
-            Delimiter(16),
-            UserData(),
+            const UserPhoto(),
+            const Delimiter(16),
+            UserData(profile: profile),
           ],
         ),
       ),

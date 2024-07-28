@@ -117,6 +117,10 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/qr-code.svg
   SvgGenImage get qrCode => const SvgGenImage('assets/media/icons/qr-code.svg');
 
+  /// File path: assets/media/icons/safety-warning-heat.svg
+  SvgGenImage get safetyWarningHeat =>
+      const SvgGenImage('assets/media/icons/safety-warning-heat.svg');
+
   /// File path: assets/media/icons/scan-line.svg
   SvgGenImage get scanLine =>
       const SvgGenImage('assets/media/icons/scan-line.svg');
@@ -172,6 +176,7 @@ class $AssetsMediaIconsGen {
         logOut,
         pinned,
         qrCode,
+        safetyWarningHeat,
         scanLine,
         search,
         sendToBack,

@@ -9,6 +9,7 @@ import 'package:denari_app/view/widgets/buttons/button_primary.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:denari_app/view/widgets/fields/edit_field.dart';
 import 'package:denari_app/view/widgets/fields/phone_field.dart';
+import 'package:denari_app/view/widgets/message.dart';
 import 'package:denari_app/view/widgets/text_with_link.dart';
 import 'package:denari_app/view/widgets/welcome_text.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,6 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final SignInState _state = SignInState(
     authRepository: di.get<AuthRepository>(),
     tokenPreferences: di.get<TokenPreferences>(),
@@ -38,9 +38,7 @@ class _SignInScreenState extends State<SignInScreen> {
         if (value == null) {
           authListener.login();
         } else {
-          ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(
-            SnackBar(content: Text(value)),
-          );
+          Message.show(value);
         }
       },
       equals: (_, __) => false,
@@ -51,7 +49,6 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 14),

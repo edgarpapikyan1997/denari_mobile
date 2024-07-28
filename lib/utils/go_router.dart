@@ -1,6 +1,8 @@
+import 'package:denari_app/data/profile/model/profile.dart';
 import 'package:denari_app/view/screens/main_screen/my_qr_code.dart';
 import 'package:denari_app/view/screens/main_screen/send_gift_screen.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
+import 'package:denari_app/view/screens/profile/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../data/authentication/model/reset_model.dart';
@@ -75,10 +77,20 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: '/profile',
+          name: Routes.profile,
+          path: '/${Routes.profile}',
           builder: (context, state) {
-            return ProfileScreen();
+            return const ProfileScreen();
           },
+          routes: [
+            GoRoute(
+              name: Routes.profileData,
+              path: Routes.profileData,
+              builder: (context, state) => ProfilePage(
+                profile: state.extra as Profile,
+              ),
+            ),
+          ],
         ),
       ],
     ),
@@ -115,16 +127,17 @@ final GoRouter router = GoRouter(
   redirect: (context, state) {
     final path = state.uri.path;
     final login = authListener.isLogin;
-    if (login && (path.contains(Routes.signUp) || path.contains(Routes.signIn))) {
+    if (login &&
+        (path.contains(Routes.signUp) || path.contains(Routes.signIn))) {
       return '/';
     }
-    if (!login && !(path.contains(Routes.signUp) || path.contains(Routes.signIn))) {
+    if (!login &&
+        !(path.contains(Routes.signUp) || path.contains(Routes.signIn))) {
       return '/${Routes.signIn}';
     }
     return null;
   },
 );
-
 
 final class Routes {
   static const signIn = 'sign-in';
@@ -133,5 +146,6 @@ final class Routes {
   static const code = 'code';
   static const forgotCode = 'f-code';
   static const password = 'password';
+  static const profile = 'profile';
+  static const profileData = 'data';
 }
-

@@ -11,6 +11,7 @@ class EditField extends StatefulWidget {
   final bool optional;
   final String? error;
   final bool obscure;
+  final String? value;
 
   const EditField({
     super.key,
@@ -20,6 +21,7 @@ class EditField extends StatefulWidget {
     this.optional = false,
     this.error,
     this.obscure = false,
+    this.value,
   });
 
   @override
@@ -37,6 +39,9 @@ class _EditFieldState extends State<EditField> {
   @override
   void initState() {
     _controller = widget.controller ?? TextEditingController();
+    if (widget.value != null) {
+      _controller.text = widget.value!;
+    }
     _error = widget.error;
     _obscure = widget.obscure ? true : false;
     _controller.addListener(() {

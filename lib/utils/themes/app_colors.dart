@@ -20,4 +20,5 @@ class AppColors {
   static const hintColor = Color.fromRGBO(164, 164, 164, 1);
   static const fieldColor = Color.fromRGBO(255, 255, 255, 1.0);
   static const errorColor = Color.fromRGBO(193, 18, 31, 1);
+  static const pickerColor = Color.fromRGBO(251, 241, 210, 1);
 }

@@ -3,6 +3,7 @@ import 'package:denari_app/utils/listeners/auth_listener.dart';
 import 'package:denari_app/utils/log/logging.dart';
 import 'package:denari_app/utils/themes/dark_theme.dart';
 import 'package:denari_app/utils/themes/light_theme.dart';
+import 'package:denari_app/view/widgets/message.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import '../utils/extensions/extensions.dart';
@@ -24,6 +25,7 @@ void main() async {
 
 class App extends StatelessWidget {
   const App({super.key});
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -41,6 +43,10 @@ class App extends StatelessWidget {
           title: 'Denari App',
           theme: lightTheme,
           darkTheme: darkTheme,
+          builder: (context, child) {
+            Message.context = context;
+            return child ?? const SizedBox.shrink();
+          },
         ));
   }
 }

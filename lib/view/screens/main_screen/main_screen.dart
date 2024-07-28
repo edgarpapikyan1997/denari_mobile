@@ -57,7 +57,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    // _token.getTokenBalance();
     initCategories();
   }
 
@@ -97,8 +96,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Define the categories list
-
     return Observer(builder: (context) {
       return Scaffold(
         appBar: PreferredSize(
@@ -107,7 +104,6 @@ class _MainScreenState extends State<MainScreen> {
             appBarColor: AppColors.yellowLight,
             leadingIcon: Assets.media.icons.token.svg(),
             tokenCount: _token.earnedToken.toString(),
-            // should be changed to data from backEnd
             tealIcon: Assets.media.icons.search.svg(),
           ),
         ),

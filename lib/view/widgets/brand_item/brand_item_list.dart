@@ -1,6 +1,5 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'brand_item_widget.dart';
 
 class BrandItemList extends StatefulWidget {

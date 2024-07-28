@@ -21,7 +21,6 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
   final _tokenBalanceState = TokenBalanceState();
 
   /// Must set list of models
-
   final brandItems = [
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
@@ -178,7 +177,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                       style: context.theme.headline2.bold,
                     ),
                   ),
-                 const SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Expanded(child: BrandItemList(brandItems: brandItems, itemsToLoad: 8,))

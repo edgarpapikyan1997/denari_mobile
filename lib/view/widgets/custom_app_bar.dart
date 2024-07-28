@@ -1,8 +1,10 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/extensions/widget_extension.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../utils/themes/app_colors.dart';
+
+import 'balance_widget.dart';
 
 class CustomAppBar extends StatelessWidget {
   final Color? appBarColor;
@@ -16,32 +18,30 @@ class CustomAppBar extends StatelessWidget {
       this.leadingIcon,
       this.tokenCount,
       this.title,
-      this.tealIcon, this.appBarColor});
+      this.tealIcon,
+      this.appBarColor});
 
   Widget tokenAppBar(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.go('/tokenBalance');
-      },
-      child: Row(
-        children: [
-          leadingIcon != null
-              ? SizedBox(height: 28, width: 26, child: leadingIcon)
-              : const SizedBox(),
-          const SizedBox(
-            width: 8,
+    return Row(
+      children: [
+        GestureDetector(
+          onTap: () {
+            context.go('/tokenBalance');
+          },
+          child: BalanceWidget(
+            isTokenBalance: tokenCount != null ? true : false,
+            tokenIconHeight: 28,
+            tokenIconWidth: 26,
+            balance: tokenCount!,
+            textStyle: context.theme.headline2.bold,
           ),
-          Text(
-            tokenCount ?? '',
-            style: context.theme.headline2.bold,
-          ),
-          Spacer(),
-          tealIcon != null
-              ? SizedBox(width: 24, height: 24, child: tealIcon)
-              : const SizedBox(),
-        ],
-      ).paddingOnly(top: 60, left: 16, right: 16, bottom: 16),
-    );
+        ),
+        const Spacer(),
+        tealIcon != null
+            ? SizedBox(width: 24, height: 24, child: tealIcon)
+            : const SizedBox(),
+      ],
+    ).paddingOnly(top: 60, left: 16, right: 16, bottom: 16);
   }
 
   Widget defaultAppBar() {
@@ -49,8 +49,7 @@ class CustomAppBar extends StatelessWidget {
       children: [
         leadingIcon != null
             ? SizedBox(height: 28, width: 26, child: leadingIcon)
-            :
-        const SizedBox(
+            : const SizedBox(
                 width: 24,
                 height: 24,
               ),

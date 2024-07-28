@@ -14,7 +14,7 @@ final bottomNavBarState = BottomNavBarState();
 class ScaffoldNavBar extends StatefulWidget {
   final Widget child;
 
-  const ScaffoldNavBar({required this.child, Key? key}) : super(key: key);
+  const ScaffoldNavBar({required this.child, super.key});
 
   @override
   State<ScaffoldNavBar> createState() => _ScaffoldNavBarState();

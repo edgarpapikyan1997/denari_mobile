@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../store/categories_state/categories_state.dart';
 import 'category_widget.dart';
 

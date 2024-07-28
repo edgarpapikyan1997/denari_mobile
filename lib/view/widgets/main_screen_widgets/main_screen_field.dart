@@ -9,7 +9,11 @@ class MainScreenField extends StatelessWidget {
   final String title;
   final String navigationTitle;
 
-  const MainScreenField({super.key, required this.asset, required this.title, required this.navigationTitle});
+  const MainScreenField(
+      {super.key,
+      required this.asset,
+      required this.title,
+      required this.navigationTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +25,18 @@ class MainScreenField extends StatelessWidget {
         child: Column(
           children: [
             CircleAvatar(
-                backgroundColor: AppColors.white, radius: 32, child: SizedBox(
-              height: 32,
-                width: 32,
-                child: asset))
-                .paddingOnly(bottom: 8),
+              backgroundColor: AppColors.white,
+              radius: 32,
+              child: SizedBox(height: 32, width: 32, child: asset),
+            ).paddingOnly(bottom: 8),
             SizedBox(
-                child: Text(
-                  title,
-                  style: context.theme.body3,
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                )),
+              child: Text(
+                title,
+                style: context.theme.body3,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+              ),
+            ),
           ],
         ),
       ),

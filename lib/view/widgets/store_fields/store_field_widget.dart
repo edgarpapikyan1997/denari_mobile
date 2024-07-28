@@ -18,7 +18,7 @@ class StoreFieldWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.only(right: 8, bottom: 16),
+          margin: const EdgeInsets.only(right: 8, bottom: 16),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8), color: Colors.grey),
           width: 128,

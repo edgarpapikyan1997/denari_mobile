@@ -1,11 +1,15 @@
+import 'package:denari_app/view/screens/main_screen/my_qr_code.dart';
+import 'package:denari_app/view/screens/main_screen/send_gift_screen.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:denari_app/view/screens/authentication/code/code_screen.dart';
-import 'package:denari_app/view/screens/authentication/forgot/forgot_screen.dart';
-import 'package:denari_app/view/screens/authentication/password/create_password_screen.dart';
-import 'package:denari_app/view/screens/authentication/sign_in/sign_in_screen.dart';
-import 'package:denari_app/view/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:go_router/go_router.dart';
+import '../data/authentication/model/reset_model.dart';
+import '../view/screens/authentication/code/forgot_code_screen.dart';
+import '../view/screens/authentication/forgot/forgot_screen.dart';
+import '../view/screens/authentication/password/create_password_screen.dart';
+import '../view/screens/authentication/sign_in/sign_in_screen.dart';
+import '../view/screens/main_screen/my_gift_cards_screen.dart';
+import '../view/screens/main_screen/transaction_history_screen.dart';
 import '../view/screens/shop_screen.dart';
 import '../view/screens/main_screen/main_screen.dart';
 import '../view/screens/notification_screen.dart';
@@ -25,31 +29,55 @@ final GoRouter router = GoRouter(
           builder: (context, state) {
             return const MainScreen();
           },
-        routes: [
-        GoRoute(
-          path: 'tokenBalance',
-          builder: (BuildContext context, GoRouterState state) {
-            return const TokenBalanceScreen();
-            },
-          ),
+          routes: [
+            GoRoute(
+              path: 'tokenBalance',
+              builder: (BuildContext context, GoRouterState state) {
+                return const TokenBalanceScreen();
+              },
+            ),
+            GoRoute(
+              path: 'myGiftCards',
+              builder: (BuildContext context, GoRouterState state) {
+                return const MyGiftCardsScreen();
+              },
+            ),
+            GoRoute(
+              path: 'sendGift',
+              builder: (BuildContext context, GoRouterState state) {
+                return const SendGiftScreen();
+              },
+            ),
+            GoRoute(
+              path: 'myQRCode',
+              builder: (BuildContext context, GoRouterState state) {
+                return const MyQRCode();
+              },
+            ),
+            GoRoute(
+              path: 'transactionHistory',
+              builder: (BuildContext context, GoRouterState state) {
+                return TransactionHistoryScreen();
+              },
+            ),
           ],
         ),
         GoRoute(
           path: '/notifications',
           builder: (context, state) {
-            return const NotificationScreen();
+            return NotificationScreen();
           },
         ),
         GoRoute(
           path: '/shopScreen',
-        builder: (context, state) {
-          return const ShopScreen();
-        },
-      ),
-      GoRoute(
-        path: '/profile',
           builder: (context, state) {
-            return const ProfileScreen();
+            return ShopScreen();
+          },
+        ),
+        GoRoute(
+          path: '/profile',
+          builder: (context, state) {
+            return ProfileScreen();
           },
         ),
       ],
@@ -68,29 +96,17 @@ final GoRouter router = GoRouter(
               name: Routes.forgotCode,
               path: Routes.code,
               builder: (context, state) =>
-                  CodeScreen(phone: state.extra as String),
+                  ForgotCodeScreen(model: state.extra as ResetModel),
               routes: [
                 GoRoute(
                   name: Routes.password,
                   path: Routes.password,
                   builder: (context, state) =>
-                      CreatePasswordScreen(phone: state.extra as String),
+                      CreatePasswordScreen(model: state.extra as ResetModel),
                 ),
               ],
             ),
           ],
-        ),
-      ],
-    ),
-    GoRoute(
-      name: Routes.signUp,
-      path: '/${Routes.signUp}',
-      builder: (context, state) => const SignUpScreen(),
-      routes: [
-        GoRoute(
-          name: Routes.code,
-          path: Routes.code,
-          builder: (context, state) => CodeScreen(phone: state.extra as String),
         ),
       ],
     ),
@@ -109,6 +125,7 @@ final GoRouter router = GoRouter(
   },
 );
 
+
 final class Routes {
   static const signIn = 'sign-in';
   static const signUp = 'sign-up';
@@ -117,3 +134,4 @@ final class Routes {
   static const forgotCode = 'f-code';
   static const password = 'password';
 }
+

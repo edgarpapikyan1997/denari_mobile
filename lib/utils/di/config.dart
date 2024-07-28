@@ -11,6 +11,6 @@ final di = Di();
 configDi(Config config) {
   di.add(config);
   di.add(ApiTokenPreferences());
-  di.add(ApiNativeDio(di.get<ApiTokenPreferences>()));
+  di.add(ApiNativeDio(di.get<TokenPreferences>()));
   di.add(ImplAuthRepository(client: di.get<Dio>(), config: di.get<Config>()));
 }

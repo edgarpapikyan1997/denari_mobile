@@ -20,7 +20,7 @@ class TokenBalanceScreen extends StatefulWidget {
 class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
   final _tokenBalanceState = TokenBalanceState();
 
-  /// Must et list of models
+  /// Must set list of models
   final brandItems = [
     BrandItemWidget(
       avatar: Assets.media.images.toyStory.path,
@@ -138,7 +138,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
         child: CustomAppBar(
           leadingIcon: GestureDetector(
               onTap: () {
-                context.pop();
+                context.go('/');
               },
               child: Assets.media.icons.chevronLeft.svg()),
           title: Text(
@@ -154,7 +154,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                 const SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   BalanceWidget(
@@ -168,7 +168,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                     height: 8,
                   ),
                   Text("balance.viewEarnedToken".tr()),
-                 const SizedBox(
+                  const SizedBox(
                     height: 32,
                   ),
                   PreviewBanner(

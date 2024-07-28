@@ -6,6 +6,8 @@ import 'package:intl_phone_field/phone_number.dart';
 
 import 'decoration_field.dart';
 
+const defaultCountryCode = 'LY';
+
 class PhoneField extends StatefulWidget {
   final TextEditingController? controller;
   final String hint;
@@ -31,12 +33,17 @@ class _PhoneFieldState extends State<PhoneField> {
   String? _error;
 
   String get _hint =>
-      widget.hint + (widget.optional ? ' (${'optional'.tr()})' : '');
+      widget.hint + (widget.optional ? ' (${'sign.optional'.tr()})' : '');
 
   @override
   void initState() {
     _controller = widget.controller ?? TextEditingController();
     _error = widget.error;
+    _controller.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
     super.initState();
   }
 
@@ -56,11 +63,15 @@ class _PhoneFieldState extends State<PhoneField> {
   Widget build(BuildContext context) {
     return IntlPhoneField(
       controller: _controller,
-      style: context.theme.headline5.copyWith(
+      initialCountryCode: defaultCountryCode,
+      languageCode: context.locale.languageCode,
+      style: context.theme.body1.copyWith(
         color: AppColors.black,
       ),
       disableLengthCheck: true,
       onChanged: widget.onChanged,
+      dropdownIconPosition: IconPosition.trailing,
+      flagsButtonMargin: const EdgeInsets.only(left: 8),
       decoration: DecorationField(
         context: context,
         controller: _controller,

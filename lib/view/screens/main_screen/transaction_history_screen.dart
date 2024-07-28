@@ -1,25 +1,25 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/view/widgets/category/category_field_generator.dart';
+import 'package:denari_app/view/widgets/preview_banner/preview_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../gen/assets.gen.dart';
 import '../../../store/categories_state/categories_state.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../../widgets/brand_item/brand_item_widget.dart';
-import '../../widgets/category/category_field_generator.dart';
 import '../../widgets/custom_app_bar.dart';
-import '../../widgets/preview_banner/preview_banner.dart';
 
 enum SingingCharacter { lafayette, jefferson, lafayette1, jefferson1 }
 
-class SendGiftScreen extends StatefulWidget {
-  const SendGiftScreen({super.key});
+class TransactionHistoryScreen extends StatefulWidget {
+  const TransactionHistoryScreen({super.key});
 
   @override
-  State<SendGiftScreen> createState() => _SendGiftScreenState();
+  State<TransactionHistoryScreen> createState() =>
+      _TransactionHistoryScreenState();
 }
 
-class _SendGiftScreenState extends State<SendGiftScreen> {
+class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
   SingingCharacter? _character = SingingCharacter.lafayette;
 
   final categories = [

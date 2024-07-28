@@ -58,12 +58,12 @@ final GoRouter router = GoRouter(
         },
         routes: [
           GoRoute(
-            name: 'sendGiftCardScreen',
-            path: 'sendGiftCardScreen',
-            builder: (context, state) {
-              BrandItemWidget brandItemWidget = state.extra as BrandItemWidget;
-              return SendGiftCardScreen(brandItemWidget: brandItemWidget);
-            }
+              name: 'sendGiftCardScreen',
+              path: 'sendGiftCardScreen',
+              builder: (context, state) {
+                BrandItemWidget brandItemWidget = state.extra as BrandItemWidget;
+                return SendGiftCardScreen(brandItemWidget: brandItemWidget);
+              }
           ),
         ]),
     // GoRoute(

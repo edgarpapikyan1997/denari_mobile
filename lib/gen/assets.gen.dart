@@ -66,6 +66,10 @@ class $AssetsMediaIconsGen {
   SvgGenImage get chevronLeft =>
       const SvgGenImage('assets/media/icons/chevron-left.svg');
 
+  /// File path: assets/media/icons/chevron-right.svg
+  SvgGenImage get chevronRight =>
+      const SvgGenImage('assets/media/icons/chevron-right.svg');
+
   /// File path: assets/media/icons/circle-user-round.svg
   SvgGenImage get circleUserRound =>
       const SvgGenImage('assets/media/icons/circle-user-round.svg');
@@ -101,6 +105,10 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/media/icons/search.svg');
 
+  /// File path: assets/media/icons/slose center.svg
+  SvgGenImage get sloseCenter =>
+      const SvgGenImage('assets/media/icons/slose center.svg');
+
   /// File path: assets/media/icons/store.svg
   SvgGenImage get store => const SvgGenImage('assets/media/icons/store.svg');
 
@@ -122,6 +130,7 @@ class $AssetsMediaIconsGen {
         bell,
         card,
         chevronLeft,
+        chevronRight,
         circleUserRound,
         creditCard1,
         creditCardSync,
@@ -132,6 +141,7 @@ class $AssetsMediaIconsGen {
         qrCode,
         scanLine,
         search,
+        sloseCenter,
         store,
         tokenWhite,
         travel
@@ -153,20 +163,57 @@ class $AssetsMediaImagesGen {
   AssetGenImage get cryptoCurrencyNamecoin =>
       const AssetGenImage('assets/media/images/crypto-currency-namecoin.png');
 
+  /// File path: assets/media/images/filled_star.png
+  AssetGenImage get filledStar =>
+      const AssetGenImage('assets/media/images/filled_star.png');
+
+  /// File path: assets/media/images/fireworks.png
+  AssetGenImage get fireworks =>
+      const AssetGenImage('assets/media/images/fireworks.png');
+
+  /// File path: assets/media/images/image 9.png
+  AssetGenImage get image9 =>
+      const AssetGenImage('assets/media/images/image 9.png');
+
+  /// File path: assets/media/images/ratedStar.png
+  AssetGenImage get ratedStar =>
+      const AssetGenImage('assets/media/images/ratedStar.png');
+
+  /// File path: assets/media/images/star.png
+  AssetGenImage get star => const AssetGenImage('assets/media/images/star.png');
+
+  /// File path: assets/media/images/task-list-clock.png
+  AssetGenImage get taskListClock =>
+      const AssetGenImage('assets/media/images/task-list-clock.png');
+
   /// File path: assets/media/images/toy_story.png
   AssetGenImage get toyStory =>
       const AssetGenImage('assets/media/images/toy_story.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [coffe, creditCard1, cryptoCurrencyNamecoin, toyStory];
+  List<AssetGenImage> get values => [
+        coffe,
+        creditCard1,
+        cryptoCurrencyNamecoin,
+        filledStar,
+        fireworks,
+        image9,
+        ratedStar,
+        star,
+        taskListClock,
+        toyStory
+      ];
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsMediaGen media = $AssetsMediaGen();
+  static const AssetGenImage splash = AssetGenImage('assets/splash.png');
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
+
+  /// List of all assets
+  static List<AssetGenImage> get values => [splash];
 }
 
 class AssetGenImage {

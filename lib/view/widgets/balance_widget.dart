@@ -4,12 +4,14 @@ import '../../gen/assets.gen.dart';
 
 class BalanceWidget extends StatelessWidget {
   final bool isTokenBalance;
+  final bool addPlusChar;
   final double tokenIconHeight;
   final double tokenIconWidth;
   final double horizontalPadding;
   final double verticalPadding;
   final int balance;
   final TextStyle textStyle;
+  final String title;
   final Color? color;
   final VoidCallback? onTap;
 
@@ -20,6 +22,8 @@ class BalanceWidget extends StatelessWidget {
     required this.balance,
     this.tokenIconHeight = 25,
     this.tokenIconWidth = 28,
+    this.addPlusChar = false,
+    this.title = "",
     this.horizontalPadding = 0,
     this.verticalPadding = 0,
     this.color,
@@ -46,9 +50,9 @@ class BalanceWidget extends StatelessWidget {
                       .svg(height: tokenIconHeight, width: tokenIconWidth),
                   const SizedBox(width: 4),
                   Text(
-                    balance.toString(),
+                    addPlusChar ? "+$balance $title" : balance.toString(),
                     style: textStyle,
-                  )
+                  ),
                 ],
               )
             : Text(

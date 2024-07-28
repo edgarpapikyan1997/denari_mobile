@@ -14,7 +14,6 @@ abstract class _TokenBalanceState with Store {
   int earnedToken = 100;
 
 
-
   @action
   int getTokenBalanceByBrand({String? brand}) {
     Random random = Random();

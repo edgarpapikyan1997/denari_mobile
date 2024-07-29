@@ -3,11 +3,14 @@ import 'package:denari_app/view/screens/main_screen/send_gift_screen.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../data/authentication/model/reg_model.dart';
 import '../data/authentication/model/reset_model.dart';
 import '../view/screens/authentication/code/forgot_code_screen.dart';
+import '../view/screens/authentication/code/sign_up_code_screen.dart';
 import '../view/screens/authentication/forgot/forgot_screen.dart';
 import '../view/screens/authentication/password/create_password_screen.dart';
 import '../view/screens/authentication/sign_in/sign_in_screen.dart';
+import '../view/screens/authentication/sign_up/sign_up_screen.dart';
 import '../view/screens/main_screen/my_gift_cards_screen.dart';
 import '../view/screens/main_screen/transaction_history_screen.dart';
 import '../view/screens/shop_screen.dart';
@@ -110,21 +113,35 @@ final GoRouter router = GoRouter(
         ),
       ],
     ),
+    GoRoute(
+      name: Routes.signUp,
+      path: '/${Routes.signUp}',
+      builder: (context, state) => const SignUpScreen(),
+      routes: [
+        GoRoute(
+          name: Routes.code,
+          path: Routes.code,
+          builder: (context, state) =>
+              SignUpCodeScreen(model: state.extra as RegModel),
+        ),
+      ],
+    ),
   ],
   refreshListenable: authListener,
   redirect: (context, state) {
     final path = state.uri.path;
     final login = authListener.isLogin;
-    if (login && (path.contains(Routes.signUp) || path.contains(Routes.signIn))) {
+    if (login &&
+        (path.contains(Routes.signUp) || path.contains(Routes.signIn))) {
       return '/';
     }
-    if (!login && !(path.contains(Routes.signUp) || path.contains(Routes.signIn))) {
+    if (!login &&
+        !(path.contains(Routes.signUp) || path.contains(Routes.signIn))) {
       return '/${Routes.signIn}';
     }
     return null;
   },
 );
-
 
 final class Routes {
   static const signIn = 'sign-in';
@@ -134,4 +151,3 @@ final class Routes {
   static const forgotCode = 'f-code';
   static const password = 'password';
 }
-

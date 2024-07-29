@@ -127,6 +127,9 @@
     "no": "No",
     "yes": "Yes",
     "are_you_sure": "Are you sure?",
-    "you_want_exit": "Why do you want to exit the application?"
+    "you_want_exit": "Why do you want to exit the application?",
+    "code_desc": "To ensure your account's security, we'll send a One-Time Password (OTP) to your new phone number for verification.",
+    "you_want_stop_verification": "Do you want to stop the verification process?",
+    "update_success": "Profile data saved successfully"
   }
 }

@@ -96,6 +96,10 @@ class $AssetsMediaIconsGen {
   SvgGenImage get drawerSend =>
       const SvgGenImage('assets/media/icons/drawer-send.svg');
 
+  /// File path: assets/media/icons/fireworks.svg
+  SvgGenImage get fireworks =>
+      const SvgGenImage('assets/media/icons/fireworks.svg');
+
   /// File path: assets/media/icons/food.svg
   SvgGenImage get food => const SvgGenImage('assets/media/icons/food.svg');
 
@@ -143,9 +147,9 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/store.svg
   SvgGenImage get store => const SvgGenImage('assets/media/icons/store.svg');
 
-  /// File path: assets/media/icons/token_white.svg
+  /// File path: assets/media/icons/tokenWhite.svg
   SvgGenImage get tokenWhite =>
-      const SvgGenImage('assets/media/icons/token_white.svg');
+      const SvgGenImage('assets/media/icons/tokenWhite.svg');
 
   /// File path: assets/media/icons/travel.svg
   SvgGenImage get travel => const SvgGenImage('assets/media/icons/travel.svg');
@@ -169,6 +173,7 @@ class $AssetsMediaIconsGen {
         creditCardSync,
         delTe,
         drawerSend,
+        fireworks,
         food,
         house,
         image8,
@@ -183,6 +188,7 @@ class $AssetsMediaIconsGen {
         sloseCenter,
         squarePen,
         store,
+        tokenWhite,
         travel
       ];
 }

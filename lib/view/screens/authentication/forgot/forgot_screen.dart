@@ -29,16 +29,18 @@ class _ForgotScreenState extends State<ForgotScreen> {
   @override
   void initState() {
     reaction(
-      (reaction) => _state.codeSentError,
+      (reaction) => _state.codeSent,
       (value) {
-        if (value == null) {
-          context.goNamed(Routes.forgotCode,
-              extra: ResetModel(
-                phone: _state.phone!.completeNumber,
-                code: '',
-                newPassword: '',
-              ));
-        } else {
+        if (value == 'true') {
+          context.goNamed(
+            Routes.forgotCode,
+            extra: ResetModel(
+              phone: _state.phone!.completeNumber,
+              code: '',
+              newPassword: '',
+            ),
+          );
+        } else if (value != null) {
           Message.show(value);
         }
       },

@@ -5,7 +5,7 @@ import 'package:denari_app/utils/di/config.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
-import 'package:denari_app/view/screens/authentication/code/widgets/resend_timer.dart';
+import 'package:denari_app/view/widgets/resend_timer.dart';
 import 'package:denari_app/view/widgets/app_bar/app_bar_page.dart';
 import 'package:denari_app/view/widgets/buttons/button_primary.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
@@ -25,7 +25,6 @@ class ForgotCodeScreen extends StatefulWidget {
 }
 
 class _ForgotCodeScreenState extends State<ForgotCodeScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final ForgotState _state = ForgotState(
     authRepository: di.get<AuthRepository>(),
   );
@@ -42,7 +41,6 @@ class _ForgotCodeScreenState extends State<ForgotCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       appBar: const AppBarPage(),
       body: SafeArea(
         child: Padding(
@@ -84,12 +82,14 @@ class _ForgotCodeScreenState extends State<ForgotCodeScreen> {
                 builder: (_) => ButtonPrimary(
                   label: 'sign.send_code'.tr(),
                   onPressed: _state.isCodeValid
-                      ? () => context.goNamed(Routes.password,
-                          extra: ResetModel(
-                            phone: _state.phone!.completeNumber,
-                            code: _state.code,
-                            newPassword: '',
-                          ))
+                      ? () => context.goNamed(
+                            Routes.password,
+                            extra: ResetModel(
+                              phone: _state.phone!.completeNumber,
+                              code: _state.code,
+                              newPassword: '',
+                            ),
+                          )
                       : null,
                 ),
               ),

@@ -33,6 +33,7 @@ class PhoneField extends StatefulWidget {
 class _PhoneFieldState extends State<PhoneField> {
   late final TextEditingController _controller;
   String? _error;
+  String? _initCode;
 
   String get _hint =>
       widget.hint + (widget.optional ? ' (${'sign.optional'.tr()})' : '');
@@ -41,7 +42,9 @@ class _PhoneFieldState extends State<PhoneField> {
   void initState() {
     _controller = widget.controller ?? TextEditingController();
     if (widget.value != null) {
-      _controller.text = widget.value!;
+      final phone = PhoneNumber.fromCompleteNumber(completeNumber: widget.value!);
+      _controller.text = phone.number;
+      _initCode = phone.countryISOCode;
     }
     _error = widget.error;
     _controller.addListener(() {
@@ -67,9 +70,8 @@ class _PhoneFieldState extends State<PhoneField> {
   @override
   Widget build(BuildContext context) {
     return IntlPhoneField(
-
       controller: _controller,
-      initialCountryCode: defaultCountryCode,
+      initialCountryCode: _initCode ?? defaultCountryCode,
       languageCode: context.locale.languageCode,
       style: context.theme.body1.copyWith(
         color: AppColors.black,

@@ -6,8 +6,9 @@ import 'package:go_router/go_router.dart';
 
 class AppBarPage extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final Function()? onPop;
 
-  const AppBarPage({super.key, this.title = ''});
+  const AppBarPage({super.key, this.title = '', this.onPop});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class AppBarPage extends StatelessWidget implements PreferredSizeWidget {
           SizedBox.square(
             dimension: 24,
             child: InkWell(
-              onTap: context.pop,
+              onTap: onPop ?? context.pop,
               borderRadius: BorderRadius.circular(8),
               child: Assets.media.icons.chevronLeft.svg(),
             ),

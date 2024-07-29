@@ -33,7 +33,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     reaction(
-      (reaction) => _state.signInError,
+      (reaction) => _state.signIn,
       (value) {
         if (value == 'true') {
           authListener.login();
@@ -93,7 +93,7 @@ class _SignInScreenState extends State<SignInScreen> {
               Observer(
                 builder: (_) => ButtonPrimary(
                   label: 'sign.log_in'.tr(),
-                  onPressed: _state.loginButtonEnabled ? _state.signIn : null,
+                  onPressed: _state.loginButtonEnabled ? _state.login : null,
                 ),
               ),
               const Delimiter(),

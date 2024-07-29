@@ -11,7 +11,7 @@ class TokenInterceptor extends QueuedInterceptor {
   TokenInterceptor(this.preferencesRepository);
 
   Map<String, String> _tokenHeader(ApiToken token) =>
-      {'Authorization': '${token.tokenType} ${token.token}'};
+      {'Authorization': 'Token ${token.token}'};
 
   @override
   Future<dynamic> onRequest(
@@ -127,9 +127,9 @@ class TokenInterceptor extends QueuedInterceptor {
 
   static Future<ApiToken> _refreshToken(token) async {
     final response = await di.get<Dio>().post(
-      '${di.get<Config>().host}/refresh_token/',
-      data: FormData.fromMap({'refresh_token': token?.refreshToken ?? ''}),
-    );
+          '${di.get<Config>().host}/refresh_token/',
+          data: FormData.fromMap({'refresh_token': token?.refreshToken ?? ''}),
+        );
     return response.item(ApiToken.fromJson);
   }
 }

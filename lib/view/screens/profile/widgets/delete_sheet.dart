@@ -1,6 +1,6 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
-import 'package:denari_app/view/widgets/bottom_sheet/question_sheet.dart';
+import 'package:denari_app/view/widgets/bottom_sheet/variants/question_sheet.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:flutter/material.dart';
 

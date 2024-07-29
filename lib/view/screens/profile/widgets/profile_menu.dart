@@ -8,7 +8,7 @@ import 'package:denari_app/view/screens/profile/widgets/delete_sheet.dart';
 import 'package:denari_app/view/screens/profile/widgets/location_sheet.dart';
 import 'package:denari_app/view/screens/profile/widgets/log_out_sheet.dart';
 import 'package:denari_app/view/screens/profile/widgets/notifications_sheet.dart';
-import 'package:denari_app/view/widgets/bottom_sheet/modal_sheet.dart';
+import 'package:denari_app/view/widgets/bottom_sheet/variants/modal_sheet.dart';
 import 'package:denari_app/view/widgets/buttons/button_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

@@ -4,7 +4,7 @@ import 'package:denari_app/view/widgets/buttons/button_icon.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:flutter/material.dart';
 
-import 'popover.dart';
+import '../popover.dart';
 
 Future<T?> showModalSheet<T>({
   required BuildContext context,

@@ -1,7 +1,7 @@
 import 'package:denari_app/data/authentication/model/reg_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
-import 'package:denari_app/utils/log/logging.dart';
 import 'package:denari_app/utils/network/data/token_preferences.dart';
+import 'package:denari_app/utils/network/utils/use_case.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
@@ -20,7 +20,7 @@ abstract class _SignUpState with Store {
         _tokenPreferences = tokenPreferences;
 
   @observable
-  String? signUpError;
+  String? signUp;
 
   @observable
   String name = "";
@@ -56,7 +56,7 @@ abstract class _SignUpState with Store {
   bool loading = false;
 
   @observable
-  String? codeSentError;
+  String? codeSent;
 
   @computed
   bool get isNameValid => name.isNotEmpty;
@@ -79,9 +79,6 @@ abstract class _SignUpState with Store {
     }
   }
 
-  @observable
-  bool isCodeValid = true;
-
   @computed
   bool get createButtonEnabled =>
       isNameValid &&
@@ -91,39 +88,32 @@ abstract class _SignUpState with Store {
       !loading;
 
   @action
-  Future<void> signUp() async {
+  Future<void> register() async {
     loading = true;
-    try {
-      isCodeValid = true;
-      final token = await _repository.register(
-        RegModel(
-          name: name,
-          email: email,
-          password: password,
-          phone: phone?.completeNumber ?? '',
-          code: code,
-        ),
-      );
-      _tokenPreferences.setToken(token);
-      signUpError = 'true';
-    } catch (e) {
-      logger.error(e.toString());
-      isCodeValid = false;
-      signUpError = e.toString();
-    }
+    final model = RegModel(
+      name: name,
+      email: email,
+      password: password,
+      phone: phone?.completeNumber ?? '',
+      code: code,
+    );
+    (await handle(() => _repository.register(model))).then(
+      (data) {
+        _tokenPreferences.setToken(data);
+        signUp = 'true';
+      },
+      (error) => signUp = error,
+    );
     loading = false;
   }
 
   @action
   Future<void> getCode() async {
     loading = true;
-    try {
-      await _repository.verify(phone?.completeNumber ?? '');
-      codeSentError = 'true';
-    } catch (e) {
-      logger.error(e.toString());
-      codeSentError = e.toString();
-    }
+    (await handle(() => _repository.verify(phone?.completeNumber ?? ''))).then(
+      (data) => codeSent = 'true',
+      (error) => codeSent = error,
+    );
     loading = false;
   }
 }

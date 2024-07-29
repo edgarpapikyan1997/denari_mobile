@@ -13,6 +13,7 @@ final class AuthListenable extends ChangeNotifier {
   }
 
   void logout() {
+    di.get<TokenPreferences>().deleteToken();
     isLogin = false;
     notifyListeners();
   }

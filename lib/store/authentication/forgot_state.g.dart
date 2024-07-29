@@ -139,19 +139,19 @@ mixin _$ForgotState on _ForgotState, Store {
     });
   }
 
-  late final _$codeSentErrorAtom =
-      Atom(name: '_ForgotState.codeSentError', context: context);
+  late final _$codeSentAtom =
+      Atom(name: '_ForgotState.codeSent', context: context);
 
   @override
-  String? get codeSentError {
-    _$codeSentErrorAtom.reportRead();
-    return super.codeSentError;
+  String? get codeSent {
+    _$codeSentAtom.reportRead();
+    return super.codeSent;
   }
 
   @override
-  set codeSentError(String? value) {
-    _$codeSentErrorAtom.reportWrite(value, super.codeSentError, () {
-      super.codeSentError = value;
+  set codeSent(String? value) {
+    _$codeSentAtom.reportWrite(value, super.codeSent, () {
+      super.codeSent = value;
     });
   }
 
@@ -227,7 +227,7 @@ passwordRepeat: ${passwordRepeat},
 phone: ${phone},
 code: ${code},
 loading: ${loading},
-codeSentError: ${codeSentError},
+codeSent: ${codeSent},
 isPasswordValid: ${isPasswordValid},
 isPhoneValid: ${isPhoneValid},
 isCodeValid: ${isCodeValid},

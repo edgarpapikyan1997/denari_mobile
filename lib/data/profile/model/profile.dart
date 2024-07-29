@@ -4,8 +4,8 @@ part 'profile.g.dart';
 
 @JsonSerializable()
 class Profile {
-  @JsonKey(defaultValue: 0, includeToJson: false)
-  final int id;
+  @JsonKey(defaultValue: '', includeToJson: false)
+  final String id;
   @JsonKey(defaultValue: '')
   final String phone;
   @JsonKey(defaultValue: '')
@@ -35,7 +35,7 @@ class Profile {
   Map<String, dynamic> toJson() => _$ProfileToJson(this);
 
   Profile copyWith({
-    int? id,
+    String? id,
     String? phone,
     String? email,
     bool? isVerified,

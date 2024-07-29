@@ -15,6 +15,7 @@ import 'package:denari_app/view/widgets/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -35,12 +36,25 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     _state.profile = widget.profile.copyWith();
+    _state.email = widget.profile.email;
+    _state.birthday = widget.profile.dateOfBirth.toDate();
+    _state.phone =
+        PhoneNumber.fromCompleteNumber(completeNumber: widget.profile.phone);
     reaction(
       (reaction) => _state.codeSentError,
       (value) {
-        if (value == null) {
-          context.goNamed(Routes.code, extra: _state.profile);
-        } else {
+        if (value == 'true') {
+          final profile = Profile(
+            userName: _state.name,
+            email: _state.email,
+            phone: _state.phone?.completeNumber ?? '',
+            id: _state.profile.id,
+            isVerified: _state.profile.isVerified,
+            dateOfBirth: _state.birthday.toString(),
+            createdAt: _state.profile.createdAt,
+          );
+          context.goNamed(Routes.profileCode, extra: profile);
+        } else if (value != null) {
           Message.show(value);
         }
       },
@@ -71,6 +85,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Observer(
                 builder: (_) => PhoneField(
                   hint: 'sign.phone'.tr(),
+                  value: _state.profile.phone,
                   error: !_state.isPhoneValid ? 'sign.phone_error'.tr() : null,
                   onChanged: _state.setPhone,
                 ),
@@ -90,7 +105,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 builder: (_) => DateField(
                   value: _state.profile.dateOfBirth.toDate(),
                   hint: 'profile.birthdate'.tr(),
-                  error: !_state.isBirthdayValid ? 'profile.birthdate_error'.tr() : null,
+                  error: !_state.isBirthdayValid
+                      ? 'profile.birthdate_error'.tr()
+                      : null,
                   onChanged: _state.setBirthday,
                 ),
               ),

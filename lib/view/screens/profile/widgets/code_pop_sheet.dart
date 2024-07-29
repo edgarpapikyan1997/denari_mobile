@@ -5,8 +5,8 @@ import 'package:denari_app/view/widgets/bottom_sheet/variants/question_sheet.dar
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:flutter/material.dart';
 
-class LogOutSheet extends StatelessWidget {
-  const LogOutSheet({super.key});
+class CodePopSheet extends StatelessWidget {
+  const CodePopSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class LogOutSheet extends StatelessWidget {
           ),
           const Delimiter(),
           Text(
-            'profile.you_want_exit'.tr(),
+            'profile.you_want_stop_verification'.tr(),
             style: context.theme.body1.copyWith(
               color: AppColors.lightGreyText,
             ),

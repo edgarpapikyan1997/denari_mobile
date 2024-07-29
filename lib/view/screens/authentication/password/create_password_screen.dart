@@ -37,9 +37,9 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
     reaction(
       (reaction) => _state.changePasswordError,
       (value) {
-        if (value == null) {
+        if (value == 'true') {
           context.goNamed(Routes.signIn);
-        } else {
+        } else if (value != null) {
           Message.show(value);
         }
       },

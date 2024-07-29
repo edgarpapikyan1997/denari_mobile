@@ -1,9 +1,7 @@
-import 'package:denari_app/data/authentication/model/reg_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
 import 'package:denari_app/data/profile/model/profile.dart';
 import 'package:denari_app/data/profile/repository/profile_repository.dart';
-import 'package:denari_app/utils/log/logging.dart';
-import 'package:denari_app/utils/network/data/token_preferences.dart';
+import 'package:denari_app/utils/network/utils/use_case.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
@@ -111,50 +109,39 @@ abstract class _ProfileState with Store {
   @action
   Future<void> getProfile() async {
     loading = true;
-    try {
-      final gProfile = await _profileRepository.getProfile();
-      getError = null;
-      profile = gProfile;
-    } catch (e) {
-      logger.error(e.toString());
-      getError = e.toString();
-    }
+    (await handle(() => _profileRepository.getProfile())).then(
+          (data) => profile = data,
+          (error) => getError = error,
+    );
     loading = false;
   }
 
   @action
   Future<void> updateProfile() async {
     loading = true;
-    try {
-      final uProfile = Profile(
-        userName: name,
-        email: email,
-        phone: phone?.completeNumber ?? '',
-        id: profile.id,
-        isVerified: profile.isVerified,
-        dateOfBirth: birthday.toString(),
-        createdAt: profile.createdAt,
-      );
-      await _profileRepository.updateProfile(uProfile);
-      updateError = null;
-      profile = uProfile;
-    } catch (e) {
-      logger.error(e.toString());
-      updateError = e.toString();
-    }
+    final uProfile = Profile(
+      userName: name,
+      email: email,
+      phone: phone?.completeNumber ?? '',
+      id: profile.id,
+      isVerified: profile.isVerified,
+      dateOfBirth: birthday.toString(),
+      createdAt: profile.createdAt,
+    );
+    (await handle(() => _profileRepository.updateProfile(uProfile))).then(
+          (data) => updateError = 'true',
+          (error) => updateError = error,
+    );
     loading = false;
   }
 
   @action
   Future<void> getCode() async {
     loading = true;
-    try {
-      await _authRepository.verify(phone?.completeNumber ?? '');
-      codeSentError = null;
-    } catch (e) {
-      logger.error(e.toString());
-      codeSentError = e.toString();
-    }
+    (await handle(() => _authRepository.verify(phone?.completeNumber ?? ''))).then(
+          (data) => codeSentError = 'true',
+          (error) => codeSentError = error,
+    );
     loading = false;
   }
 }

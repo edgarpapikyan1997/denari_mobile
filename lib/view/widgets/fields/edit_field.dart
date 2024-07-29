@@ -72,24 +72,24 @@ class _EditFieldState extends State<EditField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onTapOutside: (value) {
-        FocusScope.of(context).unfocus();
-      },
+      onTapOutside: (value) => FocusScope.of(context).unfocus(),
       controller: _controller,
       obscureText: _obscure,
       style: widget.textStyle ??
-          context.theme.body1.copyWith(
-            color: AppColors.black,
-          ),
+          context.theme.body1.copyWith(color: AppColors.black),
       onChanged: widget.onChanged,
       decoration: DecorationField(
-          context: context,
-          controller: _controller,
-          hint: _hint,
-          error: _error,
-          borderRadius: widget.borderRadius,
-          hintStyle: widget.hintStyle,
-          textStyle: widget.textStyle),
+        context: context,
+        controller: _controller,
+        hint: _hint,
+        error: _error,
+        borderRadius: widget.borderRadius,
+        hintStyle: widget.hintStyle,
+        textStyle: widget.textStyle,
+        obscure: _obscure,
+        onObscured:
+            widget.obscure ? (value) => setState(() => _obscure = value) : null,
+      ),
     );
   }
 }

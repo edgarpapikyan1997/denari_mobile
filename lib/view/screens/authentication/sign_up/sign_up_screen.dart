@@ -33,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void initState() {
     reaction(
-      (reaction) => _state.codeSentError,
+      (reaction) => _state.codeSent,
       (value) {
         if (value == 'true') {
           context.goNamed(

@@ -1,48 +1,57 @@
-import 'package:denari_app/data/authentication/model/reg_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
-import 'package:denari_app/store/authentication/sign_up_state.dart';
+import 'package:denari_app/data/profile/model/profile.dart';
+import 'package:denari_app/data/profile/repository/profile_repository.dart';
+import 'package:denari_app/store/profile/profile_state.dart';
 import 'package:denari_app/utils/di/config.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
-import 'package:denari_app/utils/listeners/auth_listener.dart';
-import 'package:denari_app/utils/network/data/token_preferences.dart';
+import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
+import 'package:denari_app/view/screens/profile/widgets/code_pop_sheet.dart';
+import 'package:denari_app/view/screens/profile/widgets/success_update_sheet.dart';
 import 'package:denari_app/view/widgets/app_bar/app_bar_page.dart';
+import 'package:denari_app/view/widgets/bottom_sheet/variants/modal_sheet.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:denari_app/view/widgets/fields/code_field.dart';
 import 'package:denari_app/view/widgets/message.dart';
+import 'package:denari_app/view/widgets/resend_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../widgets/resend_timer.dart';
+class ProfileCodePage extends StatefulWidget {
+  final Profile model;
 
-class SignUpCodeScreen extends StatefulWidget {
-  final RegModel model;
-
-  const SignUpCodeScreen({super.key, required this.model});
+  const ProfileCodePage({super.key, required this.model});
 
   @override
-  State<SignUpCodeScreen> createState() => _SignUpCodeScreenState();
+  State<ProfileCodePage> createState() => _ProfileCodePageState();
 }
 
-class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
-  final SignUpState _state = SignUpState(
+class _ProfileCodePageState extends State<ProfileCodePage> {
+  final ProfileState _state = ProfileState(
     authRepository: di.get<AuthRepository>(),
-    tokenPreferences: di.get<TokenPreferences>(),
+    profileRepository: di.get<ProfileRepository>(),
   );
 
   String get _numberText => '${'sign.on_number'.tr()}: ${widget.model.phone}';
 
   @override
   void initState() {
+    _state.name = widget.model.userName;
+    _state.email = widget.model.email;
+    _state.birthday = widget.model.dateOfBirth.toDate();
     _state.phone =
         PhoneNumber.fromCompleteNumber(completeNumber: widget.model.phone);
     reaction(
-      (reaction) => _state.signUp,
+      (reaction) => _state.updateError,
       (value) {
         if (value == 'true') {
-          authListener.login();
+          showModalSheet<void>(
+            context: context,
+            child: const SuccessUpdateSheet(),
+          ).then((value) => context.goNamed(Routes.profile));
         } else if (value != null) {
           Message.show(value);
         }
@@ -55,7 +64,12 @@ class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarPage(),
+      appBar: AppBarPage(
+        onPop: () => showModalSheet<bool>(
+          context: context,
+          child: const CodePopSheet(),
+        ).then((value) => value == true ? context.pop() : null),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 14),
@@ -67,15 +81,28 @@ class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
                 style: context.theme.headline1.copyWith(color: AppColors.black),
               ),
               const Delimiter(2),
-              Text(_numberText),
+              Text(
+                'profile.code_desc'.tr(),
+                style: context.theme.body1
+                    .copyWith(color: AppColors.lightGreyText),
+              ),
+              const Delimiter(2),
+              Text(
+                _numberText,
+                style: context.theme.body1
+                    .copyWith(color: AppColors.lightGreyText),
+              ),
               const Delimiter(24),
-              CodeField(
-                onChanged: (value) {
-                  _state.setCode(value);
-                  if (value.length >= 6) {
-                    _state.register();
-                  }
-                },
+              Observer(
+                builder: (_) => CodeField(
+                  error: !_state.isCodeValid ? 'sign.code_error'.tr() : null,
+                  onChanged: (value) {
+                    _state.setCode(value);
+                    if (value.length >= 6) {
+                      _state.updateProfile();
+                    }
+                  },
+                ),
               ),
               Flexible(
                 child: Observer(

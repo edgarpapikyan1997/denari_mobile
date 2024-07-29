@@ -13,6 +13,7 @@ class EditField extends StatefulWidget {
   final TextStyle? textStyle;
   final double? borderRadius;
   final bool obscure;
+  final String? value;
 
   const EditField({
     super.key,
@@ -25,6 +26,7 @@ class EditField extends StatefulWidget {
     this.textStyle,
     this.borderRadius,
     this.obscure = false,
+    this.value,
   });
 
   @override
@@ -42,6 +44,9 @@ class _EditFieldState extends State<EditField> {
   @override
   void initState() {
     _controller = widget.controller ?? TextEditingController();
+    if (widget.value != null) {
+      _controller.text = widget.value!;
+    }
     _error = widget.error;
     _obscure = widget.obscure ? true : false;
     _controller.addListener(() {
@@ -67,24 +72,24 @@ class _EditFieldState extends State<EditField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onTapOutside: (value) {
-        FocusScope.of(context).unfocus();
-      },
+      onTapOutside: (value) => FocusScope.of(context).unfocus(),
       controller: _controller,
       obscureText: _obscure,
       style: widget.textStyle ??
-          context.theme.body1.copyWith(
-            color: AppColors.black,
-          ),
+          context.theme.body1.copyWith(color: AppColors.black),
       onChanged: widget.onChanged,
       decoration: DecorationField(
-          context: context,
-          controller: _controller,
-          hint: _hint,
-          error: _error,
-          borderRadius: widget.borderRadius,
-          hintStyle: widget.hintStyle,
-          textStyle: widget.textStyle),
+        context: context,
+        controller: _controller,
+        hint: _hint,
+        error: _error,
+        borderRadius: widget.borderRadius,
+        hintStyle: widget.hintStyle,
+        textStyle: widget.textStyle,
+        obscure: _obscure,
+        onObscured:
+            widget.obscure ? (value) => setState(() => _obscure = value) : null,
+      ),
     );
   }
 }

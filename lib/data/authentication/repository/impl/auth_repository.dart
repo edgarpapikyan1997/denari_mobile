@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:denari_app/data/authentication/model/login_model.dart';
 import 'package:denari_app/data/authentication/model/reg_model.dart';
 import 'package:denari_app/data/authentication/model/reset_model.dart';
+import 'package:denari_app/data/authentication/repository/auth_repository.dart';
 import 'package:denari_app/utils/env/config.dart';
 import 'package:denari_app/utils/network/model/api_token.dart';
 import 'package:denari_app/utils/network/utils/response_helper.dart';
 import 'package:dio/dio.dart';
 
-import 'auth_repository.dart';
 
 final class ImplAuthRepository extends AuthRepository {
   final Dio _client;

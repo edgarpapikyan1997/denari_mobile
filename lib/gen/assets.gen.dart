@@ -56,8 +56,15 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/Token.svg
   SvgGenImage get token => const SvgGenImage('assets/media/icons/Token.svg');
 
+  /// File path: assets/media/icons/bell-ring.svg
+  SvgGenImage get bellRing =>
+      const SvgGenImage('assets/media/icons/bell-ring.svg');
+
   /// File path: assets/media/icons/bell.svg
   SvgGenImage get bell => const SvgGenImage('assets/media/icons/bell.svg');
+
+  /// File path: assets/media/icons/camera.svg
+  SvgGenImage get camera => const SvgGenImage('assets/media/icons/camera.svg');
 
   /// File path: assets/media/icons/card.svg
   SvgGenImage get card => const SvgGenImage('assets/media/icons/card.svg');
@@ -82,9 +89,16 @@ class $AssetsMediaIconsGen {
   SvgGenImage get creditCardSync =>
       const SvgGenImage('assets/media/icons/credit-card-sync.svg');
 
+  /// File path: assets/media/icons/delеte.svg
+  SvgGenImage get delTe => const SvgGenImage('assets/media/icons/delеte.svg');
+
   /// File path: assets/media/icons/drawer-send.svg
   SvgGenImage get drawerSend =>
       const SvgGenImage('assets/media/icons/drawer-send.svg');
+
+  /// File path: assets/media/icons/fireworks.svg
+  SvgGenImage get fireworks =>
+      const SvgGenImage('assets/media/icons/fireworks.svg');
 
   /// File path: assets/media/icons/food.svg
   SvgGenImage get food => const SvgGenImage('assets/media/icons/food.svg');
@@ -95,8 +109,21 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/image-8.svg
   SvgGenImage get image8 => const SvgGenImage('assets/media/icons/image-8.svg');
 
+  /// File path: assets/media/icons/lock.svg
+  SvgGenImage get lock => const SvgGenImage('assets/media/icons/lock.svg');
+
+  /// File path: assets/media/icons/log-out.svg
+  SvgGenImage get logOut => const SvgGenImage('assets/media/icons/log-out.svg');
+
+  /// File path: assets/media/icons/pinned.svg
+  SvgGenImage get pinned => const SvgGenImage('assets/media/icons/pinned.svg');
+
   /// File path: assets/media/icons/qr-code.svg
   SvgGenImage get qrCode => const SvgGenImage('assets/media/icons/qr-code.svg');
+
+  /// File path: assets/media/icons/safety-warning-heat.svg
+  SvgGenImage get safetyWarningHeat =>
+      const SvgGenImage('assets/media/icons/safety-warning-heat.svg');
 
   /// File path: assets/media/icons/scan-line.svg
   SvgGenImage get scanLine =>
@@ -105,16 +132,24 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/media/icons/search.svg');
 
+  /// File path: assets/media/icons/send-to-back.svg
+  SvgGenImage get sendToBack =>
+      const SvgGenImage('assets/media/icons/send-to-back.svg');
+
   /// File path: assets/media/icons/slose center.svg
   SvgGenImage get sloseCenter =>
       const SvgGenImage('assets/media/icons/slose center.svg');
 
+  /// File path: assets/media/icons/square-pen.svg
+  SvgGenImage get squarePen =>
+      const SvgGenImage('assets/media/icons/square-pen.svg');
+
   /// File path: assets/media/icons/store.svg
   SvgGenImage get store => const SvgGenImage('assets/media/icons/store.svg');
 
-  /// File path: assets/media/icons/token_white.svg
+  /// File path: assets/media/icons/tokenWhite.svg
   SvgGenImage get tokenWhite =>
-      const SvgGenImage('assets/media/icons/token_white.svg');
+      const SvgGenImage('assets/media/icons/tokenWhite.svg');
 
   /// File path: assets/media/icons/travel.svg
   SvgGenImage get travel => const SvgGenImage('assets/media/icons/travel.svg');
@@ -127,22 +162,33 @@ class $AssetsMediaIconsGen {
         groceries,
         other,
         token,
+        bellRing,
         bell,
+        camera,
         card,
         chevronLeft,
         chevronRight,
         circleUserRound,
         creditCard1,
         creditCardSync,
+        delTe,
         drawerSend,
+        fireworks,
         food,
         house,
         image8,
+        lock,
+        logOut,
+        pinned,
         qrCode,
+        safetyWarningHeat,
         scanLine,
         search,
+        sendToBack,
         sloseCenter,
+        squarePen,
         store,
+        tokenWhite,
         travel
       ];
 }

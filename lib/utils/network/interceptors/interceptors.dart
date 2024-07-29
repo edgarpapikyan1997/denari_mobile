@@ -14,23 +14,23 @@ class Interceptors {
 
   Interceptors(TokenPreferences tokenPreferences) {
     interceptors.addAll([
-      TalkerDioLogger(
-        settings: TalkerDioLoggerSettings(
-          printResponseHeaders: kDebugMode,
-          printRequestHeaders: kDebugMode,
-          requestPen: AnsiPen()..rgb(b: 0.0),
-          responsePen: AnsiPen()..rgb(r: 0.0, b: 0.0),
-        ),
-      ),
+      TokenInterceptor(tokenPreferences),
       SettingsInterceptor(),
       ErrorInterceptor(),
-      TokenInterceptor(tokenPreferences),
       DioCacheInterceptor(
         options: CacheOptions(
           store: MemCacheStore(),
           hitCacheOnErrorExcept: [401, 403],
           maxStale: const Duration(days: 3),
           allowPostMethod: true,
+        ),
+      ),
+      TalkerDioLogger(
+        settings: TalkerDioLoggerSettings(
+          printResponseHeaders: kDebugMode,
+          printRequestHeaders: kDebugMode,
+          requestPen: AnsiPen()..rgb(b: 0.0),
+          responsePen: AnsiPen()..rgb(r: 0.0, b: 0.0),
         ),
       ),
     ]);

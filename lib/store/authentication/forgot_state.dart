@@ -1,6 +1,6 @@
 import 'package:denari_app/data/authentication/model/reset_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
-import 'package:denari_app/utils/log/logging.dart';
+import 'package:denari_app/utils/network/utils/use_case.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
@@ -45,7 +45,7 @@ abstract class _ForgotState with Store {
   bool loading = false;
 
   @observable
-  String? codeSentError;
+  String? codeSent;
 
   @computed
   bool get isPasswordValid => password.length >= 8;
@@ -72,32 +72,25 @@ abstract class _ForgotState with Store {
   @action
   Future<void> changePassword() async {
     loading = true;
-    try {
-      await _repository.reset(
-        ResetModel(
-          newPassword: password,
-          phone: phone?.completeNumber ?? '',
-          code: code,
-        ),
-      );
-      changePasswordError = null;
-    } catch (e) {
-      logger.error(e.toString());
-      changePasswordError = e.toString();
-    }
+    final model = ResetModel(
+      newPassword: password,
+      phone: phone?.completeNumber ?? '',
+      code: code,
+    );
+    (await handle(() => _repository.reset(model))).then(
+      (data) => changePasswordError = 'true',
+      (error) => changePasswordError = error,
+    );
     loading = false;
   }
 
   @action
   Future<void> getCode() async {
     loading = true;
-    try {
-      await _repository.verify(phone?.completeNumber ?? '');
-      codeSentError = null;
-    } catch (e) {
-      logger.error(e.toString());
-      codeSentError = e.toString();
-    }
+    (await handle(() => _repository.verify(phone?.completeNumber ?? ''))).then(
+      (data) => codeSent = 'true',
+      (error) => codeSent = error,
+    );
     loading = false;
   }
 }

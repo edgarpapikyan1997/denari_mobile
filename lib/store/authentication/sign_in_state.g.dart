@@ -31,19 +31,18 @@ mixin _$SignInState on _SignInState, Store {
               name: '_SignInState.loginButtonEnabled'))
       .value;
 
-  late final _$signInErrorAtom =
-      Atom(name: '_SignInState.signInError', context: context);
+  late final _$signInAtom = Atom(name: '_SignInState.signIn', context: context);
 
   @override
-  String? get signInError {
-    _$signInErrorAtom.reportRead();
-    return super.signInError;
+  String? get signIn {
+    _$signInAtom.reportRead();
+    return super.signIn;
   }
 
   @override
-  set signInError(String? value) {
-    _$signInErrorAtom.reportWrite(value, super.signInError, () {
-      super.signInError = value;
+  set signIn(String? value) {
+    _$signInAtom.reportWrite(value, super.signIn, () {
+      super.signIn = value;
     });
   }
 
@@ -94,12 +93,12 @@ mixin _$SignInState on _SignInState, Store {
     });
   }
 
-  late final _$signInAsyncAction =
-      AsyncAction('_SignInState.signIn', context: context);
+  late final _$loginAsyncAction =
+      AsyncAction('_SignInState.login', context: context);
 
   @override
-  Future<void> signIn() {
-    return _$signInAsyncAction.run(() => super.signIn());
+  Future<void> login() {
+    return _$loginAsyncAction.run(() => super.login());
   }
 
   late final _$_SignInStateActionController =
@@ -130,7 +129,7 @@ mixin _$SignInState on _SignInState, Store {
   @override
   String toString() {
     return '''
-signInError: ${signInError},
+signIn: ${signIn},
 password: ${password},
 phone: ${phone},
 loading: ${loading},

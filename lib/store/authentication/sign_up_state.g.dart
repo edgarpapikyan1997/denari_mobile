@@ -45,19 +45,18 @@ mixin _$SignUpState on _SignUpState, Store {
               name: '_SignUpState.createButtonEnabled'))
       .value;
 
-  late final _$signUpErrorAtom =
-      Atom(name: '_SignUpState.signUpError', context: context);
+  late final _$signUpAtom = Atom(name: '_SignUpState.signUp', context: context);
 
   @override
-  String? get signUpError {
-    _$signUpErrorAtom.reportRead();
-    return super.signUpError;
+  String? get signUp {
+    _$signUpAtom.reportRead();
+    return super.signUp;
   }
 
   @override
-  set signUpError(String? value) {
-    _$signUpErrorAtom.reportWrite(value, super.signUpError, () {
-      super.signUpError = value;
+  set signUp(String? value) {
+    _$signUpAtom.reportWrite(value, super.signUp, () {
+      super.signUp = value;
     });
   }
 
@@ -153,44 +152,28 @@ mixin _$SignUpState on _SignUpState, Store {
     });
   }
 
-  late final _$codeSentErrorAtom =
-      Atom(name: '_SignUpState.codeSentError', context: context);
+  late final _$codeSentAtom =
+      Atom(name: '_SignUpState.codeSent', context: context);
 
   @override
-  String? get codeSentError {
-    _$codeSentErrorAtom.reportRead();
-    return super.codeSentError;
+  String? get codeSent {
+    _$codeSentAtom.reportRead();
+    return super.codeSent;
   }
 
   @override
-  set codeSentError(String? value) {
-    _$codeSentErrorAtom.reportWrite(value, super.codeSentError, () {
-      super.codeSentError = value;
+  set codeSent(String? value) {
+    _$codeSentAtom.reportWrite(value, super.codeSent, () {
+      super.codeSent = value;
     });
   }
 
-  late final _$isCodeValidAtom =
-      Atom(name: '_SignUpState.isCodeValid', context: context);
+  late final _$registerAsyncAction =
+      AsyncAction('_SignUpState.register', context: context);
 
   @override
-  bool get isCodeValid {
-    _$isCodeValidAtom.reportRead();
-    return super.isCodeValid;
-  }
-
-  @override
-  set isCodeValid(bool value) {
-    _$isCodeValidAtom.reportWrite(value, super.isCodeValid, () {
-      super.isCodeValid = value;
-    });
-  }
-
-  late final _$signUpAsyncAction =
-      AsyncAction('_SignUpState.signUp', context: context);
-
-  @override
-  Future<void> signUp() {
-    return _$signUpAsyncAction.run(() => super.signUp());
+  Future<void> register() {
+    return _$registerAsyncAction.run(() => super.register());
   }
 
   late final _$getCodeAsyncAction =
@@ -262,15 +245,14 @@ mixin _$SignUpState on _SignUpState, Store {
   @override
   String toString() {
     return '''
-signUpError: ${signUpError},
+signUp: ${signUp},
 name: ${name},
 email: ${email},
 password: ${password},
 phone: ${phone},
 code: ${code},
 loading: ${loading},
-codeSentError: ${codeSentError},
-isCodeValid: ${isCodeValid},
+codeSent: ${codeSent},
 isNameValid: ${isNameValid},
 isEmailValid: ${isEmailValid},
 isPasswordValid: ${isPasswordValid},

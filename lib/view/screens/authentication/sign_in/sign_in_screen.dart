@@ -9,6 +9,7 @@ import 'package:denari_app/view/widgets/buttons/button_primary.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:denari_app/view/widgets/fields/edit_field.dart';
 import 'package:denari_app/view/widgets/fields/phone_field.dart';
+import 'package:denari_app/view/widgets/message.dart';
 import 'package:denari_app/view/widgets/text_with_link.dart';
 import 'package:denari_app/view/widgets/welcome_text.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,6 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final SignInState _state = SignInState(
     authRepository: di.get<AuthRepository>(),
     tokenPreferences: di.get<TokenPreferences>(),
@@ -33,14 +33,12 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     reaction(
-      (reaction) => _state.signInError,
+      (reaction) => _state.signIn,
       (value) {
-        if (value == null) {
+        if (value == 'true') {
           authListener.login();
-        } else {
-          ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(
-            SnackBar(content: Text(value)),
-          );
+        } else if (value != null) {
+          Message.show(value);
         }
       },
       equals: (_, __) => false,
@@ -51,7 +49,6 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 14),
@@ -96,7 +93,7 @@ class _SignInScreenState extends State<SignInScreen> {
               Observer(
                 builder: (_) => ButtonPrimary(
                   label: 'sign.log_in'.tr(),
-                  onPressed: _state.loginButtonEnabled ? _state.signIn : null,
+                  onPressed: _state.loginButtonEnabled ? _state.login : null,
                 ),
               ),
               const Delimiter(),

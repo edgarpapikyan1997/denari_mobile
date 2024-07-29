@@ -22,7 +22,7 @@ final class ImplAuthRepository extends AuthRepository {
   Future<ApiToken> login(LoginModel data) async {
     final result = await _client.post(
       '${_config.host}/login',
-      data: data,
+      data: jsonEncode(data.toJson()),
     );
     return result.item(ApiToken.fromJson);
   }

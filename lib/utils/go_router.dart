@@ -1,4 +1,7 @@
+import 'package:denari_app/data/authentication/model/reg_model.dart';
 import 'package:denari_app/data/profile/model/profile.dart';
+import 'package:denari_app/view/screens/authentication/code/sign_up_code_screen.dart';
+import 'package:denari_app/view/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:denari_app/view/screens/main_screen/my_qr_code.dart';
 import 'package:denari_app/view/screens/main_screen/send_gift_screen.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
@@ -119,6 +122,19 @@ final GoRouter router = GoRouter(
               ],
             ),
           ],
+        ),
+      ],
+    ),
+    GoRoute(
+      name: Routes.signUp,
+      path: '/${Routes.signUp}',
+      builder: (context, state) => const SignUpScreen(),
+      routes: [
+        GoRoute(
+          name: Routes.code,
+          path: Routes.code,
+          builder: (context, state) =>
+              SignUpCodeScreen(model: state.extra as RegModel),
         ),
       ],
     ),

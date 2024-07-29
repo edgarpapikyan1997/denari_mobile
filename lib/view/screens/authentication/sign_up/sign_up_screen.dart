@@ -35,7 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     reaction(
       (reaction) => _state.codeSentError,
       (value) {
-        if (value == null) {
+        if (value == 'true') {
           context.goNamed(
             Routes.code,
             extra: RegModel(
@@ -46,7 +46,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               code: '',
             ),
           );
-        } else {
+        } else if (value != null) {
           Message.show(value);
         }
       },

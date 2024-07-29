@@ -105,7 +105,7 @@ abstract class _SignUpState with Store {
         ),
       );
       _tokenPreferences.setToken(token);
-      signUpError = null;
+      signUpError = 'true';
     } catch (e) {
       logger.error(e.toString());
       isCodeValid = false;
@@ -119,7 +119,7 @@ abstract class _SignUpState with Store {
     loading = true;
     try {
       await _repository.verify(phone?.completeNumber ?? '');
-      codeSentError = null;
+      codeSentError = 'true';
     } catch (e) {
       logger.error(e.toString());
       codeSentError = e.toString();

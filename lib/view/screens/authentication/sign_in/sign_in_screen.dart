@@ -35,9 +35,9 @@ class _SignInScreenState extends State<SignInScreen> {
     reaction(
       (reaction) => _state.signInError,
       (value) {
-        if (value == null) {
+        if (value == 'true') {
           authListener.login();
-        } else {
+        } else if (value != null) {
           Message.show(value);
         }
       },

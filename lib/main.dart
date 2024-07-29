@@ -17,10 +17,13 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   setupLogger(kDebugMode);
   configDi(const Config(env: 'dev', host: 'https://denari.mifort.com'));
-  authListener.login();
-  runApp(EasyLocalization(supportedLocales: const [
-    Locale('en', 'US'),
-  ], path: 'assets/translations', child: const App()));
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en', 'US')],
+      path: 'assets/translations',
+      child: const App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {
@@ -28,25 +31,27 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    authListener.checkAuth();
     return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          systemNavigationBarColor: lightTheme.canvasColor,
-          statusBarIconBrightness: Brightness.dark,
-          systemNavigationBarIconBrightness: Brightness.dark,
-        ),
-        child: MaterialApp.router(
-          routerConfig: router,
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          title: 'Denari App',
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          builder: (context, child) {
-            Message.context = context;
-            return child ?? const SizedBox.shrink();
-          },
-        ));
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: lightTheme.canvasColor,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+      child: MaterialApp.router(
+        routerConfig: router,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        title: 'Denari App',
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        builder: (context, child) {
+          Message.context = context;
+          return child ?? const SizedBox.shrink();
+        },
+      ),
+    );
   }
 }

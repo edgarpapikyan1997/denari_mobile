@@ -1,7 +1,7 @@
 import 'package:denari_app/data/authentication/model/login_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
-import 'package:denari_app/utils/log/logging.dart';
 import 'package:denari_app/utils/network/data/token_preferences.dart';
+import 'package:denari_app/utils/use_case.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
@@ -55,17 +55,17 @@ abstract class _SignInState with Store {
   @action
   Future<void> signIn() async {
     loading = true;
-    try {
-      final token = await _repository.login(
-        LoginModel(
-          password: password,
-          phone: phone?.completeNumber ?? '',
-        ),
-      );
-      _tokenPreferences.setToken(token);
-    } catch (e) {
-      logger.error(e.toString());
-      signInError = e.toString();
+    final result = await UseCase.handle(() => _repository.login(
+          LoginModel(
+            password: password,
+            phone: phone?.completeNumber ?? '',
+          ),
+        ));
+    if (result.data != null) {
+      _tokenPreferences.setToken(result.data!);
+      signInError = 'true';
+    } else {
+      signInError = result.error;
     }
     loading = false;
   }

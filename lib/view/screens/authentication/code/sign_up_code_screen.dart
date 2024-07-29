@@ -42,9 +42,9 @@ class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
     reaction(
       (reaction) => _state.signUpError,
       (value) {
-        if (value == null) {
-          context.goNamed(Routes.password);
-        } else {
+        if (value == 'true') {
+          context.goNamed(Routes.signIn);
+        } else if (value != null) {
           Message.show(value);
         }
       },
@@ -76,8 +76,7 @@ class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
                   onChanged: (value) {
                     _state.setCode(value);
                     if (value.length >= 6) {
-                      // sendCode;
-                      // _state.signUp();
+                      _state.signUp();
                     }
                   },
                 ),

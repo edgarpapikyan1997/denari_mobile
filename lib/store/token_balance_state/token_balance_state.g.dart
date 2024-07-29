@@ -25,27 +25,11 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
     });
   }
 
-  late final _$giftCardLDAtom =
-      Atom(name: '_TokenBalanceState.giftCardLD', context: context);
-
-  @override
-  int get giftCardLD {
-    _$giftCardLDAtom.reportRead();
-    return super.giftCardLD;
-  }
-
-  @override
-  set giftCardLD(int value) {
-    _$giftCardLDAtom.reportWrite(value, super.giftCardLD, () {
-      super.giftCardLD = value;
-    });
-  }
-
   late final _$_TokenBalanceStateActionController =
       ActionController(name: '_TokenBalanceState', context: context);
 
   @override
-  String getTokenBalanceByBrand({String? brand}) {
+  int getTokenBalanceByBrand({String? brand}) {
     final _$actionInfo = _$_TokenBalanceStateActionController.startAction(
         name: '_TokenBalanceState.getTokenBalanceByBrand');
     try {
@@ -58,8 +42,7 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
   @override
   String toString() {
     return '''
-earnedToken: ${earnedToken},
-giftCardLD: ${giftCardLD}
+earnedToken: ${earnedToken}
     ''';
   }
 }

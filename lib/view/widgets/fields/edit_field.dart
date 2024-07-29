@@ -1,7 +1,6 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
-
 import 'decoration_field.dart';
 
 class EditField extends StatefulWidget {
@@ -10,6 +9,9 @@ class EditField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final bool optional;
   final String? error;
+  final TextStyle? hintStyle;
+  final TextStyle? textStyle;
+  final double? borderRadius;
   final bool obscure;
   final String? value;
 
@@ -20,6 +22,9 @@ class EditField extends StatefulWidget {
     this.onChanged,
     this.optional = false,
     this.error,
+    this.hintStyle,
+    this.textStyle,
+    this.borderRadius,
     this.obscure = false,
     this.value,
   });
@@ -67,21 +72,24 @@ class _EditFieldState extends State<EditField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (value) {
+        FocusScope.of(context).unfocus();
+      },
       controller: _controller,
       obscureText: _obscure,
-      style: context.theme.body1.copyWith(
-        color: AppColors.black,
-      ),
+      style: widget.textStyle ??
+          context.theme.body1.copyWith(
+            color: AppColors.black,
+          ),
       onChanged: widget.onChanged,
       decoration: DecorationField(
-        context: context,
-        controller: _controller,
-        hint: _hint,
-        error: _error,
-        obscure: _obscure,
-        onObscured:
-            widget.obscure ? (value) => setState(() => _obscure = value) : null,
-      ),
+          context: context,
+          controller: _controller,
+          hint: _hint,
+          error: _error,
+          borderRadius: widget.borderRadius,
+          hintStyle: widget.hintStyle,
+          textStyle: widget.textStyle),
     );
   }
 }

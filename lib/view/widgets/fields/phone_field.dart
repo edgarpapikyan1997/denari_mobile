@@ -67,6 +67,7 @@ class _PhoneFieldState extends State<PhoneField> {
   @override
   Widget build(BuildContext context) {
     return IntlPhoneField(
+
       controller: _controller,
       initialCountryCode: defaultCountryCode,
       languageCode: context.locale.languageCode,

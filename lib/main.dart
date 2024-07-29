@@ -1,6 +1,7 @@
 import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/listeners/auth_listener.dart';
 import 'package:denari_app/utils/log/logging.dart';
+import 'package:denari_app/utils/services/get_it.dart';
 import 'package:denari_app/utils/themes/dark_theme.dart';
 import 'package:denari_app/utils/themes/light_theme.dart';
 import 'package:denari_app/view/widgets/message.dart';
@@ -15,6 +16,7 @@ import 'utils/env/config.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  ServiceLocator.configure();
   setupLogger(kDebugMode);
   configDi(const Config(env: 'dev', host: 'https://denari.mifort.com'));
   runApp(

@@ -3,7 +3,9 @@ import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/main_screen_field.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/product_advertisement_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../model/qr_id.dart';
 import '../../../store/categories_state/categories_state.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../../widgets/custom_app_bar.dart';
@@ -21,6 +23,10 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  CategoriesState? categoriesState = CategoriesState();
+
+  final qrIdReceiver = GetIt.instance<QRIdReceiver>();
+
   final _token = TokenBalanceState();
   final categories = [
     {
@@ -52,8 +58,6 @@ class _MainScreenState extends State<MainScreen> {
       'categoryIcon': Assets.media.icons.other.svg()
     },
   ];
-  CategoriesState? categoriesState;
-
   @override
   void initState() {
     super.initState();
@@ -61,12 +65,11 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   initCategories() {
-    categoriesState = CategoriesState(
-      initialCategory: categories[0]['categoryName'].toString(),
-    );
+    categoriesState?.selectCategory(categories[0]['categoryName'] as String);
   }
 
   Widget mainScreenFields() {
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -96,6 +99,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Observer(builder: (context) {
       return Scaffold(
         appBar: PreferredSize(
@@ -103,7 +107,8 @@ class _MainScreenState extends State<MainScreen> {
           child: CustomAppBar(
             appBarColor: AppColors.yellowLight,
             leadingIcon: Assets.media.icons.token.svg(),
-            tokenCount: _token.earnedToken.toString(),
+            tokenCount: _token.earnedToken,
+            // should be changed to data from backEnd
             tealIcon: Assets.media.icons.search.svg(),
           ),
         ),
@@ -138,13 +143,13 @@ class _MainScreenState extends State<MainScreen> {
                         'main.topCategories'.tr(),
                         style: context.theme.headline5.bold,
                       ),
-                      textButton: TextButton(
+                      tealButton: TextButton(
                         onPressed: () {},
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(
                               EdgeInsets.zero),
                           minimumSize:
-                              MaterialStateProperty.all<Size>(Size.zero),
+                          MaterialStateProperty.all<Size>(Size.zero),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                         child: Text(
@@ -162,13 +167,13 @@ class _MainScreenState extends State<MainScreen> {
                         'main.popularStores'.tr(),
                         style: context.theme.headline3.semiBold,
                       ),
-                      textButton: TextButton(
+                      tealButton: TextButton(
                         onPressed: () {},
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(
                               EdgeInsets.zero),
                           minimumSize:
-                              MaterialStateProperty.all<Size>(Size.zero),
+                          MaterialStateProperty.all<Size>(Size.zero),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                         child: Text(

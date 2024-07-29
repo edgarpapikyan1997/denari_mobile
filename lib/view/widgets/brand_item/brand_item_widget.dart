@@ -7,17 +7,34 @@ import '../../widgets/balance_widget.dart';
 class BrandItemWidget extends StatelessWidget {
   final String avatar;
   final String brandName;
-  final String? lastUpdate;
-  final String tokenBalance;
+  final bool isToken;
+  final Color wrapperColor;
+  final Widget? secondaryInfo;
+  final int? tokenBalance;
   final Widget? tealButton;
+  final bool addDivider;
+  final double bottomPadding;
+  final double topPadding;
+  final double leftPadding;
+  final double rightPadding;
+  final String? lastUpdate;
 
-  const BrandItemWidget(
-      {super.key,
-      required this.avatar,
-      required this.brandName,
-      this.lastUpdate,
-      required this.tokenBalance,
-      this.tealButton});
+  const BrandItemWidget({
+    super.key,
+    required this.avatar,
+    required this.brandName,
+    this.isToken = false,
+    this.secondaryInfo,
+    this.tokenBalance,
+    this.tealButton,
+    this.addDivider = true,
+    this.bottomPadding = 0,
+    this.topPadding = 0,
+    this.leftPadding = 0,
+    this.rightPadding = 0,
+    this.wrapperColor = AppColors.white,
+    this.lastUpdate,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,24 +46,29 @@ class BrandItemWidget extends StatelessWidget {
               height: 48,
               width: 48,
               decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage(avatar),
-                  ),
-                  border: Border.all(width: 1, color: AppColors.borderColor)),
+                color: AppColors.white,
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: AssetImage(avatar),
+                ),
+                border: Border.all(width: 1, color: AppColors.borderColor),
+              ),
             ),
             const SizedBox(
               width: 8,
             ),
-            lastUpdate != null
+            secondaryInfo != null
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         brandName,
-                        style: context.theme.headline4.medium,
+                        style: context.theme.body1,
                       ),
-                      Text(lastUpdate!),
+                      const SizedBox(
+                        height: 2,
+                      ),
+                      secondaryInfo!,
                     ],
                   )
                 : Text(
@@ -54,26 +76,30 @@ class BrandItemWidget extends StatelessWidget {
                     style: context.theme.headline4.regular,
                   ),
             const Spacer(),
-            BalanceWidget(
-              isTokenBalance: lastUpdate != null ? true : false,
-              tokenIconHeight: 20,
-              tokenIconWidth: 18,
-              balance: tokenBalance,
-              textStyle: context.theme.headline4,
-            ),
+            tokenBalance != null
+                ? BalanceWidget(
+                    isTokenBalance: isToken,
+                    tokenIconHeight: 20,
+                    tokenIconWidth: 18,
+                    balance: tokenBalance!,
+                    textStyle: context.theme.headline4,
+                    color: wrapperColor,
+                  )
+                : const SizedBox(),
             tealButton ?? const SizedBox(),
           ],
         ),
-        const SizedBox(
-          height: 16,
-        ),
-       const Divider(
-          height: 1,
-          color: AppColors.borderColor,
-        ),
-       const SizedBox(
-          height: 16,
-        ),
+        addDivider
+            ? const SizedBox(
+                height: 16,
+              )
+            : const SizedBox(),
+        addDivider
+            ? const Divider(
+                height: 1,
+                color: AppColors.borderColor,
+              )
+            : const SizedBox(),
       ],
     );
   }

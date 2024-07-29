@@ -18,7 +18,12 @@
     "other": "Other",
     "profile": "Profile",
     "notifications": "Notifications",
-    "store": "Store"
+    "store": "Store",
+    "search": "Search",
+    "nothingFound": "Nothing found",
+    "trySearchAgain": "Try searching again.",
+    "navBarQR": "My QR code",
+    "getTokens": "To get tokens for a purchase or use the accumulated points, show the screen to the seller in the store."
   },
   "balance": {
     "tokenBalance": "Token Balance",
@@ -68,16 +73,34 @@
     "save_new_password": "Save new password"
   },
   "giftCard": {
-    "giftCard": "Gift card",
     "myGiftCards": "My Gift Cards",
     "giftCards": "Gift cards",
     "manageGifts": "Manage and explore your gift cards.",
-    "noGiftCards": "No gift cards",
-    "chooseGiftCardInApp": "Choose gift cards in our application and purchase from the store checkout."
+    "giftCard": "Gift card",
+    "giftCartTokens": "Send Gift Card / Tokens",
+    "selectGift": "Select a gift card to send",
+    "totalBalanceTokens": "Total balance tokens",
+    "continue": "Continue",
+    "noGiftCards": "No Gift Cards",
+    "chooseGiftCards": "Choose gift cards in our application and purchase from the store checkout.",
+    "mustMakePurchase": "To receive tokens, you must make a purchase using a gift card.",
+    "noTokens": "No tokens",
+    "selectAmount": "Select the amount and the method of sending",
+    "amount": "Amount",
+    "specifyAmount": "Specify the amount to transfer",
+    "sendTo": "Send Gift Card to:",
+    "phoneOrEmail": "Phone number or Email address",
+    "emptyBalanceDescription": "To receive tokens, you must make a purchase using a gift card."
   },
-  "transactionHistoryScreen": {
-    "title": "Send Gift Card / Tokens",
-    "selectGiftCard" : "Select a gift card to send"
+  "buttons": {
+    "close": "Close"
+  },
+  "bottomSheet": {
+    "congratsEaredToken": "Congratulations! You’ve Earned Tokens!",
+    "yourPurchase": "Your purchase of $",
+    "at": "at",
+    "earnedYou": "earned you",
+    "wouldYouRate": "How would you rate your experience?"
   },
   "profile" : {
     "data": "Profile data",

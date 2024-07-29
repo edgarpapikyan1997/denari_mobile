@@ -20,115 +20,20 @@ class TokenBalanceScreen extends StatefulWidget {
 class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
   final _tokenBalanceState = TokenBalanceState();
 
-  /// Must set list of models
-  final brandItems = [
-    BrandItemWidget(
+  /// Must et list of models
+  final brandItems = List.generate(
+    22,
+    (index) => BrandItemWidget(
+      isToken: true,
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
+      secondaryInfo: Text(
+        'June 16, 2024, 18:23',
+      ),
       tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
       // tealButton: Icon(Icons.chevron_right),
     ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-    BrandItemWidget(
-      avatar: Assets.media.images.toyStory.path,
-      brandName: 'McDonalds',
-      lastUpdate: 'June 16, 2024, 18:23',
-      tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
-      // tealButton: Icon(Icons.chevron_right),
-    ),
-
-  ];
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +43,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
         child: CustomAppBar(
           leadingIcon: GestureDetector(
               onTap: () {
-                context.go('/');
+                context.pop();
               },
               child: Assets.media.icons.chevronLeft.svg()),
           title: Text(
@@ -149,49 +54,56 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
       ),
       body: _tokenBalanceState.earnedToken != 0
           ? Container(
-              margin: const EdgeInsets.only(left: 16, right: 16),
-              width: context.width,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  BalanceWidget(
-                    isTokenBalance: true,
-                    tokenIconHeight: 26,
-                    tokenIconWidth: 28,
-                    balance: '100',
-                    textStyle: context.theme.headline1,
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text("balance.viewEarnedToken".tr()),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  PreviewBanner(
-                    leadingBanner: Text(
-                      'balance.tokens'.tr(),
-                      style: context.theme.headline2.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Expanded(child: BrandItemList(brandItems: brandItems, itemsToLoad: 8,))
-                ],
-              ),
-            )
-          : NoDataWidget(
-              asset: Assets.media.images.cryptoCurrencyNamecoin.image(
-                height: 96,
-                width: 96,
-              ),
-              title: "balance.emptyBalance".tr(),
-              description: "balance.emptyBalanceDescription".tr()
+        margin: const EdgeInsets.only(left: 16, right: 16),
+        width: context.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 16,
             ),
+            BalanceWidget(
+              isTokenBalance: true,
+              tokenIconHeight: 26,
+              tokenIconWidth: 28,
+              balance: 100,
+              textStyle: context.theme.headline1,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Text("balance.viewEarnedToken".tr()),
+            const SizedBox(
+              height: 32,
+            ),
+            PreviewBanner(
+              leadingBanner: Text(
+                'balance.tokens'.tr(),
+                style: context.theme.headline2.bold,
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Expanded(child: BrandItemList(brandItems: brandItems))
+          ],
+        ),
+      )
+          : Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            NoDataWidget(
+                asset: Assets.media.images.cryptoCurrencyNamecoin.image(
+                  height: 96,
+                  width: 96,
+                ),
+                title: "balance.emptyBalance".tr(),
+                description: "balance.emptyBalanceDescription".tr()),
+            const SizedBox(),
+          ],
+        ),
+      ),
     );
   }
 }

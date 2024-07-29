@@ -8,7 +8,8 @@ class CategoryWidget extends StatelessWidget {
   final String categoryName;
   final Widget categoryIcon;
   final CategoriesState categoriesState;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
+
 
   const CategoryWidget({
     super.key,

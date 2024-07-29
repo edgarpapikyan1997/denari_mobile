@@ -1,6 +1,7 @@
 import 'package:denari_app/data/authentication/model/reg_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
 import 'package:denari_app/utils/log/logging.dart';
+import 'package:denari_app/utils/network/data/token_preferences.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
@@ -10,12 +11,16 @@ class SignUpState = _SignUpState with _$SignUpState;
 
 abstract class _SignUpState with Store {
   final AuthRepository _repository;
+  final TokenPreferences _tokenPreferences;
 
-  _SignUpState({required AuthRepository authRepository})
-      : _repository = authRepository;
+  _SignUpState({
+    required AuthRepository authRepository,
+    required TokenPreferences tokenPreferences,
+  })  : _repository = authRepository,
+        _tokenPreferences = tokenPreferences;
 
   @observable
-  bool? isSignUp;
+  String? signUpError;
 
   @observable
   String name = "";
@@ -51,14 +56,14 @@ abstract class _SignUpState with Store {
   bool loading = false;
 
   @observable
-  bool? isCodeSent;
+  String? codeSentError;
 
   @computed
   bool get isNameValid => name.isNotEmpty;
 
   @computed
   bool get isEmailValid =>
-      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
           .hasMatch(email) ||
       email.isEmpty;
 
@@ -74,18 +79,23 @@ abstract class _SignUpState with Store {
     }
   }
 
-  @computed
-  bool get isCodeValid => code.length == 6;
+  @observable
+  bool isCodeValid = true;
 
   @computed
   bool get createButtonEnabled =>
-      isNameValid && isEmailValid && isPasswordValid && isPhoneValid && !loading;
+      isNameValid &&
+      isEmailValid &&
+      isPasswordValid &&
+      isPhoneValid &&
+      !loading;
 
   @action
   Future<void> signUp() async {
     loading = true;
     try {
-      isSignUp = await _repository.register(
+      isCodeValid = true;
+      final token = await _repository.register(
         RegModel(
           name: name,
           email: email,
@@ -94,9 +104,12 @@ abstract class _SignUpState with Store {
           code: code,
         ),
       );
+      _tokenPreferences.setToken(token);
+      signUpError = null;
     } catch (e) {
       logger.error(e.toString());
-      isSignUp = false;
+      isCodeValid = false;
+      signUpError = e.toString();
     }
     loading = false;
   }
@@ -105,10 +118,11 @@ abstract class _SignUpState with Store {
   Future<void> getCode() async {
     loading = true;
     try {
-      isCodeSent = await _repository.verify(phone?.completeNumber ?? '');
+      await _repository.verify(phone?.completeNumber ?? '');
+      codeSentError = null;
     } catch (e) {
       logger.error(e.toString());
-      isCodeSent = false;
+      codeSentError = e.toString();
     }
     loading = false;
   }

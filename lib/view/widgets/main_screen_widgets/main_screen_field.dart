@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../bottom_sheet/qr_bottom_sheet.dart';
-import '../scaffold_nav_bar.dart';
 
 class MainScreenField extends StatelessWidget {
   final Widget asset;
@@ -12,14 +11,13 @@ class MainScreenField extends StatelessWidget {
   final String? userID;
   final String? token;
 
-  const MainScreenField({
-    super.key,
+
+  const MainScreenField({super.key,
     required this.asset,
     required this.title,
     required this.navigationTitle,
     this.userID,
-    this.token,
-  });
+    this.token,});
 
   @override
   Widget build(BuildContext context) {

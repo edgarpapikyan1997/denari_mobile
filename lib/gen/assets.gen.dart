@@ -112,9 +112,9 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/store.svg
   SvgGenImage get store => const SvgGenImage('assets/media/icons/store.svg');
 
-  /// File path: assets/media/icons/tokenWhite.svg
+  /// File path: assets/media/icons/token_white.svg
   SvgGenImage get tokenWhite =>
-      const SvgGenImage('assets/media/icons/tokenWhite.svg');
+      const SvgGenImage('assets/media/icons/token_white.svg');
 
   /// File path: assets/media/icons/travel.svg
   SvgGenImage get travel => const SvgGenImage('assets/media/icons/travel.svg');
@@ -143,7 +143,6 @@ class $AssetsMediaIconsGen {
         search,
         sloseCenter,
         store,
-        tokenWhite,
         travel
       ];
 }

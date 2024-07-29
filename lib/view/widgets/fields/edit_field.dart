@@ -1,7 +1,6 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
-
 import 'decoration_field.dart';
 
 class EditField extends StatefulWidget {
@@ -13,6 +12,7 @@ class EditField extends StatefulWidget {
   final TextStyle? hintStyle;
   final TextStyle? textStyle;
   final double? borderRadius;
+  final bool obscure;
 
   const EditField({
     super.key,
@@ -22,8 +22,9 @@ class EditField extends StatefulWidget {
     this.optional = false,
     this.error,
     this.hintStyle,
-    this.borderRadius,
     this.textStyle,
+    this.borderRadius,
+    this.obscure = false,
   });
 
   @override
@@ -32,6 +33,7 @@ class EditField extends StatefulWidget {
 
 class _EditFieldState extends State<EditField> {
   late final TextEditingController _controller;
+  late bool _obscure;
   String? _error;
 
   String get _hint =>
@@ -41,6 +43,12 @@ class _EditFieldState extends State<EditField> {
   void initState() {
     _controller = widget.controller ?? TextEditingController();
     _error = widget.error;
+    _obscure = widget.obscure ? true : false;
+    _controller.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
     super.initState();
   }
 
@@ -63,8 +71,9 @@ class _EditFieldState extends State<EditField> {
         FocusScope.of(context).unfocus();
       },
       controller: _controller,
+      obscureText: _obscure,
       style: widget.textStyle ??
-          context.theme.headline5.copyWith(
+          context.theme.body1.copyWith(
             color: AppColors.black,
           ),
       onChanged: widget.onChanged,

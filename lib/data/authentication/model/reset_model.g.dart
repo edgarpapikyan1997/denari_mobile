@@ -1,18 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_model.dart';
+part of 'reset_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-LoginModel _$LoginModelFromJson(Map<String, dynamic> json) => LoginModel(
+ResetModel _$ResetModelFromJson(Map<String, dynamic> json) => ResetModel(
       phone: json['phone'] as String? ?? '',
-      password: json['password'] as String? ?? '',
+      code: json['code'] as String? ?? '',
+      newPassword: json['newPassword'] as String? ?? '',
     );
 
-Map<String, dynamic> _$LoginModelToJson(LoginModel instance) =>
+Map<String, dynamic> _$ResetModelToJson(ResetModel instance) =>
     <String, dynamic>{
       'phone': instance.phone,
-      'password': instance.password,
+      'code': instance.code,
+      'newPassword': instance.newPassword,
     };

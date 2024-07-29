@@ -23,7 +23,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
   /// Must et list of models
   final brandItems = List.generate(
     22,
-        (index) => BrandItemWidget(
+    (index) => BrandItemWidget(
       isToken: true,
       avatar: Assets.media.images.toyStory.path,
       brandName: 'McDonalds',

@@ -87,8 +87,6 @@ class _MainScreenState extends State<MainScreen> {
           asset: Assets.media.icons.qrCode.svg(),
           title: 'main.myQRCode'.tr(),
           navigationTitle: '/myQRCode',
-          userID: qrIdReceiver.id,
-          token: _token.earnedToken.toString(),
         ),
         MainScreenField(
           asset: Assets.media.icons.creditCardSync.svg(),
@@ -101,7 +99,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Define the categories list
 
     return Observer(builder: (context) {
       return Scaffold(

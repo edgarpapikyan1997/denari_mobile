@@ -1,3 +1,4 @@
+import 'package:denari_app/store/brand_item_select_state/brand_item_select_state.dart';
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'brand_item_widget.dart';
@@ -15,7 +16,9 @@ class BrandItemList extends StatefulWidget {
 
 class _BrandItemListState extends State<BrandItemList> {
   final ScrollController _scrollController = ScrollController();
+  BrandItemSelectState brandItemSelectState = BrandItemSelectState();
   List<BrandItemWidget> _displayedItems = [];
+  final int _itemsToLoad = 9;
   bool _isLoading = false;
 
   @override
@@ -28,6 +31,7 @@ class _BrandItemListState extends State<BrandItemList> {
         _loadMoreItems();
       }
     });
+    print(_displayedItems);
   }
 
   @override
@@ -46,7 +50,6 @@ class _BrandItemListState extends State<BrandItemList> {
 
     // Simulate network delay
     await Future.delayed(const Duration(seconds: 1));
-
     setState(() {
       final nextItems = widget.brandItems
           .skip(_displayedItems.length)

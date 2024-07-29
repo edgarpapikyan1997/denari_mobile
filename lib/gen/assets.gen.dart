@@ -143,7 +143,6 @@ class $AssetsMediaIconsGen {
         search,
         sloseCenter,
         store,
-        tokenWhite,
         travel
       ];
 }
@@ -163,17 +162,46 @@ class $AssetsMediaImagesGen {
   AssetGenImage get cryptoCurrencyNamecoin =>
       const AssetGenImage('assets/media/images/crypto-currency-namecoin.png');
 
+  /// File path: assets/media/images/filled_star.png
+  AssetGenImage get filledStar =>
+      const AssetGenImage('assets/media/images/filled_star.png');
+
+  /// File path: assets/media/images/fireworks.png
+  AssetGenImage get fireworks =>
+      const AssetGenImage('assets/media/images/fireworks.png');
+
   /// File path: assets/media/images/image 9.png
   AssetGenImage get image9 =>
       const AssetGenImage('assets/media/images/image 9.png');
+
+  /// File path: assets/media/images/ratedStar.png
+  AssetGenImage get ratedStar =>
+      const AssetGenImage('assets/media/images/ratedStar.png');
+
+  /// File path: assets/media/images/star.png
+  AssetGenImage get star => const AssetGenImage('assets/media/images/star.png');
+
+  /// File path: assets/media/images/task-list-clock.png
+  AssetGenImage get taskListClock =>
+      const AssetGenImage('assets/media/images/task-list-clock.png');
 
   /// File path: assets/media/images/toy_story.png
   AssetGenImage get toyStory =>
       const AssetGenImage('assets/media/images/toy_story.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [coffe, creditCard1, cryptoCurrencyNamecoin, image9, toyStory];
+  List<AssetGenImage> get values => [
+        coffe,
+        creditCard1,
+        cryptoCurrencyNamecoin,
+        filledStar,
+        fireworks,
+        image9,
+        ratedStar,
+        star,
+        taskListClock,
+        toyStory
+      ];
 }
 
 class Assets {

@@ -8,22 +8,23 @@ class CategoryWidget extends StatelessWidget {
   final String categoryName;
   final Widget categoryIcon;
   final CategoriesState categoriesState;
+  final VoidCallback? onTap;
+
 
   const CategoryWidget({
     super.key,
     required this.categoryName,
     required this.categoryIcon,
     required this.categoriesState,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        categoriesState.selectCategory(categoryName);
-      },
+      onTap: onTap,
       child: Observer(builder: (context) {
-        bool isSelected = categoriesState.selectedCategory == categoryName;
+        bool isSelected = categoriesState.currentCategory == categoryName;
         return Container(
           decoration: BoxDecoration(
             border: Border.all(width: 1, color: AppColors.borderColor),
@@ -42,7 +43,7 @@ class CategoryWidget extends StatelessWidget {
               ),
             ],
           ).paddingSymmetric(vertical: 6, horizontal: 12),
-        ).paddingOnly(right: 4);
+        ).paddingHorizontal(4);
       }),
     );
   }

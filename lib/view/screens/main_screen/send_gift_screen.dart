@@ -37,14 +37,12 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
   @override
   void initState() {
     super.initState();
-    // _token.getTokenBalance();
     initCategories();
   }
 
   initCategories() {
-    categoriesState = CategoriesState(
-      initialCategory: categories[0]['categoryName'].toString(),
-    );
+    categoriesState?.currentCategory =  categories[0]['categoryName'].toString();
+
   }
 
   @override
@@ -84,7 +82,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
           BrandItemWidget(
             avatar: Assets.media.images.toyStory.path,
             brandName: 'McDonalds',
-            tokenBalance: '20',
+            tokenBalance: 20,
             tealButton: Radio<SingingCharacter>(
               value: SingingCharacter.jefferson,
               groupValue: _character,
@@ -98,7 +96,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
           BrandItemWidget(
             avatar: Assets.media.images.toyStory.path,
             brandName: 'McDonalds',
-            tokenBalance: '20',
+            tokenBalance: 20,
             tealButton: Radio<SingingCharacter>(
               value: SingingCharacter.lafayette,
               groupValue: _character,
@@ -112,7 +110,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
           BrandItemWidget(
             avatar: Assets.media.images.toyStory.path,
             brandName: 'McDonalds',
-            tokenBalance: '20',
+            tokenBalance: 20,
             tealButton: Radio<SingingCharacter>(
               value: SingingCharacter.lafayette1,
               groupValue: _character,
@@ -126,7 +124,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
           BrandItemWidget(
             avatar: Assets.media.images.toyStory.path,
             brandName: 'McDonalds',
-            tokenBalance: '20',
+            tokenBalance: 20,
             tealButton: Radio<SingingCharacter>(
               fillColor: MaterialStateProperty.resolveWith<Color>(
                   (Set<MaterialState> states) {

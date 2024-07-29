@@ -41,9 +41,9 @@ class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
     reaction(
       (reaction) => _state.signUpError,
       (value) {
-        if (value == null) {
+        if (value == "true") {
           context.goNamed(Routes.password);
-        } else {
+        } else if(value != null){
           ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(
             SnackBar(content: Text(value)),
           );
@@ -84,8 +84,7 @@ class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
                   onChanged: (value) {
                     _state.setCode(value);
                     if (value.length >= 6) {
-                      // sendCode;
-                      // _state.signUp();
+                      _state.signUp();
                     }
                   },
                 ),

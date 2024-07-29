@@ -119,7 +119,6 @@ abstract class _SignUpState with Store {
     loading = true;
     try {
       await _repository.verify(phone?.completeNumber ?? '');
-      codeSentError = null;
     } catch (e) {
       logger.error(e.toString());
       codeSentError = e.toString();

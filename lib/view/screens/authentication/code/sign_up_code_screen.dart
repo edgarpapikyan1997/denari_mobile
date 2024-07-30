@@ -38,6 +38,9 @@ class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
   void initState() {
     _state.phone =
         PhoneNumber.fromCompleteNumber(completeNumber: widget.model.phone);
+    _state.name = widget.model.name;
+    _state.email = widget.model.email;
+    _state.password = widget.model.password;
     reaction(
       (reaction) => _state.signUp,
       (value) {

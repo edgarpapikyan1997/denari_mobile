@@ -94,7 +94,7 @@ abstract class _SignUpState with Store {
       name: name,
       email: email,
       password: password,
-      phone: phone?.completeNumber ?? '',
+      phone: phone?.completeNumber != null ? "+${phone?.completeNumber}" : '',
       code: code,
     );
     (await handle(() => _repository.register(model))).then(

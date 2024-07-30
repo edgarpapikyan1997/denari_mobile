@@ -110,8 +110,8 @@ abstract class _ProfileState with Store {
   Future<void> getProfile() async {
     loading = true;
     (await handle(() => _profileRepository.getProfile())).then(
-          (data) => profile = data,
-          (error) => getError = error,
+      (data) => profile = data,
+      (error) => getError = error,
     );
     loading = false;
   }
@@ -122,15 +122,15 @@ abstract class _ProfileState with Store {
     final uProfile = Profile(
       userName: name,
       email: email,
-      phone: phone?.completeNumber ?? '',
+      phone: '+${phone?.completeNumber ?? ''}',
       id: profile.id,
       isVerified: profile.isVerified,
       dateOfBirth: birthday.toString(),
       createdAt: profile.createdAt,
     );
     (await handle(() => _profileRepository.updateProfile(uProfile))).then(
-          (data) => updateError = 'true',
-          (error) => updateError = error,
+      (data) => updateError = 'true',
+      (error) => updateError = error,
     );
     loading = false;
   }
@@ -138,9 +138,11 @@ abstract class _ProfileState with Store {
   @action
   Future<void> getCode() async {
     loading = true;
-    (await handle(() => _authRepository.verify(phone?.completeNumber ?? ''))).then(
-          (data) => codeSentError = 'true',
-          (error) => codeSentError = error,
+    (await handle(
+            () => _authRepository.verify('+${phone?.completeNumber ?? ''}')))
+        .then(
+      (data) => codeSentError = 'true',
+      (error) => codeSentError = error,
     );
     loading = false;
   }

@@ -30,7 +30,8 @@ class CodePopSheet extends StatelessWidget {
           const Delimiter(),
         ],
       ),
-      okLabel: 'profile.log_out'.tr(),
+      cancelLabel: 'profile.stop'.tr(),
+      okLabel: 'profile.continue'.tr(),
     );
   }
 }

@@ -10,10 +10,8 @@ class Profile {
   final String phone;
   @JsonKey(defaultValue: '')
   final String email;
-  @JsonKey(defaultValue: false, includeToJson: false)
-  final bool isVerified;
   @JsonKey(defaultValue: '')
-  final String userName;
+  final String name;
   @JsonKey(defaultValue: '')
   final String dateOfBirth;
   @JsonKey(defaultValue: '', includeToJson: false)
@@ -23,8 +21,7 @@ class Profile {
     required this.id,
     required this.phone,
     required this.email,
-    required this.isVerified,
-    required this.userName,
+    required this.name,
     required this.dateOfBirth,
     required this.createdAt,
   });
@@ -38,8 +35,7 @@ class Profile {
     String? id,
     String? phone,
     String? email,
-    bool? isVerified,
-    String? userName,
+    String? name,
     String? dateOfBirth,
     String? createdAt,
   }) {
@@ -47,8 +43,7 @@ class Profile {
       id: id ?? this.id,
       phone: phone ?? this.phone,
       email: email ?? this.email,
-      isVerified: isVerified ?? this.isVerified,
-      userName: userName ?? this.userName,
+      name: name ?? this.name,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       createdAt: createdAt ?? this.createdAt,
     );

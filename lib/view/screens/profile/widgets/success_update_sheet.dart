@@ -22,7 +22,6 @@ class SuccessUpdateSheet extends StatelessWidget {
           const Delimiter(),
         ],
       ),
-      okLabel: 'profile.log_out'.tr(),
     );
   }
 }

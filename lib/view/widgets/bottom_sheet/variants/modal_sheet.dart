@@ -14,6 +14,7 @@ Future<T?> showModalSheet<T>({
     context: context,
     backgroundColor: AppColors.white,
     useRootNavigator: true,
+    isScrollControlled: true,
     builder: (context) => child,
   );
 }

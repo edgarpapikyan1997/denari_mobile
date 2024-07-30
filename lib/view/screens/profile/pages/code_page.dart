@@ -39,7 +39,7 @@ class _ProfileCodePageState extends State<ProfileCodePage> {
 
   @override
   void initState() {
-    _state.name = widget.model.userName;
+    _state.name = widget.model.name;
     _state.email = widget.model.email;
     _state.birthday = widget.model.dateOfBirth.toDate();
     _state.phone =
@@ -68,7 +68,7 @@ class _ProfileCodePageState extends State<ProfileCodePage> {
         onPop: () => showModalSheet<bool>(
           context: context,
           child: const CodePopSheet(),
-        ).then((value) => value == true ? context.pop() : null),
+        ).then((value) => value == false ? context.pop() : null),
       ),
       body: SafeArea(
         child: Padding(

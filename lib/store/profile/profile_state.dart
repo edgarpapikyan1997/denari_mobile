@@ -120,11 +120,10 @@ abstract class _ProfileState with Store {
   Future<void> updateProfile() async {
     loading = true;
     final uProfile = Profile(
-      userName: name,
+      name: name,
       email: email,
-      phone: '+${phone?.completeNumber ?? ''}',
+      phone: phone?.completeNumber ?? '',
       id: profile.id,
-      isVerified: profile.isVerified,
       dateOfBirth: birthday.toString(),
       createdAt: profile.createdAt,
     );
@@ -138,8 +137,12 @@ abstract class _ProfileState with Store {
   @action
   Future<void> getCode() async {
     loading = true;
+    String number = phone?.completeNumber ?? '';
+    if (!number.startsWith('+')) {
+      number = '+$number';
+    }
     (await handle(
-            () => _authRepository.verify('+${phone?.completeNumber ?? ''}')))
+            () => _authRepository.verify(number)))
         .then(
       (data) => codeSentError = 'true',
       (error) => codeSentError = error,

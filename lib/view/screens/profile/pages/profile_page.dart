@@ -45,11 +45,10 @@ class _ProfilePageState extends State<ProfilePage> {
       (value) {
         if (value == 'true') {
           final profile = Profile(
-            userName: _state.name,
+            name: _state.name,
             email: _state.email,
             phone: _state.phone?.completeNumber ?? '',
             id: _state.profile.id,
-            isVerified: _state.profile.isVerified,
             dateOfBirth: _state.birthday.toString(),
             createdAt: _state.profile.createdAt,
           );
@@ -75,7 +74,7 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               Observer(
                 builder: (_) => EditField(
-                  value: _state.profile.userName,
+                  value: _state.profile.name,
                   hint: 'sign.name'.tr(),
                   error: !_state.isNameValid ? '' : null,
                   onChanged: _state.setName,

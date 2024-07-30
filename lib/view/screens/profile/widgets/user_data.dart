@@ -16,7 +16,7 @@ class UserData extends StatelessWidget {
       children: [
         Flexible(
           child: Text(
-            profile.userName,
+            profile.name,
             textAlign: TextAlign.start,
             style: context.theme.headline2,
           ),

@@ -1,6 +1,7 @@
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
 import 'package:denari_app/data/profile/model/profile.dart';
 import 'package:denari_app/data/profile/repository/profile_repository.dart';
+import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/network/utils/use_case.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
@@ -122,7 +123,7 @@ abstract class _ProfileState with Store {
     final uProfile = Profile(
       name: name,
       email: email,
-      phone: phone?.completeNumber ?? '',
+      phone: phone.print(),
       id: profile.id,
       dateOfBirth: birthday.toString(),
       createdAt: profile.createdAt,
@@ -137,12 +138,8 @@ abstract class _ProfileState with Store {
   @action
   Future<void> getCode() async {
     loading = true;
-    String number = phone?.completeNumber ?? '';
-    if (!number.startsWith('+')) {
-      number = '+$number';
-    }
     (await handle(
-            () => _authRepository.verify(number)))
+            () => _authRepository.verify(phone.print())))
         .then(
       (data) => codeSentError = 'true',
       (error) => codeSentError = error,

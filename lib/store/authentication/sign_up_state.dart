@@ -1,5 +1,6 @@
 import 'package:denari_app/data/authentication/model/reg_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
+import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/network/data/token_preferences.dart';
 import 'package:denari_app/utils/network/utils/use_case.dart';
 import 'package:intl_phone_field/phone_number.dart';
@@ -94,7 +95,7 @@ abstract class _SignUpState with Store {
       name: name,
       email: email,
       password: password,
-      phone: phone?.completeNumber ?? '',
+      phone: phone.print(),
       code: code,
     );
     (await handle(() => _repository.register(model))).then(
@@ -110,7 +111,7 @@ abstract class _SignUpState with Store {
   @action
   Future<void> getCode() async {
     loading = true;
-    (await handle(() => _repository.verify(phone?.completeNumber ?? ''))).then(
+    (await handle(() => _repository.verify(phone.print()))).then(
       (data) => codeSent = 'true',
       (error) => codeSent = error,
     );

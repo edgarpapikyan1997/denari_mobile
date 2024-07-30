@@ -47,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
           final profile = Profile(
             name: _state.name,
             email: _state.email,
-            phone: _state.phone?.completeNumber ?? '',
+            phone: _state.phone.print(),
             id: _state.profile.id,
             dateOfBirth: _state.birthday.toString(),
             createdAt: _state.profile.createdAt,

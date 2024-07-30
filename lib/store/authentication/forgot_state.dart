@@ -1,5 +1,6 @@
 import 'package:denari_app/data/authentication/model/reset_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
+import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/network/utils/use_case.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
@@ -74,7 +75,7 @@ abstract class _ForgotState with Store {
     loading = true;
     final model = ResetModel(
       newPassword: password,
-      phone: phone?.completeNumber ?? '',
+      phone: phone.print(),
       code: code,
     );
     (await handle(() => _repository.reset(model))).then(
@@ -87,7 +88,7 @@ abstract class _ForgotState with Store {
   @action
   Future<void> getCode() async {
     loading = true;
-    (await handle(() => _repository.verify(phone?.completeNumber ?? ''))).then(
+    (await handle(() => _repository.verify(phone.print()))).then(
       (data) => codeSent = 'true',
       (error) => codeSent = error,
     );

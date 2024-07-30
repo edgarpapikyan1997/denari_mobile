@@ -1,5 +1,6 @@
 import 'package:denari_app/data/authentication/model/login_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
+import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/network/data/token_preferences.dart';
 import 'package:denari_app/utils/network/utils/use_case.dart';
 import 'package:intl_phone_field/phone_number.dart';
@@ -57,7 +58,7 @@ abstract class _SignInState with Store {
     loading = true;
     final model = LoginModel(
       password: password,
-      phone: phone?.completeNumber ?? '',
+      phone: phone.print(),
     );
     (await handle(() => _repository.login(model))).then(
       (data) {

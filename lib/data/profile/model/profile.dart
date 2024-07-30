@@ -16,6 +16,8 @@ class Profile {
   final String dateOfBirth;
   @JsonKey(defaultValue: '', includeToJson: false)
   final String createdAt;
+  @JsonKey(defaultValue: '')
+  final String code;
 
   const Profile({
     required this.id,
@@ -24,6 +26,7 @@ class Profile {
     required this.name,
     required this.dateOfBirth,
     required this.createdAt,
+    required this.code,
   });
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
@@ -38,6 +41,7 @@ class Profile {
     String? name,
     String? dateOfBirth,
     String? createdAt,
+    String? code,
   }) {
     return Profile(
       id: id ?? this.id,
@@ -46,6 +50,7 @@ class Profile {
       name: name ?? this.name,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       createdAt: createdAt ?? this.createdAt,
+      code: code ?? this.code,
     );
   }
 }

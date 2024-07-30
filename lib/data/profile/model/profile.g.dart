@@ -13,6 +13,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       name: json['name'] as String? ?? '',
       dateOfBirth: json['dateOfBirth'] as String? ?? '',
       createdAt: json['createdAt'] as String? ?? '',
+      code: json['code'] as String? ?? '',
     );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
@@ -20,4 +21,5 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'email': instance.email,
       'name': instance.name,
       'dateOfBirth': instance.dateOfBirth,
+      'code': instance.code,
     };

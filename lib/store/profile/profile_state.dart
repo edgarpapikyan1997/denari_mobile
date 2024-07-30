@@ -104,7 +104,6 @@ abstract class _ProfileState with Store {
       isEmailValid &&
       isBirthdayValid &&
       isPhoneValid &&
-      isBirthdayValid &&
       !loading;
 
   @action
@@ -125,8 +124,9 @@ abstract class _ProfileState with Store {
       email: email,
       phone: phone.print(),
       id: profile.id,
-      dateOfBirth: birthday.toString(),
+      dateOfBirth: birthday?.print() ?? '',
       createdAt: profile.createdAt,
+      code: code,
     );
     (await handle(() => _profileRepository.updateProfile(uProfile))).then(
       (data) => updateError = 'true',
@@ -138,9 +138,7 @@ abstract class _ProfileState with Store {
   @action
   Future<void> getCode() async {
     loading = true;
-    (await handle(
-            () => _authRepository.verify(phone.print())))
-        .then(
+    (await handle(() => _authRepository.verify(phone.print()))).then(
       (data) => codeSentError = 'true',
       (error) => codeSentError = error,
     );

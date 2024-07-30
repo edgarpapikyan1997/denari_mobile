@@ -37,6 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     _state.profile = widget.profile.copyWith();
     _state.email = widget.profile.email;
+    _state.name = widget.profile.name;
     _state.birthday = widget.profile.dateOfBirth.toDate();
     _state.phone =
         PhoneNumber.fromCompleteNumber(completeNumber: widget.profile.phone);
@@ -51,6 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
             id: _state.profile.id,
             dateOfBirth: _state.birthday.toString(),
             createdAt: _state.profile.createdAt,
+            code: _state.code,
           );
           context.goNamed(Routes.profileCode, extra: profile);
         } else if (value != null) {

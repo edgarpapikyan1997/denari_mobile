@@ -1,5 +1,5 @@
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
-import 'package:denari_app/data/profile/model/profile.dart';
+import 'package:denari_app/data/profile/model/profile_model.dart';
 import 'package:denari_app/data/profile/repository/profile_repository.dart';
 import 'package:denari_app/store/profile/profile_state.dart';
 import 'package:denari_app/utils/di/config.dart';
@@ -7,7 +7,7 @@ import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:denari_app/view/screens/profile/widgets/code_pop_sheet.dart';
-import 'package:denari_app/view/screens/profile/widgets/success_update_sheet.dart';
+import 'package:denari_app/view/screens/profile/widgets/success_operation_sheet.dart';
 import 'package:denari_app/view/widgets/app_bar/app_bar_page.dart';
 import 'package:denari_app/view/widgets/bottom_sheet/variants/modal_sheet.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
@@ -21,7 +21,7 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
 class ProfileCodePage extends StatefulWidget {
-  final Profile model;
+  final ProfileModel model;
 
   const ProfileCodePage({super.key, required this.model});
 
@@ -50,7 +50,8 @@ class _ProfileCodePageState extends State<ProfileCodePage> {
         if (value == 'true') {
           showModalSheet<void>(
             context: context,
-            child: const SuccessUpdateSheet(),
+            child:
+                SuccessOperationSheet(message: 'profile.update_success'.tr()),
           ).then((value) => context.goNamed(Routes.profile));
         } else if (value != null) {
           Message.show(value);

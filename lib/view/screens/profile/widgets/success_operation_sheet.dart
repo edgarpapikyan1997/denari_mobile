@@ -4,8 +4,9 @@ import 'package:denari_app/view/widgets/bottom_sheet/variants/alert_sheet.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:flutter/material.dart';
 
-class SuccessUpdateSheet extends StatelessWidget {
-  const SuccessUpdateSheet({super.key});
+class SuccessOperationSheet extends StatelessWidget {
+  final String message;
+  const SuccessOperationSheet({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class SuccessUpdateSheet extends StatelessWidget {
           Assets.media.icons.fireworks.svg(),
           const Delimiter(),
           Text(
-            'profile.update_success'.tr(),
+            message,
             style: context.theme.headline2,
           ),
           const Delimiter(),

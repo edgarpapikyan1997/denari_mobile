@@ -1,10 +1,11 @@
-import 'package:denari_app/data/authentication/model/reset_pass_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
-import 'package:denari_app/store/authentication/forgot_state.dart';
+import 'package:denari_app/store/change_password/change_password_state.dart';
 import 'package:denari_app/utils/di/config.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
+import 'package:denari_app/view/screens/profile/widgets/success_operation_sheet.dart';
 import 'package:denari_app/view/widgets/app_bar/app_bar_page.dart';
+import 'package:denari_app/view/widgets/bottom_sheet/variants/modal_sheet.dart';
 import 'package:denari_app/view/widgets/buttons/button_primary.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:denari_app/view/widgets/fields/edit_field.dart';
@@ -12,33 +13,31 @@ import 'package:denari_app/view/widgets/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
-class CreatePasswordScreen extends StatefulWidget {
-  final ResetPassModel model;
-
-  const CreatePasswordScreen({super.key, required this.model});
+class ChangePasswordPage extends StatefulWidget {
+  const ChangePasswordPage({super.key});
 
   @override
-  State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();
+  State<ChangePasswordPage> createState() => _ChangePasswordPageState();
 }
 
-class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
-  final ForgotState _state = ForgotState(
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
+  final ChangePasswordState _state = ChangePasswordState(
     authRepository: di.get<AuthRepository>(),
   );
 
   @override
   void initState() {
-    _state.phone =
-        PhoneNumber.fromCompleteNumber(completeNumber: widget.model.phone);
-    _state.code = widget.model.code;
     reaction(
       (reaction) => _state.changePasswordError,
       (value) {
         if (value == 'true') {
-          context.goNamed(Routes.signIn);
+          showModalSheet<void>(
+            context: context,
+            child: SuccessOperationSheet(
+                message: 'profile.save_pass_success'.tr()),
+          ).then((value) => context.goNamed(Routes.profile));
         } else if (value != null) {
           Message.show(value);
         }
@@ -51,7 +50,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarPage(),
+      appBar: AppBarPage(title: 'profile.change_password'.tr()),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 14),
@@ -59,11 +58,9 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'sign.create_new_password'.tr(),
-                style: context.theme.headline1,
+                'profile.enter_valid_password'.tr(),
+                style: context.theme.headline2,
               ),
-              const Delimiter(2),
-              Text('sign.new_password_description'.tr()),
               const Delimiter(24),
               Observer(
                 builder: (_) => EditField(
@@ -73,6 +70,33 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                       ? 'sign.password_error'.tr()
                       : null,
                   onChanged: _state.setPassword,
+                ),
+              ),
+              const Delimiter(),
+              Align(
+                alignment: Alignment.topRight,
+                child: SelectableText(
+                  '${'sign.forgot_password'.tr()}?',
+                  style: context.theme.bodyText1.copyWith(
+                    color: context.theme.primaryColor,
+                  ),
+                  onTap: () => context.goNamed(Routes.profileForgot),
+                ),
+              ),
+              const Delimiter(24),
+              Text(
+                'profile.enter_new_password'.tr(),
+                style: context.theme.headline2,
+              ),
+              const Delimiter(24),
+              Observer(
+                builder: (_) => EditField(
+                  hint: 'sign.password'.tr(),
+                  obscure: true,
+                  error: !_state.isNewPasswordValid
+                      ? 'sign.password_error'.tr()
+                      : null,
+                  onChanged: _state.setNewPassword,
                 ),
               ),
               const Delimiter(),

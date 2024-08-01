@@ -132,6 +132,10 @@
     "you_want_stop_verification": "Do you want to stop the verification process?",
     "update_success": "Profile data saved successfully",
     "stop": "Stop",
-    "continue": "Continue"
+    "continue": "Continue",
+    "enter_valid_password": "Enter a valid password",
+    "enter_new_password": "Enter a new password",
+    "save_pass_success": "Password saved successfully"
+
   }
 }

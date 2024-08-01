@@ -1,4 +1,4 @@
-import 'package:denari_app/data/profile/model/profile.dart';
+import 'package:denari_app/data/profile/model/profile_model.dart';
 import 'package:denari_app/gen/assets.gen.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileMenu extends StatelessWidget {
-  final Profile profile;
+  final ProfileModel profile;
 
   const ProfileMenu({
     super.key,
@@ -39,7 +39,7 @@ class ProfileMenu extends StatelessWidget {
           ButtonMenu(
             label: 'profile.change_password'.tr(),
             svg: Assets.media.icons.lock.path,
-            onPressed: () => {},
+            onPressed: () => context.goNamed(Routes.profilePassword),
           ),
           const Divider(height: 1),
           ButtonMenu(

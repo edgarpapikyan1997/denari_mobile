@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:denari_app/data/authentication/model/login_model.dart';
 import 'package:denari_app/data/authentication/model/reg_model.dart';
-import 'package:denari_app/data/authentication/model/reset_model.dart';
+import 'package:denari_app/data/authentication/model/reset_pass_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
+import 'package:denari_app/data/authentication/model/change_pass_model.dart';
 import 'package:denari_app/utils/env/config.dart';
 import 'package:denari_app/utils/network/model/api_token.dart';
 import 'package:denari_app/utils/network/utils/response_helper.dart';
@@ -46,9 +47,18 @@ final class ImplAuthRepository extends AuthRepository {
   }
 
   @override
-  Future<bool> reset(ResetModel data) async {
+  Future<bool> resetPassword(ResetPassModel data) async {
     final result = await _client.post(
       '${_config.host}/reset-password',
+      data: jsonEncode(data.toJson()),
+    );
+    return result.statusCode == 200;
+  }
+
+  @override
+  Future<bool> changePassword(ChangePassModel data) async {
+    final result = await _client.post(
+      '${_config.host}/changePassword',
       data: jsonEncode(data.toJson()),
     );
     return result.statusCode == 200;

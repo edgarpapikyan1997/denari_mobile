@@ -7,38 +7,39 @@ import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/view/widgets/app_bar/app_bar_page.dart';
 import 'package:denari_app/view/widgets/buttons/button_primary.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
-import 'package:denari_app/view/widgets/fields/edit_field.dart';
+import 'package:denari_app/view/widgets/fields/phone_field.dart';
 import 'package:denari_app/view/widgets/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
-class CreatePasswordScreen extends StatefulWidget {
-  final ResetPassModel model;
-
-  const CreatePasswordScreen({super.key, required this.model});
+class ForgotPage extends StatefulWidget {
+  const ForgotPage({super.key});
 
   @override
-  State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();
+  State<ForgotPage> createState() => _ForgotPageState();
 }
 
-class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
+class _ForgotPageState extends State<ForgotPage> {
   final ForgotState _state = ForgotState(
     authRepository: di.get<AuthRepository>(),
   );
 
   @override
   void initState() {
-    _state.phone =
-        PhoneNumber.fromCompleteNumber(completeNumber: widget.model.phone);
-    _state.code = widget.model.code;
     reaction(
-      (reaction) => _state.changePasswordError,
+      (reaction) => _state.codeSent,
       (value) {
         if (value == 'true') {
-          context.goNamed(Routes.signIn);
+          context.goNamed(
+            Routes.profileForgotCode,
+            extra: ResetPassModel(
+              phone: _state.phone!.completeNumber,
+              code: '',
+              newPassword: '',
+            ),
+          );
         } else if (value != null) {
           Message.show(value);
         }
@@ -59,39 +60,24 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'sign.create_new_password'.tr(),
+                'sign.forgot_password'.tr(),
                 style: context.theme.headline1,
               ),
               const Delimiter(2),
-              Text('sign.new_password_description'.tr()),
+              Text('sign.forgot_description'.tr()),
               const Delimiter(24),
               Observer(
-                builder: (_) => EditField(
-                  hint: 'sign.password'.tr(),
-                  obscure: true,
-                  error: !_state.isPasswordValid
-                      ? 'sign.password_error'.tr()
-                      : null,
-                  onChanged: _state.setPassword,
-                ),
-              ),
-              const Delimiter(),
-              Observer(
-                builder: (_) => EditField(
-                  hint: 'sign.confirm_password'.tr(),
-                  obscure: true,
-                  error: !(_state.password == _state.passwordRepeat)
-                      ? 'sign.password_mismatch'.tr()
-                      : null,
-                  onChanged: _state.setPasswordRepeat,
+                builder: (_) => PhoneField(
+                  hint: 'sign.phone'.tr(),
+                  error: !_state.isPhoneValid ? 'sign.phone_error'.tr() : null,
+                  onChanged: _state.setPhone,
                 ),
               ),
               const Spacer(),
               Observer(
                 builder: (_) => ButtonPrimary(
-                  label: 'sign.save_new_password'.tr(),
-                  onPressed:
-                      _state.changeButtonEnabled ? _state.changePassword : null,
+                  label: 'sign.send'.tr(),
+                  onPressed: _state.sendButtonEnabled ? _state.getCode : null,
                 ),
               ),
             ],

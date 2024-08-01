@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'profile.g.dart';
+part 'profile_model.g.dart';
 
 @JsonSerializable()
-class Profile {
+class ProfileModel {
   @JsonKey(defaultValue: '', includeToJson: false)
   final String id;
   @JsonKey(defaultValue: '')
@@ -19,7 +19,7 @@ class Profile {
   @JsonKey(defaultValue: '')
   final String code;
 
-  const Profile({
+  const ProfileModel({
     required this.id,
     required this.phone,
     required this.email,
@@ -29,12 +29,12 @@ class Profile {
     required this.code,
   });
 
-  factory Profile.fromJson(Map<String, dynamic> json) =>
-      _$ProfileFromJson(json);
+  factory ProfileModel.fromJson(Map<String, dynamic> json) =>
+      _$ProfileModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ProfileToJson(this);
+  Map<String, dynamic> toJson() => _$ProfileModelToJson(this);
 
-  Profile copyWith({
+  ProfileModel copyWith({
     String? id,
     String? phone,
     String? email,
@@ -43,7 +43,7 @@ class Profile {
     String? createdAt,
     String? code,
   }) {
-    return Profile(
+    return ProfileModel(
       id: id ?? this.id,
       phone: phone ?? this.phone,
       email: email ?? this.email,

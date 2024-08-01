@@ -15,16 +15,16 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
-class ForgotCodeScreen extends StatefulWidget {
+class ForgotCodePage extends StatefulWidget {
   final ResetPassModel model;
 
-  const ForgotCodeScreen({super.key, required this.model});
+  const ForgotCodePage({super.key, required this.model});
 
   @override
-  State<ForgotCodeScreen> createState() => _ForgotCodeScreenState();
+  State<ForgotCodePage> createState() => _ForgotCodePageState();
 }
 
-class _ForgotCodeScreenState extends State<ForgotCodeScreen> {
+class _ForgotCodePageState extends State<ForgotCodePage> {
   final ForgotState _state = ForgotState(
     authRepository: di.get<AuthRepository>(),
   );
@@ -83,7 +83,7 @@ class _ForgotCodeScreenState extends State<ForgotCodeScreen> {
                   label: 'sign.send_code'.tr(),
                   onPressed: _state.isCodeValid
                       ? () => context.goNamed(
-                            Routes.password,
+                            Routes.profileReset,
                             extra: ResetPassModel(
                               phone: _state.phone!.completeNumber,
                               code: _state.code,

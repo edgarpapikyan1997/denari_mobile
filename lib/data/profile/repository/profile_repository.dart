@@ -1,7 +1,7 @@
-import 'package:denari_app/data/profile/model/profile.dart';
+import 'package:denari_app/data/profile/model/profile_model.dart';
 
 abstract class ProfileRepository {
-  Future<Profile> getProfile();
+  Future<ProfileModel> getProfile();
 
-  Future<bool> updateProfile(Profile profile);
+  Future<bool> updateProfile(ProfileModel profile);
 }

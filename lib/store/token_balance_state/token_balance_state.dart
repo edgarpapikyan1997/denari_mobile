@@ -38,9 +38,7 @@ abstract class _TokenBalanceState with Store {
       (data) => tokenBalance = data,
       (error) => getError = error,
     );
-    if (tokenBalance?.totalBalance != 0 && tokenBalance?.totalBalance != null) {
-      getTokenBalanceHistory();
-    }
+
   }
 
   @action

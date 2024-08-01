@@ -122,7 +122,7 @@ class _MainScreenState extends State<MainScreen> {
           child: CustomAppBar(
             appBarColor: AppColors.yellowLight,
             leadingIcon: Assets.media.icons.token.svg(),
-            tokenBalance: _state.tokenBalance?.totalBalance,
+            tokenBalance: _state.tokenBalance?.totalBalance ?? _state.balance,
             // should be changed to data from backEnd
             tealIcon: Assets.media.icons.search.svg(),
           ),

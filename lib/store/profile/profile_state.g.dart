@@ -56,13 +56,13 @@ mixin _$ProfileState on _ProfileState, Store {
       Atom(name: '_ProfileState.profile', context: context);
 
   @override
-  Profile get profile {
+  ProfileModel get profile {
     _$profileAtom.reportRead();
     return super.profile;
   }
 
   @override
-  set profile(Profile value) {
+  set profile(ProfileModel value) {
     _$profileAtom.reportWrite(value, super.profile, () {
       super.profile = value;
     });

@@ -1,18 +1,18 @@
-import 'package:denari_app/data/authentication/model/reset_pass_model.dart';
+import 'package:denari_app/data/authentication/model/change_pass_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/network/utils/use_case.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
-part 'forgot_state.g.dart';
+part 'change_password_state.g.dart';
 
-class ForgotState = _ForgotState with _$ForgotState;
+class ChangePasswordState = _ChangePasswordState with _$ChangePasswordState;
 
-abstract class _ForgotState with Store {
+abstract class _ChangePasswordState with Store {
   final AuthRepository _repository;
 
-  _ForgotState({required AuthRepository authRepository})
+  _ChangePasswordState({required AuthRepository authRepository})
       : _repository = authRepository;
 
   @observable
@@ -23,6 +23,12 @@ abstract class _ForgotState with Store {
 
   @action
   void setPassword(String value) => password = value;
+
+  @observable
+  String newPassword = "";
+
+  @action
+  void setNewPassword(String value) => newPassword = value;
 
   @observable
   String passwordRepeat = "";
@@ -52,6 +58,9 @@ abstract class _ForgotState with Store {
   bool get isPasswordValid => password.length >= 8;
 
   @computed
+  bool get isNewPasswordValid => password.length >= 8;
+
+  @computed
   bool get isPhoneValid {
     try {
       return phone?.isValidNumber() ?? false;
@@ -65,7 +74,10 @@ abstract class _ForgotState with Store {
 
   @computed
   bool get changeButtonEnabled =>
-      isPasswordValid && password == passwordRepeat && isPhoneValid && !loading;
+      isPasswordValid &&
+      isNewPasswordValid &&
+      newPassword == passwordRepeat &&
+      !loading;
 
   @computed
   bool get sendButtonEnabled => isPhoneValid && !loading;
@@ -73,12 +85,11 @@ abstract class _ForgotState with Store {
   @action
   Future<void> changePassword() async {
     loading = true;
-    final model = ResetPassModel(
-      newPassword: password,
-      phone: phone.print(),
-      code: code,
+    final model = ChangePassModel(
+      oldPassword: password,
+      newPassword: newPassword,
     );
-    (await handle(() => _repository.resetPassword(model))).then(
+    (await handle(() => _repository.changePassword(model))).then(
       (data) => changePasswordError = 'true',
       (error) => changePasswordError = error,
     );

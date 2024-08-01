@@ -1,4 +1,4 @@
-import 'package:denari_app/data/profile/model/profile.dart';
+import 'package:denari_app/data/profile/model/profile_model.dart';
 import 'package:denari_app/gen/assets.gen.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
@@ -13,8 +13,10 @@ import 'package:denari_app/view/widgets/buttons/button_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'invite_sheet.dart';
+
 class ProfileMenu extends StatelessWidget {
-  final Profile profile;
+  final ProfileModel profile;
 
   const ProfileMenu({
     super.key,
@@ -39,7 +41,7 @@ class ProfileMenu extends StatelessWidget {
           ButtonMenu(
             label: 'profile.change_password'.tr(),
             svg: Assets.media.icons.lock.path,
-            onPressed: () => {},
+            onPressed: () => context.goNamed(Routes.profilePassword),
           ),
           const Divider(height: 1),
           ButtonMenu(
@@ -63,7 +65,10 @@ class ProfileMenu extends StatelessWidget {
           ButtonMenu(
             label: 'profile.invite_friends'.tr(),
             svg: Assets.media.icons.sendToBack.path,
-            onPressed: () => {},
+            onPressed: () => showModalSheet<void>(
+              context: context,
+              child: const InviteSheet(),
+            ),
           ),
           const Divider(height: 1),
           ButtonMenu(

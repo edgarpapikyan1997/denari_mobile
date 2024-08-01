@@ -1,16 +1,20 @@
 import 'package:denari_app/data/authentication/model/reg_model.dart';
-import 'package:denari_app/data/profile/model/profile.dart';
+import 'package:denari_app/data/profile/model/profile_model.dart';
 import 'package:denari_app/view/screens/authentication/code/sign_up_code_screen.dart';
 import 'package:denari_app/view/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
+import 'package:denari_app/view/screens/profile/pages/change_password_page.dart';
 import 'package:denari_app/view/screens/profile/pages/code_page.dart';
+import 'package:denari_app/view/screens/profile/pages/create_password_page.dart';
+import 'package:denari_app/view/screens/profile/pages/forgot_code_page.dart';
+import 'package:denari_app/view/screens/profile/pages/forgot_page.dart';
 import 'package:denari_app/view/screens/profile/pages/profile_page.dart';
 import 'package:denari_app/view/screens/send_gift_screen/send_gift_card_screen.dart';
 import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../data/authentication/model/reset_model.dart';
+import '../data/authentication/model/reset_pass_model.dart';
 import '../view/screens/authentication/code/forgot_code_screen.dart';
 import '../view/screens/authentication/forgot/forgot_screen.dart';
 import '../view/screens/authentication/password/create_password_screen.dart';
@@ -67,14 +71,42 @@ final GoRouter router = GoRouter(
               name: Routes.profileData,
               path: Routes.profileData,
               builder: (context, state) => ProfilePage(
-                profile: state.extra as Profile,
+                profile: state.extra as ProfileModel,
               ),
               routes: [
                 GoRoute(
                   name: Routes.profileCode,
                   path: Routes.code,
                   builder: (context, state) =>
-                      ProfileCodePage(model: state.extra as Profile),
+                      ProfileCodePage(model: state.extra as ProfileModel),
+                ),
+              ],
+            ),
+            GoRoute(
+              name: Routes.profilePassword,
+              path: Routes.password,
+              builder: (context, state) => const ChangePasswordPage(),
+              routes: [
+                GoRoute(
+                  name: Routes.profileForgot,
+                  path: Routes.forgot,
+                  builder: (context, state) => const ForgotPage(),
+                  routes: [
+                    GoRoute(
+                      name: Routes.profileForgotCode,
+                      path: Routes.code,
+                      builder: (context, state) =>
+                          ForgotCodePage(model: state.extra as ResetPassModel),
+                      routes: [
+                        GoRoute(
+                          name: Routes.profileReset,
+                          path: Routes.password,
+                          builder: (context, state) => CreatePasswordPage(
+                              model: state.extra as ResetPassModel),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -111,13 +143,13 @@ final GoRouter router = GoRouter(
               name: Routes.forgotCode,
               path: Routes.code,
               builder: (context, state) =>
-                  ForgotCodeScreen(model: state.extra as ResetModel),
+                  ForgotCodeScreen(model: state.extra as ResetPassModel),
               routes: [
                 GoRoute(
                   name: Routes.password,
                   path: Routes.password,
-                  builder: (context, state) =>
-                      CreatePasswordScreen(model: state.extra as ResetModel),
+                  builder: (context, state) => CreatePasswordScreen(
+                      model: state.extra as ResetPassModel),
                 ),
               ],
             ),
@@ -165,4 +197,8 @@ final class Routes {
   static const password = 'password';
   static const profile = 'profile';
   static const profileData = 'data';
+  static const profilePassword = 'p-password';
+  static const profileForgot = 'p-forgot';
+  static const profileForgotCode = 'p-f-forgot';
+  static const profileReset = 'p-reset';
 }

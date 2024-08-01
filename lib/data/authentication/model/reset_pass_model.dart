@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'reset_model.g.dart';
+part 'reset_pass_model.g.dart';
 
 @JsonSerializable()
-class ResetModel {
+class ResetPassModel {
   @JsonKey(defaultValue: '')
   final String phone;
   @JsonKey(defaultValue: '')
@@ -11,23 +11,23 @@ class ResetModel {
   @JsonKey(defaultValue: '')
   final String newPassword;
 
-  const ResetModel({
+  const ResetPassModel({
     required this.phone,
     required this.code,
     required this.newPassword,
   });
 
-  factory ResetModel.fromJson(Map<String, dynamic> json) =>
-      _$ResetModelFromJson(json);
+  factory ResetPassModel.fromJson(Map<String, dynamic> json) =>
+      _$ResetPassModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ResetModelToJson(this);
+  Map<String, dynamic> toJson() => _$ResetPassModelToJson(this);
 
-  ResetModel copyWith({
+  ResetPassModel copyWith({
     String? phone,
     String? code,
     String? newPassword,
   }) {
-    return ResetModel(
+    return ResetPassModel(
       phone: phone ?? this.phone,
       code: code ?? this.code,
       newPassword: newPassword ?? this.newPassword,

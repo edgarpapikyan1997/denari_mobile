@@ -15,16 +15,16 @@ import 'package:go_router/go_router.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
-class CreatePasswordScreen extends StatefulWidget {
+class CreatePasswordPage extends StatefulWidget {
   final ResetPassModel model;
 
-  const CreatePasswordScreen({super.key, required this.model});
+  const CreatePasswordPage({super.key, required this.model});
 
   @override
-  State<CreatePasswordScreen> createState() => _CreatePasswordScreenState();
+  State<CreatePasswordPage> createState() => _CreatePasswordPageState();
 }
 
-class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
+class _CreatePasswordPageState extends State<CreatePasswordPage> {
   final ForgotState _state = ForgotState(
     authRepository: di.get<AuthRepository>(),
   );

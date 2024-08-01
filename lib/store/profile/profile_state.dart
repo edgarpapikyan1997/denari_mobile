@@ -1,5 +1,5 @@
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
-import 'package:denari_app/data/profile/model/profile.dart';
+import 'package:denari_app/data/profile/model/profile_model.dart';
 import 'package:denari_app/data/profile/repository/profile_repository.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/network/utils/use_case.dart';
@@ -21,7 +21,7 @@ abstract class _ProfileState with Store {
         _profileRepository = profileRepository;
 
   @observable
-  Profile profile = Profile.fromJson({});
+  ProfileModel profile = ProfileModel.fromJson({});
 
   @observable
   String? getError;
@@ -119,7 +119,7 @@ abstract class _ProfileState with Store {
   @action
   Future<void> updateProfile() async {
     loading = true;
-    final uProfile = Profile(
+    final uProfile = ProfileModel(
       name: name,
       email: email,
       phone: phone.print(),

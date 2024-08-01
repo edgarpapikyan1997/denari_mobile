@@ -132,6 +132,16 @@
     "you_want_stop_verification": "Do you want to stop the verification process?",
     "update_success": "Profile data saved successfully",
     "stop": "Stop",
-    "continue": "Continue"
+    "continue": "Continue",
+    "enter_valid_password": "Enter a valid password",
+    "enter_new_password": "Enter a new password",
+    "save_pass_success": "Password saved successfully",
+    "invite_desc": "Share the benefits of Denari app with your friends!",
+    "email_or_phone": "Enter email or phone number",
+    "send_invite": "Send Invitation",
+    "invite_error": "incorrect invite",
+    "invite_success": "Congratulations! You've earned tokens for inviting a friend!",
+    "invite_success_desc": "You’ve successfully invited a friend to join Denari app.",
+    "tokens": "+{} tokens"
   }
 }

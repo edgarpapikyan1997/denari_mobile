@@ -16,6 +16,13 @@ mixin _$ChangePasswordState on _ChangePasswordState, Store {
       (_$isPasswordValidComputed ??= Computed<bool>(() => super.isPasswordValid,
               name: '_ChangePasswordState.isPasswordValid'))
           .value;
+  Computed<bool>? _$isNewPasswordValidComputed;
+
+  @override
+  bool get isNewPasswordValid => (_$isNewPasswordValidComputed ??=
+          Computed<bool>(() => super.isNewPasswordValid,
+              name: '_ChangePasswordState.isNewPasswordValid'))
+      .value;
   Computed<bool>? _$isPhoneValidComputed;
 
   @override
@@ -259,6 +266,7 @@ code: ${code},
 loading: ${loading},
 codeSent: ${codeSent},
 isPasswordValid: ${isPasswordValid},
+isNewPasswordValid: ${isNewPasswordValid},
 isPhoneValid: ${isPhoneValid},
 isCodeValid: ${isCodeValid},
 changeButtonEnabled: ${changeButtonEnabled},

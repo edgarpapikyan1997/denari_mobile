@@ -28,4 +28,13 @@ final class ImplProfileRepository extends ProfileRepository {
     );
     return result.statusCode == 200;
   }
+
+  @override
+  Future<bool> invite(String contact) async {
+    final result = await _client.get(
+      '${_config.host}/invite',
+      queryParameters: {'contact': contact},
+    );
+    return result.statusCode == 200;
+  }
 }

@@ -13,6 +13,8 @@ import 'package:denari_app/view/widgets/buttons/button_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'invite_sheet.dart';
+
 class ProfileMenu extends StatelessWidget {
   final ProfileModel profile;
 
@@ -63,7 +65,10 @@ class ProfileMenu extends StatelessWidget {
           ButtonMenu(
             label: 'profile.invite_friends'.tr(),
             svg: Assets.media.icons.sendToBack.path,
-            onPressed: () => {},
+            onPressed: () => showModalSheet<void>(
+              context: context,
+              child: const InviteSheet(),
+            ),
           ),
           const Divider(height: 1),
           ButtonMenu(

@@ -4,4 +4,6 @@ abstract class ProfileRepository {
   Future<ProfileModel> getProfile();
 
   Future<bool> updateProfile(ProfileModel profile);
+
+  Future<bool> invite(String contact);
 }

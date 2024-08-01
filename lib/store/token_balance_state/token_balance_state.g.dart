@@ -9,19 +9,51 @@ part of 'token_balance_state.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TokenBalanceState on _TokenBalanceState, Store {
-  late final _$earnedTokenAtom =
-      Atom(name: '_TokenBalanceState.earnedToken', context: context);
+  late final _$balanceAtom =
+      Atom(name: '_TokenBalanceState.balance', context: context);
 
   @override
-  int get earnedToken {
-    _$earnedTokenAtom.reportRead();
-    return super.earnedToken;
+  int get balance {
+    _$balanceAtom.reportRead();
+    return super.balance;
   }
 
   @override
-  set earnedToken(int value) {
-    _$earnedTokenAtom.reportWrite(value, super.earnedToken, () {
-      super.earnedToken = value;
+  set balance(int value) {
+    _$balanceAtom.reportWrite(value, super.balance, () {
+      super.balance = value;
+    });
+  }
+
+  late final _$tokenModelsAtom =
+      Atom(name: '_TokenBalanceState.tokenModels', context: context);
+
+  @override
+  List<TokenModel> get tokenModels {
+    _$tokenModelsAtom.reportRead();
+    return super.tokenModels;
+  }
+
+  @override
+  set tokenModels(List<TokenModel> value) {
+    _$tokenModelsAtom.reportWrite(value, super.tokenModels, () {
+      super.tokenModels = value;
+    });
+  }
+
+  late final _$tokenBalanceAtom =
+      Atom(name: '_TokenBalanceState.tokenBalance', context: context);
+
+  @override
+  TokenBalanceModel? get tokenBalance {
+    _$tokenBalanceAtom.reportRead();
+    return super.tokenBalance;
+  }
+
+  @override
+  set tokenBalance(TokenBalanceModel? value) {
+    _$tokenBalanceAtom.reportWrite(value, super.tokenBalance, () {
+      super.tokenBalance = value;
     });
   }
 
@@ -41,6 +73,40 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
     });
   }
 
+  late final _$getErrorAtom =
+      Atom(name: '_TokenBalanceState.getError', context: context);
+
+  @override
+  String? get getError {
+    _$getErrorAtom.reportRead();
+    return super.getError;
+  }
+
+  @override
+  set getError(String? value) {
+    _$getErrorAtom.reportWrite(value, super.getError, () {
+      super.getError = value;
+    });
+  }
+
+  late final _$getTokenBalanceAsyncAction =
+      AsyncAction('_TokenBalanceState.getTokenBalance', context: context);
+
+  @override
+  Future<void> getTokenBalance() {
+    return _$getTokenBalanceAsyncAction.run(() => super.getTokenBalance());
+  }
+
+  late final _$getTokenBalanceHistoryAsyncAction = AsyncAction(
+      '_TokenBalanceState.getTokenBalanceHistory',
+      context: context);
+
+  @override
+  Future<void> getTokenBalanceHistory() {
+    return _$getTokenBalanceHistoryAsyncAction
+        .run(() => super.getTokenBalanceHistory());
+  }
+
   late final _$_TokenBalanceStateActionController =
       ActionController(name: '_TokenBalanceState', context: context);
 
@@ -58,8 +124,11 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
   @override
   String toString() {
     return '''
-earnedToken: ${earnedToken},
-giftCardLD: ${giftCardLD}
+balance: ${balance},
+tokenModels: ${tokenModels},
+tokenBalance: ${tokenBalance},
+giftCardLD: ${giftCardLD},
+getError: ${getError}
     ''';
   }
 }

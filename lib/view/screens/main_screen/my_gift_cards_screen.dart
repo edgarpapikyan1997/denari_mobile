@@ -18,7 +18,7 @@ class MyGiftCardsScreen extends StatefulWidget {
 }
 
 class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
-  final _tokenBalanceState = TokenBalanceState();
+  final _tokenBalanceState = TokenBalanceState(tokenRepository: null);
   final brandName = 'Disney Toy Store';
   final purchaseDate = 'July 24, 2024';
 
@@ -31,7 +31,7 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
         BrandItemWidget(
           avatar: Assets.media.images.toyStory.path,
           brandName: '$brandName$i',
-          tokenBalance: _tokenBalanceState.earnedToken,
+          tokenBalance: _tokenBalanceState.balance,
           tealButton: GestureDetector(
             onTap: () {
               showItemInfoBottomSheet(
@@ -49,7 +49,7 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
                   'Purchase date: $purchaseDate',
                   style: context.theme.caption.lightGreyText,
                 ),
-                itemInfoCost: _tokenBalanceState.earnedToken.toString(),
+                itemInfoCost: _tokenBalanceState.balance.toString(),
               );
             },
             child: Assets.media.icons.chevronRight.svg(),

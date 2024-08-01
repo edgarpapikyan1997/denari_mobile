@@ -1,12 +1,16 @@
+import 'package:denari_app/store/loading_state/loading_state.dart';
 import 'package:denari_app/store/token_balance_state/token_balance_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/main_screen_field.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/product_advertisement_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import '../../../data/token/repository/impl/token_repository_impl.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../model/qr_id.dart';
 import '../../../store/categories_state/categories_state.dart';
+import '../../../utils/di/config.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/category/category_field_generator.dart';
@@ -23,11 +27,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  CategoriesState? categoriesState = CategoriesState();
+  final LoadingState _loadingState = LoadingState();
 
+  final TokenBalanceState _state = TokenBalanceState(
+    tokenRepository: di.get<ImplTokenRepository>(),
+  );
+  CategoriesState? categoriesState = CategoriesState();
   final qrIdReceiver = GetIt.instance<QRIdReceiver>();
 
-  final _token = TokenBalanceState();
   final categories = [
     {
       'categoryName': 'main.food'.tr(),
@@ -58,18 +65,27 @@ class _MainScreenState extends State<MainScreen> {
       'categoryIcon': Assets.media.icons.other.svg()
     },
   ];
+
   @override
   void initState() {
+    _loadingState.startLoading();
     super.initState();
-    initCategories();
+    initPrefs();
   }
 
   initCategories() {
     categoriesState?.selectCategory(categories[0]['categoryName'] as String);
   }
 
-  Widget mainScreenFields() {
+  void initPrefs() {
+    initCategories();
+    _state.getTokenBalance();
+    _loadingState.stopLoading();
+  }
 
+
+
+  Widget mainScreenFields() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -99,7 +115,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Observer(builder: (context) {
       return Scaffold(
         appBar: PreferredSize(
@@ -107,7 +122,7 @@ class _MainScreenState extends State<MainScreen> {
           child: CustomAppBar(
             appBarColor: AppColors.yellowLight,
             leadingIcon: Assets.media.icons.token.svg(),
-            tokenCount: _token.earnedToken,
+            tokenBalance: _state.tokenBalance?.totalBalance,
             // should be changed to data from backEnd
             tealIcon: Assets.media.icons.search.svg(),
           ),
@@ -149,7 +164,7 @@ class _MainScreenState extends State<MainScreen> {
                           padding: MaterialStateProperty.all<EdgeInsets>(
                               EdgeInsets.zero),
                           minimumSize:
-                          MaterialStateProperty.all<Size>(Size.zero),
+                              MaterialStateProperty.all<Size>(Size.zero),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                         child: Text(
@@ -173,7 +188,7 @@ class _MainScreenState extends State<MainScreen> {
                           padding: MaterialStateProperty.all<EdgeInsets>(
                               EdgeInsets.zero),
                           minimumSize:
-                          MaterialStateProperty.all<Size>(Size.zero),
+                              MaterialStateProperty.all<Size>(Size.zero),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                         child: Text(

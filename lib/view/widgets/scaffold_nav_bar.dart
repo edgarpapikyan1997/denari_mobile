@@ -1,13 +1,17 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:denari_app/utils/themes/dark_theme.dart';
 import 'package:denari_app/utils/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../gen/assets.gen.dart';
+import '../../model/qr_id.dart';
 import '../../store/nottom_nav_bar_state/bottom_nav_bar_state.dart';
+import 'bottom_sheet/qr_bottom_sheet.dart';
 
 final bottomNavBarState = BottomNavBarState();
 
@@ -21,6 +25,7 @@ class ScaffoldNavBar extends StatefulWidget {
 }
 
 class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
+  final qrIdReceiver = GetIt.instance<QRIdReceiver>();
   int selectedValue = 0;
   PageController pageController = PageController(initialPage: 0);
   ThemeData theme =
@@ -46,10 +51,8 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
           selectedLabelStyle: context.theme.navBar,
           unselectedLabelStyle: context.theme.navBar.regular,
           currentIndex: bottomNavBarState.index,
-          // Change to your desired selected color
           unselectedItemColor: AppColors.lightGreyText,
           selectedItemColor: AppColors.black,
-          // currentIndex: selectedValue,
           items: [
             BottomNavigationBarItem(
                 icon: Assets.media.icons.circleUserRound
@@ -97,7 +100,7 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
             bottomNavBarState.changeIndex(index);
             switch (index) {
               case 0:
-                context.go('/profile');
+                context.goNamed(Routes.profile);
                 break;
               case 1:
                 context.go('/notifications');

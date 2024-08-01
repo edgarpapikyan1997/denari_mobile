@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:denari_app/view/widgets/countdown.dart';
 import 'package:denari_app/view/widgets/text_with_link.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class _ResendTimerState extends State<ResendTimer> {
   void _createTimer() {
     _timer = Timer(
       _duration,
-          () => setState(() => _timer == null),
+      () => setState(() => _timer == null),
     );
   }
 
@@ -42,6 +43,8 @@ class _ResendTimerState extends State<ResendTimer> {
     if (_timer?.isActive == true) {
       return Text.rich(
         TextSpan(
+          style: context.theme.body1
+              .copyWith(color: AppColors.lightGreyText),
           children: [
             TextSpan(text: 'sign.can_resend'.tr()),
             const TextSpan(text: ': '),
@@ -55,6 +58,7 @@ class _ResendTimerState extends State<ResendTimer> {
                           .toString();
                   return Text(
                     '${minutes..padLeft(2, "0")}:${seconds.padLeft(2, "0")}',
+                    style: context.theme.button,
                   );
                 },
               ),

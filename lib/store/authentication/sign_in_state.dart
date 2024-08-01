@@ -1,7 +1,8 @@
 import 'package:denari_app/data/authentication/model/login_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
-import 'package:denari_app/utils/log/logging.dart';
+import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/network/data/token_preferences.dart';
+import 'package:denari_app/utils/network/utils/use_case.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
@@ -20,7 +21,7 @@ abstract class _SignInState with Store {
         _tokenPreferences = tokenPreferences;
 
   @observable
-  String? signInError;
+  String? signIn;
 
   @observable
   String password = "";
@@ -53,20 +54,19 @@ abstract class _SignInState with Store {
   bool get loginButtonEnabled => isPasswordValid && isPhoneValid && !loading;
 
   @action
-  Future<void> signIn() async {
+  Future<void> login() async {
     loading = true;
-    try {
-      final token = await _repository.login(
-        LoginModel(
-          password: password,
-          phone: phone?.completeNumber ?? '',
-        ),
-      );
-      _tokenPreferences.setToken(token);
-    } catch (e) {
-      logger.error(e.toString());
-      signInError = e.toString();
-    }
+    final model = LoginModel(
+      password: password,
+      phone: phone.print(),
+    );
+    (await handle(() => _repository.login(model))).then(
+      (data) {
+        _tokenPreferences.setToken(data);
+        signIn = 'true';
+      },
+      (error) => signIn = error,
+    );
     loading = false;
   }
 }

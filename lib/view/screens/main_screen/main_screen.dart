@@ -1,10 +1,16 @@
+import 'package:denari_app/store/loading_state/loading_state.dart';
 import 'package:denari_app/store/token_balance_state/token_balance_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/main_screen_field.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/product_advertisement_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import '../../../data/token/repository/impl/token_repository_impl.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../model/qr_id.dart';
 import '../../../store/categories_state/categories_state.dart';
+import '../../../utils/di/config.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/category/category_field_generator.dart';
@@ -21,7 +27,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final _token = TokenBalanceState();
+  final LoadingState _loadingState = LoadingState();
+
+  final TokenBalanceState _state = TokenBalanceState(
+    tokenRepository: di.get<ImplTokenRepository>(),
+  );
+  CategoriesState? categoriesState = CategoriesState();
+  final qrIdReceiver = GetIt.instance<QRIdReceiver>();
+
   final categories = [
     {
       'categoryName': 'main.food'.tr(),
@@ -52,19 +65,25 @@ class _MainScreenState extends State<MainScreen> {
       'categoryIcon': Assets.media.icons.other.svg()
     },
   ];
-  CategoriesState? categoriesState;
 
   @override
   void initState() {
+    _loadingState.startLoading();
     super.initState();
-    initCategories();
+    initPrefs();
   }
 
   initCategories() {
-    categoriesState = CategoriesState(
-      initialCategory: categories[0]['categoryName'].toString(),
-    );
+    categoriesState?.selectCategory(categories[0]['categoryName'] as String);
   }
+
+  void initPrefs() {
+    initCategories();
+    _state.getTokenBalance();
+    _loadingState.stopLoading();
+  }
+
+
 
   Widget mainScreenFields() {
     return Row(
@@ -103,7 +122,8 @@ class _MainScreenState extends State<MainScreen> {
           child: CustomAppBar(
             appBarColor: AppColors.yellowLight,
             leadingIcon: Assets.media.icons.token.svg(),
-            tokenCount: _token.earnedToken.toString(),
+            tokenBalance: _state.tokenBalance?.totalBalance,
+            // should be changed to data from backEnd
             tealIcon: Assets.media.icons.search.svg(),
           ),
         ),
@@ -138,7 +158,7 @@ class _MainScreenState extends State<MainScreen> {
                         'main.topCategories'.tr(),
                         style: context.theme.headline5.bold,
                       ),
-                      textButton: TextButton(
+                      tealButton: TextButton(
                         onPressed: () {},
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(
@@ -162,7 +182,7 @@ class _MainScreenState extends State<MainScreen> {
                         'main.popularStores'.tr(),
                         style: context.theme.headline3.semiBold,
                       ),
-                      textButton: TextButton(
+                      tealButton: TextButton(
                         onPressed: () {},
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all<EdgeInsets>(

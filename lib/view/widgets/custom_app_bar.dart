@@ -9,17 +9,18 @@ import 'balance_widget.dart';
 class CustomAppBar extends StatelessWidget {
   final Color? appBarColor;
   final Widget? leadingIcon;
-  final String? tokenCount;
+  final int? tokenBalance;
   final Text? title;
   final Widget? tealIcon;
 
-  const CustomAppBar(
-      {super.key,
-      this.leadingIcon,
-      this.tokenCount,
-      this.title,
-      this.tealIcon,
-      this.appBarColor});
+  const CustomAppBar({
+    super.key,
+    this.leadingIcon,
+    this.tokenBalance,
+    this.title,
+    this.tealIcon,
+    this.appBarColor,
+  });
 
   Widget tokenAppBar(BuildContext context) {
     return Row(
@@ -29,10 +30,10 @@ class CustomAppBar extends StatelessWidget {
             context.go('/tokenBalance');
           },
           child: BalanceWidget(
-            isTokenBalance: tokenCount != null ? true : false,
+            isTokenBalance: tokenBalance != null ? true : false,
             tokenIconHeight: 28,
             tokenIconWidth: 26,
-            balance: tokenCount!,
+            balance: tokenBalance!,
             textStyle: context.theme.headline2.bold,
           ),
         ),
@@ -71,7 +72,7 @@ class CustomAppBar extends StatelessWidget {
     return Container(
       color: appBarColor,
       width: context.width,
-      child: tokenCount != null ? tokenAppBar(context) : defaultAppBar(),
+      child: tokenBalance != null ? tokenAppBar(context) : defaultAppBar(),
     );
   }
 }

@@ -9,6 +9,7 @@ import 'package:denari_app/view/widgets/buttons/button_primary.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:denari_app/view/widgets/fields/edit_field.dart';
 import 'package:denari_app/view/widgets/fields/phone_field.dart';
+import 'package:denari_app/view/widgets/message.dart';
 import 'package:denari_app/view/widgets/text_with_link.dart';
 import 'package:denari_app/view/widgets/welcome_text.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final SignUpState _state = SignUpState(
     authRepository: di.get<AuthRepository>(),
     tokenPreferences: di.get<TokenPreferences>(),
@@ -33,9 +33,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void initState() {
     reaction(
-      (reaction) => _state.codeSentError,
+      (reaction) => _state.codeSent,
       (value) {
-        if (value == null) {
+        if (value == 'true') {
           context.goNamed(
             Routes.code,
             extra: RegModel(
@@ -46,10 +46,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               code: '',
             ),
           );
-        } else {
-          ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(
-            SnackBar(content: Text(value)),
-          );
+        } else if (value != null) {
+          Message.show(value);
         }
       },
       equals: (_, __) => false,
@@ -60,7 +58,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 14),

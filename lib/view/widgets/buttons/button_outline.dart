@@ -1,4 +1,6 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/themes/app_colors.dart';
+import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'button.dart';
@@ -42,8 +44,8 @@ class ButtonOutline extends StatelessWidget {
       svg: svg,
       dimension: dimension,
       buttonColor: Colors.transparent,
-      borderColor: context.theme.colorScheme.primary,
-      valuesColor: context.theme.colorScheme.primary,
+      borderColor: AppColors.black,
+      valuesColor: AppColors.black,
       borderRadius: borderRadius,
       padding: padding,
       fontSize: fontSize,

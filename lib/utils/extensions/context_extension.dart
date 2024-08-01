@@ -68,12 +68,20 @@ extension ThemeDataHelper on ThemeData {
         height: 1.26,
       );
 
+  TextStyle get headline6 => const TextStyle(
+        color: AppColors.black,
+        fontFamily: FontFamily.onest,
+        fontWeight: FontWeight.w600,
+        fontSize: 26,
+        height: 1.20,
+      );
+
   TextStyle get body1 => const TextStyle(
         color: AppColors.black,
         fontFamily: FontFamily.onest,
         fontWeight: FontWeight.w400,
         fontSize: 16,
-        height: 1.40,
+        height: 1.22,
       );
 
   TextStyle get body2 => const TextStyle(
@@ -244,6 +252,8 @@ extension TextStyleHelpers on TextStyle {
   TextStyle get alertRed => copyWith(color: AppColors.alertRed);
 
   TextStyle get lightGreyText => copyWith(color: AppColors.lightGreyText);
+
+  TextStyle get greyLight => copyWith(color: AppColors.greyLight);
 
   TextStyle size([double? fontSize]) => copyWith(fontSize: fontSize);
 

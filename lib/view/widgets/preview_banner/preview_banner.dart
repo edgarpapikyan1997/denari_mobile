@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 class PreviewBanner extends StatelessWidget {
   final Widget? leadingBanner;
   final Widget? middleBanner;
-  final Widget? textButton;
+  final Widget? tealButton;
   final String? bannerUnderText;
 
   const PreviewBanner(
       {super.key,
       this.leadingBanner,
       this.middleBanner,
-      this.textButton,
+      this.tealButton,
       this.bannerUnderText});
 
   @override
@@ -25,7 +25,7 @@ class PreviewBanner extends StatelessWidget {
           children: [
             leadingBanner ?? const SizedBox(),
             middleBanner ?? const SizedBox(),
-            textButton ?? const SizedBox(),
+            tealButton ?? const SizedBox(),
           ],
         ),
         bannerUnderText != null

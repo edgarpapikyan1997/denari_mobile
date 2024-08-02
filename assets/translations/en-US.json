@@ -143,5 +143,9 @@
     "invite_success": "Congratulations! You've earned tokens for inviting a friend!",
     "invite_success_desc": "You’ve successfully invited a friend to join Denari app.",
     "tokens": "+{} tokens"
+  },
+  "shops" : {
+    "shops" : "Shops",
+    "all" : "All"
   }
 }

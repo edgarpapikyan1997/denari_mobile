@@ -10,6 +10,8 @@ import 'package:go_router/go_router.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../store/categories_state/categories_state.dart';
 import '../../../../utils/themes/app_colors.dart';
+import '../../../constants/categories.dart';
+import '../../widgets/category/category.dart';
 import '../../widgets/category/category_field_generator.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/custom_button.dart';
@@ -29,14 +31,8 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
   bool isToken = false;
 
   final categories = [
-    {
-      'categoryName': 'giftCard.giftCard'.tr(),
-      'categoryIcon': Assets.media.icons.card.svg()
-    },
-    {
-      'categoryName': 'balance.tokens'.tr(),
-      'categoryIcon': Assets.media.icons.tokenWhite.svg()
-    },
+    Category(type: CategoryType.giftCard),
+    Category(type: CategoryType.tokens),
   ];
 
   @override
@@ -46,7 +42,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
   }
 
   initCategories() {
-    categoriesState?.selectCategory(categories[0]['categoryName'] as String);
+    categoriesState?.selectCategory(categories[0].name);
   }
 
   @override
@@ -79,8 +75,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
               const SizedBox(
                 height: 24,
               ),
-              categoriesState?.currentCategory ==
-                      categories[0]['categoryName'].toString()
+              categoriesState?.currentCategory == categories[0].name
                   ? Expanded(
                       child: ItemSelectorWidget(
                         items: items,
@@ -112,8 +107,10 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                   context.goNamed(
                     "sendGiftCardScreen",
                     extra: BrandItemWidget(
-                      isToken: categoriesState?.currentCategory ==
-                          categories[0]['categoryName'] ? false : true,
+                      isToken:
+                          categoriesState?.currentCategory == categories[0].name
+                              ? false
+                              : true,
                       avatar: Assets.media.images.toyStory.path,
                       brandName: 'McDonalds',
                       tokenBalance: 50,

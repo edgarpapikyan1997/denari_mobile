@@ -220,6 +220,9 @@ class $AssetsMediaImagesGen {
   AssetGenImage get image9 =>
       const AssetGenImage('assets/media/images/image 9.png');
 
+  /// File path: assets/media/images/img.png
+  AssetGenImage get img => const AssetGenImage('assets/media/images/img.png');
+
   /// File path: assets/media/images/ratedStar.png
   AssetGenImage get ratedStar =>
       const AssetGenImage('assets/media/images/ratedStar.png');
@@ -243,6 +246,7 @@ class $AssetsMediaImagesGen {
         filledStar,
         fireworks,
         image9,
+        img,
         ratedStar,
         star,
         taskListClock,

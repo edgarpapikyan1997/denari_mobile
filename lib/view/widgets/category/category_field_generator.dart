@@ -1,9 +1,12 @@
+import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
 import '../../../store/categories_state/categories_state.dart';
+import 'category.dart';
 import 'category_widget.dart';
 
 class CategoryFieldGenerator extends StatelessWidget {
-  final List<Map<String, dynamic>> categories;
+  final List<Category> categories;
   final CategoriesState categoriesState;
 
   const CategoryFieldGenerator({
@@ -14,17 +17,22 @@ class CategoryFieldGenerator extends StatelessWidget {
 
   Widget createWidgetCollection() {
     return Row(
-      children: categories.map((category) {
-        String categoryName = category['categoryName'] as String;
-        Widget categoryIcon = category['categoryIcon'] as Widget;
-        return CategoryWidget(
-            categoryName: categoryName,
-            categoryIcon: categoryIcon,
+      children: categories.asMap().entries.map((entry) {
+        int index = entry.key;
+        Category category = entry.value;
+        return PaddingUtility.only(
+          right: index == categories.length - 1 ? 0 : 8,
+          child: CategoryWidget(
+            categoryName: category.name,
+            categoryIcon: category.icon,
             categoriesState: categoriesState,
             onTap: () {
+              print('Selected category index: $index');
               print(categoriesState.currentCategory);
-              categoriesState.selectCategory(categoryName);
-            });
+              categoriesState.selectCategory(category.name);
+            },
+          ),
+        );
       }).toList(),
     );
   }

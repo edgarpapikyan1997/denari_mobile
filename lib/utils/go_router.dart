@@ -23,11 +23,12 @@ import '../view/screens/main_screen/main_screen.dart';
 import '../view/screens/notification_screen.dart';
 import '../view/screens/profile/profile_screen.dart';
 import '../view/screens/send_gift_screen/send_gift_screen.dart';
-import '../view/screens/shop_screen.dart';
+import '../view/screens/shops_screen/shop_screen.dart';
 import '../view/widgets/scaffold_nav_bar.dart';
 import 'listeners/auth_listener.dart';
 
 final GoRouter router = GoRouter(
+
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -55,9 +56,9 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: '/shopScreen',
+          path: '/shopsScreen',
           builder: (context, state) {
-            return const ShopScreen();
+            return const ShopsScreen();
           },
         ),
         GoRoute(

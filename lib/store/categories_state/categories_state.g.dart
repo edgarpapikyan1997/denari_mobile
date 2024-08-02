@@ -25,6 +25,22 @@ mixin _$CategoriesState on _CategoriesState, Store {
     });
   }
 
+  late final _$itemColorAtom =
+      Atom(name: '_CategoriesState.itemColor', context: context);
+
+  @override
+  Color? get itemColor {
+    _$itemColorAtom.reportRead();
+    return super.itemColor;
+  }
+
+  @override
+  set itemColor(Color? value) {
+    _$itemColorAtom.reportWrite(value, super.itemColor, () {
+      super.itemColor = value;
+    });
+  }
+
   late final _$_CategoriesStateActionController =
       ActionController(name: '_CategoriesState', context: context);
 
@@ -40,9 +56,21 @@ mixin _$CategoriesState on _CategoriesState, Store {
   }
 
   @override
+  void setColor(Color color) {
+    final _$actionInfo = _$_CategoriesStateActionController.startAction(
+        name: '_CategoriesState.setColor');
+    try {
+      return super.setColor(color);
+    } finally {
+      _$_CategoriesStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-currentCategory: ${currentCategory}
+currentCategory: ${currentCategory},
+itemColor: ${itemColor}
     ''';
   }
 }

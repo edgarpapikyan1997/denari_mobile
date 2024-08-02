@@ -1,18 +1,77 @@
-import 'package:denari_app/view/widgets/store_fields/store_field_widget.dart';
+import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:pinput/pinput.dart';
+import '../../../utils/themes/app_colors.dart';
+import 'store_field_widget.dart';
 
 class StoreFieldGenerator extends StatelessWidget {
   final List<Map<String, dynamic>> storeFieldList;
+  final bool isGrid;
 
   const StoreFieldGenerator({
     super.key,
     required this.storeFieldList,
+    required this.isGrid,
   });
 
-  Widget createWidgetCollection() {
-    return Row(
-      children: storeFieldList.map((storeField) {
-        var asset = storeField['asset'] as Widget;
+  Widget showGrid(BuildContext context) {
+    return GridView.builder(
+        scrollDirection: Axis.vertical,
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: context.width / 2,
+          mainAxisExtent: 240,
+          crossAxisSpacing: 8,
+        ),
+        itemCount: storeFieldList.length,
+        itemBuilder: (context, index) {
+          var storeField = storeFieldList[index];
+          String? asset = storeField['asset'] as String?;
+          String title = storeField['title'] as String;
+          String description = storeField['description'] as String;
+          return StoreFieldWidget(
+            asset: asset,
+            title: title,
+            description: description,
+            width: 168,
+            height: 175,
+          );
+        });
+  }
+
+  Widget showListView() {
+    int itemCount = storeFieldList.length > 4 ? 4 : storeFieldList.length;
+    return SizedBox(
+      height: 196,
+      child: ListView(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        children: List.generate(itemCount, (index) {
+          var storeField = storeFieldList[index];
+          String? asset = storeField['asset'] as String?;
+          String title = storeField['title'] as String;
+          String description = storeField['description'] as String;
+          return StoreFieldWidget(
+            asset: asset,
+            title: title,
+            description: description,
+            width: 128,
+            height: 148,
+          );
+        }),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return isGrid ? showGrid(context) : showListView();
+  }
+}
+
+/*
+  itemBuilder: (context, index) {
+        var storeField = storeFieldList[index];
+        Widget? asset = storeField['asset'] as Widget?;
         String title = storeField['title'] as String;
         String description = storeField['description'] as String;
         return StoreFieldWidget(
@@ -20,16 +79,5 @@ class StoreFieldGenerator extends StatelessWidget {
           title: title,
           description: description,
         );
-      }).toList(),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      child: createWidgetCollection(),
-    );
-  }
-}
+      },
+ */

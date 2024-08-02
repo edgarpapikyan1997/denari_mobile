@@ -43,7 +43,7 @@ class CategoryWidget extends StatelessWidget {
               ),
             ],
           ).paddingSymmetric(vertical: 6, horizontal: 12),
-        ).paddingHorizontal(4);
+        );
       }),
     );
   }

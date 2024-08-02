@@ -108,7 +108,7 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
               case 2:
                 break;
               case 3:
-                context.go('/shopScreen');
+                context.go('/shopsScreen');
                 break;
               case 4:
                 context.go('/');

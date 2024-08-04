@@ -46,7 +46,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void initCategories() {
-    categoriesState.selectCategory(categories[0].name);
+    categoriesState.selectCategory(
+        categoryName: categories[0].name, newCategoryType: categories[0].type);
   }
 
   void initPrefs() {
@@ -145,7 +146,10 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                         tealButton: TextButton(
                           onPressed: () {
-                            categoriesState.selectCategory(categories[0].name);
+                            categoriesState.selectCategory(
+                              categoryName: categories[0].name,
+                              newCategoryType: categories[0].type,
+                            );
                             bottomNavBarState.changeIndex(3);
                             context.go('/shopsScreen');
                           },
@@ -173,7 +177,9 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                         tealButton: TextButton(
                           onPressed: () {
-                            categoriesState.selectCategory(categories[0].name);
+                            categoriesState.selectCategory(
+                                categoryName: categories[0].name,
+                                newCategoryType: categories[0].type);
                             bottomNavBarState.changeIndex(3);
                             context.go('/shopsScreen');
                           },
@@ -191,9 +197,7 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ).paddingOnly(bottom: 16),
                       StoreFieldGenerator(
-                        isGrid: false,
-                        storeFieldList: allShops
-                      ),
+                          isGrid: false, storeFieldList: allShops),
                     ],
                   ),
                 ),

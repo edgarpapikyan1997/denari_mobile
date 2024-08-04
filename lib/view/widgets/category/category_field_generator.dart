@@ -9,11 +9,13 @@ import 'category_widget.dart';
 class CategoryFieldGenerator extends StatelessWidget {
   final List<Category> categories;
   final CategoriesState categoriesState;
+  final bool justSelector;
 
   const CategoryFieldGenerator({
     super.key,
     required this.categories,
     required this.categoriesState,
+    this.justSelector = false
   });
 
   Widget createWidgetCollection({required BuildContext context}) {
@@ -24,22 +26,22 @@ class CategoryFieldGenerator extends StatelessWidget {
         return PaddingUtility.only(
           right: index == categories.length - 1 ? 0 : 8,
           child: CategoryWidget(
-            categoryName: category.name,
-            categoryIcon: category.icon,
-            categoriesState: categoriesState,
+              categoryName: category.name,
+              categoryIcon: category.icon,
+              categoriesState: categoriesState,
               onTap: () {
-                categoriesState.selectCategory(category.name);
-                if (category.type != CategoryType.all) {
+                print(categoriesState);
+                categoriesState.selectCategory(
+                    categoryName: category.name,
+                    newCategoryType: category.type);
+                if (justSelector != true && category.type != CategoryType.all) {
                   context.push(
-                    '/chosenCategoryScreen',
-                    extra: {
-                      'categoryType': category.type,
-                      'categoryName': category.name,
-                    },
+                      '/chosenCategoryScreen',
+                      extra: categoriesState
                   );
+
                 }
-              }
-          ),
+              }),
         );
       }).toList(),
     );

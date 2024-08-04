@@ -25,6 +25,22 @@ mixin _$CategoriesState on _CategoriesState, Store {
     });
   }
 
+  late final _$categoryTypeAtom =
+      Atom(name: '_CategoriesState.categoryType', context: context);
+
+  @override
+  CategoryType? get categoryType {
+    _$categoryTypeAtom.reportRead();
+    return super.categoryType;
+  }
+
+  @override
+  set categoryType(CategoryType? value) {
+    _$categoryTypeAtom.reportWrite(value, super.categoryType, () {
+      super.categoryType = value;
+    });
+  }
+
   late final _$itemColorAtom =
       Atom(name: '_CategoriesState.itemColor', context: context);
 
@@ -45,22 +61,13 @@ mixin _$CategoriesState on _CategoriesState, Store {
       ActionController(name: '_CategoriesState', context: context);
 
   @override
-  void selectCategory(String categoryName) {
+  void selectCategory(
+      {required String categoryName, required CategoryType newCategoryType}) {
     final _$actionInfo = _$_CategoriesStateActionController.startAction(
         name: '_CategoriesState.selectCategory');
     try {
-      return super.selectCategory(categoryName);
-    } finally {
-      _$_CategoriesStateActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setColor(Color color) {
-    final _$actionInfo = _$_CategoriesStateActionController.startAction(
-        name: '_CategoriesState.setColor');
-    try {
-      return super.setColor(color);
+      return super.selectCategory(
+          categoryName: categoryName, newCategoryType: newCategoryType);
     } finally {
       _$_CategoriesStateActionController.endAction(_$actionInfo);
     }
@@ -70,6 +77,7 @@ mixin _$CategoriesState on _CategoriesState, Store {
   String toString() {
     return '''
 currentCategory: ${currentCategory},
+categoryType: ${categoryType},
 itemColor: ${itemColor}
     ''';
   }

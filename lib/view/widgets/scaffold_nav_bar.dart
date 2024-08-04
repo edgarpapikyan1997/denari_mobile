@@ -1,3 +1,4 @@
+import 'package:denari_app/constants/categories.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
@@ -29,14 +30,15 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
   final qrIdReceiver = GetIt.instance<QRIdReceiver>();
   int selectedValue = 0;
   ThemeData theme =
-      SchedulerBinding.instance.platformDispatcher.platformBrightness ==
-              Brightness.dark
-          ? darkTheme
-          : lightTheme;
+  SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+      Brightness.dark
+      ? darkTheme
+      : lightTheme;
 
   @override
   void initState() {
     super.initState();
+    bottomNavBarState.changeIndex(4);
   }
 
   @override
@@ -57,17 +59,17 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
             BottomNavigationBarItem(
                 icon: Assets.media.icons.circleUserRound
                     .svg(
-                      height: 24,
-                      width: 24,
-                    )
+                  height: 24,
+                  width: 24,
+                )
                     .paddingSymmetric(vertical: 8),
                 label: 'main.profile'.tr()),
             BottomNavigationBarItem(
                 icon: Assets.media.icons.bell
                     .svg(
-                      height: 24,
-                      width: 24,
-                    )
+                  height: 24,
+                  width: 24,
+                )
                     .paddingSymmetric(vertical: 8),
                 label: 'main.notifications'.tr()),
             BottomNavigationBarItem(
@@ -82,17 +84,17 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
             BottomNavigationBarItem(
                 icon: Assets.media.icons.store
                     .svg(
-                      height: 24,
-                      width: 24,
-                    )
+                  height: 24,
+                  width: 24,
+                )
                     .paddingSymmetric(vertical: 8),
                 label: 'main.store'.tr()),
             BottomNavigationBarItem(
                 icon: Assets.media.icons.house
                     .svg(
-                      height: 24,
-                      width: 24,
-                    )
+                  height: 24,
+                  width: 24,
+                )
                     .paddingSymmetric(vertical: 8),
                 label: 'Home'),
           ],
@@ -116,6 +118,7 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
               default:
                 context.go('/');
             }
+
           },
         );
       }),

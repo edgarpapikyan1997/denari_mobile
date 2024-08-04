@@ -13,11 +13,11 @@ class StoreFieldWidget extends StatelessWidget {
 
   const StoreFieldWidget(
       {super.key,
-      required this.asset,
-      required this.title,
-      required this.description,
-      required this.height,
-      required this.width});
+        required this.asset,
+        required this.title,
+        required this.description,
+        required this.height,
+        required this.width});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:denari_app/data/authentication/model/reg_model.dart';
 import 'package:denari_app/data/profile/model/profile_model.dart';
+import 'package:denari_app/store/categories_state/categories_state.dart';
 import 'package:denari_app/view/screens/authentication/code/sign_up_code_screen.dart';
 import 'package:denari_app/view/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
@@ -66,12 +67,9 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: '/chosenCategoryScreen',
           builder: (BuildContext context, GoRouterState state) {
-            final Map<String, dynamic> extras = state.extra as Map<String, dynamic>;
-            final CategoryType? categoryType = extras['categoryType'] as CategoryType?;
-            final String categoryName = extras['categoryName'] as String;
+            print(state.extra);
             return ChosenCategoryScreen(
-              categoryType: categoryType,
-              categoryName: categoryName,
+              categoriesState: state.extra as CategoriesState,
             );
           },
         ),
@@ -140,7 +138,7 @@ final GoRouter router = GoRouter(
               path: 'sendGiftCardScreen',
               builder: (context, state) {
                 BrandItemWidget brandItemWidget =
-                    state.extra as BrandItemWidget;
+                state.extra as BrandItemWidget;
                 return SendGiftCardScreen(brandItemWidget: brandItemWidget);
               }),
         ]),

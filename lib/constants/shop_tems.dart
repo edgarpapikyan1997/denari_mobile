@@ -39,6 +39,11 @@ List<Map<String, dynamic>> beautyField = [
     'title': 'Title',
     'description': 'Description'
   },
+  {
+    'asset': Assets.media.images.img.path,
+    'title': 'Name shop',
+    'description': 'Description'
+  },
 ];
 List<Map<String, dynamic>> clothingField = [
   {

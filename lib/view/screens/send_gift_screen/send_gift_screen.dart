@@ -42,7 +42,8 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
   }
 
   initCategories() {
-    categoriesState?.selectCategory(categories[0].name);
+    categoriesState?.selectCategory(
+        categoryName: categories[0].name, newCategoryType: categories[0].type);
   }
 
   @override
@@ -71,6 +72,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
               CategoryFieldGenerator(
                 categories: categories,
                 categoriesState: categoriesState!,
+                justSelector: true,
               ),
               const SizedBox(
                 height: 24,

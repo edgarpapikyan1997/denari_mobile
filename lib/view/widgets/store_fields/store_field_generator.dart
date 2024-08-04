@@ -68,6 +68,6 @@ class StoreFieldGenerator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return isGrid ? showGrid(context) : showListView();
+    return isGrid ? showGrid(context) : showListView();
   }
 }

@@ -31,7 +31,8 @@ class _ShopsScreenState extends State<ShopsScreen> {
   }
 
   void initCategories() {
-    categoriesState.selectCategory(categories[0].name);
+    categoriesState.selectCategory(
+        categoryName: categories[0].name, newCategoryType: categories[0].type);
   }
 
   void initPrefs() {
@@ -77,7 +78,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
               categoriesState: categoriesState,
             ),
             const SizedBox(height: 24),
-             Expanded(
+            Expanded(
               child: StoreFieldGenerator(
                 isGrid: true,
                 storeFieldList: allShops,

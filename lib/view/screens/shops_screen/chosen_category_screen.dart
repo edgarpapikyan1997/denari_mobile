@@ -1,5 +1,6 @@
 import 'package:denari_app/constants/app_sizes/app_sizes.dart';
 import 'package:denari_app/constants/categories.dart';
+import 'package:denari_app/store/categories_state/categories_state.dart';
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:denari_app/view/widgets/custom_app_bar.dart';
@@ -10,17 +11,17 @@ import '../../../gen/assets.gen.dart';
 import '../../widgets/store_fields/store_field_generator.dart';
 
 class ChosenCategoryScreen extends StatelessWidget {
-  final CategoryType? categoryType;
-  final String categoryName;
+  final CategoriesState categoriesState;
+
 
   const ChosenCategoryScreen({
     super.key,
-    this.categoryType,
-    required this.categoryName,
+    required this.categoriesState,
   });
 
   Widget getItemsByCategory() {
-    switch (categoryType) {
+    print(categoriesState.categoryType);
+    switch (categoriesState.categoryType) {
       case CategoryType.all:
         return StoreFieldGenerator(
           isGrid: true,
@@ -41,6 +42,7 @@ class ChosenCategoryScreen extends StatelessWidget {
           isGrid: true,
           storeFieldList: clothingField,
         );
+
       case CategoryType.activities:
         return StoreFieldGenerator(
           isGrid: true,
@@ -72,7 +74,7 @@ class ChosenCategoryScreen extends StatelessWidget {
           storeFieldList: otherField,
         );
       default:
-        return StoreFieldGenerator(
+        return const StoreFieldGenerator(
           isGrid: true,
           storeFieldList: [],
         );
@@ -86,7 +88,7 @@ class ChosenCategoryScreen extends StatelessWidget {
         preferredSize: AppSizes.prefSizes,
         child: CustomAppBar(
           title: Text(
-            categoryName,
+            categoriesState.currentCategory ?? '',
             style: context.theme.body1.semiBold.black,
           ),
           leadingIcon: GestureDetector(
@@ -94,6 +96,13 @@ class ChosenCategoryScreen extends StatelessWidget {
                 context.pop();
               },
               child: Assets.media.icons.chevronLeft.svg()),
+          tealIcon: Row(
+            children: [
+              Assets.media.icons.search.svg(),
+              const SizedBox(width: 16,),
+              Assets.media.icons.filter.svg(),
+            ],
+          ),
         ),
       ),
       body: PaddingUtility.only(

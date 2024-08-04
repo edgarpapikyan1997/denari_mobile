@@ -96,6 +96,9 @@ class $AssetsMediaIconsGen {
   SvgGenImage get drawerSend =>
       const SvgGenImage('assets/media/icons/drawer-send.svg');
 
+  /// File path: assets/media/icons/filter.svg
+  SvgGenImage get filter => const SvgGenImage('assets/media/icons/filter.svg');
+
   /// File path: assets/media/icons/fireworks.svg
   SvgGenImage get fireworks =>
       const SvgGenImage('assets/media/icons/fireworks.svg');
@@ -173,6 +176,7 @@ class $AssetsMediaIconsGen {
         creditCardSync,
         delTe,
         drawerSend,
+        filter,
         fireworks,
         food,
         house,

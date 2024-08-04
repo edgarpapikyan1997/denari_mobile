@@ -1,3 +1,5 @@
+import 'package:denari_app/constants/shop_tems.dart';
+import 'package:denari_app/store/categories_state/categories_state.dart';
 import 'package:denari_app/store/loading_state/loading_state.dart';
 import 'package:denari_app/store/token_balance_state/token_balance_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
@@ -6,12 +8,12 @@ import 'package:denari_app/view/widgets/main_screen_widgets/main_screen_field.da
 import 'package:denari_app/view/widgets/main_screen_widgets/product_advertisement_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import '../../../constants/app_sizes/app_sizes.dart';
 import '../../../constants/categories.dart';
 import '../../../data/token/repository/impl/token_repository_impl.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../model/qr_id.dart';
-import '../../../store/categories_state/categories_state.dart';
 import '../../../utils/di/config.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../../widgets/category/category.dart';
@@ -19,7 +21,7 @@ import '../../widgets/custom_app_bar.dart';
 import '../../widgets/category/category_field_generator.dart';
 import '../../widgets/preview_banner/preview_banner.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
+import '../../widgets/scaffold_nav_bar.dart';
 import '../../widgets/store_fields/store_field_generator.dart';
 
 class MainScreen extends StatefulWidget {
@@ -48,7 +50,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void initPrefs() {
-    // categoriesState.setColor(AppColors.black);
     _loadingState.startLoading();
     categories = [
       Category(type: CategoryType.food, iconColor: categoriesState.itemColor),
@@ -112,16 +113,17 @@ class _MainScreenState extends State<MainScreen> {
         body: Column(
           children: [
             Container(
-                decoration:
-                    BoxDecoration(color: AppColors.yellowLight, boxShadow: [
-                  BoxShadow(
-                    color: AppColors.greyDark.withOpacity(0.6),
-                    blurRadius: 8,
-                    blurStyle: BlurStyle.outer,
-                    spreadRadius: 0,
-                  ),
-                ]),
-                child: mainScreenFields()),
+              decoration:
+                  BoxDecoration(color: AppColors.yellowLight, boxShadow: [
+                BoxShadow(
+                  color: AppColors.greyDark.withOpacity(0.6),
+                  blurRadius: 8,
+                  blurStyle: BlurStyle.outer,
+                  spreadRadius: 0,
+                ),
+              ]),
+              child: mainScreenFields(),
+            ),
             Expanded(
               child: PaddingUtility.only(
                 left: 16,
@@ -142,7 +144,11 @@ class _MainScreenState extends State<MainScreen> {
                           style: context.theme.headline5.bold,
                         ),
                         tealButton: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            categoriesState.selectCategory(categories[0].name);
+                            bottomNavBarState.changeIndex(3);
+                            context.go('/shopsScreen');
+                          },
                           style: ButtonStyle(
                             padding: WidgetStateProperty.all<EdgeInsets>(
                                 EdgeInsets.zero),
@@ -166,7 +172,11 @@ class _MainScreenState extends State<MainScreen> {
                           style: context.theme.headline3.semiBold,
                         ),
                         tealButton: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            categoriesState.selectCategory(categories[0].name);
+                            bottomNavBarState.changeIndex(3);
+                            context.go('/shopsScreen');
+                          },
                           style: ButtonStyle(
                             padding: WidgetStateProperty.all<EdgeInsets>(
                                 EdgeInsets.zero),
@@ -182,28 +192,7 @@ class _MainScreenState extends State<MainScreen> {
                       ).paddingOnly(bottom: 16),
                       StoreFieldGenerator(
                         isGrid: false,
-                        storeFieldList: [
-                          {
-                            'asset': Assets.media.images.img.path,
-                            'title': 'Name shop',
-                            'description': 'Description'
-                          },
-                          {
-                            'asset': Assets.media.images.coffe.path,
-                            'title': 'Name Shop',
-                            'description': 'Description'
-                          },
-                          {
-                            'asset': Assets.media.images.coffe.path,
-                            'title': 'Title',
-                            'description': 'Description'
-                          },
-                          {
-                            'asset': Assets.media.images.img.path,
-                            'title': 'Name shop',
-                            'description': 'Description'
-                          },
-                        ],
+                        storeFieldList: allShops
                       ),
                     ],
                   ),

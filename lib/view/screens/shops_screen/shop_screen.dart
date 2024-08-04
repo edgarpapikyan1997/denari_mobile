@@ -4,6 +4,7 @@ import 'package:denari_app/view/widgets/category/category_field_generator.dart';
 import 'package:flutter/material.dart';
 import '../../../constants/app_sizes/app_sizes.dart';
 import '../../../constants/categories.dart';
+import '../../../constants/shop_tems.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../store/categories_state/categories_state.dart';
 import '../../../store/loading_state/loading_state.dart';
@@ -57,7 +58,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(0, 104),
+        preferredSize: AppSizes.prefSizes,
         child: CustomAppBar(
           title: Text(
             'shops.shops'.tr(),
@@ -67,7 +68,6 @@ class _ShopsScreenState extends State<ShopsScreen> {
         ),
       ),
       body: PaddingUtility.only(
-        bottom: 16,
         left: 16,
         right: 16,
         child: Column(
@@ -77,56 +77,10 @@ class _ShopsScreenState extends State<ShopsScreen> {
               categoriesState: categoriesState,
             ),
             const SizedBox(height: 24),
-            Expanded(
+             Expanded(
               child: StoreFieldGenerator(
                 isGrid: true,
-                storeFieldList: [
-                  {
-                    // 'asset': Assets.media.images.img.path,
-                    'title': 'Name shop',
-                    'description': 'Description'
-                  },
-                  {
-                    'asset': Assets.media.images.img.path,
-                    'title': 'Name Shop',
-                    'description': 'Description'
-                  },
-                  {
-                    'asset': Assets.media.images.img.path,
-                    'title': 'Title',
-                    'description': 'Description'
-                  },
-                  {
-                    'asset': Assets.media.images.img.path,
-                    'title': 'Name shop',
-                    'description': 'Description'
-                  },
-                  {
-                    'asset': Assets.media.images.img.path,
-                    'title': 'Name Shop',
-                    'description': 'Description'
-                  },
-                  {
-                    'asset': Assets.media.images.img.path,
-                    'title': 'Title',
-                    'description': 'Description'
-                  },
-                  {
-                    'asset': Assets.media.images.img.path,
-                    'title': 'Name shop',
-                    'description': 'Description'
-                  },
-                  {
-                    'asset': Assets.media.images.img.path,
-                    'title': 'Name Shop',
-                    'description': 'Description'
-                  },
-                  {
-                    'asset': Assets.media.images.img.path,
-                    'title': 'Title',
-                    'description': 'Description'
-                  },
-                ],
+                storeFieldList: allShops,
               ),
             ),
           ],

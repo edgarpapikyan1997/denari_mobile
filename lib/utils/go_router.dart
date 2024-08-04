@@ -10,10 +10,12 @@ import 'package:denari_app/view/screens/profile/pages/forgot_code_page.dart';
 import 'package:denari_app/view/screens/profile/pages/forgot_page.dart';
 import 'package:denari_app/view/screens/profile/pages/profile_page.dart';
 import 'package:denari_app/view/screens/send_gift_screen/send_gift_card_screen.dart';
+import 'package:denari_app/view/screens/shops_screen/chosen_category_screen.dart';
 import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../constants/categories.dart';
 import '../data/authentication/model/reset_pass_model.dart';
 import '../view/screens/authentication/code/forgot_code_screen.dart';
 import '../view/screens/authentication/forgot/forgot_screen.dart';
@@ -59,6 +61,18 @@ final GoRouter router = GoRouter(
           path: '/shopsScreen',
           builder: (context, state) {
             return const ShopsScreen();
+          },
+        ),
+        GoRoute(
+          path: '/chosenCategoryScreen',
+          builder: (BuildContext context, GoRouterState state) {
+            final Map<String, dynamic> extras = state.extra as Map<String, dynamic>;
+            final CategoryType? categoryType = extras['categoryType'] as CategoryType?;
+            final String categoryName = extras['categoryName'] as String;
+            return ChosenCategoryScreen(
+              categoryType: categoryType,
+              categoryName: categoryName,
+            );
           },
         ),
         GoRoute(

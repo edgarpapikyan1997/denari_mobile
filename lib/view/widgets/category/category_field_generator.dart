@@ -1,6 +1,7 @@
+import 'package:denari_app/constants/categories.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart';
+import 'package:go_router/go_router.dart';
 import '../../../store/categories_state/categories_state.dart';
 import 'category.dart';
 import 'category_widget.dart';
@@ -15,7 +16,7 @@ class CategoryFieldGenerator extends StatelessWidget {
     required this.categoriesState,
   });
 
-  Widget createWidgetCollection() {
+  Widget createWidgetCollection({required BuildContext context}) {
     return Row(
       children: categories.asMap().entries.map((entry) {
         int index = entry.key;
@@ -26,11 +27,18 @@ class CategoryFieldGenerator extends StatelessWidget {
             categoryName: category.name,
             categoryIcon: category.icon,
             categoriesState: categoriesState,
-            onTap: () {
-              print('Selected category index: $index');
-              print(categoriesState.currentCategory);
-              categoriesState.selectCategory(category.name);
-            },
+              onTap: () {
+                categoriesState.selectCategory(category.name);
+                if (category.type != CategoryType.all) {
+                  context.push(
+                    '/chosenCategoryScreen',
+                    extra: {
+                      'categoryType': category.type,
+                      'categoryName': category.name,
+                    },
+                  );
+                }
+              }
           ),
         );
       }).toList(),
@@ -42,7 +50,7 @@ class CategoryFieldGenerator extends StatelessWidget {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
-      child: createWidgetCollection(),
+      child: createWidgetCollection(context: context),
     );
   }
 }

@@ -16,7 +16,6 @@ class StoreFieldWidget extends StatelessWidget {
       required this.asset,
       required this.title,
       required this.description,
-      re,
       required this.height,
       required this.width});
 
@@ -27,14 +26,17 @@ class StoreFieldWidget extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(20),
               color: AppColors.whiteGrey),
-          child: Image.asset(
-            /// must be some image of unavailable data
-            asset ?? Assets.media.images.coffe.path,
-            height: height,
-            width: width,
-            fit: BoxFit.fill ,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset(
+              /// must be some image of unavailable data
+              asset ?? Assets.media.images.coffe.path,
+              height: height,
+              width: width,
+              fit: BoxFit.fill,
+            ),
           ),
         ),
         const SizedBox(height: 8),

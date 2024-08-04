@@ -13,7 +13,8 @@ import '../../model/qr_id.dart';
 import '../../store/nottom_nav_bar_state/bottom_nav_bar_state.dart';
 import 'bottom_sheet/qr_bottom_sheet.dart';
 
-final bottomNavBarState = BottomNavBarState();
+
+final BottomNavBarState bottomNavBarState = BottomNavBarState();
 
 class ScaffoldNavBar extends StatefulWidget {
   final Widget child;
@@ -27,7 +28,6 @@ class ScaffoldNavBar extends StatefulWidget {
 class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
   final qrIdReceiver = GetIt.instance<QRIdReceiver>();
   int selectedValue = 0;
-  PageController pageController = PageController(initialPage: 0);
   ThemeData theme =
       SchedulerBinding.instance.platformDispatcher.platformBrightness ==
               Brightness.dark
@@ -98,7 +98,7 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
           ],
           onTap: (index) {
             bottomNavBarState.changeIndex(index);
-            switch (index) {
+            switch (bottomNavBarState.index) {
               case 0:
                 context.goNamed(Routes.profile);
                 break;

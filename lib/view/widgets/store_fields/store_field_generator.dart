@@ -1,4 +1,5 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import '../../../utils/themes/app_colors.dart';
@@ -10,7 +11,7 @@ class StoreFieldGenerator extends StatelessWidget {
 
   const StoreFieldGenerator({
     super.key,
-    required this.storeFieldList,
+    this.storeFieldList = const [],
     required this.isGrid,
   });
 
@@ -50,12 +51,15 @@ class StoreFieldGenerator extends StatelessWidget {
           String? asset = storeField['asset'] as String?;
           String title = storeField['title'] as String;
           String description = storeField['description'] as String;
-          return StoreFieldWidget(
-            asset: asset,
-            title: title,
-            description: description,
-            width: 128,
-            height: 148,
+          return PaddingUtility.only(
+            right: index != itemCount - 1 ? 8 : 0,
+            child: StoreFieldWidget(
+              asset: asset,
+              title: title,
+              description: description,
+              width: 128,
+              height: 148,
+            ),
           );
         }),
       ),
@@ -64,20 +68,6 @@ class StoreFieldGenerator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isGrid ? showGrid(context) : showListView();
+      return isGrid ? showGrid(context) : showListView();
   }
 }
-
-/*
-  itemBuilder: (context, index) {
-        var storeField = storeFieldList[index];
-        Widget? asset = storeField['asset'] as Widget?;
-        String title = storeField['title'] as String;
-        String description = storeField['description'] as String;
-        return StoreFieldWidget(
-          asset: asset,
-          title: title,
-          description: description,
-        );
-      },
- */

@@ -2,8 +2,6 @@ import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import '../../../constants/categories.dart';
 import '../../../gen/assets.gen.dart';
-import 'package:flutter/widgets.dart';
-
 import '../../../utils/themes/app_colors.dart';
 
 class Category {
@@ -12,7 +10,6 @@ class Category {
 
   Category({required this.type, Color? iconColor})
       : iconColor = iconColor ?? AppColors.black;
-
 
   String get name {
     switch (type) {

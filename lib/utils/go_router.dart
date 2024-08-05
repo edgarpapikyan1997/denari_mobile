@@ -20,7 +20,7 @@ import '../view/screens/authentication/forgot/forgot_screen.dart';
 import '../view/screens/authentication/password/create_password_screen.dart';
 import '../view/screens/authentication/sign_in/sign_in_screen.dart';
 import '../view/screens/main_screen/main_screen.dart';
-import '../view/screens/notification_screen.dart';
+import '../view/screens/notifications/notification_screen.dart';
 import '../view/screens/profile/profile_screen.dart';
 import '../view/screens/send_gift_screen/send_gift_screen.dart';
 import '../view/screens/shop_screen.dart';

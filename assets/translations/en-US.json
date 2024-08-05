@@ -146,6 +146,13 @@
   },
   "shops" : {
     "shops" : "Shops",
-    "all" : "All"
+    "all" : "All",
+    "location" : "Location",
+    "selectLocation" : "Select store location",
+    "city" : "City",
+    "town" : "Town",
+    "distanceToStore" : "Distance to store",
+    "enterMinMaxDistance" : "Enter the minimum and maximum distance to the store.",
+    "filters" : "Filters"
   }
 }

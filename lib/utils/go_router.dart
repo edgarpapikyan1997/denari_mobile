@@ -1,3 +1,4 @@
+import 'package:denari_app/constants/categories.dart';
 import 'package:denari_app/data/authentication/model/reg_model.dart';
 import 'package:denari_app/data/profile/model/profile_model.dart';
 import 'package:denari_app/store/categories_state/categories_state.dart';
@@ -12,11 +13,10 @@ import 'package:denari_app/view/screens/profile/pages/forgot_page.dart';
 import 'package:denari_app/view/screens/profile/pages/profile_page.dart';
 import 'package:denari_app/view/screens/send_gift_screen/send_gift_card_screen.dart';
 import 'package:denari_app/view/screens/shops_screen/chosen_category_screen.dart';
+import 'package:denari_app/view/screens/shops_screen/shop_screen_filter.dart';
 import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../constants/categories.dart';
 import '../data/authentication/model/reset_pass_model.dart';
 import '../view/screens/authentication/code/forgot_code_screen.dart';
 import '../view/screens/authentication/forgot/forgot_screen.dart';
@@ -31,7 +31,6 @@ import '../view/widgets/scaffold_nav_bar.dart';
 import 'listeners/auth_listener.dart';
 
 final GoRouter router = GoRouter(
-
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -65,14 +64,21 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: '/chosenCategoryScreen',
-          builder: (BuildContext context, GoRouterState state) {
-            print(state.extra);
-            return ChosenCategoryScreen(
-              categoriesState: state.extra as CategoriesState,
-            );
-          },
-        ),
+            path: '/chosenCategoryScreen',
+            builder: (context, state) {
+              CategoriesState categoryState = state.extra as CategoriesState;
+              return ChosenCategoryScreen(
+                categoriesState: categoryState,
+              );
+            },
+            routes: [
+              GoRoute(
+                  path: 'shopScreenFilter',
+                  builder: (context, state) {
+                    return ShopScreenFilter(
+                    );
+                  })
+            ]),
         GoRoute(
           name: Routes.profile,
           path: '/${Routes.profile}',
@@ -138,7 +144,7 @@ final GoRouter router = GoRouter(
               path: 'sendGiftCardScreen',
               builder: (context, state) {
                 BrandItemWidget brandItemWidget =
-                state.extra as BrandItemWidget;
+                    state.extra as BrandItemWidget;
                 return SendGiftCardScreen(brandItemWidget: brandItemWidget);
               }),
         ]),

@@ -13,14 +13,13 @@ import '../../widgets/store_fields/store_field_generator.dart';
 class ChosenCategoryScreen extends StatelessWidget {
   final CategoriesState categoriesState;
 
-
   const ChosenCategoryScreen({
     super.key,
     required this.categoriesState,
   });
 
+
   Widget getItemsByCategory() {
-    print(categoriesState.categoryType);
     switch (categoriesState.categoryType) {
       case CategoryType.all:
         return StoreFieldGenerator(
@@ -99,8 +98,17 @@ class ChosenCategoryScreen extends StatelessWidget {
           tealIcon: Row(
             children: [
               Assets.media.icons.search.svg(),
-              const SizedBox(width: 16,),
-              Assets.media.icons.filter.svg(),
+              const SizedBox(
+                width: 16,
+              ),
+              GestureDetector(
+                  onTap: () {
+                    context.push(
+                      '/chosenCategoryScreen/shopScreenFilter',
+                      extra: categoriesState,
+                    );
+                  },
+                  child: Assets.media.icons.filter.svg()),
             ],
           ),
         ),

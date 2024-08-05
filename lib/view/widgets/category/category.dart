@@ -31,8 +31,18 @@ class Category {
         return 'giftCard.giftCard'.tr();
       case CategoryType.tokens:
         return 'balance.tokens'.tr();
+      case CategoryType.city:
+        return 'shops.city'.tr();
+      case CategoryType.town:
+        return 'shops.town'.tr();
+      case CategoryType.italian:
+        return 'balance.tokens'.tr();
+      case CategoryType.desert:
+        return 'balance.tokens'.tr();
       case CategoryType.other:
         return 'main.other'.tr();
+      case CategoryType.allNoIcon:
+        return 'shops.all'.tr();
     }
   }
 
@@ -58,6 +68,16 @@ class Category {
         return Assets.media.icons.tokenWhite.svg(colorFilter: ColorFilter.mode(iconColor!, BlendMode.srcIn));
       case CategoryType.other:
         return Assets.media.icons.other.svg(colorFilter: ColorFilter.mode(iconColor!, BlendMode.srcIn));
+      case CategoryType.city:
+        return const SizedBox();
+      case CategoryType.town:
+        return const SizedBox();
+      case CategoryType.italian:
+        return const SizedBox();
+      case CategoryType.desert:
+        return const SizedBox();
+      case CategoryType.allNoIcon:
+        return const SizedBox();
     }
   }
 }

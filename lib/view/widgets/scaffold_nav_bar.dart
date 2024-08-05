@@ -1,4 +1,3 @@
-import 'package:denari_app/constants/categories.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
@@ -12,7 +11,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../gen/assets.gen.dart';
 import '../../model/qr_id.dart';
 import '../../store/nottom_nav_bar_state/bottom_nav_bar_state.dart';
-import 'bottom_sheet/qr_bottom_sheet.dart';
 
 
 final BottomNavBarState bottomNavBarState = BottomNavBarState();

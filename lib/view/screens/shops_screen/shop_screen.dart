@@ -36,7 +36,6 @@ class _ShopsScreenState extends State<ShopsScreen> {
   }
 
   void initPrefs() {
-    // categoriesState.setColor(AppColors.black);
     _loadingState.startLoading();
     categories = [
       Category(type: CategoryType.all, iconColor: categoriesState.itemColor),

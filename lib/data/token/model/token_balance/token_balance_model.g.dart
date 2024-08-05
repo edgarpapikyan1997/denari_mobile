@@ -8,7 +8,7 @@ part of 'token_balance_model.dart';
 
 TokenBalanceModel _$TokenBalanceModelFromJson(Map<String, dynamic> json) =>
     TokenBalanceModel(
-      userId: json['userId'] as String? ?? '',
+      userId: (json['userId'] as num?)?.toInt() ?? 0,
       totalBalance: (json['totalBalance'] as num?)?.toInt() ?? 0,
     );
 

@@ -5,8 +5,8 @@ part 'token_balance_model.g.dart';
 
 @JsonSerializable()
 class TokenBalanceModel {
-  @JsonKey(defaultValue: '')
-  final String userId;
+  @JsonKey(defaultValue: 0)
+  final int userId;
   @JsonKey(defaultValue: 0)
   final int totalBalance;
 
@@ -21,7 +21,7 @@ class TokenBalanceModel {
   Map<String, dynamic> toJson() => _$TokenBalanceModelToJson(this);
 
   TokenBalanceModel copyWith({
-    String? userId,
+    int? userId,
     int? totalBalance,
 
   }) {

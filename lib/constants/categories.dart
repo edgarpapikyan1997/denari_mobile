@@ -9,6 +9,11 @@ enum CategoryType {
   giftCard,
   tokens,
   other,
+  city,
+  town,
+  italian,
+  desert,
+  allNoIcon
 }
 
 

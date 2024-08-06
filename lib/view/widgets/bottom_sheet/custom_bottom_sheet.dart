@@ -1,14 +1,6 @@
-import 'package:denari_app/utils/extensions/extensions.dart';
-import 'package:denari_app/utils/padding_utility/padding_utility.dart';
-import 'package:denari_app/utils/services/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/bottom_sheet_type.dart';
-import '../../../utils/themes/app_colors.dart';
-import '../balance_widget.dart';
-import '../custom_button.dart';
-import '../rate_widget/rate_widget.dart';
-import 'bottom_sheet_upper_piece.dart';
 import 'custom_buttom_sheet_moods/congrats_mood.dart';
 
 void customBottomSheet({
@@ -65,9 +57,9 @@ Widget _buildAlertBottomSheet(BuildContext context, String? asset) {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
+        const Text(
           'Congratulations!',
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         const SizedBox(height: 16),
@@ -86,9 +78,9 @@ Widget _buildCustomBottomSheet(BuildContext context, String? asset) {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
+        const Text(
           'Custom Bottom Sheet',
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         // if (asset != null) asset,

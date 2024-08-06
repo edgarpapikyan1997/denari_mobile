@@ -126,9 +126,9 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
             brandName: 'McDonalds',
             tokenBalance: 20,
             tealButton: Radio<SingingCharacter>(
-              fillColor: MaterialStateProperty.resolveWith<Color>(
-                  (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
+              fillColor: WidgetStateProperty.resolveWith<Color>(
+                  (Set<WidgetState> states) {
+                if (states.contains(WidgetState.disabled)) {
                   return Colors.orange.withOpacity(.32);
                 }
                 return Colors.black;

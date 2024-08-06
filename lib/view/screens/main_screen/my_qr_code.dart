@@ -10,17 +10,16 @@ class MyQRCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: CustomAppBar(
-      leadingIcon: GestureDetector(
-          onTap: () {
-            context.pop();
-          },
-          child: Assets.media.icons.chevronLeft.svg()),
-      title: Text(
-        "balance.tokenBalance".tr(),
-        style: context.theme.headline4,
-      ),
-    ));
+    return CustomAppBar(
+          leadingIcon: GestureDetector(
+      onTap: () {
+        context.pop();
+      },
+      child: Assets.media.icons.chevronLeft.svg()),
+          title: Text(
+    "balance.tokenBalance".tr(),
+    style: context.theme.headline4,
+          ),
+        );
   }
 }

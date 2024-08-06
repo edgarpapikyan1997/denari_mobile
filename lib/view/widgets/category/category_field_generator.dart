@@ -22,7 +22,6 @@ class CategoryFieldGenerator extends StatelessWidget {
             categoryIcon: categoryIcon,
             categoriesState: categoriesState,
             onTap: () {
-              print(categoriesState.currentCategory);
               categoriesState.selectCategory(categoryName);
             });
       }).toList(),

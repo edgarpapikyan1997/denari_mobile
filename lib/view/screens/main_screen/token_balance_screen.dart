@@ -50,8 +50,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
           ),
         ),
       ),
-      body: _state.tokenBalance?.totalBalance == 0 ||
-              _state.tokenBalance?.totalBalance == null
+      body: _state.balance == 0
           ? Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -105,7 +104,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                           isToken: true,
                           avatar: Assets.media.images.toyStory.path,
                           brandName: 'McDonalds',
-                          secondaryInfo: Text(
+                          secondaryInfo: const Text(
                             'June 16, 2024, 18:23',
                           ),
                           // tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),

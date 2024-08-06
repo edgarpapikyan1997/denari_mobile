@@ -3,7 +3,6 @@ import 'package:denari_app/store/token_balance_state/token_balance_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/main_screen_field.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/product_advertisement_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import '../../../data/token/repository/impl/token_repository_impl.dart';
@@ -122,7 +121,7 @@ class _MainScreenState extends State<MainScreen> {
           child: CustomAppBar(
             appBarColor: AppColors.yellowLight,
             leadingIcon: Assets.media.icons.token.svg(),
-            tokenBalance: _state.tokenBalance?.totalBalance ?? _state.balance,
+            tokenBalance:_state.balance,
             // should be changed to data from backEnd
             tealIcon: Assets.media.icons.search.svg(),
           ),
@@ -161,10 +160,10 @@ class _MainScreenState extends State<MainScreen> {
                       tealButton: TextButton(
                         onPressed: () {},
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all<EdgeInsets>(
+                          padding: WidgetStateProperty.all<EdgeInsets>(
                               EdgeInsets.zero),
                           minimumSize:
-                              MaterialStateProperty.all<Size>(Size.zero),
+                              WidgetStateProperty.all<Size>(Size.zero),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                         child: Text(
@@ -185,10 +184,10 @@ class _MainScreenState extends State<MainScreen> {
                       tealButton: TextButton(
                         onPressed: () {},
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.all<EdgeInsets>(
+                          padding: WidgetStateProperty.all<EdgeInsets>(
                               EdgeInsets.zero),
                           minimumSize:
-                              MaterialStateProperty.all<Size>(Size.zero),
+                              WidgetStateProperty.all<Size>(Size.zero),
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                         child: Text(

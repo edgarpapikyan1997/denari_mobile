@@ -11,9 +11,7 @@ import 'package:denari_app/view/widgets/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
-
 import 'success_invite_sheet.dart';
-import 'success_operation_sheet.dart';
 
 class InviteSheet extends StatefulWidget {
   const InviteSheet({super.key});

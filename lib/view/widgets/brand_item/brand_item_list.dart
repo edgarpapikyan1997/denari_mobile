@@ -18,7 +18,6 @@ class _BrandItemListState extends State<BrandItemList> {
   final ScrollController _scrollController = ScrollController();
   BrandItemSelectState brandItemSelectState = BrandItemSelectState();
   List<BrandItemWidget> _displayedItems = [];
-  final int _itemsToLoad = 9;
   bool _isLoading = false;
 
   @override
@@ -31,7 +30,6 @@ class _BrandItemListState extends State<BrandItemList> {
         _loadMoreItems();
       }
     });
-    print(_displayedItems);
   }
 
   @override

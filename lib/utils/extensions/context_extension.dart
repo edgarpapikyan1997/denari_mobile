@@ -183,11 +183,11 @@ extension ThemeDataHelper on ThemeData {
 
 extension ElevatedButtonHelper on ButtonStyle {
   ButtonStyle buttonColor(Color color) => copyWith(
-        shadowColor: MaterialStateProperty.all(color),
-        foregroundColor: MaterialStateProperty.all(AppColors.white),
-        backgroundColor: MaterialStateProperty.resolveWith(
+        shadowColor: WidgetStateProperty.all(color),
+        foregroundColor: WidgetStateProperty.all(AppColors.white),
+        backgroundColor: WidgetStateProperty.resolveWith(
           (states) {
-            return states.contains(MaterialState.disabled)
+            return states.contains(WidgetState.disabled)
                 ? color.withOpacity(0.5)
                 : color;
           },
@@ -196,7 +196,7 @@ extension ElevatedButtonHelper on ButtonStyle {
 
   ButtonStyle elevationSize(double elevation) {
     return copyWith(
-      elevation: MaterialStateProperty.all(
+      elevation: WidgetStateProperty.all(
         elevation,
       ),
     );
@@ -204,7 +204,7 @@ extension ElevatedButtonHelper on ButtonStyle {
 
   ButtonStyle paddingAll(double padding) {
     return copyWith(
-      padding: MaterialStateProperty.all(
+      padding: WidgetStateProperty.all(
         EdgeInsets.all(padding),
       ),
     );
@@ -212,14 +212,14 @@ extension ElevatedButtonHelper on ButtonStyle {
 
   ButtonStyle paddingVertical(double padding) {
     return copyWith(
-      padding: MaterialStateProperty.all(
+      padding: WidgetStateProperty.all(
         EdgeInsets.symmetric(vertical: padding),
       ),
     );
   }
 
   ButtonStyle get removePaddings => copyWith(
-        padding: MaterialStateProperty.all(
+        padding: WidgetStateProperty.all(
           EdgeInsets.zero,
         ),
       );
@@ -228,7 +228,7 @@ extension ElevatedButtonHelper on ButtonStyle {
     Color color,
   ) {
     return copyWith(
-      foregroundColor: MaterialStateProperty.all(
+      foregroundColor: WidgetStateProperty.all(
         color,
       ),
     );

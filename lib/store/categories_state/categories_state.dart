@@ -5,9 +5,9 @@ import '../../constants/categories.dart';
 
 part 'categories_state.g.dart';
 
-class CategoriesState = _CategoriesState with _$CategoriesState;
+class CategoriesState = CategoriesStatePerformer with _$CategoriesState;
 
-abstract class _CategoriesState with Store {
+abstract class CategoriesStatePerformer with Store {
   @observable
   String? currentCategory;
 
@@ -17,12 +17,23 @@ abstract class _CategoriesState with Store {
   @observable
   Color? itemColor;
 
+  @observable
+  ObservableList<CategoryType> selectedCategories = ObservableList<CategoryType>();
+
+  @action
+  void addCategory(CategoryType categoryType) {
+    selectedCategories.add(categoryType);
+  }
+
+  @action
+  void removeCategory(CategoryType categoryType) {
+    selectedCategories.remove(categoryType);
+  }
+
   @action
   void selectCategory(
       {required String categoryName, required CategoryType newCategoryType}) {
     currentCategory = categoryName;
     categoryType = newCategoryType;
   }
-
-
 }

@@ -22,7 +22,7 @@ import '../../widgets/category/category_field_generator.dart';
 import '../../widgets/preview_banner/preview_banner.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../widgets/scaffold_nav_bar.dart';
-import '../../widgets/store_fields/store_field_generator.dart';
+import '../store_field_screen/store_fields/store_field_generator.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -140,10 +140,8 @@ class _MainScreenState extends State<MainScreen> {
                         bottom: 32,
                       ),
                       PreviewBanner(
-                        leadingBanner: Text(
-                          'main.topCategories'.tr(),
-                          style: context.theme.headline5.bold,
-                        ),
+                        leadingBanner: 'main.topCategories'.tr(),
+                        previewStyle: context.theme.headline5.bold,
                         tealButton: TextButton(
                           onPressed: () {
                             categoriesState.selectCategory(
@@ -151,7 +149,7 @@ class _MainScreenState extends State<MainScreen> {
                               newCategoryType: categories[0].type,
                             );
                             bottomNavBarState.changeIndex(3);
-                            context.go('/shopsScreen');
+                            context.push('/shopsScreen');
                           },
                           style: ButtonStyle(
                             padding: WidgetStateProperty.all<EdgeInsets>(
@@ -171,17 +169,16 @@ class _MainScreenState extends State<MainScreen> {
                         categories: categories,
                       ).paddingOnly(bottom: 24),
                       PreviewBanner(
-                        leadingBanner: Text(
+                        leadingBanner:
                           'main.popularStores'.tr(),
-                          style: context.theme.headline3.semiBold,
-                        ),
+                          previewStyle: context.theme.headline3.semiBold,
                         tealButton: TextButton(
                           onPressed: () {
                             categoriesState.selectCategory(
                                 categoryName: categories[0].name,
                                 newCategoryType: categories[0].type);
                             bottomNavBarState.changeIndex(3);
-                            context.go('/shopsScreen');
+                            context.push('/shopsScreen');
                           },
                           style: ButtonStyle(
                             padding: WidgetStateProperty.all<EdgeInsets>(

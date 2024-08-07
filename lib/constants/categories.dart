@@ -12,6 +12,9 @@ enum CategoryType {
   city,
   town,
   italian,
+  armenian,
+  georgian,
+  belarusian,
   desert,
   allNoIcon
 }

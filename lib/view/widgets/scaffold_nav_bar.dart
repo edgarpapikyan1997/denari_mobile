@@ -12,7 +12,6 @@ import '../../gen/assets.gen.dart';
 import '../../model/qr_id.dart';
 import '../../store/nottom_nav_bar_state/bottom_nav_bar_state.dart';
 
-
 final BottomNavBarState bottomNavBarState = BottomNavBarState();
 
 class ScaffoldNavBar extends StatefulWidget {
@@ -28,10 +27,10 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
   final qrIdReceiver = GetIt.instance<QRIdReceiver>();
   int selectedValue = 0;
   ThemeData theme =
-  SchedulerBinding.instance.platformDispatcher.platformBrightness ==
-      Brightness.dark
-      ? darkTheme
-      : lightTheme;
+      SchedulerBinding.instance.platformDispatcher.platformBrightness ==
+              Brightness.dark
+          ? darkTheme
+          : lightTheme;
 
   @override
   void initState() {
@@ -57,17 +56,17 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
             BottomNavigationBarItem(
                 icon: Assets.media.icons.circleUserRound
                     .svg(
-                  height: 24,
-                  width: 24,
-                )
+                      height: 24,
+                      width: 24,
+                    )
                     .paddingSymmetric(vertical: 8),
                 label: 'main.profile'.tr()),
             BottomNavigationBarItem(
                 icon: Assets.media.icons.bell
                     .svg(
-                  height: 24,
-                  width: 24,
-                )
+                      height: 24,
+                      width: 24,
+                    )
                     .paddingSymmetric(vertical: 8),
                 label: 'main.notifications'.tr()),
             BottomNavigationBarItem(
@@ -82,17 +81,17 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
             BottomNavigationBarItem(
                 icon: Assets.media.icons.store
                     .svg(
-                  height: 24,
-                  width: 24,
-                )
+                      height: 24,
+                      width: 24,
+                    )
                     .paddingSymmetric(vertical: 8),
                 label: 'main.store'.tr()),
             BottomNavigationBarItem(
                 icon: Assets.media.icons.house
                     .svg(
-                  height: 24,
-                  width: 24,
-                )
+                      height: 24,
+                      width: 24,
+                    )
                     .paddingSymmetric(vertical: 8),
                 label: 'Home'),
           ],
@@ -108,15 +107,16 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
               case 2:
                 break;
               case 3:
-                context.go('/shopsScreen');
+                bottomNavBarState.previous != bottomNavBarState.index
+                    ? context.push('/shopsScreen')
+                    : null;
                 break;
               case 4:
-                context.go('/');
+                context.pop();
                 break;
               default:
                 context.go('/');
             }
-
           },
         );
       }),

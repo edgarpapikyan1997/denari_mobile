@@ -11,8 +11,12 @@ abstract class _BottomNavBarState with Store {
   @observable
   int index = 4;
 
+  @observable
+  int previous = 4;
+
   @action
   void changeIndex(newIndex) {
+    previous = index;
     index = newIndex;
   }
 }

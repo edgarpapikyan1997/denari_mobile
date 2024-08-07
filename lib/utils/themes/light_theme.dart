@@ -19,6 +19,11 @@ ThemeData lightTheme = ThemeData(
       elevation: 3,
     ),
   ),
+  switchTheme: SwitchThemeData(
+    trackOutlineColor: WidgetStateProperty.all(AppColors.borderColor),
+    trackOutlineWidth: WidgetStateProperty.all(0),
+
+  ),
   buttonTheme: const ButtonThemeData(buttonColor: Colors.red),
   navigationBarTheme: const NavigationBarThemeData(
     backgroundColor: AppColors.white,

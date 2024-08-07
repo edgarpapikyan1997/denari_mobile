@@ -54,7 +54,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
         child: CustomAppBar(
           leadingIcon: GestureDetector(
               onTap: () {
-                context.go('/');
+                context.pop();
               },
               child: Assets.media.icons.chevronLeft.svg()),
           title: Text(

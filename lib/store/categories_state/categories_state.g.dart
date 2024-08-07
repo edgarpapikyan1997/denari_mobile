@@ -8,9 +8,9 @@ part of 'categories_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$CategoriesState on _CategoriesState, Store {
+mixin _$CategoriesState on CategoriesStatePerformer, Store {
   late final _$currentCategoryAtom =
-      Atom(name: '_CategoriesState.currentCategory', context: context);
+      Atom(name: 'CategoriesStatePerformer.currentCategory', context: context);
 
   @override
   String? get currentCategory {
@@ -26,7 +26,7 @@ mixin _$CategoriesState on _CategoriesState, Store {
   }
 
   late final _$categoryTypeAtom =
-      Atom(name: '_CategoriesState.categoryType', context: context);
+      Atom(name: 'CategoriesStatePerformer.categoryType', context: context);
 
   @override
   CategoryType? get categoryType {
@@ -42,7 +42,7 @@ mixin _$CategoriesState on _CategoriesState, Store {
   }
 
   late final _$itemColorAtom =
-      Atom(name: '_CategoriesState.itemColor', context: context);
+      Atom(name: 'CategoriesStatePerformer.itemColor', context: context);
 
   @override
   Color? get itemColor {
@@ -57,19 +57,57 @@ mixin _$CategoriesState on _CategoriesState, Store {
     });
   }
 
-  late final _$_CategoriesStateActionController =
-      ActionController(name: '_CategoriesState', context: context);
+  late final _$selectedCategoriesAtom = Atom(
+      name: 'CategoriesStatePerformer.selectedCategories', context: context);
+
+  @override
+  ObservableList<CategoryType> get selectedCategories {
+    _$selectedCategoriesAtom.reportRead();
+    return super.selectedCategories;
+  }
+
+  @override
+  set selectedCategories(ObservableList<CategoryType> value) {
+    _$selectedCategoriesAtom.reportWrite(value, super.selectedCategories, () {
+      super.selectedCategories = value;
+    });
+  }
+
+  late final _$CategoriesStatePerformerActionController =
+      ActionController(name: 'CategoriesStatePerformer', context: context);
+
+  @override
+  void addCategory(CategoryType categoryType) {
+    final _$actionInfo = _$CategoriesStatePerformerActionController.startAction(
+        name: 'CategoriesStatePerformer.addCategory');
+    try {
+      return super.addCategory(categoryType);
+    } finally {
+      _$CategoriesStatePerformerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removeCategory(CategoryType categoryType) {
+    final _$actionInfo = _$CategoriesStatePerformerActionController.startAction(
+        name: 'CategoriesStatePerformer.removeCategory');
+    try {
+      return super.removeCategory(categoryType);
+    } finally {
+      _$CategoriesStatePerformerActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void selectCategory(
       {required String categoryName, required CategoryType newCategoryType}) {
-    final _$actionInfo = _$_CategoriesStateActionController.startAction(
-        name: '_CategoriesState.selectCategory');
+    final _$actionInfo = _$CategoriesStatePerformerActionController.startAction(
+        name: 'CategoriesStatePerformer.selectCategory');
     try {
       return super.selectCategory(
           categoryName: categoryName, newCategoryType: newCategoryType);
     } finally {
-      _$_CategoriesStateActionController.endAction(_$actionInfo);
+      _$CategoriesStatePerformerActionController.endAction(_$actionInfo);
     }
   }
 
@@ -78,7 +116,8 @@ mixin _$CategoriesState on _CategoriesState, Store {
     return '''
 currentCategory: ${currentCategory},
 categoryType: ${categoryType},
-itemColor: ${itemColor}
+itemColor: ${itemColor},
+selectedCategories: ${selectedCategories}
     ''';
   }
 }

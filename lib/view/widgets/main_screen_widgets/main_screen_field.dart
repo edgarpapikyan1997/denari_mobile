@@ -32,7 +32,7 @@ class MainScreenField extends StatelessWidget {
               token: token,
               isEnabled: true);
         } else {
-          context.go(navigationTitle);
+          context.push(navigationTitle);
         }
       },
       child: SizedBox(

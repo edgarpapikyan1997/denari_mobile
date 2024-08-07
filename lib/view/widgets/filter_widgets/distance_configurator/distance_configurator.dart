@@ -1,11 +1,8 @@
-import 'package:denari_app/store/distance_state/distance_configurator_state.dart';
-import 'package:denari_app/utils/di/di.dart';
-import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+import '../../../../store/filters/distance_state/distance_configurator_state.dart';
 import 'km_field.dart';
 
 class DistanceConfigurator extends StatefulWidget {
@@ -42,7 +39,6 @@ class _DistanceConfiguratorState extends State<DistanceConfigurator> {
           ),
           const Delimiter(16),
           RangeSlider(
-
             values: _currentRangeValues,
             max: 100,
             onChanged: (RangeValues values) {

@@ -6,7 +6,7 @@ import '../../../utils/themes/app_colors.dart';
 
 class CategoryWidget extends StatelessWidget {
   final String categoryName;
-  final Widget categoryIcon;
+  final Widget? categoryIcon;
   final CategoriesState categoriesState;
   final VoidCallback? onTap;
   final Color? unselectedColor;
@@ -14,8 +14,7 @@ class CategoryWidget extends StatelessWidget {
 
   const CategoryWidget(
       {super.key,
-      required this.categoryName,
-      required this.categoryIcon,
+      required this.categoryName, this.categoryIcon,
       required this.categoriesState,
       required this.onTap,
       this.unselectedColor,
@@ -38,13 +37,13 @@ class CategoryWidget extends StatelessWidget {
           ),
           child: Row(
             children: [
-              categoryIcon,
-              const SizedBox(
-                width: 4,
+              categoryIcon ?? const SizedBox(),
+               SizedBox(
+                width: categoryIcon != null ? 4 : 0,
               ),
               Text(
                 categoryName,
-                style: context.theme.body1,
+                style: context.theme.body1.medium,
               ),
             ],
           ).paddingSymmetric(vertical: 6, horizontal: 12),

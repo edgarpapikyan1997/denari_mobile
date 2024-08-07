@@ -1,8 +1,7 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart';
-import '../../../utils/themes/app_colors.dart';
+import 'package:go_router/go_router.dart';
 import 'store_field_widget.dart';
 
 class StoreFieldGenerator extends StatelessWidget {
@@ -29,12 +28,17 @@ class StoreFieldGenerator extends StatelessWidget {
           String? asset = storeField['asset'] as String?;
           String title = storeField['title'] as String;
           String description = storeField['description'] as String;
-          return StoreFieldWidget(
-            asset: asset,
-            title: title,
-            description: description,
-            width: 168,
-            height: 175,
+          return GestureDetector(
+            onTap: () {
+              context.push('/storeFieldItemScreen');
+            },
+            child: StoreFieldWidget(
+              asset: asset,
+              title: title,
+              description: description,
+              width: 168,
+              height: 175,
+            ),
           );
         });
   }

@@ -8,19 +8,33 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/shop_tems.dart';
 import '../../../gen/assets.gen.dart';
-import '../../widgets/store_fields/store_field_generator.dart';
+import '../store_field_screen/store_fields/store_field_generator.dart';
 
-class ChosenCategoryScreen extends StatelessWidget {
-  final CategoriesState categoriesState;
+class ChosenCategoryScreen extends StatefulWidget {
+  final CategoriesState? categoriesState;
 
   const ChosenCategoryScreen({
     super.key,
     required this.categoriesState,
   });
 
+  @override
+  State<ChosenCategoryScreen> createState() => _ChosenCategoryScreenState();
+}
+
+class _ChosenCategoryScreenState extends State<ChosenCategoryScreen> {
+  CategoriesState? categoriesState;
+
+  @override
+  void initState() {
+    super.initState();
+    if(widget.categoriesState != null) {
+      categoriesState = widget.categoriesState;
+    }
+  }
 
   Widget getItemsByCategory() {
-    switch (categoriesState.categoryType) {
+    switch (categoriesState?.categoryType) {
       case CategoryType.all:
         return StoreFieldGenerator(
           isGrid: true,
@@ -41,7 +55,6 @@ class ChosenCategoryScreen extends StatelessWidget {
           isGrid: true,
           storeFieldList: clothingField,
         );
-
       case CategoryType.activities:
         return StoreFieldGenerator(
           isGrid: true,
@@ -87,7 +100,7 @@ class ChosenCategoryScreen extends StatelessWidget {
         preferredSize: AppSizes.prefSizes,
         child: CustomAppBar(
           title: Text(
-            categoriesState.currentCategory ?? '',
+            categoriesState?.currentCategory ?? '',
             style: context.theme.body1.semiBold.black,
           ),
           leadingIcon: GestureDetector(
@@ -105,7 +118,6 @@ class ChosenCategoryScreen extends StatelessWidget {
                   onTap: () {
                     context.push(
                       '/chosenCategoryScreen/shopScreenFilter',
-                      extra: categoriesState,
                     );
                   },
                   child: Assets.media.icons.filter.svg()),

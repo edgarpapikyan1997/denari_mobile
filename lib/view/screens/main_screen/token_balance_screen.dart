@@ -89,10 +89,9 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                     height: 32,
                   ),
                   PreviewBanner(
-                    leadingBanner: Text(
+                    leadingBanner:
                       'balance.tokens'.tr(),
-                      style: context.theme.headline2.bold,
-                    ),
+
                   ),
                   const SizedBox(
                     height: 16,

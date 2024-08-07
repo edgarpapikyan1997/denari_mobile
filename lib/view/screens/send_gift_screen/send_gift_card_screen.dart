@@ -97,10 +97,8 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                         height: 32,
                       ),
                       PreviewBanner(
-                        leadingBanner: Text(
-                          'giftCard.specifyAmount'.tr(),
-                          style: context.theme.body4.semiBold,
-                        ),
+                        leadingBanner: 'giftCard.specifyAmount'.tr(),
+                        previewStyle: context.theme.body4.semiBold,
                       ),
                       const SizedBox(
                         height: 16,
@@ -146,10 +144,8 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                       ),
                       const Delimiter(32),
                       PreviewBanner(
-                        leadingBanner: Text(
-                          'giftCard.sendTo'.tr(),
-                          style: context.theme.body4.semiBold,
-                        ),
+                        leadingBanner: 'giftCard.sendTo'.tr(),
+                        previewStyle: context.theme.body4.semiBold,
                       ),
                       const SizedBox(
                         height: 16,

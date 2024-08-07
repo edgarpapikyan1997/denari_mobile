@@ -153,6 +153,14 @@
     "town" : "Town",
     "distanceToStore" : "Distance to store",
     "enterMinMaxDistance" : "Enter the minimum and maximum distance to the store.",
-    "filters" : "Filters"
+    "filters" : "Filters",
+    "workingNow" :"Working now",
+    "category" : "Category",
+    "italian" : "Italian",
+    "desert" : "Desert",
+    "armenian": "Armenian",
+    "georgian" : "Georgian",
+    "belarusian" : "Belarusian",
+    "reset" : "Reset"
   }
 }

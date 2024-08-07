@@ -1,4 +1,3 @@
-import 'package:denari_app/store/custom_button_state/custom_button_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +22,7 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        height: 52,
         width: context.width,
         padding: const EdgeInsets.symmetric(
           vertical: 16,

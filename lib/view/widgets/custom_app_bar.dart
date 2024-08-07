@@ -70,7 +70,6 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 104,
       color: appBarColor,
       width: context.width,
       child: tokenBalance != null ? tokenAppBar(context) : defaultAppBar(),

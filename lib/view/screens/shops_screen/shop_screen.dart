@@ -10,7 +10,7 @@ import '../../../store/categories_state/categories_state.dart';
 import '../../../store/loading_state/loading_state.dart';
 import '../../widgets/category/category.dart';
 import '../../widgets/custom_app_bar.dart';
-import '../../widgets/store_fields/store_field_generator.dart';
+import '../store_field_screen/store_fields/store_field_generator.dart';
 
 class ShopsScreen extends StatefulWidget {
   const ShopsScreen({super.key});

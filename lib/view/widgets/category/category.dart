@@ -36,9 +36,15 @@ class Category {
       case CategoryType.town:
         return 'shops.town'.tr();
       case CategoryType.italian:
-        return 'balance.tokens'.tr();
+        return 'shops.italian'.tr();
+      case CategoryType.armenian:
+        return 'shops.armenian'.tr();
+      case CategoryType.georgian:
+        return 'shops.georgian'.tr();
+      case CategoryType.belarusian:
+        return 'shops.belarusian'.tr();
       case CategoryType.desert:
-        return 'balance.tokens'.tr();
+        return 'shops.desert'.tr();
       case CategoryType.other:
         return 'main.other'.tr();
       case CategoryType.allNoIcon:
@@ -46,7 +52,7 @@ class Category {
     }
   }
 
-  Widget get icon {
+  Widget? get icon {
     switch (type) {
       case CategoryType.all:
         return Assets.media.icons.food.svg(colorFilter: ColorFilter.mode(iconColor!, BlendMode.srcIn));
@@ -68,16 +74,8 @@ class Category {
         return Assets.media.icons.tokenWhite.svg(colorFilter: ColorFilter.mode(iconColor!, BlendMode.srcIn));
       case CategoryType.other:
         return Assets.media.icons.other.svg(colorFilter: ColorFilter.mode(iconColor!, BlendMode.srcIn));
-      case CategoryType.city:
-        return const SizedBox();
-      case CategoryType.town:
-        return const SizedBox();
-      case CategoryType.italian:
-        return const SizedBox();
-      case CategoryType.desert:
-        return const SizedBox();
-      case CategoryType.allNoIcon:
-        return const SizedBox();
+      default: const SizedBox();
     }
+    return null;
   }
 }

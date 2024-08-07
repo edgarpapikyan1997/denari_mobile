@@ -89,10 +89,7 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
                     height: 15,
                   ),
                   PreviewBanner(
-                    leadingBanner: Text(
-                      'giftCard.giftCards'.tr(),
-                      style: context.theme.headline2.bold,
-                    ),
+                    leadingBanner: 'giftCard.giftCards'.tr(),
                     bannerUnderText: 'giftCard.manageGifts'.tr(),
                   ),
                   const SizedBox(

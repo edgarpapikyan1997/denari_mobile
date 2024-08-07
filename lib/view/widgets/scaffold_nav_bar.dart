@@ -11,7 +11,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../gen/assets.gen.dart';
 import '../../model/qr_id.dart';
 import '../../store/nottom_nav_bar_state/bottom_nav_bar_state.dart';
-import 'bottom_sheet/qr_bottom_sheet.dart';
 
 final bottomNavBarState = BottomNavBarState();
 
@@ -103,7 +102,7 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
                 context.goNamed(Routes.profile);
                 break;
               case 1:
-                context.go('/notifications');
+                context.goNamed(Routes.notifications);
                 break;
               case 2:
                 break;

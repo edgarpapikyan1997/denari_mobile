@@ -143,5 +143,9 @@
     "invite_success": "Congratulations! You've earned tokens for inviting a friend!",
     "invite_success_desc": "You’ve successfully invited a friend to join Denari app.",
     "tokens": "+{} tokens"
+  },
+  "notifications": {
+    "no": "No notification",
+    "empty": "There are no new events or messages requiring your attention at this time."
   }
 }

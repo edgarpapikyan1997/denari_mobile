@@ -49,10 +49,9 @@ final GoRouter router = GoRouter(
           ],
         ),
         GoRoute(
-          path: '/notifications',
-          builder: (context, state) {
-            return const NotificationScreen();
-          },
+          name: Routes.notifications,
+          path: '/${Routes.notifications}',
+          builder: (context, state) => const NotificationScreen(),
         ),
         GoRoute(
           path: '/shopScreen',
@@ -63,9 +62,7 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: Routes.profile,
           path: '/${Routes.profile}',
-          builder: (context, state) {
-            return const ProfileScreen();
-          },
+          builder: (context, state) => const ProfileScreen(),
           routes: [
             GoRoute(
               name: Routes.profileData,
@@ -201,4 +198,5 @@ final class Routes {
   static const profileForgot = 'p-forgot';
   static const profileForgotCode = 'p-f-forgot';
   static const profileReset = 'p-reset';
+  static const notifications = 'notifications';
 }

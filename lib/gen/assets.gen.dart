@@ -56,6 +56,10 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/Token.svg
   SvgGenImage get token => const SvgGenImage('assets/media/icons/Token.svg');
 
+  /// File path: assets/media/icons/alarm-bell.svg
+  SvgGenImage get alarmBell =>
+      const SvgGenImage('assets/media/icons/alarm-bell.svg');
+
   /// File path: assets/media/icons/bell-ring.svg
   SvgGenImage get bellRing =>
       const SvgGenImage('assets/media/icons/bell-ring.svg');
@@ -108,6 +112,9 @@ class $AssetsMediaIconsGen {
 
   /// File path: assets/media/icons/image-8.svg
   SvgGenImage get image8 => const SvgGenImage('assets/media/icons/image-8.svg');
+
+  /// File path: assets/media/icons/info.svg
+  SvgGenImage get info => const SvgGenImage('assets/media/icons/info.svg');
 
   /// File path: assets/media/icons/lock.svg
   SvgGenImage get lock => const SvgGenImage('assets/media/icons/lock.svg');
@@ -162,6 +169,7 @@ class $AssetsMediaIconsGen {
         groceries,
         other,
         token,
+        alarmBell,
         bellRing,
         bell,
         camera,
@@ -177,6 +185,7 @@ class $AssetsMediaIconsGen {
         food,
         house,
         image8,
+        info,
         lock,
         logOut,
         pinned,

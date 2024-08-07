@@ -102,7 +102,7 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
                 context.goNamed(Routes.profile);
                 break;
               case 1:
-                context.go('/notifications');
+                context.goNamed(Routes.notifications);
                 break;
               case 2:
                 break;

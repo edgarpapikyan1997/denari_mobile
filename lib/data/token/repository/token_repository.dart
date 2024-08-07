@@ -5,6 +5,4 @@ abstract class TokenRepository {
   Future<List<TokenModel>> getUserTokenBalanceHistory();
 
   Future<TokenBalanceModel> getTokenBalance();
-
-
 }

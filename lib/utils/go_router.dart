@@ -20,7 +20,7 @@ import '../view/screens/authentication/forgot/forgot_screen.dart';
 import '../view/screens/authentication/password/create_password_screen.dart';
 import '../view/screens/authentication/sign_in/sign_in_screen.dart';
 import '../view/screens/main_screen/main_screen.dart';
-import '../view/screens/notification_screen.dart';
+import '../view/screens/notifications/notification_screen.dart';
 import '../view/screens/profile/profile_screen.dart';
 import '../view/screens/send_gift_screen/send_gift_screen.dart';
 import '../view/screens/shop_screen.dart';
@@ -49,10 +49,9 @@ final GoRouter router = GoRouter(
           ],
         ),
         GoRoute(
-          path: '/notifications',
-          builder: (context, state) {
-            return const NotificationScreen();
-          },
+          name: Routes.notifications,
+          path: '/${Routes.notifications}',
+          builder: (context, state) => const NotificationScreen(),
         ),
         GoRoute(
           path: '/shopScreen',
@@ -63,9 +62,7 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: Routes.profile,
           path: '/${Routes.profile}',
-          builder: (context, state) {
-            return const ProfileScreen();
-          },
+          builder: (context, state) => const ProfileScreen(),
           routes: [
             GoRoute(
               name: Routes.profileData,
@@ -201,4 +198,5 @@ final class Routes {
   static const profileForgot = 'p-forgot';
   static const profileForgotCode = 'p-f-forgot';
   static const profileReset = 'p-reset';
+  static const notifications = 'notifications';
 }

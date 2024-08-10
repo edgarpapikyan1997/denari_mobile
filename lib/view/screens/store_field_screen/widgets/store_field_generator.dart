@@ -30,7 +30,9 @@ class StoreFieldGenerator extends StatelessWidget {
           String description = storeField['description'] as String;
           return GestureDetector(
             onTap: () {
-              context.push('/storeFieldItemScreen');
+              context.push(
+                '/storeFieldItemScreen',
+              );
             },
             child: StoreFieldWidget(
               asset: asset,

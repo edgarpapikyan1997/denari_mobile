@@ -106,6 +106,10 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/food.svg
   SvgGenImage get food => const SvgGenImage('assets/media/icons/food.svg');
 
+  /// File path: assets/media/icons/handShake.svg
+  SvgGenImage get handShake =>
+      const SvgGenImage('assets/media/icons/handShake.svg');
+
   /// File path: assets/media/icons/house.svg
   SvgGenImage get house => const SvgGenImage('assets/media/icons/house.svg');
 
@@ -118,11 +122,22 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/log-out.svg
   SvgGenImage get logOut => const SvgGenImage('assets/media/icons/log-out.svg');
 
+  /// File path: assets/media/icons/map.svg
+  SvgGenImage get map => const SvgGenImage('assets/media/icons/map.svg');
+
+  /// File path: assets/media/icons/phone-call.svg
+  SvgGenImage get phoneCall =>
+      const SvgGenImage('assets/media/icons/phone-call.svg');
+
   /// File path: assets/media/icons/pinned.svg
   SvgGenImage get pinned => const SvgGenImage('assets/media/icons/pinned.svg');
 
   /// File path: assets/media/icons/qr-code.svg
   SvgGenImage get qrCode => const SvgGenImage('assets/media/icons/qr-code.svg');
+
+  /// File path: assets/media/icons/rate_icon.svg
+  SvgGenImage get rateIcon =>
+      const SvgGenImage('assets/media/icons/rate_icon.svg');
 
   /// File path: assets/media/icons/safety-warning-heat.svg
   SvgGenImage get safetyWarningHeat =>
@@ -179,12 +194,16 @@ class $AssetsMediaIconsGen {
         filter,
         fireworks,
         food,
+        handShake,
         house,
         image8,
         lock,
         logOut,
+        map,
+        phoneCall,
         pinned,
         qrCode,
+        rateIcon,
         safetyWarningHeat,
         scanLine,
         search,

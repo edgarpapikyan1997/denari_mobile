@@ -1,3 +1,4 @@
+import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -60,6 +61,7 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
       appBar: PreferredSize(
         preferredSize: const Size(0, 88),
         child: CustomAppBar(
+          appBarType: AppBarType.regular,
           leadingIcon: GestureDetector(
             onTap: () {
               context.go('/');

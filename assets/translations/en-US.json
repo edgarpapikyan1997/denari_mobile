@@ -33,7 +33,7 @@
     "emptyBalance": "Balance is empty",
     "emptyBalanceDescription": "To receive tokens, you must make a purchase using a gift card."
   },
-  "sign" : {
+  "sign": {
     "in": "Sign in",
     "up": "Sign up",
     "out": "Sign out",
@@ -102,7 +102,7 @@
     "earnedYou": "earned you",
     "wouldYouRate": "How would you rate your experience?"
   },
-  "profile" : {
+  "profile": {
     "data": "Profile data",
     "change_password": "Change Password",
     "notifications": "Notifications",
@@ -144,23 +144,30 @@
     "invite_success_desc": "You’ve successfully invited a friend to join Denari app.",
     "tokens": "+{} tokens"
   },
-  "shops" : {
-    "shops" : "Shops",
-    "all" : "All",
-    "location" : "Location",
-    "selectLocation" : "Select store location",
-    "city" : "City",
-    "town" : "Town",
-    "distanceToStore" : "Distance to store",
-    "enterMinMaxDistance" : "Enter the minimum and maximum distance to the store.",
-    "filters" : "Filters",
-    "workingNow" :"Working now",
-    "category" : "Category",
-    "italian" : "Italian",
-    "desert" : "Desert",
+  "shops": {
+    "shops": "Shops",
+    "all": "All",
+    "location": "Location",
+    "selectLocation": "Select store location",
+    "city": "City",
+    "town": "Town",
+    "distanceToStore": "Distance to store",
+    "enterMinMaxDistance": "Enter the minimum and maximum distance to the store.",
+    "filters": "Filters",
+    "workingNow": "Working now",
+    "category": "Category",
+    "italian": "Italian",
+    "desert": "Desert",
     "armenian": "Armenian",
-    "georgian" : "Georgian",
-    "belarusian" : "Belarusian",
-    "reset" : "Reset"
+    "georgian": "Georgian",
+    "belarusian": "Belarusian",
+    "reset": "Reset",
+    "cashbackRate": "Cahsback\nRate",
+    "currentBalance": "Current\nBalance",
+    "tokenBalance": "Token\nBalance",
+    "giftCardOptions": "Gift Card Options",
+    "redemeToken": "Redeme Token",
+    "newPurchase": "New Purchase",
+    "branches": "Branches"
   }
 }

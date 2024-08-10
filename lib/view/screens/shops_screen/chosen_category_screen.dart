@@ -1,3 +1,4 @@
+import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/constants/app_sizes/app_sizes.dart';
 import 'package:denari_app/constants/categories.dart';
 import 'package:denari_app/store/categories_state/categories_state.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/shop_tems.dart';
 import '../../../gen/assets.gen.dart';
-import '../store_field_screen/store_fields/store_field_generator.dart';
+import '../store_field_screen/widgets/store_field_generator.dart';
 
 class ChosenCategoryScreen extends StatefulWidget {
   final CategoriesState? categoriesState;
@@ -99,6 +100,7 @@ class _ChosenCategoryScreenState extends State<ChosenCategoryScreen> {
       appBar: PreferredSize(
         preferredSize: AppSizes.prefSizes,
         child: CustomAppBar(
+          appBarType: AppBarType.regular,
           title: Text(
             categoriesState?.currentCategory ?? '',
             style: context.theme.body1.semiBold.black,
@@ -117,7 +119,7 @@ class _ChosenCategoryScreenState extends State<ChosenCategoryScreen> {
               GestureDetector(
                   onTap: () {
                     context.push(
-                      '/chosenCategoryScreen/shopScreenFilter',
+                      '/shopScreenFilter',
                     );
                   },
                   child: Assets.media.icons.filter.svg()),

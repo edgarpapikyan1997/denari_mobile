@@ -44,9 +44,9 @@ Widget _buildCongratsBottomSheet(
   String? balance,
 ) {
   return CongratsMood(
-    asset: asset!,
+    asset: asset,
     title: title,
-    tokens: tokens!,
+    tokens: tokens,
     balance: balance,
   );
 }

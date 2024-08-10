@@ -1,3 +1,4 @@
+import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/constants/shop_tems.dart';
 import 'package:denari_app/store/categories_state/categories_state.dart';
 import 'package:denari_app/store/loading_state/loading_state.dart';
@@ -22,7 +23,7 @@ import '../../widgets/category/category_field_generator.dart';
 import '../../widgets/preview_banner/preview_banner.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../widgets/scaffold_nav_bar.dart';
-import '../store_field_screen/store_fields/store_field_generator.dart';
+import '../store_field_screen/widgets/store_field_generator.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -76,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
         MainScreenField(
           asset: Assets.media.icons.creditCard1.svg(),
           title: 'main.myGiftCards'.tr(),
-          navigationTitle: '/myGiftCards',
+          navigationTitle: '/myGiftCardsScreen',
         ),
         MainScreenField(
           asset: Assets.media.icons.drawerSend.svg(),
@@ -87,6 +88,7 @@ class _MainScreenState extends State<MainScreen> {
           asset: Assets.media.icons.qrCode.svg(),
           title: 'main.myQRCode'.tr(),
           navigationTitle: '/myQRCode',
+          userID: '12345678',
         ),
         MainScreenField(
           asset: Assets.media.icons.creditCardSync.svg(),
@@ -104,6 +106,7 @@ class _MainScreenState extends State<MainScreen> {
         appBar: PreferredSize(
           preferredSize: AppSizes.prefSizes,
           child: CustomAppBar(
+            appBarType: AppBarType.token,
             appBarColor: AppColors.yellowLight,
             leadingIcon: Assets.media.icons.token.svg(),
             tokenBalance: _state.tokenBalance?.totalBalance ?? _state.balance,

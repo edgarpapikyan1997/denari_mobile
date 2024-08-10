@@ -24,6 +24,8 @@ import '../view/screens/authentication/forgot/forgot_screen.dart';
 import '../view/screens/authentication/password/create_password_screen.dart';
 import '../view/screens/authentication/sign_in/sign_in_screen.dart';
 import '../view/screens/main_screen/main_screen.dart';
+import '../view/screens/main_screen/my_gift_cards_screen.dart';
+import '../view/screens/map_screen/map_screen.dart';
 import '../view/screens/notification_screen.dart';
 import '../view/screens/profile/profile_screen.dart';
 import '../view/screens/send_gift_screen/send_gift_screen.dart';
@@ -50,6 +52,11 @@ final GoRouter router = GoRouter(
                 return const TokenBalanceScreen();
               },
             ),
+            GoRoute(
+                path: 'myGiftCardsScreen',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyGiftCardsScreen();
+                })
           ],
         ),
         GoRoute(
@@ -83,7 +90,13 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: '/storeFieldItemScreen',
           builder: (context, state) {
-            return const StoreFieldItemScreen();
+            return StoreFieldItemScreen();
+          },
+        ),
+        GoRoute(
+          path: '/mapScreen',
+          builder: (context, state) {
+            return MapScreen();
           },
         ),
         GoRoute(

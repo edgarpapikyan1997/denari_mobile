@@ -1,3 +1,4 @@
+import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/store/token_balance_state/token_balance_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/view/widgets/custom_app_bar.dart';
@@ -29,7 +30,6 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
   void initState() {
     super.initState();
     _state.getTokenBalance();
-
     itemsLength = _state.tokenModels.length;
   }
 
@@ -53,18 +53,18 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
       body: _state.tokenBalance?.totalBalance == 0 ||
               _state.tokenBalance?.totalBalance == null
           ? Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              NoDataWidget(
-                  asset: Assets.media.images.cryptoCurrencyNamecoin.image(
-                    height: 96,
-                    width: 96,
-                  ),
-                  title: "balance.emptyBalance".tr(),
-                  description: "balance.emptyBalanceDescription".tr()),
-              const SizedBox(),
-            ],
-          )
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                NoDataWidget(
+                    asset: Assets.media.images.cryptoCurrencyNamecoin.image(
+                      height: 96,
+                      width: 96,
+                    ),
+                    title: "balance.emptyBalance".tr(),
+                    description: "balance.emptyBalanceDescription".tr()),
+                const SizedBox(),
+              ],
+            )
           : Container(
               margin: const EdgeInsets.only(left: 16, right: 16),
               width: context.width,
@@ -89,9 +89,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                     height: 32,
                   ),
                   PreviewBanner(
-                    leadingBanner:
-                      'balance.tokens'.tr(),
-
+                    leadingBanner: 'balance.tokens'.tr(),
                   ),
                   const SizedBox(
                     height: 16,

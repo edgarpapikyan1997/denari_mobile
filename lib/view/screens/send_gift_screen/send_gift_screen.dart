@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../store/categories_state/categories_state.dart';
 import '../../../../utils/themes/app_colors.dart';
+import '../../../constants/app_bar_type.dart';
 import '../../../constants/categories.dart';
 import '../../widgets/category/category.dart';
 import '../../widgets/category/category_field_generator.dart';
@@ -52,15 +53,16 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
       appBar: PreferredSize(
         preferredSize: const Size(0, 88),
         child: CustomAppBar(
-          leadingIcon: GestureDetector(
-              onTap: () {
-                context.pop();
-              },
-              child: Assets.media.icons.chevronLeft.svg()),
-          title: Text(
-            "giftCard.giftCartTokens".tr(),
-            style: context.theme.headline4,
-          ),
+            appBarType: AppBarType.regular,
+            leadingIcon: GestureDetector(
+                onTap: () {
+                  context.pop();
+                },
+                child: Assets.media.icons.chevronLeft.svg()),
+            title: Text(
+              "giftCard.giftCartTokens".tr(),
+              style: context.theme.headline4,
+            ),
         ),
       ),
       body: Observer(builder: (context) {
@@ -79,28 +81,28 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
               ),
               categoriesState?.currentCategory == categories[0].name
                   ? Expanded(
-                      child: ItemSelectorWidget(
-                        items: items,
-                        brandItemSelectState: sendGiftItemSelectState,
-                        isToken: false,
-                        previewTitle: 'giftCard.selectGift'.tr(),
-                      ),
-                    )
+                child: ItemSelectorWidget(
+                  items: items,
+                  brandItemSelectState: sendGiftItemSelectState,
+                  isToken: false,
+                  previewTitle: 'giftCard.selectGift'.tr(),
+                ),
+              )
                   : Expanded(
-                      child: ItemSelectorWidget(
-                        items: items,
-                        brandItemSelectState: tokenItemSelectState,
-                        isToken: true,
-                        previewTitle: 'giftCard.totalBalanceTokens'.tr(),
-                        tealButton: BalanceWidget(
-                          isTokenBalance: true,
-                          balance: 50,
-                          textStyle: context.theme.headline2.bold,
-                          tokenIconHeight: 20,
-                          tokenIconWidth: 18,
-                        ),
-                      ),
-                    ),
+                child: ItemSelectorWidget(
+                  items: items,
+                  brandItemSelectState: tokenItemSelectState,
+                  isToken: true,
+                  previewTitle: 'giftCard.totalBalanceTokens'.tr(),
+                  tealButton: BalanceWidget(
+                    isTokenBalance: true,
+                    balance: 50,
+                    textStyle: context.theme.headline2.bold,
+                    tokenIconHeight: 20,
+                    tokenIconWidth: 18,
+                  ),
+                ),
+              ),
               CustomButton(
                 isEnabled: true,
                 isWhite: false,
@@ -110,9 +112,9 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                     "sendGiftCardScreen",
                     extra: BrandItemWidget(
                       isToken:
-                          categoriesState?.currentCategory == categories[0].name
-                              ? false
-                              : true,
+                      categoriesState?.currentCategory == categories[0].name
+                          ? false
+                          : true,
                       avatar: Assets.media.images.toyStory.path,
                       brandName: 'McDonalds',
                       tokenBalance: 50,

@@ -5,6 +5,7 @@ import 'package:denari_app/utils/services/get_it.dart';
 import 'package:denari_app/utils/themes/dark_theme.dart';
 import 'package:denari_app/utils/themes/light_theme.dart';
 import 'package:denari_app/view/widgets/message.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import '../utils/extensions/extensions.dart';
@@ -16,6 +17,7 @@ import 'utils/env/config.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await Firebase.initializeApp();
   ServiceLocator.configure();
   setupLogger(kDebugMode);
   configDi(const Config(env: 'dev', host: 'https://denari.mifort.com'));

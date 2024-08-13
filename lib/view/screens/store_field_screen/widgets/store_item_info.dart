@@ -11,7 +11,7 @@ class StoreItemInfo extends StatefulWidget {
   final String? rating;
   final String? phone;
   final String? city;
-  final String dateTime;
+  final String? dateTime;
 
   const StoreItemInfo(
       {super.key,
@@ -20,7 +20,7 @@ class StoreItemInfo extends StatefulWidget {
       this.rating,
       this.phone,
       this.city,
-      required this.dateTime});
+      this.dateTime});
 
   @override
   State<StoreItemInfo> createState() => _StoreItemInfoState();

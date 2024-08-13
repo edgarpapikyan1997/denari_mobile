@@ -1,7 +1,9 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class PreviewBanner extends StatelessWidget {
+  final Widget? leadingWidget;
   final String? leadingBanner;
   final Widget? middleBanner;
   final Widget? tealButton;
@@ -10,6 +12,7 @@ class PreviewBanner extends StatelessWidget {
 
   const PreviewBanner(
       {super.key,
+      this.leadingWidget,
       this.leadingBanner,
       this.middleBanner,
       this.tealButton,
@@ -25,10 +28,12 @@ class PreviewBanner extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              leadingBanner ?? '',
-              style: previewStyle ?? context.theme.headline2.bold,
-            ),
+            leadingWidget != null
+                ? leadingWidget!
+                : Text(
+                    leadingBanner ?? '',
+                    style: previewStyle ?? context.theme.headline2.bold,
+                  ),
             middleBanner ?? const SizedBox(),
             tealButton ?? const SizedBox(),
           ],

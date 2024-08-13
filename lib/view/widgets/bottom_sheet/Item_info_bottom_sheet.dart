@@ -10,9 +10,9 @@ import 'bottom_sheet_upper_piece.dart';
 void showItemInfoBottomSheet({
   required BuildContext context,
   required VoidCallback onConfirm,
-  required bool addCloseButton,
   required String itemTitle,
   bool addButtons = false,
+  bool addCloseButton = false,
   Text? underInfoCostText,
   bool itemTitleChevronRight = false,
   String? dateTime,

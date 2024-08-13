@@ -53,6 +53,9 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/Other.svg
   SvgGenImage get other => const SvgGenImage('assets/media/icons/Other.svg');
 
+  /// File path: assets/media/icons/Pin.svg
+  SvgGenImage get pin => const SvgGenImage('assets/media/icons/Pin.svg');
+
   /// File path: assets/media/icons/Token.svg
   SvgGenImage get token => const SvgGenImage('assets/media/icons/Token.svg');
 
@@ -62,6 +65,9 @@ class $AssetsMediaIconsGen {
 
   /// File path: assets/media/icons/bell.svg
   SvgGenImage get bell => const SvgGenImage('assets/media/icons/bell.svg');
+
+  /// File path: assets/media/icons/bigPin.svg
+  SvgGenImage get bigPin => const SvgGenImage('assets/media/icons/bigPin.svg');
 
   /// File path: assets/media/icons/camera.svg
   SvgGenImage get camera => const SvgGenImage('assets/media/icons/camera.svg');
@@ -80,6 +86,9 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/circle-user-round.svg
   SvgGenImage get circleUserRound =>
       const SvgGenImage('assets/media/icons/circle-user-round.svg');
+
+  /// File path: assets/media/icons/clock.svg
+  SvgGenImage get clock => const SvgGenImage('assets/media/icons/clock.svg');
 
   /// File path: assets/media/icons/credit-card-1.svg
   SvgGenImage get creditCard1 =>
@@ -179,14 +188,17 @@ class $AssetsMediaIconsGen {
         clothing,
         groceries,
         other,
+        pin,
         token,
         bellRing,
         bell,
+        bigPin,
         camera,
         card,
         chevronLeft,
         chevronRight,
         circleUserRound,
+        clock,
         creditCard1,
         creditCardSync,
         delTe,
@@ -261,6 +273,10 @@ class $AssetsMediaImagesGen {
   AssetGenImage get taskListClock =>
       const AssetGenImage('assets/media/images/task-list-clock.png');
 
+  /// File path: assets/media/images/toy-story-sample.png
+  AssetGenImage get toyStorySample =>
+      const AssetGenImage('assets/media/images/toy-story-sample.png');
+
   /// File path: assets/media/images/toy_story.png
   AssetGenImage get toyStory =>
       const AssetGenImage('assets/media/images/toy_story.png');
@@ -278,6 +294,7 @@ class $AssetsMediaImagesGen {
         ratedStar,
         star,
         taskListClock,
+        toyStorySample,
         toyStory
       ];
 }

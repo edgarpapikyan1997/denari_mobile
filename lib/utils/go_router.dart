@@ -94,12 +94,6 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: '/mapScreen',
-          builder: (context, state) {
-            return MapScreen();
-          },
-        ),
-        GoRoute(
           name: Routes.profile,
           path: '/${Routes.profile}',
           builder: (context, state) {
@@ -152,6 +146,12 @@ final GoRouter router = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '/mapScreen',
+      builder: (context, state) {
+        return MapScreen();
+      },
     ),
     GoRoute(
         path: '/sendGift',

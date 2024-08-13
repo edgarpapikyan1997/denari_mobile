@@ -112,7 +112,7 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
                     : null;
                 break;
               case 4:
-                context.pop();
+                context.go('/');
                 break;
               default:
                 context.go('/');

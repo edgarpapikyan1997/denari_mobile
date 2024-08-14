@@ -109,7 +109,7 @@ class _MainScreenState extends State<MainScreen> {
             appBarType: AppBarType.token,
             appBarColor: AppColors.yellowLight,
             leadingIcon: Assets.media.icons.token.svg(),
-            tokenBalance: _state.tokenBalance?.totalBalance ?? _state.balance,
+            tokenBalance:_state.balance,
             // should be changed to data from backEnd
             tealIcon: GestureDetector(
               onTap: () {

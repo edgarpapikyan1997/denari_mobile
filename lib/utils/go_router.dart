@@ -1,3 +1,4 @@
+import 'package:denari_app/data/authentication/model/reg_model.dart';
 import 'package:denari_app/data/profile/model/profile_model.dart';
 import 'package:denari_app/store/categories_state/categories_state.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
@@ -16,7 +17,6 @@ import 'package:denari_app/view/screens/store_field_screen/store_field_item_scre
 import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../data/authentication/model/reg_model.dart';
 import '../data/authentication/model/reset_pass_model.dart';
 import '../view/screens/authentication/code/forgot_code_screen.dart';
 import '../view/screens/authentication/code/sign_up_code_screen.dart';
@@ -27,7 +27,7 @@ import '../view/screens/authentication/sign_up/sign_up_screen.dart';
 import '../view/screens/main_screen/main_screen.dart';
 import '../view/screens/main_screen/my_gift_cards_screen.dart';
 import '../view/screens/map_screen/map_screen.dart';
-import '../view/screens/notification_screen.dart';
+import '../view/screens/notifications/notification_screen.dart';
 import '../view/screens/profile/profile_screen.dart';
 import '../view/screens/send_gift_screen/send_gift_screen.dart';
 import '../view/screens/shops_screen/shop_screen.dart';
@@ -61,10 +61,9 @@ final GoRouter router = GoRouter(
           ],
         ),
         GoRoute(
-          path: '/notifications',
-          builder: (context, state) {
-            return const NotificationScreen();
-          },
+          name: Routes.notifications,
+          path: '/${Routes.notifications}',
+          builder: (context, state) => const NotificationScreen(),
         ),
         GoRoute(
           path: '/shopsScreen',
@@ -110,9 +109,7 @@ final GoRouter router = GoRouter(
         GoRoute(
           name: Routes.profile,
           path: '/${Routes.profile}',
-          builder: (context, state) {
-            return const ProfileScreen();
-          },
+          builder: (context, state) => const ProfileScreen(),
           routes: [
             GoRoute(
               name: Routes.profileData,
@@ -254,4 +251,5 @@ final class Routes {
   static const profileForgot = 'p-forgot';
   static const profileForgotCode = 'p-f-forgot';
   static const profileReset = 'p-reset';
+  static const notifications = 'notifications';
 }

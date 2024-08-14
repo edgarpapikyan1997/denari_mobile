@@ -49,8 +49,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
           ),
         ),
       ),
-      body: _state.tokenBalance?.totalBalance == 0 ||
-              _state.tokenBalance?.totalBalance == null
+      body: _state.balance == 0
           ? Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

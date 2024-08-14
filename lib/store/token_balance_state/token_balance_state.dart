@@ -38,7 +38,7 @@ abstract class _TokenBalanceState with Store {
       (data) => tokenBalance = data,
       (error) => getError = error,
     );
-
+    balance = int.parse(tokenBalance!.totalBalance);
   }
 
   @action

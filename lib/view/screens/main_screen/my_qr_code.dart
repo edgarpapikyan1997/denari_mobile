@@ -2,6 +2,7 @@ import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../constants/app_bar_type.dart';
 import '../../../gen/assets.gen.dart';
 import '../../widgets/custom_app_bar.dart';
 
@@ -11,6 +12,7 @@ class MyQRCode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
+      appBarType: AppBarType.regular,
           leadingIcon: GestureDetector(
       onTap: () {
         context.pop();

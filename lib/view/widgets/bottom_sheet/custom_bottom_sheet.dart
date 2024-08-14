@@ -44,9 +44,9 @@ Widget _buildCongratsBottomSheet(
   String? balance,
 ) {
   return CongratsMood(
-    asset: asset!,
+    asset: asset,
     title: title,
-    tokens: tokens!,
+    tokens: tokens,
     balance: balance,
   );
 }
@@ -80,10 +80,9 @@ Widget _buildCustomBottomSheet(BuildContext context, String? asset) {
       children: [
         const Text(
           'Custom Bottom Sheet',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style:  TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
-        // if (asset != null) asset,
         const SizedBox(height: 16),
         ElevatedButton(
           onPressed: () => context.pop(),

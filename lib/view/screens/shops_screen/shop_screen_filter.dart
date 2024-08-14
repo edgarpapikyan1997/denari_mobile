@@ -120,7 +120,6 @@ class _ShopScreenFilterState extends State<ShopScreenFilter> {
                 tealButton: SwitcherWidget(
                   switcherState: _switcherState,
                   onTap: () {
-                    print(_switcherState.switchEnable);
                   },
                 ),
               ),

@@ -28,7 +28,7 @@ class _DistanceConfiguratorState extends State<DistanceConfigurator> {
                   child: KmField(
                 fromDestination: distanceConfiguratorState.from,
               )),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Expanded(

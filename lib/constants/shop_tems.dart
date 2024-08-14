@@ -13,7 +13,7 @@ List<Map<String, dynamic>> foodField = [
     'description': 'Description'
   },
   {
-    'asset': Assets.media.images.channel.path,
+    'asset': Assets.media.images.img.path,
     'title': 'Name Shop',
     'description': 'Description'
   },

@@ -111,8 +111,12 @@ class _MainScreenState extends State<MainScreen> {
             leadingIcon: Assets.media.icons.token.svg(),
             tokenBalance: _state.tokenBalance?.totalBalance ?? _state.balance,
             // should be changed to data from backEnd
-            tealIcon: Assets.media.icons.search.svg(),
-          ),
+            tealIcon: GestureDetector(
+              onTap: () {
+                context.push('/searchScreen');
+              },
+              child: Assets.media.icons.search.svg(),
+            ),          ),
         ),
         body: Column(
           children: [
@@ -197,7 +201,7 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ).paddingOnly(bottom: 16),
                       StoreFieldGenerator(
-                          isGrid: false, storeFieldList: allShops),
+                          isGrid: false, storeFieldList: foodField),
                     ],
                   ),
                 ),

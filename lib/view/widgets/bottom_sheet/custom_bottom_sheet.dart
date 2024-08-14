@@ -57,14 +57,14 @@ Widget _buildAlertBottomSheet(BuildContext context, String? asset) {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
+        const Text(
           'Congratulations!',
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style:  TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         const SizedBox(height: 16),
         ElevatedButton(
-          onPressed: () => context.pop(),
+          onPressed: () => context.go('/'),
           child: const Text('Close'),
         ),
       ],
@@ -78,12 +78,11 @@ Widget _buildCustomBottomSheet(BuildContext context, String? asset) {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
+        const Text(
           'Custom Bottom Sheet',
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style:  TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
-        // if (asset != null) asset,
         const SizedBox(height: 16),
         ElevatedButton(
           onPressed: () => context.pop(),

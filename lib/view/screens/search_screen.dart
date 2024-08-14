@@ -18,7 +18,7 @@ class SearchScreen extends StatelessWidget {
         child: CustomAppBar(
           leadingIcon: GestureDetector(
             onTap: () {
-              context.go('/myGiftCards');
+              context.pop();
             },
             child: Assets.media.icons.chevronLeft.svg(),
           ),

@@ -47,7 +47,6 @@ abstract class _TokenBalanceState with Store {
       (data) => tokenModels = data,
       (error) => getError = error,
     );
-    print(tokenModels);
   }
 
   @action

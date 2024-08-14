@@ -5,13 +5,19 @@ import 'package:go_router/go_router.dart';
 import 'store_field_widget.dart';
 
 class StoreFieldGenerator extends StatelessWidget {
+  final double? height;
+  final double? width;
   final List<Map<String, dynamic>> storeFieldList;
   final bool isGrid;
+  final bool excludeTitle;
 
   const StoreFieldGenerator({
     super.key,
     this.storeFieldList = const [],
     required this.isGrid,
+    this.height,
+    this.width,
+    this.excludeTitle = false,
   });
 
   Widget showGrid(BuildContext context) {
@@ -38,8 +44,8 @@ class StoreFieldGenerator extends StatelessWidget {
               asset: asset,
               title: title,
               description: description,
-              width: 168,
-              height: 175,
+              width: width ?? 168,
+              height: height ?? 175,
             ),
           );
         });
@@ -63,8 +69,9 @@ class StoreFieldGenerator extends StatelessWidget {
               asset: asset,
               title: title,
               description: description,
-              width: 128,
-              height: 148,
+              width: width ?? 128,
+              height: height ?? 148,
+              excludeTitle: excludeTitle,
             ),
           );
         }),

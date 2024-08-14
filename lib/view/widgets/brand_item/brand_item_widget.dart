@@ -2,7 +2,6 @@ import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../gen/assets.gen.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../../widgets/balance_widget.dart';
 
@@ -46,18 +45,21 @@ class BrandItemWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-           iconAvatar != null ? iconAvatar! : Container(
-              height: 48,
-              width: 48,
+            iconAvatar != null
+                ? iconAvatar!
+                : Container(
+                    height: 48,
+                    width: 48,
                     decoration: BoxDecoration(
                       color: AppColors.white,
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage(avatar!),
-                ),
-                border: Border.all(width: 1, color: AppColors.borderColor),
-              ),
-            ),
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage(avatar!),
+                      ),
+                      border:
+                          Border.all(width: 1, color: AppColors.borderColor),
+                    ),
+                  ),
             const SizedBox(
               width: 8,
             ),
@@ -72,7 +74,8 @@ class BrandItemWidget extends StatelessWidget {
                       const SizedBox(
                         height: 2,
                       ),
-                      secondaryInfo!,
+                      SizedBox(
+                          width: context.width / 1.5, child: secondaryInfo!),
                     ],
                   )
                 : Text(

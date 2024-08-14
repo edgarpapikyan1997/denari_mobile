@@ -23,7 +23,10 @@
     "nothingFound": "Nothing found",
     "trySearchAgain": "Try searching again.",
     "navBarQR": "My QR code",
-    "getTokens": "To get tokens for a purchase or use the accumulated points, show the screen to the seller in the store."
+    "qrOfTransaction" : "QR code of the Transaction",
+    "showThisQr" : "Show this QR code to the seller to get bonuses or pay with a gift card",
+    "getTokens": "To get tokens for a purchase or use the accumulated points, show the screen to the seller in the store.",
+    "dontLeaveScreen" : "Please do not leave the screen before confirming the purchase."
   },
   "balance": {
     "tokenBalance": "Token Balance",
@@ -168,6 +171,12 @@
     "giftCardOptions": "Gift Card Options",
     "redemeToken": "Redeme Token",
     "newPurchase": "New Purchase",
-    "branches": "Branches"
+    "branches": "Branches",
+    "alliance": "Alliance",
+    "allianceSec": "Sky team alliance to share all your airmiles",
+    "selectAmount": "Select the amount and number of tokens to be withdrawn.",
+    "redeemGift": "Redeem from Gift Cards",
+    "redeemToken": "Redeem from Tokens",
+    "max" : "max"
   }
 }

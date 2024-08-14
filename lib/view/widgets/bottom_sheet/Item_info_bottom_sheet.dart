@@ -9,7 +9,10 @@ import 'bottom_sheet_upper_piece.dart';
 
 void showItemInfoBottomSheet({
   required BuildContext context,
-  required VoidCallback onConfirm,
+  required VoidCallback onConfirmSecond,
+  required VoidCallback onConfirmFirst,
+  required String firstButtonTitle,
+  required String secondButtonTitle,
   required String itemTitle,
   bool addButtons = false,
   bool addCloseButton = false,
@@ -88,20 +91,20 @@ void showItemInfoBottomSheet({
                     children: [
                       Expanded(
                           child: CustomButton(
-                        title: 'Send',
-                        isEnabled: false,
+                        title: firstButtonTitle,
+                        isEnabled: true,
                         isWhite: true,
-                        onTap: () {},
+                        onTap: onConfirmFirst,
                       )),
                       const SizedBox(
                         width: 8,
                       ),
                       Expanded(
                           child: CustomButton(
-                        title: 'Use',
-                        isEnabled: false,
+                        title: secondButtonTitle,
+                        isEnabled: true,
                         isWhite: false,
-                        onTap: () {},
+                        onTap: onConfirmSecond,
                       )),
                     ],
                   )

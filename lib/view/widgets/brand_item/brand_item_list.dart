@@ -30,7 +30,6 @@ class _BrandItemListState extends State<BrandItemList> {
         _loadMoreItems();
       }
     });
-    print(_displayedItems);
   }
 
   @override

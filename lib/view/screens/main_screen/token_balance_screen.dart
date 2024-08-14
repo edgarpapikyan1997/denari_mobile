@@ -1,4 +1,3 @@
-import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/store/token_balance_state/token_balance_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/view/widgets/custom_app_bar.dart';
@@ -102,7 +101,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                           isToken: true,
                           avatar: Assets.media.images.toyStory.path,
                           brandName: 'McDonalds',
-                          secondaryInfo: Text(
+                          secondaryInfo: const Text(
                             'June 16, 2024, 18:23',
                           ),
                           // tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),

@@ -1,13 +1,11 @@
 import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/constants/app_sizes/app_sizes.dart';
-import 'package:denari_app/constants/bottom_sheet_type.dart';
 import 'package:denari_app/store/loading_state/loading_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:denari_app/view/widgets/bottom_sheet/bottom_sheet_upper_piece.dart';
 import 'package:denari_app/view/widgets/custom_app_bar.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
-import 'package:denari_app/view/widgets/preview_banner/preview_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
@@ -15,11 +13,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
+import '../../../constants/shop_tems.dart';
 import '../../../gen/assets.gen.dart';
-import '../../widgets/bottom_sheet/Item_info_bottom_sheet.dart';
-import '../../widgets/bottom_sheet/custom_bottom_sheet.dart';
+import '../../../utils/themes/app_colors.dart';
 import '../../widgets/bottom_sheet/variants/modal_sheet.dart';
+import '../store_field_screen/widgets/store_field_generator.dart';
 import '../store_field_screen/widgets/store_item_info.dart';
+import '../store_field_screen/widgets/store_item_info_creater.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -36,10 +36,18 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
   );
 
   final LoadingState loadingState = LoadingState();
+  String name = 'Store Name';
+  String rating = "4.5";
+  String phone = '+1 (123) 456-7890';
+  String city = '123 Main St, City';
+  String dateTime = 'Daily from 10:00 to 20:00';
   double defaultHeight = 49;
   double defaultWidth = 44;
   double selectedHeight = 69;
   double selectedWidth = 60;
+  ColorFilter iconColor =
+      const ColorFilter.mode(AppColors.yellowDark, BlendMode.srcIn);
+
   LatLng? selectedMarker;
   LatLng? _currentLocation;
 
@@ -162,18 +170,44 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
             });
             showModalSheet(
               context: context,
-              child: Container(
-                width: context.width,
-                height: context.height / 2,
-                child: Column(
-                  children: [
-                    const Delimiter(8),
-                    const BottomSheetUpperPiece(),
-                    PaddingUtility(
-                      all: 16,
-                      child: StoreItemInfo(),
-                    ),
-                  ],
+              child: PaddingUtility(
+                all: 16,
+                child:  SizedBox(
+                  width: context.width,
+                  height: context.height / 2,
+                  child: Column(
+                    children: [
+                      const Delimiter(8),
+                      const BottomSheetUpperPiece(),
+                      StoreItemInfo(
+                        items: [
+                          StoreItemInfoCreator(
+                            svgPicture: Assets.media.icons.phoneCall
+                                .svg(colorFilter: iconColor),
+                            textValue: phone,
+                          ),
+                          StoreItemInfoCreator(
+                            svgPicture: Assets.media.icons.map
+                                .svg(colorFilter: iconColor),
+                            textValue: city,
+                          ),
+                          StoreItemInfoCreator(
+                            svgPicture: Assets.media.icons.clock
+                                .svg(colorFilter: iconColor),
+                            textValue: dateTime,
+                          ),
+                        ],
+                      ),
+                     const Delimiter(16),
+                      StoreFieldGenerator(
+                        isGrid: false,
+                        storeFieldList: allShops,
+                        width: 160,
+                        height: 156,
+                        excludeTitle: true,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

@@ -90,6 +90,10 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/clock.svg
   SvgGenImage get clock => const SvgGenImage('assets/media/icons/clock.svg');
 
+  /// File path: assets/media/icons/close-left.svg
+  SvgGenImage get closeLeft =>
+      const SvgGenImage('assets/media/icons/close-left.svg');
+
   /// File path: assets/media/icons/credit-card-1.svg
   SvgGenImage get creditCard1 =>
       const SvgGenImage('assets/media/icons/credit-card-1.svg');
@@ -199,6 +203,7 @@ class $AssetsMediaIconsGen {
         chevronRight,
         circleUserRound,
         clock,
+        closeLeft,
         creditCard1,
         creditCardSync,
         delTe,
@@ -266,6 +271,10 @@ class $AssetsMediaImagesGen {
   AssetGenImage get ratedStar =>
       const AssetGenImage('assets/media/images/ratedStar.png');
 
+  /// File path: assets/media/images/skyteam.png
+  AssetGenImage get skyteam =>
+      const AssetGenImage('assets/media/images/skyteam.png');
+
   /// File path: assets/media/images/star.png
   AssetGenImage get star => const AssetGenImage('assets/media/images/star.png');
 
@@ -292,6 +301,7 @@ class $AssetsMediaImagesGen {
         image9,
         img,
         ratedStar,
+        skyteam,
         star,
         taskListClock,
         toyStorySample,

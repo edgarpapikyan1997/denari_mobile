@@ -37,8 +37,11 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
             onTap: () {
               showItemInfoBottomSheet(
                 /// must be changed to data from backend
+              firstButtonTitle: 'Send',
+                secondButtonTitle: 'Use',
+                onConfirmFirst: () {},
                 context: context,
-                onConfirm: () {
+                onConfirmSecond: () {
                   context.pop();
                 },
                 addButtons: true,

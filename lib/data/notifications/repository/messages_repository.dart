@@ -1,4 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../model/notification.dart';
@@ -21,7 +20,7 @@ abstract class MessagesRepository {
 
   Stream<RemoteMessage> getMessageForeground();
 
-  Stream<DatabaseEvent> getNotificationStream();
+  Stream<List<Notification>> getNotificationStream();
 
   Future<void> updateNotification(Notification notification);
 

@@ -7,8 +7,8 @@ part 'token_balance_model.g.dart';
 class TokenBalanceModel {
   @JsonKey(defaultValue: '')
   final String userId;
-  @JsonKey(defaultValue: '')
-  final String totalBalance;
+  @JsonKey(defaultValue: 0)
+  final int totalBalance;
 
   const TokenBalanceModel({
     required this.userId,
@@ -22,7 +22,7 @@ class TokenBalanceModel {
 
   TokenBalanceModel copyWith({
     String? userId,
-    String? totalBalance,
+    int? totalBalance,
 
   }) {
     return TokenBalanceModel(

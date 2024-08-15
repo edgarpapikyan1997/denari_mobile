@@ -1,3 +1,4 @@
+import 'package:denari_app/data/notifications/messages_bloc.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
@@ -5,6 +6,7 @@ import 'package:denari_app/utils/themes/dark_theme.dart';
 import 'package:denari_app/utils/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -35,7 +37,15 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
 
   @override
   void initState() {
+    BlocProvider.of<MessagesBloc>(context).add(InitializedMessagesEvent());
+    BlocProvider.of<MessagesBloc>(context).add(SubscribeToNotificationsEvent());
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    BlocProvider.of<MessagesBloc>(context).add(UnSubscribeNotificationsEvent());
+    super.dispose();
   }
 
   @override

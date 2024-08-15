@@ -54,6 +54,7 @@ class DefaultFirebaseOptions {
     appId: '1:566463012532:android:d91c0bffde93c8efac81e1',
     messagingSenderId: '566463012532',
     projectId: 'denari-84a55',
+    databaseURL: 'https://denari-84a55-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'denari-84a55.appspot.com',
   );
 
@@ -62,6 +63,7 @@ class DefaultFirebaseOptions {
     appId: '1:566463012532:ios:7aa0a582cc2080cdac81e1',
     messagingSenderId: '566463012532',
     projectId: 'denari-84a55',
+    databaseURL: 'https://denari-84a55-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'denari-84a55.appspot.com',
     iosBundleId: 'com.example.denariApp',
   );

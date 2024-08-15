@@ -1,7 +1,6 @@
 import 'package:denari_app/data/authentication/model/reg_model.dart';
 import 'package:denari_app/data/profile/model/profile_model.dart';
-import 'package:denari_app/view/screens/authentication/code/sign_up_code_screen.dart';
-import 'package:denari_app/view/screens/authentication/sign_up/sign_up_screen.dart';
+import 'package:denari_app/store/categories_state/categories_state.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
 import 'package:denari_app/view/screens/profile/pages/change_password_page.dart';
 import 'package:denari_app/view/screens/profile/pages/code_page.dart';
@@ -9,21 +8,29 @@ import 'package:denari_app/view/screens/profile/pages/create_password_page.dart'
 import 'package:denari_app/view/screens/profile/pages/forgot_code_page.dart';
 import 'package:denari_app/view/screens/profile/pages/forgot_page.dart';
 import 'package:denari_app/view/screens/profile/pages/profile_page.dart';
+import 'package:denari_app/view/screens/search_screen.dart';
 import 'package:denari_app/view/screens/send_gift_screen/send_gift_card_screen.dart';
+import 'package:denari_app/view/screens/shops_screen/chosen_category_screen.dart';
+import 'package:denari_app/view/screens/shops_screen/shop_screen_filter.dart';
+import 'package:denari_app/view/screens/store_field_screen/alliance_screen/alliance_screen.dart';
+import 'package:denari_app/view/screens/store_field_screen/store_field_item_screen.dart';
 import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../data/authentication/model/reset_pass_model.dart';
 import '../view/screens/authentication/code/forgot_code_screen.dart';
+import '../view/screens/authentication/code/sign_up_code_screen.dart';
 import '../view/screens/authentication/forgot/forgot_screen.dart';
 import '../view/screens/authentication/password/create_password_screen.dart';
 import '../view/screens/authentication/sign_in/sign_in_screen.dart';
+import '../view/screens/authentication/sign_up/sign_up_screen.dart';
 import '../view/screens/main_screen/main_screen.dart';
+import '../view/screens/main_screen/my_gift_cards_screen.dart';
+import '../view/screens/map_screen/map_screen.dart';
 import '../view/screens/notifications/notification_screen.dart';
 import '../view/screens/profile/profile_screen.dart';
 import '../view/screens/send_gift_screen/send_gift_screen.dart';
-import '../view/screens/shop_screen.dart';
+import '../view/screens/shops_screen/shop_screen.dart';
 import '../view/widgets/scaffold_nav_bar.dart';
 import 'listeners/auth_listener.dart';
 
@@ -46,6 +53,11 @@ final GoRouter router = GoRouter(
                 return const TokenBalanceScreen();
               },
             ),
+            GoRoute(
+                path: 'myGiftCardsScreen',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyGiftCardsScreen();
+                })
           ],
         ),
         GoRoute(
@@ -54,11 +66,46 @@ final GoRouter router = GoRouter(
           builder: (context, state) => const NotificationScreen(),
         ),
         GoRoute(
-          path: '/shopScreen',
+          path: '/shopsScreen',
           builder: (context, state) {
-            return const ShopScreen();
+            return const ShopsScreen();
           },
         ),
+        GoRoute(
+          path: '/searchScreen',
+          builder: (context, state) {
+            return const SearchScreen();
+          },
+        ),
+        GoRoute(
+          path: '/chosenCategoryScreen',
+          builder: (context, state) {
+            final CategoriesState? categoriesState =
+                state.extra as CategoriesState?;
+            return ChosenCategoryScreen(
+              categoriesState: categoriesState,
+            );
+          },
+        ),
+        GoRoute(
+          path: '/shopScreenFilter',
+          builder: (context, state) {
+            return const ShopScreenFilter();
+          },
+        ),
+        GoRoute(
+          path: '/storeFieldItemScreen',
+          builder: (context, state) {
+            return const StoreFieldItemScreen();
+          },
+        ),
+        GoRoute(
+            path: '/alliance',
+            builder: (context, state) {
+              return AllianceScreen(
+                isAlliance: state.extra as bool?,
+              );
+            }),
         GoRoute(
           name: Routes.profile,
           path: '/${Routes.profile}',
@@ -110,6 +157,12 @@ final GoRouter router = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '/mapScreen',
+      builder: (context, state) {
+        return const MapScreen();
+      },
     ),
     GoRoute(
         path: '/sendGift',

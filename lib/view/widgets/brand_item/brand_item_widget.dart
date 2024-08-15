@@ -1,11 +1,12 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../../widgets/balance_widget.dart';
 
 class BrandItemWidget extends StatelessWidget {
-  final String avatar;
+  final String? avatar;
   final String brandName;
   final bool isToken;
   final Color wrapperColor;
@@ -18,6 +19,7 @@ class BrandItemWidget extends StatelessWidget {
   final double leftPadding;
   final double rightPadding;
   final String? lastUpdate;
+  final SvgPicture? iconAvatar;
 
   const BrandItemWidget({
     super.key,
@@ -34,6 +36,7 @@ class BrandItemWidget extends StatelessWidget {
     this.rightPadding = 0,
     this.wrapperColor = AppColors.white,
     this.lastUpdate,
+    this.iconAvatar,
   });
 
   @override
@@ -42,18 +45,21 @@ class BrandItemWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-            Container(
-              height: 48,
-              width: 48,
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage(avatar),
-                ),
-                border: Border.all(width: 1, color: AppColors.borderColor),
-              ),
-            ),
+            iconAvatar != null
+                ? iconAvatar!
+                : Container(
+                    height: 48,
+                    width: 48,
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage(avatar!),
+                      ),
+                      border:
+                          Border.all(width: 1, color: AppColors.borderColor),
+                    ),
+                  ),
             const SizedBox(
               width: 8,
             ),
@@ -68,7 +74,8 @@ class BrandItemWidget extends StatelessWidget {
                       const SizedBox(
                         height: 2,
                       ),
-                      secondaryInfo!,
+                      SizedBox(
+                          width: context.width / 1.5, child: secondaryInfo!),
                     ],
                   )
                 : Text(

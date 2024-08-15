@@ -25,6 +25,22 @@ mixin _$BottomNavBarState on _BottomNavBarState, Store {
     });
   }
 
+  late final _$previousAtom =
+      Atom(name: '_BottomNavBarState.previous', context: context);
+
+  @override
+  int get previous {
+    _$previousAtom.reportRead();
+    return super.previous;
+  }
+
+  @override
+  set previous(int value) {
+    _$previousAtom.reportWrite(value, super.previous, () {
+      super.previous = value;
+    });
+  }
+
   late final _$_BottomNavBarStateActionController =
       ActionController(name: '_BottomNavBarState', context: context);
 
@@ -42,7 +58,8 @@ mixin _$BottomNavBarState on _BottomNavBarState, Store {
   @override
   String toString() {
     return '''
-index: ${index}
+index: ${index},
+previous: ${previous}
     ''';
   }
 }

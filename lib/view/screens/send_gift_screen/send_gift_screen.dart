@@ -10,6 +10,9 @@ import 'package:go_router/go_router.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../store/categories_state/categories_state.dart';
 import '../../../../utils/themes/app_colors.dart';
+import '../../../constants/app_bar_type.dart';
+import '../../../constants/categories.dart';
+import '../../widgets/category/category.dart';
 import '../../widgets/category/category_field_generator.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/custom_button.dart';
@@ -29,14 +32,8 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
   bool isToken = false;
 
   final categories = [
-    {
-      'categoryName': 'giftCard.giftCard'.tr(),
-      'categoryIcon': Assets.media.icons.card.svg()
-    },
-    {
-      'categoryName': 'balance.tokens'.tr(),
-      'categoryIcon': Assets.media.icons.tokenWhite.svg()
-    },
+    Category(type: CategoryType.giftCard),
+    Category(type: CategoryType.tokens),
   ];
 
   @override
@@ -46,7 +43,8 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
   }
 
   initCategories() {
-    categoriesState?.selectCategory(categories[0]['categoryName'] as String);
+    categoriesState?.selectCategory(
+        categoryName: categories[0].name, newCategoryType: categories[0].type);
   }
 
   @override
@@ -55,15 +53,16 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
       appBar: PreferredSize(
         preferredSize: const Size(0, 88),
         child: CustomAppBar(
-          leadingIcon: GestureDetector(
-              onTap: () {
-                context.go('/');
-              },
-              child: Assets.media.icons.chevronLeft.svg()),
-          title: Text(
-            "giftCard.giftCartTokens".tr(),
-            style: context.theme.headline4,
-          ),
+            appBarType: AppBarType.regular,
+            leadingIcon: GestureDetector(
+                onTap: () {
+                  context.pop();
+                },
+                child: Assets.media.icons.chevronLeft.svg()),
+            title: Text(
+              "giftCard.giftCartTokens".tr(),
+              style: context.theme.headline4,
+            ),
         ),
       ),
       body: Observer(builder: (context) {
@@ -75,35 +74,35 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
               CategoryFieldGenerator(
                 categories: categories,
                 categoriesState: categoriesState!,
+                justSelector: true,
               ),
               const SizedBox(
                 height: 24,
               ),
-              categoriesState?.currentCategory ==
-                      categories[0]['categoryName'].toString()
+              categoriesState?.currentCategory == categories[0].name
                   ? Expanded(
-                      child: ItemSelectorWidget(
-                        items: items,
-                        brandItemSelectState: sendGiftItemSelectState,
-                        isToken: false,
-                        previewTitle: 'giftCard.selectGift'.tr(),
-                      ),
-                    )
+                child: ItemSelectorWidget(
+                  items: items,
+                  brandItemSelectState: sendGiftItemSelectState,
+                  isToken: false,
+                  previewTitle: 'giftCard.selectGift'.tr(),
+                ),
+              )
                   : Expanded(
-                      child: ItemSelectorWidget(
-                        items: items,
-                        brandItemSelectState: tokenItemSelectState,
-                        isToken: true,
-                        previewTitle: 'giftCard.totalBalanceTokens'.tr(),
-                        tealButton: BalanceWidget(
-                          isTokenBalance: true,
-                          balance: 50,
-                          textStyle: context.theme.headline2.bold,
-                          tokenIconHeight: 20,
-                          tokenIconWidth: 18,
-                        ),
-                      ),
-                    ),
+                child: ItemSelectorWidget(
+                  items: items,
+                  brandItemSelectState: tokenItemSelectState,
+                  isToken: true,
+                  previewTitle: 'giftCard.totalBalanceTokens'.tr(),
+                  tealButton: BalanceWidget(
+                    isTokenBalance: true,
+                    balance: 50,
+                    textStyle: context.theme.headline2.bold,
+                    tokenIconHeight: 20,
+                    tokenIconWidth: 18,
+                  ),
+                ),
+              ),
               CustomButton(
                 isEnabled: true,
                 isWhite: false,
@@ -112,8 +111,10 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                   context.goNamed(
                     "sendGiftCardScreen",
                     extra: BrandItemWidget(
-                      isToken: categoriesState?.currentCategory ==
-                          categories[0]['categoryName'] ? false : true,
+                      isToken:
+                      categoriesState?.currentCategory == categories[0].name
+                          ? false
+                          : true,
                       avatar: Assets.media.images.toyStory.path,
                       brandName: 'McDonalds',
                       tokenBalance: 50,

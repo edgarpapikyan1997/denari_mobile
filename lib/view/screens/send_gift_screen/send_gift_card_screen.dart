@@ -8,6 +8,7 @@ import 'package:denari_app/view/widgets/preview_banner/preview_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
+import '../../../constants/app_bar_type.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../store/sending_amount_state/sending_amount_state.dart';
 import '../../../utils/themes/app_colors.dart';
@@ -51,6 +52,7 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
       appBar: PreferredSize(
         preferredSize: const Size(0, 88),
         child: CustomAppBar(
+          appBarType: AppBarType.regular,
           leadingIcon: GestureDetector(
               onTap: () {
                 context.pop();
@@ -97,10 +99,8 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                         height: 32,
                       ),
                       PreviewBanner(
-                        leadingBanner: Text(
-                          'giftCard.specifyAmount'.tr(),
-                          style: context.theme.body4.semiBold,
-                        ),
+                        leadingBanner: 'giftCard.specifyAmount'.tr(),
+                        previewStyle: context.theme.body4.semiBold,
                       ),
                       const SizedBox(
                         height: 16,
@@ -146,10 +146,8 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                       ),
                       const Delimiter(32),
                       PreviewBanner(
-                        leadingBanner: Text(
-                          'giftCard.sendTo'.tr(),
-                          style: context.theme.body4.semiBold,
-                        ),
+                        leadingBanner: 'giftCard.sendTo'.tr(),
+                        previewStyle: context.theme.body4.semiBold,
                       ),
                       const SizedBox(
                         height: 16,

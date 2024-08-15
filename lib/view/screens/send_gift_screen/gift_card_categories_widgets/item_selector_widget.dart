@@ -41,10 +41,7 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
         children: [
           widget.items != null
               ? PreviewBanner(
-                  leadingBanner: Text(
-                    widget.previewTitle,
-                    style: context.theme.headline2.bold,
-                  ),
+                  leadingBanner: widget.previewTitle,
                   tealButton: widget.tealButton,
                 )
               : const SizedBox(),

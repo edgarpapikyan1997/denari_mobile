@@ -29,7 +29,6 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
   void initState() {
     super.initState();
     _state.getTokenBalance();
-
     itemsLength = _state.tokenModels.length;
   }
 
@@ -52,18 +51,18 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
       ),
       body: _state.balance == 0
           ? Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              NoDataWidget(
-                  asset: Assets.media.images.cryptoCurrencyNamecoin.image(
-                    height: 96,
-                    width: 96,
-                  ),
-                  title: "balance.emptyBalance".tr(),
-                  description: "balance.emptyBalanceDescription".tr()),
-              const SizedBox(),
-            ],
-          )
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                NoDataWidget(
+                    asset: Assets.media.images.cryptoCurrencyNamecoin.image(
+                      height: 96,
+                      width: 96,
+                    ),
+                    title: "balance.emptyBalance".tr(),
+                    description: "balance.emptyBalanceDescription".tr()),
+                const SizedBox(),
+              ],
+            )
           : Container(
               margin: const EdgeInsets.only(left: 16, right: 16),
               width: context.width,
@@ -88,10 +87,7 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                     height: 32,
                   ),
                   PreviewBanner(
-                    leadingBanner: Text(
-                      'balance.tokens'.tr(),
-                      style: context.theme.headline2.bold,
-                    ),
+                    leadingBanner: 'balance.tokens'.tr(),
                   ),
                   const SizedBox(
                     height: 16,

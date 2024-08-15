@@ -14,7 +14,7 @@ import '../../gen/assets.gen.dart';
 import '../../model/qr_id.dart';
 import '../../store/nottom_nav_bar_state/bottom_nav_bar_state.dart';
 
-final bottomNavBarState = BottomNavBarState();
+final BottomNavBarState bottomNavBarState = BottomNavBarState();
 
 class ScaffoldNavBar extends StatefulWidget {
   final Widget child;
@@ -28,7 +28,6 @@ class ScaffoldNavBar extends StatefulWidget {
 class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
   final qrIdReceiver = GetIt.instance<QRIdReceiver>();
   int selectedValue = 0;
-  PageController pageController = PageController(initialPage: 0);
   ThemeData theme =
       SchedulerBinding.instance.platformDispatcher.platformBrightness ==
               Brightness.dark
@@ -40,6 +39,7 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
     BlocProvider.of<MessagesBloc>(context).add(InitializedMessagesEvent());
     BlocProvider.of<MessagesBloc>(context).add(SubscribeToNotificationsEvent());
     super.initState();
+    bottomNavBarState.changeIndex(4);
   }
 
   @override
@@ -107,7 +107,7 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
           ],
           onTap: (index) {
             bottomNavBarState.changeIndex(index);
-            switch (index) {
+            switch (bottomNavBarState.index) {
               case 0:
                 context.goNamed(Routes.profile);
                 break;
@@ -117,7 +117,9 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
               case 2:
                 break;
               case 3:
-                context.go('/shopScreen');
+                bottomNavBarState.previous != bottomNavBarState.index
+                    ? context.push('/shopsScreen')
+                    : null;
                 break;
               case 4:
                 context.go('/');

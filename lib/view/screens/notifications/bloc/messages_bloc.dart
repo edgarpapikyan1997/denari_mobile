@@ -8,8 +8,8 @@ import 'package:denari_app/data/profile/model/profile_model.dart';
 import 'package:denari_app/data/profile/repository/profile_repository.dart';
 import 'package:denari_app/utils/log/logging.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'repository/messages_repository.dart';
-import 'model/notification.dart';
+import '../../../../data/notifications/repository/messages_repository.dart';
+import '../../../../data/notifications/model/notification.dart';
 
 abstract class MessagesState {}
 

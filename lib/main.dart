@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:denari_app/data/notifications/messages_bloc.dart';
 import 'package:denari_app/data/notifications/repository/messages_repository.dart';
 import 'package:denari_app/data/profile/repository/profile_repository.dart';
 import 'package:denari_app/firebase_options.dart';
@@ -10,14 +7,15 @@ import 'package:denari_app/utils/log/logging.dart';
 import 'package:denari_app/utils/services/get_it.dart';
 import 'package:denari_app/utils/themes/dark_theme.dart';
 import 'package:denari_app/utils/themes/light_theme.dart';
+import 'package:denari_app/view/screens/notifications/bloc/messages_bloc.dart';
 import 'package:denari_app/view/widgets/message.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../utils/extensions/extensions.dart';
-import 'package:flutter/material.dart';
 
+import '../utils/extensions/extensions.dart';
 import 'utils/di/config.dart';
 import 'utils/env/config.dart';
 

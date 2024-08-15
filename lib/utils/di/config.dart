@@ -18,5 +18,5 @@ configDi(Config config) {
   di.add(ImplAuthRepository(client: di.get<Dio>(), config: di.get<Config>()));
   di.add(ImplTokenRepository(client: di.get<Dio>(), config: di.get<Config>()));
   di.add(ImplProfileRepository(client: di.get<Dio>(), config: di.get<Config>()));
-  di.add(FirebaseMessagesRepository());
+  di.add(FirebaseMessagesRepository(client: di.get<Dio>(), config: di.get<Config>()));
 }

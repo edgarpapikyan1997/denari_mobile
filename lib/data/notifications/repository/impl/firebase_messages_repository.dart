@@ -1,7 +1,10 @@
+import 'dart:async';
 
 import 'package:denari_app/data/notifications/model/notification.dart';
 import 'package:denari_app/data/notifications/repository/messages_repository.dart';
 import 'package:denari_app/firebase_options.dart';
+import 'package:denari_app/utils/env/config.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -12,7 +15,12 @@ class FirebaseMessagesRepository implements MessagesRepository {
   late final FirebaseDatabase _database;
   late final DatabaseReference _ref;
 
-  FirebaseMessagesRepository() {
+  late final Dio _client;
+  late final Config _config;
+
+  FirebaseMessagesRepository({required Dio client, required Config config}) {
+    _client = client;
+    _config = config;
     _database = FirebaseDatabase.instanceFor(
       app: FirebaseDatabase.instance.app,
       databaseURL: DefaultFirebaseOptions.currentPlatform.databaseURL,
@@ -60,11 +68,20 @@ class FirebaseMessagesRepository implements MessagesRepository {
 
   @override
   void getMessageBackground(
-      Future<void> Function(RemoteMessage message) handler) =>
+          Future<void> Function(RemoteMessage message) handler) =>
       FirebaseMessaging.onBackgroundMessage(handler);
 
   @override
-  Stream<DatabaseEvent> getNotificationStream() => _ref.child(key).onValue;
+  Stream<List<Notification>> getNotificationStream() => _notifications();
+
+  Stream<List<Notification>> _notifications() async* {
+    while (true) {
+      final response = await _client.get('${_config.host}/notifications');
+      final list = response.data as List<dynamic>;
+      yield list.map((e) => Notification.fromJson(e as Map<String, dynamic>)).toList();
+      await Future.delayed(const Duration(minutes: 1));
+    }
+  }
 
   @override
   Future<void> updateNotification(Notification notification) async =>
@@ -75,14 +92,14 @@ class FirebaseMessagesRepository implements MessagesRepository {
 
   @override
   Future<void> deleteNotification(Notification notification) async =>
-      await _ref.child('$key/${notification.id}').remove();
+      await _client.delete('${_config.host}/notifications/${notification.id}');
 
   @override
   Future<void> saveTokenToDatabase(
-      String user,
-      String platform,
-      String token,
-      ) async {
+    String user,
+    String platform,
+    String token,
+  ) async {
     await _ref.child('$keyTokens/$user').update({platform: token});
   }
 }

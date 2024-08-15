@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class NotificationItem extends StatelessWidget {
   final String message;
-  final DateTime date;
+  final DateTime? date;
 
   const NotificationItem({
     super.key,
@@ -27,8 +27,9 @@ class NotificationItem extends StatelessWidget {
           children: [
             Text(message, style: context.theme.body1),
             const Delimiter(2),
+            if (date != null)
             Text(
-              date.printFull(),
+              date!.printFull(),
               style:
                   context.theme.body3.copyWith(color: AppColors.lightGreyText),
             ),

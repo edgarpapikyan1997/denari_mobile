@@ -1,13 +1,16 @@
 import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/constants/shop_tems.dart';
+import 'package:denari_app/data/advertisements/repository/advertisements_repository.dart';
 import 'package:denari_app/store/categories_state/categories_state.dart';
 import 'package:denari_app/store/loading_state/loading_state.dart';
 import 'package:denari_app/store/token_balance_state/token_balance_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
+import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:denari_app/view/widgets/main_screen_widgets/main_screen_field.dart';
-import 'package:denari_app/view/widgets/main_screen_widgets/product_advertisement_widget.dart';
+import 'package:denari_app/view/screens/main_screen/widgets/advertisements_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/app_sizes/app_sizes.dart';
@@ -24,6 +27,7 @@ import '../../widgets/preview_banner/preview_banner.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../widgets/scaffold_nav_bar.dart';
 import '../store_field_screen/widgets/store_field_generator.dart';
+import 'bloc/advertisements_bloc.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -101,115 +105,115 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (context) {
-      return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: AppSizes.prefSizes,
-          child: CustomAppBar(
-            appBarType: AppBarType.token,
-            appBarColor: AppColors.yellowLight,
-            leadingIcon: Assets.media.icons.token.svg(),
-            tokenBalance:_state.balance,
-            // should be changed to data from backEnd
-            tealIcon: GestureDetector(
-              onTap: () {
-                context.push('/searchScreen');
-              },
-              child: Assets.media.icons.search.svg(),
-            ),          ),
-        ),
-        body: Column(
-          children: [
-            Container(
-              decoration:
-                  BoxDecoration(color: AppColors.yellowLight, boxShadow: [
-                BoxShadow(
-                  color: AppColors.greyDark.withOpacity(0.6),
-                  blurRadius: 8,
-                  blurStyle: BlurStyle.outer,
-                  spreadRadius: 0,
-                ),
-              ]),
-              child: mainScreenFields(),
+    return BlocProvider(
+      create: (context) =>
+          AdvertisementsBloc(repository: di.get<AdvertisementsRepository>())
+            ..add(AdvertisementsFetchEvent()),
+      child: Observer(builder: (context) {
+        return Scaffold(
+          appBar: PreferredSize(
+            preferredSize: AppSizes.prefSizes,
+            child: CustomAppBar(
+              appBarType: AppBarType.token,
+              appBarColor: AppColors.yellowLight,
+              leadingIcon: Assets.media.icons.token.svg(),
+              tokenBalance: _state.balance,
+              // should be changed to data from backEnd
+              tealIcon: GestureDetector(
+                onTap: () {
+                  context.push('/searchScreen');
+                },
+                child: Assets.media.icons.search.svg(),
+              ),
             ),
-            Expanded(
-              child: PaddingUtility.only(
-                left: 16,
-                right: 16,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ProductAdvertisementWidget(
-                        image: Assets.media.images.coffe.provider(),
-                        radius: 10,
-                      ).paddingOnly(
-                        top: 24,
-                        bottom: 32,
-                      ),
-                      PreviewBanner(
-                        leadingBanner: 'main.topCategories'.tr(),
-                        previewStyle: context.theme.headline5.bold,
-                        tealButton: TextButton(
-                          onPressed: () {
-                            categoriesState.selectCategory(
-                              categoryName: categories[0].name,
-                              newCategoryType: categories[0].type,
-                            );
-                            bottomNavBarState.changeIndex(3);
-                            context.push('/shopsScreen');
-                          },
-                          style: ButtonStyle(
-                            padding: WidgetStateProperty.all<EdgeInsets>(
-                                EdgeInsets.zero),
-                            minimumSize:
-                                WidgetStateProperty.all<Size>(Size.zero),
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          ),
-                          child: Text(
-                            'main.seeAll'.tr(),
-                            style: context.theme.headline4.regular.yellowDark,
-                          ),
-                        ),
-                      ).paddingOnly(bottom: 16),
-                      CategoryFieldGenerator(
-                        categoriesState: categoriesState,
-                        categories: categories,
-                      ).paddingOnly(bottom: 24),
-                      PreviewBanner(
-                        leadingBanner:
-                          'main.popularStores'.tr(),
-                          previewStyle: context.theme.headline3.semiBold,
-                        tealButton: TextButton(
-                          onPressed: () {
-                            categoriesState.selectCategory(
+          ),
+          body: Column(
+            children: [
+              Container(
+                decoration:
+                    BoxDecoration(color: AppColors.yellowLight, boxShadow: [
+                  BoxShadow(
+                    color: AppColors.greyDark.withOpacity(0.6),
+                    blurRadius: 8,
+                    blurStyle: BlurStyle.outer,
+                    spreadRadius: 0,
+                  ),
+                ]),
+                child: mainScreenFields(),
+              ),
+              Expanded(
+                child: PaddingUtility.only(
+                  left: 16,
+                  right: 16,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const AdvertisementsWidget(),
+                        const Delimiter(32),
+                        PreviewBanner(
+                          leadingBanner: 'main.topCategories'.tr(),
+                          previewStyle: context.theme.headline5.bold,
+                          tealButton: TextButton(
+                            onPressed: () {
+                              categoriesState.selectCategory(
                                 categoryName: categories[0].name,
-                                newCategoryType: categories[0].type);
-                            bottomNavBarState.changeIndex(3);
-                            context.push('/shopsScreen');
-                          },
-                          style: ButtonStyle(
-                            padding: WidgetStateProperty.all<EdgeInsets>(
-                                EdgeInsets.zero),
-                            minimumSize:
-                                WidgetStateProperty.all<Size>(Size.zero),
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                newCategoryType: categories[0].type,
+                              );
+                              bottomNavBarState.changeIndex(3);
+                              context.push('/shopsScreen');
+                            },
+                            style: ButtonStyle(
+                              padding: WidgetStateProperty.all<EdgeInsets>(
+                                  EdgeInsets.zero),
+                              minimumSize:
+                                  WidgetStateProperty.all<Size>(Size.zero),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                            child: Text(
+                              'main.seeAll'.tr(),
+                              style: context.theme.headline4.regular.yellowDark,
+                            ),
                           ),
-                          child: Text(
-                            'main.seeAll'.tr(),
-                            style: context.theme.headline4.regular.yellowDark,
+                        ).paddingOnly(bottom: 16),
+                        CategoryFieldGenerator(
+                          categoriesState: categoriesState,
+                          categories: categories,
+                        ).paddingOnly(bottom: 24),
+                        PreviewBanner(
+                          leadingBanner: 'main.popularStores'.tr(),
+                          previewStyle: context.theme.headline3.semiBold,
+                          tealButton: TextButton(
+                            onPressed: () {
+                              categoriesState.selectCategory(
+                                  categoryName: categories[0].name,
+                                  newCategoryType: categories[0].type);
+                              bottomNavBarState.changeIndex(3);
+                              context.push('/shopsScreen');
+                            },
+                            style: ButtonStyle(
+                              padding: WidgetStateProperty.all<EdgeInsets>(
+                                  EdgeInsets.zero),
+                              minimumSize:
+                                  WidgetStateProperty.all<Size>(Size.zero),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            ),
+                            child: Text(
+                              'main.seeAll'.tr(),
+                              style: context.theme.headline4.regular.yellowDark,
+                            ),
                           ),
-                        ),
-                      ).paddingOnly(bottom: 16),
-                      StoreFieldGenerator(
-                          isGrid: false, storeFieldList: foodField),
-                    ],
+                        ).paddingOnly(bottom: 16),
+                        StoreFieldGenerator(
+                            isGrid: false, storeFieldList: foodField),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      );
-    });
+            ],
+          ),
+        );
+      }),
+    );
   }
 }

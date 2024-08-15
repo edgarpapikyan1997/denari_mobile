@@ -1,4 +1,4 @@
-import 'package:denari_app/data/notifications/messages_bloc.dart';
+import 'package:denari_app/view/screens/notifications/bloc/messages_bloc.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';

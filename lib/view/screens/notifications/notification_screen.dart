@@ -1,4 +1,4 @@
-import 'package:denari_app/data/notifications/messages_bloc.dart';
+import 'package:denari_app/view/screens/notifications/bloc/messages_bloc.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:denari_app/view/screens/notifications/widgets/no_notifications.dart';
@@ -19,18 +19,21 @@ class NotificationScreen extends StatelessWidget {
         child: BlocBuilder<MessagesBloc, MessagesState>(
           builder: (context, state) {
             if (state is WorkMessagesState) {
-              if (state.notifications == null || state.notifications!.isEmpty) {
+              final notifications = state.notifications;
+              if (notifications == null || notifications.isEmpty) {
                 return const NoNotifications();
               }
               return ListView.separated(
-                itemCount: 5,
-                itemBuilder: (context, index) =>
-                    NotificationItem(
-                      message: 'Message #$index',
-                      date: DateTime.now(),
-                    ),
-                separatorBuilder: (context, int index) =>
-                const Divider(
+                itemCount: notifications.length,
+                itemBuilder: (context, index) {
+                  final notification = notifications[index];
+                  return NotificationItem(
+                    key: ValueKey('notification_${notification.id}'),
+                    message: notification.message,
+                    date: notification.createdAt.toDate(),
+                  );
+                },
+                separatorBuilder: (context, int index) => const Divider(
                   height: 32,
                   thickness: 1,
                   color: AppColors.borderColor,

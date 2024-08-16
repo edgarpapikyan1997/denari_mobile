@@ -111,19 +111,10 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                   context.goNamed(
                     "sendGiftCardScreen",
                     extra: BrandItemWidget(
-                      isToken:
-                      categoriesState?.currentCategory == categories[0].name
-                          ? false
-                          : true,
                       avatar: Assets.media.images.toyStory.path,
                       brandName: 'McDonalds',
                       tokenBalance: 50,
                       addDivider: false,
-                      topPadding: 8,
-                      bottomPadding: 8,
-                      leftPadding: 12,
-                      rightPadding: 12,
-                      wrapperColor: AppColors.whiteGrey,
                     ),
                   );
                 },

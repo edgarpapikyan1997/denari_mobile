@@ -56,7 +56,6 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                       children: List.generate(
                         9,
                         (index) => BrandItemWidget(
-                          topPadding: 16,
                           avatar: Assets.media.images.toyStory.path,
                           brandName: 'McDonalds',
                           secondaryInfo: widget.isToken

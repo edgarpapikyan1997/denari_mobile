@@ -251,9 +251,13 @@ extension TextStyleHelpers on TextStyle {
 
   TextStyle get alertRed => copyWith(color: AppColors.alertRed);
 
+  TextStyle get completed => copyWith(color: AppColors.greenDark);
+
   TextStyle get lightGreyText => copyWith(color: AppColors.lightGreyText);
 
   TextStyle get greyLight => copyWith(color: AppColors.greyLight);
+
+  TextStyle get statusOnHold => copyWith(color: AppColors.yellowDark);
 
   TextStyle size([double? fontSize]) => copyWith(fontSize: fontSize);
 

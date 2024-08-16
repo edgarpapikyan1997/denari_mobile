@@ -7,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-
 import 'balance_widget.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -55,6 +54,7 @@ class CustomAppBar extends StatelessWidget {
 
   Widget defaultAppBar() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         leadingIcon != null
             ? SizedBox(height: 28, width: 26, child: leadingIcon)
@@ -62,9 +62,7 @@ class CustomAppBar extends StatelessWidget {
                 width: 24,
                 height: 24,
               ),
-        const Spacer(),
         title ?? const SizedBox(),
-        const Spacer(),
         tealIcon != null
             ? SizedBox(child: tealIcon)
             : const SizedBox(

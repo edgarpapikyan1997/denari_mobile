@@ -36,6 +36,7 @@
     "emptyBalance": "Balance is empty",
     "emptyBalanceDescription": "To receive tokens, you must make a purchase using a gift card."
   },
+
   "sign": {
     "in": "Sign in",
     "up": "Sign up",
@@ -182,5 +183,8 @@
     "redeemGift": "Redeem from Gift Cards",
     "redeemToken": "Redeem from Tokens",
     "max" : "max"
+  },
+  "transaction" : {
+    "transaction" : "Transaction"
   }
 }

@@ -17,8 +17,11 @@ class AppColors {
   static const alertRed = Color(0xffC1121F);
   static const yellowLight = Color(0xffE8CF78);
   static const yellowLight2 = Color(0xffDFB011);
+  static const greenDark = Color(0xFF40A578);
   static const yellowDark = Color(0xffBD8B25);
-
+  static const statusOnHold = Color(0xFFFBF1D2);
+  static const statusCancelled = Color(0xFFF6DBDD);
+  static const statusComplete = Color(0xFFD2F2D2);
   static const hintColor = Color.fromRGBO(164, 164, 164, 1);
   static const fieldColor = Color.fromRGBO(255, 255, 255, 1.0);
   static const errorColor = Color.fromRGBO(193, 18, 31, 1);

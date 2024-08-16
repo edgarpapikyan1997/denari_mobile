@@ -2,6 +2,7 @@ import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../constants/app_sizes/app_sizes.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../store/token_balance_state/token_balance_state.dart';
 import '../../widgets/bottom_sheet/Item_info_bottom_sheet.dart';
@@ -23,7 +24,7 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
   final brandName = 'Disney Toy Store';
   final purchaseDate = 'July 24, 2024';
 
-  // final List<BrandItemWidget> brandItems = [];
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +33,13 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
         BrandItemWidget(
           avatar: Assets.media.images.toyStory.path,
           brandName: '$brandName$i',
-          tokenBalance: _tokenBalanceState.balance,
+          balanceLD: _tokenBalanceState.balance,
+
           tealButton: GestureDetector(
             onTap: () {
               showItemInfoBottomSheet(
                 /// must be changed to data from backend
-              firstButtonTitle: 'Send',
+                firstButtonTitle: 'Send',
                 secondButtonTitle: 'Use',
                 onConfirmFirst: () {},
                 context: context,
@@ -62,7 +64,7 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
     ];
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size(0, 88),
+        preferredSize: AppSizes.prefSizes,
         child: CustomAppBar(
           appBarType: AppBarType.regular,
           leadingIcon: GestureDetector(

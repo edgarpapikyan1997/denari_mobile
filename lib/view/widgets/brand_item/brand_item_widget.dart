@@ -4,45 +4,54 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../../widgets/balance_widget.dart';
+import '../delimiter.dart';
 
 class BrandItemWidget extends StatelessWidget {
   final String? avatar;
   final String brandName;
-  final bool isToken;
-  final Color wrapperColor;
   final Widget? secondaryInfo;
   final int? tokenBalance;
+  final int? balanceLD;
   final Widget? tealButton;
   final bool addDivider;
-  final double bottomPadding;
-  final double topPadding;
-  final double leftPadding;
-  final double rightPadding;
-  final String? lastUpdate;
+  final DateTime? lastUpdate;
+  final DateTime? purchaseDate;
   final SvgPicture? iconAvatar;
+  final Color tokenColor;
+  final Color balanceColor;
+  final TextStyle? balanceLDStyle;
+  final TextStyle? tokenBalanceStyle;
+  final double iconHeight;
+  final double iconWidth;
+  final bool addPlus;
 
   const BrandItemWidget({
     super.key,
     required this.avatar,
     required this.brandName,
-    this.isToken = false,
     this.secondaryInfo,
     this.tokenBalance,
+    this.balanceLD,
     this.tealButton,
     this.addDivider = true,
-    this.bottomPadding = 0,
-    this.topPadding = 0,
-    this.leftPadding = 0,
-    this.rightPadding = 0,
-    this.wrapperColor = AppColors.white,
+    this.tokenColor = AppColors.white,
+    this.balanceColor = AppColors.white,
     this.lastUpdate,
+    this.purchaseDate,
     this.iconAvatar,
+    this.balanceLDStyle,
+    this.tokenBalanceStyle,
+    this.iconHeight = 20,
+    this.iconWidth = 10,
+    this.addPlus = false,
+
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Delimiter(16),
         Row(
           children: [
             iconAvatar != null
@@ -72,10 +81,9 @@ class BrandItemWidget extends StatelessWidget {
                         style: context.theme.body1,
                       ),
                       const SizedBox(
-                        height: 2,
+                        height: 4,
                       ),
-                      SizedBox(
-                          width: context.width / 1.5, child: secondaryInfo!),
+                      secondaryInfo!,
                     ],
                   )
                 : Text(
@@ -83,16 +91,35 @@ class BrandItemWidget extends StatelessWidget {
                     style: context.theme.headline4.regular,
                   ),
             const Spacer(),
-            tokenBalance != null
-                ? BalanceWidget(
-                    isTokenBalance: isToken,
-                    tokenIconHeight: 20,
-                    tokenIconWidth: 18,
-                    balance: tokenBalance!,
-                    textStyle: context.theme.headline4,
-                    color: wrapperColor,
-                  )
-                : const SizedBox(),
+            Column(
+              children: [
+                balanceLD != null
+                    ? BalanceWidget(
+                        isTokenBalance: false,
+                        tokenIconHeight: 20,
+                        tokenIconWidth: 18,
+                        balance: balanceLD!,
+                        textStyle: balanceLDStyle ?? context.theme.headline4,
+                        color: balanceColor,
+                      )
+                    : SizedBox(),
+                if (tokenBalance != null && balanceLD != null)
+                  const Delimiter(4),
+                tokenBalance != null
+                    ? BalanceWidget(
+                        isTokenBalance: true,
+                        horizontalPadding: 5,
+                        verticalPadding: 2,
+                        tokenIconHeight: iconHeight,
+                        tokenIconWidth: iconWidth,
+                        balance: tokenBalance!,
+                        textStyle: tokenBalanceStyle ?? context.theme.headline4,
+                        color: tokenColor,
+                        addPlusChar: addPlus,
+                      )
+                    : SizedBox(),
+              ],
+            ),
             tealButton ?? const SizedBox(),
           ],
         ),

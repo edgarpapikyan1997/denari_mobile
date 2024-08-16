@@ -26,6 +26,7 @@ import '../view/screens/authentication/sign_in/sign_in_screen.dart';
 import '../view/screens/authentication/sign_up/sign_up_screen.dart';
 import '../view/screens/main_screen/main_screen.dart';
 import '../view/screens/main_screen/my_gift_cards_screen.dart';
+import '../view/screens/main_screen/transaction_history_screen.dart';
 import '../view/screens/map_screen/map_screen.dart';
 import '../view/screens/notifications/notification_screen.dart';
 import '../view/screens/profile/profile_screen.dart';
@@ -85,12 +86,6 @@ final GoRouter router = GoRouter(
             return ChosenCategoryScreen(
               categoriesState: categoriesState,
             );
-          },
-        ),
-        GoRoute(
-          path: '/shopScreenFilter',
-          builder: (context, state) {
-            return const ShopScreenFilter();
           },
         ),
         GoRoute(
@@ -157,6 +152,17 @@ final GoRouter router = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+        path: '/transactions',
+        builder: (context, state) {
+          return const TransactionScreen();
+        }),
+    GoRoute(
+      path: '/shopScreenFilter',
+      builder: (context, state) {
+        return const ShopScreenFilter();
+      },
     ),
     GoRoute(
       path: '/mapScreen',

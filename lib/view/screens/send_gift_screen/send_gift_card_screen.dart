@@ -83,16 +83,10 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                         height: 16,
                       ),
                       BrandItemWidget(
-                        isToken: widget.brandItemWidget.isToken,
                         avatar: Assets.media.images.toyStory.path,
                         brandName: 'McDonalds',
                         tokenBalance: 50,
                         addDivider: false,
-                        topPadding: 8,
-                        bottomPadding: 8,
-                        leftPadding: 12,
-                        rightPadding: 12,
-                        wrapperColor: AppColors.whiteGrey,
                       ),
                       // widget.brandItemWidget,
                       const SizedBox(
@@ -130,7 +124,7 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                         children: [
                           for (var i = 2; i < 6; ++i)
                             BalanceWidget(
-                              isTokenBalance: widget.brandItemWidget.isToken,
+                              isTokenBalance: widget.brandItemWidget.tokenBalance != null,
                               textStyle: context.theme.headline4.medium,
                               balance: i * 10,
                               horizontalPadding: 12,

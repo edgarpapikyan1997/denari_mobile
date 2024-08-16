@@ -93,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
         MainScreenField(
           asset: Assets.media.icons.creditCardSync.svg(),
           title: 'main.transactionHistory'.tr(),
-          navigationTitle: '/transactionHistory',
+          navigationTitle: '/transactions',
         ),
       ],
     ).paddingOnly(bottom: 16, left: 16, right: 16);

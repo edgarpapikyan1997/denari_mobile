@@ -45,8 +45,6 @@ class _BrandItemListState extends State<BrandItemList> {
     setState(() {
       _isLoading = true;
     });
-
-    // Simulate network delay
     await Future.delayed(const Duration(seconds: 1));
     setState(() {
       final nextItems = widget.brandItems
@@ -74,7 +72,6 @@ class _BrandItemListState extends State<BrandItemList> {
               childCount: _displayedItems.length,
             ),
           ),
-          // Show loading indicator at the end of the list
           if (_isLoading)
             const SliverToBoxAdapter(
               child: Padding(

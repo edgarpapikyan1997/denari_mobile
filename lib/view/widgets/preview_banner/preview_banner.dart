@@ -8,6 +8,8 @@ class PreviewBanner extends StatelessWidget {
   final Widget? tealButton;
   final String? bannerUnderText;
   final TextStyle? previewStyle;
+  final TextStyle? underTextStyle;
+
 
   const PreviewBanner(
       {super.key,
@@ -16,7 +18,8 @@ class PreviewBanner extends StatelessWidget {
       this.middleBanner,
       this.tealButton,
       this.bannerUnderText,
-      this.previewStyle});
+      this.previewStyle,
+        this.underTextStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class PreviewBanner extends StatelessWidget {
         bannerUnderText != null
             ? Text(
                 bannerUnderText!,
-                style: context.theme.headline4.regular.lightGreyText,
+                style: underTextStyle ?? context.theme.headline4.regular.lightGreyText,
               )
             : const SizedBox()
       ],

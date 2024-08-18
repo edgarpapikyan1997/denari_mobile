@@ -11,7 +11,7 @@ class BalanceWidget extends StatelessWidget {
   final double horizontalPadding;
   final double verticalPadding;
   final int balance;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final String title;
   final Color? color;
   final VoidCallback? onTap;
@@ -19,7 +19,7 @@ class BalanceWidget extends StatelessWidget {
   const BalanceWidget({
     super.key,
     this.isTokenBalance = false,
-    required this.textStyle,
+    this.textStyle,
     required this.balance,
     this.tokenIconHeight = 25,
     this.tokenIconWidth = 28,
@@ -44,20 +44,21 @@ class BalanceWidget extends StatelessWidget {
         ),
         child: isTokenBalance
             ? Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Assets.media.icons.token
-                    .svg(height: tokenIconHeight, width: tokenIconWidth),
-                const SizedBox(width: 4),
-                Text(
-                  addPlusChar ? "+$balance $title" : balance.toString(),
-                  style: textStyle,
-                ),
-              ],
-            )
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Assets.media.icons.token
+                      .svg(height: tokenIconHeight, width: tokenIconWidth),
+                  const SizedBox(width: 4),
+                  Text(
+                    addPlusChar ? "+$balance $title" : balance.toString(),
+                    style: textStyle ?? context.theme.body1.medium,
+                  ),
+                ],
+              )
             : Text(
                 '$balance ${'balance.ld'.tr()}',
-                style: textStyle,
+                style: textStyle ?? context.theme.body1.medium,
               ),
       ),
     );

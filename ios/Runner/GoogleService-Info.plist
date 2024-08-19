@@ -26,5 +26,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:566463012532:ios:7aa0a582cc2080cdac81e1</string>
+	<key>DATABASE_URL</key>
+	<string>https://denari-84a55-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>

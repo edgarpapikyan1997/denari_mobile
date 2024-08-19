@@ -1,0 +1,20 @@
+import 'package:denari_app/data/shops/shops_model/shops_model.dart';
+import 'package:denari_app/data/shops/shops_repository/shops_repository.dart';
+import 'package:denari_app/utils/env/config.dart';
+import 'package:denari_app/utils/network/utils/response_helper.dart';
+import 'package:dio/dio.dart';
+
+final class ImplShopsRepository extends ShopsRepository {
+  final Dio _client;
+  final Config _config;
+
+  ImplShopsRepository({required Dio client, required Config config})
+      : _client = client,
+        _config = config;
+
+  @override
+  Future<List<ShopsModel>> getShops() async {
+    final result = await _client.get('${_config.host}/shops/filter');
+    return result.list(ShopsModel.fromJson);
+  }
+}

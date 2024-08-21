@@ -1,4 +1,6 @@
+import 'package:denari_app/data/gift_card_model/gift_card_model.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'shops_model.g.dart';
 
 // "id": "004f07a4-7ebe-4331-88eb-3f9e7d41585a",
@@ -16,29 +18,17 @@ class ShopsModel {
   final String id;
   @JsonKey(defaultValue: '')
   final String name;
-  @JsonKey(defaultValue: 0)
-  final int cashback;
-  @JsonKey(defaultValue: '')
-  final String? inviteCode;
   @JsonKey(defaultValue: '')
   final String imageUrl;
   @JsonKey(defaultValue: '')
-  final String totalTokensGiven;
-  @JsonKey(defaultValue: '')
-  final String totalTransactions;
-  @JsonKey(defaultValue: '')
-  final String createdAt;
+  final String description;
 
-  const ShopsModel({
-    required this.id,
-    required this.name,
-    required this.cashback,
-    this.inviteCode,
-    required this.imageUrl,
-    required this.totalTokensGiven,
-    required this.totalTransactions,
-    required this.createdAt,
-  });
+  const ShopsModel(
+      {required this.id,
+      required this.name,
+  required this.imageUrl,
+  required this.description
+      });
 
   factory ShopsModel.fromJson(Map<String, dynamic> json) =>
       _$ShopsModelFromJson(json);
@@ -48,21 +38,15 @@ class ShopsModel {
   ShopsModel copyWith({
     String? id,
     String? name,
-    int? cashback,
-    String? inviteCode,
     String? imageUrl,
-    String? totalTokensGiven,
-    String? totalTransactions,
-    String? createdAt,
+    String? description,
+
   }) {
     return ShopsModel(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        cashback: cashback ?? this.cashback,
-        inviteCode: inviteCode ?? this.inviteCode,
-        imageUrl: imageUrl ?? this.imageUrl,
-        totalTokensGiven: totalTokensGiven ?? this.totalTokensGiven,
-        totalTransactions: totalTransactions ?? this.totalTransactions,
-        createdAt: createdAt ?? this.createdAt);
+      id: id ?? this.id,
+      name: name ?? this.name,
+      imageUrl: imageUrl ?? this.imageUrl,
+      description: description ?? this.description,
+    );
   }
 }

@@ -153,6 +153,7 @@
     "empty": "There are no new events or messages requiring your attention at this time."
   },
   "shops": {
+    "allShops" : "See all shops",
     "shops": "Shops",
     "all": "All",
     "location": "Location",

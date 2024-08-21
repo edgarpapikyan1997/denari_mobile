@@ -41,6 +41,22 @@ mixin _$CustomButtonState on _CustomButtonState, Store {
     });
   }
 
+  late final _$isPressedAtom =
+      Atom(name: '_CustomButtonState.isPressed', context: context);
+
+  @override
+  bool get isPressed {
+    _$isPressedAtom.reportRead();
+    return super.isPressed;
+  }
+
+  @override
+  set isPressed(bool value) {
+    _$isPressedAtom.reportWrite(value, super.isPressed, () {
+      super.isPressed = value;
+    });
+  }
+
   late final _$_CustomButtonStateActionController =
       ActionController(name: '_CustomButtonState', context: context);
 
@@ -59,7 +75,8 @@ mixin _$CustomButtonState on _CustomButtonState, Store {
   String toString() {
     return '''
 isButtonEnabled: ${isButtonEnabled},
-index: ${index}
+index: ${index},
+isPressed: ${isPressed}
     ''';
   }
 }

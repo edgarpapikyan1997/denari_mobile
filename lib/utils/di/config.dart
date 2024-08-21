@@ -7,6 +7,7 @@ import 'package:denari_app/utils/network/api_native_dio.dart';
 import 'package:denari_app/utils/network/data/token_preferences.dart';
 import 'package:dio/dio.dart';
 
+import '../../data/shops/shops_repository/impl/shops_repository.dart';
 import '../../data/token/repository/impl/token_repository_impl.dart';
 import 'di.dart';
 
@@ -18,7 +19,11 @@ configDi(Config config) {
   di.add(ApiNativeDio(di.get<TokenPreferences>()));
   di.add(ImplAuthRepository(client: di.get<Dio>(), config: di.get<Config>()));
   di.add(ImplTokenRepository(client: di.get<Dio>(), config: di.get<Config>()));
-  di.add(ImplProfileRepository(client: di.get<Dio>(), config: di.get<Config>()));
-  di.add(FirebaseMessagesRepository(client: di.get<Dio>(), config: di.get<Config>()));
-  di.add(ImplAdvertisementsRepository(client: di.get<Dio>(), config: di.get<Config>()));
+  di.add(
+      ImplProfileRepository(client: di.get<Dio>(), config: di.get<Config>()));
+  di.add(FirebaseMessagesRepository(
+      client: di.get<Dio>(), config: di.get<Config>()));
+  di.add(ImplAdvertisementsRepository(
+      client: di.get<Dio>(), config: di.get<Config>()));
+  di.add(ImplShopsRepository(client: di.get<Dio>(), config: di.get<Config>()));
 }

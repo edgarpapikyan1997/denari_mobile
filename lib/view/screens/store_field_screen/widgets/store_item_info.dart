@@ -6,10 +6,15 @@ import 'package:flutter/material.dart';
 import '../../../../gen/assets.gen.dart';
 
 class StoreItemInfo extends StatefulWidget {
+  final String storeName;
+  final String storeImage;
+
   final List<StoreItemInfoCreator> items;
 
   const StoreItemInfo({
     super.key,
+    required this.storeImage,
+    required this.storeName,
     required this.items,
   });
 
@@ -34,15 +39,19 @@ class _StoreItemInfoState extends State<StoreItemInfo> {
         children: [
           Row(
             children: [
-              Image.asset(
-                brand,
-                height: 56,
-                width: 56,
-                fit: BoxFit.cover,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  widget.storeImage,
+                  height: 56,
+                  width: 56,
+                  fit: BoxFit.cover,
+                  
+                ),
               ),
               const Delimiter(8),
               Text(
-                name,
+               widget.storeName,
                 style: context.theme.headline5.bold,
               ),
               const Spacer(),

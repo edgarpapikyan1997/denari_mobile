@@ -96,7 +96,9 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: '/storeFieldItemScreen',
           builder: (context, state) {
-            return const StoreFieldItemScreen();
+            return StoreFieldItemScreen(
+              uniqueID: state.extra as String,
+            );
           },
         ),
         GoRoute(

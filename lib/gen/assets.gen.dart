@@ -280,6 +280,10 @@ class $AssetsMediaImagesGen {
   AssetGenImage get ratedStar =>
       const AssetGenImage('assets/media/images/ratedStar.png');
 
+  /// File path: assets/media/images/safety-warning-heat.png
+  AssetGenImage get safetyWarningHeat =>
+      const AssetGenImage('assets/media/images/safety-warning-heat.png');
+
   /// File path: assets/media/images/skyteam.png
   AssetGenImage get skyteam =>
       const AssetGenImage('assets/media/images/skyteam.png');
@@ -310,6 +314,7 @@ class $AssetsMediaImagesGen {
         image9,
         img,
         ratedStar,
+        safetyWarningHeat,
         skyteam,
         star,
         taskListClock,

@@ -34,65 +34,65 @@ class _ChosenCategoryScreenState extends State<ChosenCategoryScreen> {
     }
   }
 
-  Widget getItemsByCategory() {
-    switch (categoriesState?.categoryType) {
-      case CategoryType.all:
-        return StoreFieldGenerator(
-          isGrid: true,
-          storeFieldList: allShops,
-        );
-      case CategoryType.food:
-        return StoreFieldGenerator(
-          isGrid: true,
-          storeFieldList: foodField,
-        );
-      case CategoryType.beauty:
-        return StoreFieldGenerator(
-          isGrid: true,
-          storeFieldList: beautyField,
-        );
-      case CategoryType.clothing:
-        return StoreFieldGenerator(
-          isGrid: true,
-          storeFieldList: clothingField,
-        );
-      case CategoryType.activities:
-        return StoreFieldGenerator(
-          isGrid: true,
-          storeFieldList: activitiesField,
-        );
-      case CategoryType.groceries:
-        return StoreFieldGenerator(
-          isGrid: true,
-          storeFieldList: groceriesField,
-        );
-      case CategoryType.travel:
-        return StoreFieldGenerator(
-          isGrid: true,
-          storeFieldList: travelField,
-        );
-      case CategoryType.giftCard:
-        return StoreFieldGenerator(
-          isGrid: true,
-          storeFieldList: giftCardField,
-        );
-      case CategoryType.tokens:
-        return StoreFieldGenerator(
-          isGrid: true,
-          storeFieldList: tokensField,
-        );
-      case CategoryType.other:
-        return StoreFieldGenerator(
-          isGrid: true,
-          storeFieldList: otherField,
-        );
-      default:
-        return const StoreFieldGenerator(
-          isGrid: true,
-          storeFieldList: [],
-        );
-    }
-  }
+  // Widget getItemsByCategory() {
+  //   switch (categoriesState?.categoryType) {
+  //     case CategoryType.all:
+  //       return StoreFieldGenerator(
+  //         isGrid: true,
+  //         storeFieldList: allShops,
+  //       );
+  //     case CategoryType.food:
+  //       return StoreFieldGenerator(
+  //         isGrid: true,
+  //         storeFieldList: foodField,
+  //       );
+  //     case CategoryType.beauty:
+  //       return StoreFieldGenerator(
+  //         isGrid: true,
+  //         storeFieldList: beautyField,
+  //       );
+  //     case CategoryType.clothing:
+  //       return StoreFieldGenerator(
+  //         isGrid: true,
+  //         storeFieldList: clothingField,
+  //       );
+  //     case CategoryType.activities:
+  //       return StoreFieldGenerator(
+  //         isGrid: true,
+  //         storeFieldList: activitiesField,
+  //       );
+  //     case CategoryType.groceries:
+  //       return StoreFieldGenerator(
+  //         isGrid: true,
+  //         storeFieldList: groceriesField,
+  //       );
+  //     case CategoryType.travel:
+  //       return StoreFieldGenerator(
+  //         isGrid: true,
+  //         storeFieldList: travelField,
+  //       );
+  //     case CategoryType.giftCard:
+  //       return StoreFieldGenerator(
+  //         isGrid: true,
+  //         storeFieldList: giftCardField,
+  //       );
+  //     case CategoryType.tokens:
+  //       return StoreFieldGenerator(
+  //         isGrid: true,
+  //         storeFieldList: tokensField,
+  //       );
+  //     case CategoryType.other:
+  //       return StoreFieldGenerator(
+  //         isGrid: true,
+  //         storeFieldList: otherField,
+  //       );
+  //     default:
+  //       return const StoreFieldGenerator(
+  //         isGrid: true,
+  //         storeFieldList: [],
+  //       );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +132,7 @@ class _ChosenCategoryScreenState extends State<ChosenCategoryScreen> {
         right: 16,
         child: Column(
           children: [
-            Expanded(child: getItemsByCategory()),
+            // Expanded(child: getItemsByCategory()),
           ],
         ),
       ),

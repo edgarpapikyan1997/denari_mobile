@@ -2,12 +2,13 @@ import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../data/shops/shops_model/shops_model.dart';
 import 'store_field_widget.dart';
 
 class StoreFieldGenerator extends StatelessWidget {
   final double? height;
   final double? width;
-  final List<Map<String, dynamic>> storeFieldList;
+  final List<ShopsModel> storeFieldList;
   final bool isGrid;
   final bool excludeTitle;
 
@@ -31,19 +32,17 @@ class StoreFieldGenerator extends StatelessWidget {
         itemCount: storeFieldList.length,
         itemBuilder: (context, index) {
           var storeField = storeFieldList[index];
-          String? asset = storeField['asset'] as String?;
-          String title = storeField['title'] as String;
-          String description = storeField['description'] as String;
           return GestureDetector(
             onTap: () {
               context.push(
                 '/storeFieldItemScreen',
+                extra: storeFieldList[index].id,
               );
             },
             child: StoreFieldWidget(
-              asset: asset,
-              title: title,
-              description: description,
+              asset: storeField.imageUrl,
+              title: storeField.name,
+              description: 'description',
               width: width ?? 168,
               height: height ?? 175,
             ),
@@ -51,7 +50,7 @@ class StoreFieldGenerator extends StatelessWidget {
         });
   }
 
-  Widget showListView() {
+  Widget showListView(BuildContext context) {
     int itemCount = storeFieldList.length > 4 ? 4 : storeFieldList.length;
     return SizedBox(
       height: 196,
@@ -60,18 +59,23 @@ class StoreFieldGenerator extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: List.generate(itemCount, (index) {
           var storeField = storeFieldList[index];
-          String? asset = storeField['asset'] as String?;
-          String title = storeField['title'] as String;
-          String description = storeField['description'] as String;
           return PaddingUtility.only(
             right: index != itemCount - 1 ? 8 : 0,
-            child: StoreFieldWidget(
-              asset: asset,
-              title: title,
-              description: description,
-              width: width ?? 128,
-              height: height ?? 148,
-              excludeTitle: excludeTitle,
+            child: GestureDetector(
+              onTap: () {
+                context.push(
+                  '/storeFieldItemScreen',
+                  extra: storeFieldList[index].id,
+                );
+              },
+              child: StoreFieldWidget(
+                asset: storeField.imageUrl,
+                title: storeField.name,
+                description: 'description',
+                width: width ?? 128,
+                height: height ?? 148,
+                excludeTitle: excludeTitle,
+              ),
             ),
           );
         }),
@@ -81,6 +85,6 @@ class StoreFieldGenerator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isGrid ? showGrid(context) : showListView();
+    return isGrid ? showGrid(context) : showListView(context);
   }
 }

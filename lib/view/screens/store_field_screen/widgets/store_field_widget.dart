@@ -26,17 +26,6 @@ class StoreFieldWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Image.network(
-          errorBuilder: (context, error, stackTrace) {
-            return Container(
-              decoration: BoxDecoration(
-                color: AppColors.whiteGrey,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              height: height,
-              width: width,
-              child: Assets.media.images.safetyWarningHeat.image(),
-            );
-          },
           asset ?? '',
           height: height,
           width: width,

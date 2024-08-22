@@ -9,12 +9,14 @@ class StoreFieldGenerator extends StatelessWidget {
   final double? height;
   final double? width;
   final List<ShopsModel> storeFieldList;
+  final List<String> storeDataImages;
   final bool isGrid;
   final bool excludeTitle;
 
   const StoreFieldGenerator({
     super.key,
     this.storeFieldList = const [],
+    this.storeDataImages = const [],
     required this.isGrid,
     this.height,
     this.width,
@@ -51,7 +53,13 @@ class StoreFieldGenerator extends StatelessWidget {
   }
 
   Widget showListView(BuildContext context) {
-    int itemCount = storeFieldList.length > 4 ? 4 : storeFieldList.length;
+    int itemCount;
+    if (storeDataImages.isNotEmpty) {
+      itemCount = storeDataImages.length;
+    } else {
+      itemCount = storeFieldList.length > 4 ? 4 : storeFieldList.length;
+    }
+
     return SizedBox(
       height: 196,
       child: ListView(

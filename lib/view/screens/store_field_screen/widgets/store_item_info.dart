@@ -4,6 +4,7 @@ import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../gen/assets.gen.dart';
+import '../../../../utils/themes/app_colors.dart';
 
 class StoreItemInfo extends StatefulWidget {
   final String storeName;
@@ -46,7 +47,6 @@ class _StoreItemInfoState extends State<StoreItemInfo> {
                   height: 56,
                   width: 56,
                   fit: BoxFit.cover,
-                  
                 ),
               ),
               const Delimiter(8),

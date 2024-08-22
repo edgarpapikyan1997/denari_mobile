@@ -1,4 +1,5 @@
 import 'package:denari_app/constants/app_bar_type.dart';
+import 'package:denari_app/data/shops/shop_branch_model/shop_branch_model.dart';
 import 'package:denari_app/data/shops/shop_unit_model/shop_unit_model.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
@@ -45,11 +46,6 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
 
   final LoadingState _loadingState = LoadingState();
   bool isEmpty = false;
-  String name = 'Store Name';
-  String rating = "4.5";
-  String phone = '+1 (123) 456-7890';
-  String city = '123 Main St, City';
-  String dateTime = 'Daily from 10:00 to 20:00';
   List<String> imageList = [];
 
   @override
@@ -68,6 +64,50 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
     }
     isEmpty = imageList.isEmpty;
     _loadingState.stopLoading();
+  }
+
+  List<Widget> getGiftCardOptions() {
+    return List.generate(_shopState.shopsUnitModel!.giftCards.length, (index) {
+      return PaddingUtility.only(
+        bottom: 16,
+        child: BrandItemWidget(
+          avatar: Assets.media.icons.card.path,
+          brandName:
+              'Gift Card ${_shopState.shopsUnitModel?.giftCards[index].value}',
+          addDivider: true,
+          tokenBalance: _shopState.shopsUnitModel?.giftCards[index].value ?? 0,
+          tealButton: GestureDetector(
+            onTap: () {
+              showItemInfoBottomSheet(
+                secondButtonTitle: 'Buy',
+                firstButtonTitle: 'Close',
+                context: context,
+                onConfirmSecond: () {
+                  context.pop();
+                },
+                onConfirmFirst: () {},
+                addButtons: true,
+                addCloseButton: true,
+                image: _shopState.shopsUnitModel?.imageUrl,
+                itemTitle: _shopState.shopsUnitModel?.name ?? 'Undefined',
+                itemTitleChevronRight: true,
+                underInfoCostText: Text(
+                  'Gift Card ${_shopState.shopsUnitModel?.giftCards[index].value}',
+                  style: context.theme.body1,
+                ),
+                itemInfoCost:
+                    '${_shopState.shopsUnitModel?.giftCards[index].value}',
+              );
+            },
+            child: Assets.media.icons.chevronRight.svg(),
+          ),
+          iconAvatar: Assets.media.icons.card.svg(
+            colorFilter:
+                const ColorFilter.mode(AppColors.yellowDark, BlendMode.srcIn),
+          ),
+        ),
+      );
+    });
   }
 
   @override
@@ -119,9 +159,9 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                           asset: Assets.media.icons.store.svg(
                               colorFilter: const ColorFilter.mode(
                                   AppColors.yellowDark, BlendMode.srcIn)),
-                          title: '${storeData?.branch.length} Branches',
+                          title: '${storeData!.branch.length} Branches',
                           onTap: () {
-                            context.push('/mapScreen');
+                            context.push('/mapScreen', extra: storeData);
                           },
                         ),
                         const Delimiter(16),
@@ -166,68 +206,23 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                           ],
                         ),
                         const Delimiter(16),
-                        StoreFieldProperty(
-                          asset: Assets.media.icons.handShake.svg(
-                              colorFilter: const ColorFilter.mode(
-                                  AppColors.yellowDark, BlendMode.srcIn)),
-                          title: 'Allianse (4)',
-                          onTap: () {
-                            context.push('/alliance', extra: true);
-                          },
-                        ),
-                        const Delimiter(32),
+                        // StoreFieldProperty(
+                        //   asset: Assets.media.icons.handShake.svg(
+                        //       colorFilter: const ColorFilter.mode(
+                        //           AppColors.yellowDark, BlendMode.srcIn)),
+                        //   title: 'Allianse (4)',
+                        //   onTap: () {
+                        //     context.push('/alliance', extra: true);
+                        //   },
+                        // ),
+                        // const Delimiter(32),
                         PreviewBanner(
                             leadingBanner: 'shops.giftCardOptions'.tr()),
                         const Delimiter(12),
-                        BrandItemWidget(
-                          avatar: Assets.media.icons.card.path,
-                          brandName: 'Gift Card 100',
-                          addDivider: true,
-                          tokenBalance: 100,
-                          tealButton: GestureDetector(
-                            onTap: () {
-                              showItemInfoBottomSheet(
-                                secondButtonTitle: 'Buy',
-                                firstButtonTitle: 'Close',
-                                context: context,
-                                onConfirmSecond: () {
-                                  context.pop();
-                                },
-                                onConfirmFirst: () {},
-                                addButtons: true,
-                                addCloseButton: true,
-                                image: Assets.media.images.image9.path,
-                                itemTitle: 'Disney Toy store',
-                                itemTitleChevronRight: true,
-                                underInfoCostText: Text(
-                                  'Gift Card 100',
-                                  style: context.theme.body1,
-                                ),
-                                itemInfoCost: '100',
-                              );
-                            },
-                            child: Assets.media.icons.chevronRight.svg(),
-                          ),
-                          iconAvatar: Assets.media.icons.card.svg(
-                            colorFilter: const ColorFilter.mode(
-                                AppColors.yellowDark, BlendMode.srcIn),
-                          ),
+                        Column(
+                          children: getGiftCardOptions(),
                         ),
-                        const Delimiter(16),
-                        BrandItemWidget(
-                          avatar: Assets.media.icons.card.path,
-                          brandName: 'Gift Card 100',
-                          addDivider: true,
-                          tokenBalance: 100,
-                          tealButton: GestureDetector(
-                            onTap: () {},
-                            child: Assets.media.icons.chevronRight.svg(),
-                          ),
-                          iconAvatar: Assets.media.icons.card.svg(
-                            colorFilter: const ColorFilter.mode(
-                                AppColors.yellowDark, BlendMode.srcIn),
-                          ),
-                        ),
+
                         const Delimiter(8),
                         Row(
                           children: [

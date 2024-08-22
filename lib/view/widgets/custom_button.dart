@@ -9,7 +9,7 @@ class CustomButton extends StatefulWidget {
   final bool isEnabled;
   final bool isWhite;
   final String title;
-  final VoidCallback onTap;
+  final Function  onTap;
 
   const CustomButton({
     super.key,
@@ -41,11 +41,11 @@ class _CustomButtonState extends State<CustomButton>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        widget.onTap();
         _controller.forward();
         Future.delayed(const Duration(milliseconds: 100), () {
           _controller.reverse();
         });
-        widget.onTap;
       },
       child: ScaleTransition(
         scale: Tween<double>(

@@ -18,6 +18,7 @@ import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../data/authentication/model/reset_pass_model.dart';
+import '../data/shops/shop_unit_model/shop_unit_model.dart';
 import '../view/screens/authentication/code/forgot_code_screen.dart';
 import '../view/screens/authentication/code/sign_up_code_screen.dart';
 import '../view/screens/authentication/forgot/forgot_screen.dart';
@@ -94,14 +95,6 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: '/storeFieldItemScreen',
-          builder: (context, state) {
-            return StoreFieldItemScreen(
-              uniqueID: state.extra as String,
-            );
-          },
-        ),
-        GoRoute(
             path: '/alliance',
             builder: (context, state) {
               return AllianceScreen(
@@ -161,9 +154,19 @@ final GoRouter router = GoRouter(
       ],
     ),
     GoRoute(
+      path: '/storeFieldItemScreen',
+      builder: (context, state) {
+        return StoreFieldItemScreen(
+          uniqueID: state.extra as String,
+        );
+      },
+    ),
+    GoRoute(
       path: '/mapScreen',
       builder: (context, state) {
-        return const MapScreen();
+        return MapScreen(
+          storeData: state.extra as ShopsUnitModel,
+        );
       },
     ),
     GoRoute(

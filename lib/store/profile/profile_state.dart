@@ -127,6 +127,9 @@ abstract class _ProfileState with Store {
       dateOfBirth: birthday?.print() ?? '',
       createdAt: profile.createdAt,
       code: code,
+      allowGPSLocation: profile.allowGPSLocation,
+      transactionNotification: profile.transactionNotification,
+      advertisements: profile.advertisements,
     );
     (await handle(() => _profileRepository.updateProfile(uProfile))).then(
       (data) => updateError = 'true',

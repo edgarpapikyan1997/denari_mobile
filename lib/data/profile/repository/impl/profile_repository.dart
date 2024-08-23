@@ -37,4 +37,31 @@ final class ImplProfileRepository extends ProfileRepository {
     );
     return result.statusCode == 200;
   }
+
+  @override
+  Future<bool> changeGpsState(bool state) async {
+    final result = await _client.post(
+      '${_config.host}/user/toggle-gps',
+      data: jsonEncode({'allowGPSLocation': state}),
+    );
+    return result.statusCode == 200;
+  }
+
+  @override
+  Future<bool> changeNotificationsState(bool transState, bool advState) async {
+    final result = await _client.post(
+      '${_config.host}/user/toggle-notifications',
+      data: jsonEncode({
+        'toggleTransaction': transState,
+        'toggleAdvertisements': advState,
+      }),
+    );
+    return result.statusCode == 200;
+  }
+
+  @override
+  Future<bool> deleteProfile() async {
+    final result = await _client.delete('${_config.host}/deleteAccount');
+    return result.statusCode == 200;
+  }
 }

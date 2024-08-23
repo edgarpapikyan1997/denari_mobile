@@ -9,6 +9,7 @@ import 'package:denari_app/view/widgets/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -47,10 +48,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           builder: (context) => UserBanner(profile: _state.profile),
         ),
       ),
-      body: SafeArea(
-        minimum: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-        child: Observer(
-          builder: (context) => ProfileMenu(profile: _state.profile),
+      body: Provider(
+        create: (context) => _state,
+        child: SafeArea(
+          minimum: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          child: Observer(
+            builder: (context) => ProfileMenu(profile: _state.profile),
+          ),
         ),
       ),
     );

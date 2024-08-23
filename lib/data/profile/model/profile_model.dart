@@ -18,6 +18,12 @@ class ProfileModel {
   final String createdAt;
   @JsonKey(defaultValue: '')
   final String code;
+  @JsonKey(defaultValue: false)
+  final bool allowGPSLocation;
+  @JsonKey(defaultValue: false)
+  final bool transactionNotification;
+  @JsonKey(defaultValue: false)
+  final bool advertisements;
 
   const ProfileModel({
     required this.id,
@@ -27,6 +33,9 @@ class ProfileModel {
     required this.dateOfBirth,
     required this.createdAt,
     required this.code,
+    required this.allowGPSLocation,
+    required this.transactionNotification,
+    required this.advertisements,
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) =>
@@ -42,6 +51,9 @@ class ProfileModel {
     String? dateOfBirth,
     String? createdAt,
     String? code,
+    bool? allowGPSLocation,
+    bool? transactionNotification,
+    bool? advertisements,
   }) {
     return ProfileModel(
       id: id ?? this.id,
@@ -51,6 +63,9 @@ class ProfileModel {
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       createdAt: createdAt ?? this.createdAt,
       code: code ?? this.code,
+      allowGPSLocation: allowGPSLocation ?? this.allowGPSLocation,
+      transactionNotification: transactionNotification ?? this.transactionNotification,
+      advertisements: advertisements ?? this.advertisements,
     );
   }
 }

@@ -6,4 +6,10 @@ abstract class ProfileRepository {
   Future<bool> updateProfile(ProfileModel profile);
 
   Future<bool> invite(String contact);
+
+  Future<bool> changeGpsState(bool state);
+
+  Future<bool> changeNotificationsState(bool transState, bool advState);
+
+  Future<bool> deleteProfile();
 }

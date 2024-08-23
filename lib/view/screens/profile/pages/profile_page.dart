@@ -53,6 +53,9 @@ class _ProfilePageState extends State<ProfilePage> {
             dateOfBirth: _state.birthday.toString(),
             createdAt: _state.profile.createdAt,
             code: _state.code,
+            allowGPSLocation: _state.profile.allowGPSLocation,
+            transactionNotification: _state.profile.transactionNotification,
+            advertisements: _state.profile.advertisements,
           );
           context.goNamed(Routes.profileCode, extra: profile);
         } else if (value != null) {

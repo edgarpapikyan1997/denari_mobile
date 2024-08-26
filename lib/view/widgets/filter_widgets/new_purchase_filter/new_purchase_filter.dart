@@ -53,6 +53,7 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
   void initState() {
     super.initState();
     _transactionModel = TransactionModel(
+      id: null,
       date: DateTime.now().toString(),
       shopId: widget.shopUnitModel.branch[0].shopId,
       status: 'status.onHold'.tr(),
@@ -70,17 +71,17 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
     _loadingState.startLoading();
     await _transactionsState.sendTransaction(_transactionModel!);
     _loadingState.stopLoading();
-    if (_transactionsState.isSuccessful.isNotEmpty && _transactionModel != null) {
+    print(_transactionModel?.id);
+    if (_transactionsState.isSuccessful.isNotEmpty &&
+        _transactionModel != null && _transactionModel?.id != null) {
       showModalSheet(
         context: context,
         child: SizedBox(
           width: context.width,
           child: QrGeneratorScreen(
             transactionModel: _transactionModel!,
-            userID: widget.profileModel.id,
-            onTap: () {
-              // Handle tap event inside QR code screen if needed
-            },
+            transactionID: _transactionModel!.id.toString() ,
+            onTap: () {},
           ),
         ),
       );
@@ -96,7 +97,6 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
 
   @override
   Widget build(BuildContext context) {
-
     return PaddingUtility.only(
       top: 8,
       bottom: 40,
@@ -129,13 +129,14 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
               ),
               const Delimiter(24),
               _loadingState.isLoading
-                  ? const CircularProgressIndicator()  // Show loader while loading
+                  ? const CircularProgressIndicator() // Show loader while loading
                   : CustomButton(
-                isEnabled: true,
-                isWhite: false,
-                title: 'qr.generateQR'.tr(),
-                onTap: () => _handleTransaction(context),  // Trigger transaction handling
-              ),
+                      isEnabled: true,
+                      isWhite: false,
+                      title: 'qr.generateQR'.tr(),
+                      onTap: () => _handleTransaction(
+                          context), // Trigger transaction handling
+                    ),
             ],
           );
         },

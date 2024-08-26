@@ -5,6 +5,8 @@ part 'transaction_model.g.dart';
 @JsonSerializable()
 class TransactionModel {
   @JsonKey(defaultValue: '')
+  final String? id;
+  @JsonKey(defaultValue: '')
   final String date;
   @JsonKey(defaultValue: '')
   final String shopId;
@@ -28,15 +30,16 @@ class TransactionModel {
   final int? giftCardAmount;
 
   const TransactionModel({
+     this.id,
     required this.date,
     required this.shopId,
-     this.addressShopId,
-     this.transactionsAmount,
-     this.tokenAddedAmount,
-     this.amountTokensUsed,
-     this.amountGiftCardsUsing,
+    this.addressShopId,
+    this.transactionsAmount,
+    this.tokenAddedAmount,
+    this.amountTokensUsed,
+    this.amountGiftCardsUsing,
     required this.status,
-     this.comment,
+    this.comment,
     required this.userId,
     this.giftCardAmount,
   });
@@ -47,6 +50,7 @@ class TransactionModel {
   Map<String, dynamic> toJson() => _$TransactionModelToJson(this);
 
   TransactionModel copyWith({
+    final String? id,
     final String? date,
     final String? shopId,
     final int? addressShopId,
@@ -60,6 +64,7 @@ class TransactionModel {
     final int? giftCardAmount,
   }) {
     return TransactionModel(
+      id: id ?? this.id,
       date: date ?? this.date,
       shopId: shopId ?? this.shopId,
       addressShopId: addressShopId ?? this.addressShopId,

@@ -14,13 +14,19 @@ final class ImplTransactionsRepository extends TransactionsRepository {
         _config = config;
 
   @override
-  Future<bool> sendTransaction(TransactionModel data) async {
-    print(data.shopId);
+  Future<TransactionModel?> sendTransaction(TransactionModel data) async {
     final result = await _client.post(
       '${_config.host}/transactions',
       data: jsonEncode(data.toJson()),
     );
-    print(result.data);
-    return result.statusCode == 201;
+    print(data);
+    if (result.data != null) {
+      print(result.data);
+
+      return TransactionModel.fromJson(result.data);
+
+    }
+    print(result.data.toString());
+    return null;
   }
 }

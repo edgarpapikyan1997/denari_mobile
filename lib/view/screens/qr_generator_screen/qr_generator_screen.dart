@@ -14,13 +14,13 @@ import '../../../utils/padding_utility/padding_utility.dart';
 import '../../widgets/bottom_sheet/custom_bottom_sheet.dart';
 
 class QrGeneratorScreen extends StatelessWidget {
-  final String userID;
+  final String transactionID;
   final TransactionModel transactionModel;
   final VoidCallback onTap;
 
   const QrGeneratorScreen(
       {super.key,
-      required this.userID,
+      required this.transactionID,
       required this.onTap,
       required this.transactionModel});
 

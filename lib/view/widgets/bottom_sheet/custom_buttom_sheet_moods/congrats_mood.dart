@@ -139,6 +139,8 @@ class _CongratsMoodState extends State<CongratsMood> {
                       isWhite: false,
                       onTap: () {
                         context.pop();
+                        context.pop();
+                        context.pop();
                       },
                     ),
                   ),

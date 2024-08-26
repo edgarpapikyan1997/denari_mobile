@@ -65,6 +65,15 @@ mixin _$ShopsState on ShopsStatePerformer, Store {
     return _$getAllShopsAsyncAction.run(() => super.getAllShops());
   }
 
+  late final _$getShopsByCategoryAsyncAction =
+      AsyncAction('ShopsStatePerformer.getShopsByCategory', context: context);
+
+  @override
+  Future<void> getShopsByCategory({required String id}) {
+    return _$getShopsByCategoryAsyncAction
+        .run(() => super.getShopsByCategory(id: id));
+  }
+
   late final _$getShopByIDAsyncAction =
       AsyncAction('ShopsStatePerformer.getShopByID', context: context);
 

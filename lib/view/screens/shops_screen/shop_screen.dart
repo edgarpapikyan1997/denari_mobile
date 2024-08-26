@@ -1,4 +1,3 @@
-import 'package:denari_app/store/shops/shops_state/shops_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:denari_app/view/widgets/category/category_field_generator.dart';
@@ -11,6 +10,7 @@ import '../../../data/shops/shops_repository/impl/shops_repository.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../store/categories_state/categories_state.dart';
 import '../../../store/loading_state/loading_state.dart';
+import '../../../store/shops/shops_state/shops_state.dart';
 import '../../../utils/di/config.dart';
 import '../../widgets/category/category.dart';
 import '../../widgets/custom_app_bar.dart';
@@ -24,7 +24,7 @@ class ShopsScreen extends StatefulWidget {
 }
 
 class _ShopsScreenState extends State<ShopsScreen> {
-  final ShopsState _state = ShopsState(
+  final ShopsState _shopsState = ShopsState(
     shopsRepository: di.get<ImplShopsRepository>(),
   );
   final LoadingState _loadingState = LoadingState();
@@ -58,7 +58,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
       Category(type: CategoryType.other, iconColor: categoriesState.itemColor),
     ];
     initCategories();
-    await _state.getAllShops();
+    await _shopsState.getAllShops();
     _loadingState.stopLoading();
   }
 
@@ -97,7 +97,7 @@ class _ShopsScreenState extends State<ShopsScreen> {
                       : Expanded(
                           child: StoreFieldGenerator(
                             isGrid: true,
-                            storeFieldList: _state.shops,
+                            storeFieldList: _shopsState.shops,
                           ),
                         ),
                 ],

@@ -185,5 +185,13 @@
     "redeemToken": "Redeem from Tokens",
     "max": "max",
     "dailyFrom": "Daily from"
+  },
+  "status": {
+    "onHold": "On Hold",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "qr" : {
+   "generateQR" : "Generate QR code"
   }
 }

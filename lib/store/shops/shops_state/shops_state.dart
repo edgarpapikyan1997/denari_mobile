@@ -32,6 +32,14 @@ abstract class ShopsStatePerformer with Store {
     );
     await Future.delayed(const Duration(milliseconds: 200));
   }
+  @action
+  Future<void> getShopsByCategory({required String id}) async {
+    (await handle(() => _shopsRepository.getShopsByCategory(shopID: id))).then(
+          (data) => shops = data,
+          (error) => getError = error,
+    );
+    await Future.delayed(const Duration(milliseconds: 200));
+  }
 
   @action
   Future<void> getShopByID({required String id}) async {

@@ -1,6 +1,8 @@
 import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/data/shops/shop_branch_model/shop_branch_model.dart';
 import 'package:denari_app/data/shops/shop_unit_model/shop_unit_model.dart';
+import 'package:denari_app/data/transactions/repositoriy/transactions_repository.dart';
+import 'package:denari_app/store/transactions/transactions_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:denari_app/view/screens/store_field_screen/widgets/store_field_property.dart';
@@ -15,9 +17,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/app_sizes/app_sizes.dart';
+import '../../../data/authentication/repository/auth_repository.dart';
+import '../../../data/profile/repository/profile_repository.dart';
 import '../../../data/shops/shops_repository/impl/shops_repository.dart';
+import '../../../data/transactions/model/transaction_model.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../store/loading_state/loading_state.dart';
+import '../../../store/profile/profile_state.dart';
 import '../../../store/shops/shops_state/shops_state.dart';
 import '../../../utils/di/config.dart';
 import '../../../utils/themes/app_colors.dart';
@@ -39,9 +45,16 @@ class StoreFieldItemScreen extends StatefulWidget {
 }
 
 class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
-  final ShopsState _shopState = ShopsState(
-    shopsRepository: di.get<ImplShopsRepository>(),
+  final ProfileState _profileState = ProfileState(
+    authRepository: di.get<AuthRepository>(),
+    profileRepository: di.get<ProfileRepository>(),
   );
+  final ShopsState _shopState =
+      ShopsState(shopsRepository: di.get<ImplShopsRepository>());
+
+  final TransactionsState _transactionsState = TransactionsState(
+      transactionsRepository: di.get<TransactionsRepository>());
+
   ShopsUnitModel? storeData;
 
   final LoadingState _loadingState = LoadingState();
@@ -56,6 +69,7 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
 
   void initPrefs() async {
     _loadingState.startLoading();
+    await _profileState.getProfile();
     await _shopState.getShopByID(id: widget.uniqueID);
     storeData = _shopState.shopsUnitModel;
     print(_shopState.shopsUnitModel?.imageUrl);
@@ -69,7 +83,7 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
   List<Widget> getGiftCardOptions() {
     return List.generate(_shopState.shopsUnitModel!.giftCards.length, (index) {
       return PaddingUtility.only(
-        bottom: 16,
+        bottom: 40,
         child: BrandItemWidget(
           avatar: Assets.media.icons.card.path,
           brandName:
@@ -84,6 +98,18 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                 context: context,
                 onConfirmSecond: () {
                   context.pop();
+                  _transactionsState.sendTransaction(
+                    TransactionModel(
+                      giftCardAmount:
+                          _shopState.shopsUnitModel?.giftCards[index].value ??
+                              0,
+                      shopId: widget.uniqueID,
+                      status: 'status.onHold',
+                      date: DateTime.now().toString(),
+                      addressShopId: 0,
+                      userId: _profileState.profile.id,
+                    ),
+                  );
                 },
                 onConfirmFirst: () {},
                 addButtons: true,
@@ -112,6 +138,7 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(_shopState.shopsUnitModel?.giftCards[0].shopId);
     return Observer(builder: (_) {
       return Container(
         color: AppColors.white,
@@ -222,7 +249,6 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                         Column(
                           children: getGiftCardOptions(),
                         ),
-
                         const Delimiter(8),
                         Row(
                           children: [
@@ -240,11 +266,19 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                                   isWhite: false,
                                   title: 'shops.newPurchase'.tr(),
                                   onTap: () {
-                                    showModalSheet(
-                                      context: context,
-                                      child: const SizedBox(
-                                          child: NewPurchaseFilter()),
-                                    );
+                                    _shopState.shopsUnitModel != null
+                                        ? showModalSheet(
+                                            context: context,
+                                            child: SizedBox(
+                                              child: NewPurchaseFilter(
+                                                shopUnitModel:
+                                                    _shopState.shopsUnitModel!,
+                                                profileModel:
+                                                    _profileState.profile,
+                                              ),
+                                            ),
+                                          )
+                                        : null;
                                   }),
                             )
                           ],

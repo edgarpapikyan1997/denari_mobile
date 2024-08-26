@@ -22,6 +22,12 @@ final class ImplShopsRepository extends ShopsRepository {
   }
 
   @override
+  Future<List<ShopsModel>> getShopsByCategory({required String shopID}) async {
+    final result = await _client.get('${_config.host}/shops/{$shopID}');
+    return result.list(ShopsModel.fromJson);
+  }
+
+  @override
   Future<ShopsUnitModel> getShopByID({required String shopID}) async {
     final result = await _client.get(
       '${_config.host}/shops/{$shopID}',

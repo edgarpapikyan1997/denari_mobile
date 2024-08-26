@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/data/advertisements/repository/advertisements_repository.dart';
 import 'package:denari_app/store/categories_state/categories_state.dart';
@@ -47,6 +49,7 @@ class _MainScreenState extends State<MainScreen> {
   final CategoriesState categoriesState = CategoriesState();
   final qrIdReceiver = GetIt.instance<QRIdReceiver>();
   late final List<Category> categories;
+  bool hasError = false;
 
   @override
   void initState() {
@@ -60,24 +63,84 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void initPrefs() async{
-    _loadingState.startLoading();
-    categories = [
-      Category(type: CategoryType.food, iconColor: categoriesState.itemColor),
-      Category(type: CategoryType.beauty, iconColor: categoriesState.itemColor),
-      Category(
-          type: CategoryType.clothing, iconColor: categoriesState.itemColor),
-      Category(
-          type: CategoryType.activities, iconColor: categoriesState.itemColor),
-      Category(
-          type: CategoryType.groceries, iconColor: categoriesState.itemColor),
-      Category(type: CategoryType.travel, iconColor: categoriesState.itemColor),
-      Category(type: CategoryType.other, iconColor: categoriesState.itemColor),
-    ];
-    initCategories();
-    _tokenBalanceState.getTokenBalance();
-    await _shopsState.getAllShops();
-    _loadingState.stopLoading();
+    try {
+      _loadingState.startLoading();
+      categories = [
+        Category(type: CategoryType.food, iconColor: categoriesState.itemColor),
+        Category(type: CategoryType.beauty, iconColor: categoriesState.itemColor),
+        Category(type: CategoryType.clothing, iconColor: categoriesState.itemColor),
+        Category(type: CategoryType.activities, iconColor: categoriesState.itemColor),
+        Category(type: CategoryType.groceries, iconColor: categoriesState.itemColor),
+        Category(type: CategoryType.travel, iconColor: categoriesState.itemColor),
+        Category(type: CategoryType.other, iconColor: categoriesState.itemColor),
+      ];
+
+      initCategories();
+      _tokenBalanceState.getTokenBalance();
+
+      // Wrap your shop fetching logic in a Future with timeout
+      await _tryFetchingDataWithTimeout();
+      _loadingState.stopLoading();
+    } catch (e) {
+      _loadingState.stopLoading();
+      setState(() {
+        hasError = true; // Indicate that an error occurred
+      });
+    }
   }
+
+
+  Future<void> _tryFetchingDataWithTimeout() async {
+    try {
+      // Set the timeout to 10 seconds
+      await Future.any([
+        _shopsState.getAllShops(),
+        Future.delayed(Duration(seconds: 10)).then((_) {
+          throw TimeoutException('Data fetching timed out');
+        }),
+      ]);
+    } catch (e) {
+      if (e is TimeoutException) {
+        // Retry fetching the data
+        await _retryFetchingData();
+      } else {
+        // If it's another type of error, rethrow it
+        throw e;
+      }
+    }
+  }
+  Widget buildErrorWidget() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Failed to load data. Please try again later.'),
+          SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () {
+              // Retry logic
+              setState(() {
+                hasError = false;
+                initPrefs();
+              });
+            },
+            child: Text('Retry'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _retryFetchingData() async {
+    try {
+      // Retry fetching shops data
+      await _shopsState.getAllShops();
+    } catch (e) {
+      throw Exception('Failed after retry');
+    }
+  }
+
+
 
   Widget mainScreenFields() {
     return Row(

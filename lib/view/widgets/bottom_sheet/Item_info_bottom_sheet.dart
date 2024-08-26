@@ -28,7 +28,7 @@ void showItemInfoBottomSheet({
     builder: (BuildContext context) {
       return Container(
         width: context.width,
-        padding: const EdgeInsets.only(top: 8, bottom: 16, left: 16, right: 16),
+        padding: const EdgeInsets.only(top: 8, bottom: 44, left: 16, right: 16),
         decoration: const BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.only(

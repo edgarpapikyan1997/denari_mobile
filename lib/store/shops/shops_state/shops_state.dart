@@ -33,8 +33,8 @@ abstract class ShopsStatePerformer with Store {
     await Future.delayed(const Duration(milliseconds: 200));
   }
   @action
-  Future<void> getShopsByCategory({required String id}) async {
-    (await handle(() => _shopsRepository.getShopsByCategory(shopID: id))).then(
+  Future<void> getShopsByCategory({required String categories}) async {
+    (await handle(() => _shopsRepository.getShopsByCategory(categories: categories))).then(
           (data) => shops = data,
           (error) => getError = error,
     );

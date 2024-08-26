@@ -63,6 +63,7 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
       amountTokensUsed: giftSliderState.tokenValue,
       transactionsAmount: giftSliderState.tokenValue,
     );
+    print(_transactionModel);
   }
 
   Future<void> _handleTransaction(BuildContext context) async {
@@ -95,6 +96,7 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
 
   @override
   Widget build(BuildContext context) {
+
     return PaddingUtility.only(
       top: 8,
       bottom: 40,

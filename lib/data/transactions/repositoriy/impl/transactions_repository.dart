@@ -15,6 +15,7 @@ final class ImplTransactionsRepository extends TransactionsRepository {
 
   @override
   Future<bool> sendTransaction(TransactionModel data) async {
+    print(data.shopId);
     final result = await _client.post(
       '${_config.host}/transactions',
       data: jsonEncode(data.toJson()),

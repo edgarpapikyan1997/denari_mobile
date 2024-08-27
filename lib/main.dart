@@ -23,7 +23,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform, name: 'DEFAULT2');
+      options: DefaultFirebaseOptions.currentPlatform,);
   ServiceLocator.configure();
   setupLogger(kDebugMode);
   configDi(const Config(env: 'dev', host: 'https://denari.mifort.com'));

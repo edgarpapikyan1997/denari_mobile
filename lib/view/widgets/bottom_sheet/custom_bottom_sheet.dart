@@ -7,7 +7,7 @@ void customBottomSheet({
   required BuildContext context,
   required BottomSheetType type,
   required String title,
-  required String description,
+  String? description,
   String? rateText,
   String? tokens,
   String? balance,

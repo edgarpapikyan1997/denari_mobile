@@ -7,10 +7,13 @@ import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+import '../../../../data/shops/shop_unit_model/shop_unit_model.dart';
 import '../../../../utils/themes/app_colors.dart';
 import '../../preview_banner/preview_banner.dart';
 
 class PurchaseAmountConfigurator extends StatefulWidget {
+  final SliderState sliderState;
+  final ShopsUnitModel shopsUnitModel;
   final String previewTitle;
   final bool isToken;
 
@@ -18,6 +21,8 @@ class PurchaseAmountConfigurator extends StatefulWidget {
     super.key,
     required this.previewTitle,
     required this.isToken,
+    required this.shopsUnitModel,
+    required this.sliderState,
   });
 
   @override
@@ -27,7 +32,22 @@ class PurchaseAmountConfigurator extends StatefulWidget {
 
 class _PurchaseAmountConfiguratorState
     extends State<PurchaseAmountConfigurator> {
-  SliderState sliderState = SliderState();
+  @override
+  void initState() {
+    super.initState();
+    initPrefs();
+  }
+
+  void initPrefs() {
+    widget.sliderState.maxGift =
+        widget.shopsUnitModel.shopUserTokens[0].giftCardBalance;
+    widget.sliderState.maxToken =
+        widget.shopsUnitModel.shopUserTokens[0].tokenBalance;
+    widget.sliderState.giftValue =
+        widget.shopsUnitModel.shopUserTokens[0].giftCardBalance;
+    widget.sliderState.tokenValue =
+        widget.shopsUnitModel.shopUserTokens[0].tokenBalance;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +72,7 @@ class _PurchaseAmountConfiguratorState
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        '${widget.isToken ? sliderState.giftValue.toInt() : sliderState.tokenValue.toInt()}',
+                        '${widget.isToken ? widget.sliderState.giftValue.toInt() : widget.sliderState.tokenValue.toInt()}',
                         style: context.theme.body1,
                       ),
                     ),
@@ -67,29 +87,34 @@ class _PurchaseAmountConfiguratorState
                     borderRadius: BorderRadius.circular(8),
                     color: AppColors.whiteGrey),
                 child: Align(
-                    alignment: Alignment.center,
-                    child: BalanceWidget(
-                      tokenIconWidth: 20,
-                      tokenIconHeight: 18,
-                      textStyle: context.theme.body1,
-                      balance: widget.isToken == true
-                          ? sliderState.maxToken.toInt()
-                          : sliderState.maxGift.toInt(),
-                      isTokenBalance: widget.isToken,
-
-                    )),
+                  alignment: Alignment.center,
+                  child: BalanceWidget(
+                    leadingTitle: 'shops.max'.tr(),
+                    tokenIconWidth: 20,
+                    tokenIconHeight: 18,
+                    textStyle: context.theme.body1,
+                    balance: widget.isToken == true
+                        ? widget.sliderState.maxToken.toInt()
+                        : widget.sliderState.maxGift.toInt(),
+                    isTokenBalance: widget.isToken,
+                  ),
+                ),
               ),
             ],
           ),
           Slider(
             value: widget.isToken == true
-                ? sliderState.tokenValue
-                : sliderState.giftValue,
+                ? widget.sliderState.tokenValue.toDouble()
+                : widget.sliderState.giftValue.toDouble(),
             max: widget.isToken == true
-                ? sliderState.maxToken
-                : sliderState.maxGift,
+                ? widget.sliderState.maxToken.toDouble()
+                : widget.sliderState.maxGift.toDouble(),
             onChanged: (double value) {
-              sliderState.changeValue(value);
+              if (widget.isToken) {
+                widget.sliderState.changeValue(value.toInt());
+              } else {
+                widget.sliderState.changeValue(value.toInt());
+              }
             },
           ),
         ],

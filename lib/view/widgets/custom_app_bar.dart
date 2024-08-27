@@ -1,5 +1,6 @@
 import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/constants/app_sizes/app_sizes.dart';
+import 'package:denari_app/data/shops/shop_unit_model/shop_unit_model.dart';
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/extensions/widget_extension.dart';
 import 'package:denari_app/view/widgets/app_bar/image_app_bar.dart';
@@ -17,7 +18,7 @@ class CustomAppBar extends StatelessWidget {
   final Text? title;
   final Widget? tealIcon;
   final AppBarType appBarType;
-  final List<String?>? imageList;
+  final List<String>? imageList;
 
   const CustomAppBar({
     super.key,

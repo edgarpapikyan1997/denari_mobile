@@ -23,10 +23,10 @@
     "nothingFound": "Nothing found",
     "trySearchAgain": "Try searching again.",
     "navBarQR": "My QR code",
-    "qrOfTransaction" : "QR code of the Transaction",
-    "showThisQr" : "Show this QR code to the seller to get bonuses or pay with a gift card",
+    "qrOfTransaction": "QR code of the Transaction",
+    "showThisQr": "Show this QR code to the seller to get bonuses or pay with a gift card",
     "getTokens": "To get tokens for a purchase or use the accumulated points, show the screen to the seller in the store.",
-    "dontLeaveScreen" : "Please do not leave the screen before confirming the purchase.",
+    "dontLeaveScreen": "Please do not leave the screen before confirming the purchase.",
     "error_adv": "Error get advertisements"
   },
   "balance": {
@@ -153,6 +153,7 @@
     "empty": "There are no new events or messages requiring your attention at this time."
   },
   "shops": {
+    "allShops": "See all shops",
     "shops": "Shops",
     "all": "All",
     "location": "Location",
@@ -182,6 +183,15 @@
     "selectAmount": "Select the amount and number of tokens to be withdrawn.",
     "redeemGift": "Redeem from Gift Cards",
     "redeemToken": "Redeem from Tokens",
-    "max" : "max"
+    "max": "max",
+    "dailyFrom": "Daily from"
+  },
+  "status": {
+    "onHold": "On Hold",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "qr" : {
+   "generateQR" : "Generate QR code"
   }
 }

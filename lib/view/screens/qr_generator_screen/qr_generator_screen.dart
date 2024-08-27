@@ -1,4 +1,5 @@
 import 'package:denari_app/constants/app_sizes/app_sizes.dart';
+import 'package:denari_app/data/transactions/model/transaction_model.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/view/widgets/custom_app_bar.dart';
 import 'package:denari_app/view/widgets/custom_button.dart';
@@ -13,11 +14,15 @@ import '../../../utils/padding_utility/padding_utility.dart';
 import '../../widgets/bottom_sheet/custom_bottom_sheet.dart';
 
 class QrGeneratorScreen extends StatelessWidget {
-  final String userID;
-  final String token;
+  final String transactionID;
+  final TransactionModel transactionModel;
+  final VoidCallback onTap;
 
   const QrGeneratorScreen(
-      {super.key, required this.userID, required this.token});
+      {super.key,
+      required this.transactionID,
+      required this.onTap,
+      required this.transactionModel});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +52,8 @@ class QrGeneratorScreen extends StatelessWidget {
             children: [
               const Spacer(),
               QrImageView(
-                data: userID,
+                data:
+                    "${transactionModel.userId}\n${transactionModel.date}\n${transactionModel.status}\n${transactionModel.shopId}\n${transactionModel.amountGiftCardsUsing}\n${transactionModel.amountTokensUsed}",
                 size: 195,
               ),
               const Delimiter(16),
@@ -67,17 +73,7 @@ class QrGeneratorScreen extends StatelessWidget {
                 isEnabled: true,
                 isWhite: false,
                 title: 'buttons.close'.tr(),
-                onTap: () {
-                  customBottomSheet(
-                    context: context,
-                    type: BottomSheetType.congrats,
-                    title: 'bottomSheet.congratsEaredToken'.tr(),
-                    description: 'Description',
-                    asset: Assets.media.images.fireworks.path,
-                    tokens: token,
-                    balance: '100',
-                  );
-                },
+                onTap: onTap,
               ),
             ],
           ),

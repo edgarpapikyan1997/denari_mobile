@@ -1,5 +1,6 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
+import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
@@ -27,7 +28,7 @@ void showItemInfoBottomSheet({
     builder: (BuildContext context) {
       return Container(
         width: context.width,
-        padding: const EdgeInsets.only(top: 8, bottom: 16, left: 16, right: 16),
+        padding: const EdgeInsets.only(top: 8, bottom: 44, left: 16, right: 16),
         decoration: const BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.only(
@@ -54,13 +55,28 @@ void showItemInfoBottomSheet({
                   ).paddingOnly(bottom: 16)
                 : const SizedBox(),
             image != null
-                ? Image.asset(
-                    image,
-                    height: 76,
-                    width: 76,
-                    // fit: BoxFit.cover,
-                  ).paddingOnly(bottom: 8)
+                ? ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  child: Image.network(
+                      image,
+                      height: 76,
+                      width: 76,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.whiteGrey,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          height: 76,
+                          width: 76,
+                          child: Assets.media.images.safetyWarningHeat.image(),
+                        );
+                      },
+                    ),
+                )
                 : const SizedBox(),
+            const Delimiter(8),
             itemTitleChevronRight
                 ? GestureDetector(
                     onTap: () {},

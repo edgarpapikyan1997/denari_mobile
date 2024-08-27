@@ -22,7 +22,8 @@ import 'utils/env/config.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform, name: 'DEFAULT2');
   ServiceLocator.configure();
   setupLogger(kDebugMode);
   configDi(const Config(env: 'dev', host: 'https://denari.mifort.com'));

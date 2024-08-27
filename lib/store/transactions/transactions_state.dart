@@ -16,7 +16,7 @@ abstract class ImplTransactionsState with Store {
   }) : _transactionsRepository = transactionsRepository;
 
   @observable
-  TransactionModel transactionModel = TransactionModel.fromJson({});
+  TransactionModel? transactionModel = TransactionModel.fromJson({});
 
   @observable
   String? getError;
@@ -27,11 +27,21 @@ abstract class ImplTransactionsState with Store {
   @observable
   String isSuccessful = '';
 
+
   @action
-  Future<void> sendTransaction(TransactionModel transactionModel) async {
-    await _transactionsRepository.sendTransaction(transactionModel).then(
-          (data) => isSuccessful = 'true',
-      onError: (error) => getError = error,
-    );
+  Future<String?> sendTransaction(TransactionModel transactionModel) async {
+    try {
+      final data = await _transactionsRepository.sendTransaction(transactionModel);
+      if (data != null) {
+        isSuccessful = "true";
+        this.transactionModel = data;
+      } else {
+        isSuccessful = "false";
+      }
+    } catch (error) {
+      getError = error.toString();
+    }
+    return null;
   }
+
 }

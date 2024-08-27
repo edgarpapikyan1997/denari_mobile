@@ -19,14 +19,12 @@ final class ImplTransactionsRepository extends TransactionsRepository {
       '${_config.host}/transactions',
       data: jsonEncode(data.toJson()),
     );
-    print(data);
-    if (result.data != null) {
-      print(result.data);
-
-      return TransactionModel.fromJson(result.data);
-
+    if (result.statusCode == 201) {
+      final transaction = TransactionModel.fromJson(result.data);
+      print("TRANSACTION REPOSITORY >>> id ${transaction.id}");
+      return transaction;
     }
-    print(result.data.toString());
+    print('No data received from the server');
     return null;
   }
 }

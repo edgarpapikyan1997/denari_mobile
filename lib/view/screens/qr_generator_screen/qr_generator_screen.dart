@@ -52,8 +52,7 @@ class QrGeneratorScreen extends StatelessWidget {
             children: [
               const Spacer(),
               QrImageView(
-                data:
-                    "${transactionModel.userId}\n${transactionModel.date}\n${transactionModel.status}\n${transactionModel.shopId}\n${transactionModel.amountGiftCardsUsing}\n${transactionModel.amountTokensUsed}",
+                data: '${transactionID}',
                 size: 195,
               ),
               const Delimiter(16),

@@ -13,13 +13,13 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
       Atom(name: 'ImplTransactionsState.transactionModel', context: context);
 
   @override
-  TransactionModel get transactionModel {
+  TransactionModel? get transactionModel {
     _$transactionModelAtom.reportRead();
     return super.transactionModel;
   }
 
   @override
-  set transactionModel(TransactionModel value) {
+  set transactionModel(TransactionModel? value) {
     _$transactionModelAtom.reportWrite(value, super.transactionModel, () {
       super.transactionModel = value;
     });
@@ -77,7 +77,7 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
       AsyncAction('ImplTransactionsState.sendTransaction', context: context);
 
   @override
-  Future<void> sendTransaction(TransactionModel transactionModel) {
+  Future<String?> sendTransaction(TransactionModel transactionModel) {
     return _$sendTransactionAsyncAction
         .run(() => super.sendTransaction(transactionModel));
   }

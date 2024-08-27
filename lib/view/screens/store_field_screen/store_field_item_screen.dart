@@ -1,5 +1,4 @@
 import 'package:denari_app/constants/app_bar_type.dart';
-import 'package:denari_app/data/shops/shop_branch_model/shop_branch_model.dart';
 import 'package:denari_app/data/shops/shop_unit_model/shop_unit_model.dart';
 import 'package:denari_app/data/transactions/repositoriy/transactions_repository.dart';
 import 'package:denari_app/store/transactions/transactions_state.dart';
@@ -72,7 +71,6 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
     await _profileState.getProfile();
     await _shopState.getShopByID(id: widget.uniqueID);
     storeData = _shopState.shopsUnitModel;
-    print(_shopState.shopsUnitModel?.imageUrl);
     if (_shopState.shopsUnitModel?.imageUrl != null) {
       imageList.add(_shopState.shopsUnitModel!.imageUrl);
     }
@@ -138,7 +136,6 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(_shopState.shopsUnitModel?.giftCards[0].shopId);
     return Observer(builder: (_) {
       return Container(
         color: AppColors.white,

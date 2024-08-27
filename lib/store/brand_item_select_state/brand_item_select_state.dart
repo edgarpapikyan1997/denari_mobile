@@ -3,9 +3,9 @@ import '../../view/widgets/brand_item/brand_item_widget.dart';
 
 part 'brand_item_select_state.g.dart';
 
-class BrandItemSelectState = _BrandItemSelectState with _$BrandItemSelectState;
+class BrandItemSelectState = ImplBrandItemSelectState with _$BrandItemSelectState;
 
-abstract class _BrandItemSelectState with Store {
+abstract class ImplBrandItemSelectState with Store {
 
   @observable
   BrandItemWidget? brandItemWidget;

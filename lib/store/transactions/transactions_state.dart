@@ -1,9 +1,6 @@
 import 'package:denari_app/data/transactions/repositoriy/transactions_repository.dart';
 import 'package:mobx/mobx.dart';
-import '../../data/authentication/repository/auth_repository.dart';
 import '../../data/transactions/model/transaction_model.dart';
-import '../../utils/network/utils/use_case.dart';
-
 part 'transactions_state.g.dart';
 
 class TransactionsState = ImplTransactionsState with _$TransactionsState;
@@ -25,7 +22,7 @@ abstract class ImplTransactionsState with Store {
   String? transactionID;
 
   @observable
-  String isSuccessful = '';
+  bool isSuccessful = false;
 
 
   @action
@@ -33,10 +30,10 @@ abstract class ImplTransactionsState with Store {
     try {
       final data = await _transactionsRepository.sendTransaction(transactionModel);
       if (data != null) {
-        isSuccessful = "true";
+        isSuccessful = true;
         this.transactionModel = data;
       } else {
-        isSuccessful = "false";
+        isSuccessful = false;
       }
     } catch (error) {
       getError = error.toString();

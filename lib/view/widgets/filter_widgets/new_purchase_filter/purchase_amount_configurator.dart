@@ -1,5 +1,4 @@
 import 'package:denari_app/store/filters/slider_state/slider_state.dart';
-import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:denari_app/view/widgets/balance_widget.dart';

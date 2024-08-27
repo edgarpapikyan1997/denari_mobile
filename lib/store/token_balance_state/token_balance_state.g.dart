@@ -8,9 +8,9 @@ part of 'token_balance_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$TokenBalanceState on _TokenBalanceState, Store {
+mixin _$TokenBalanceState on ImplTokenBalanceState, Store {
   late final _$balanceAtom =
-      Atom(name: '_TokenBalanceState.balance', context: context);
+      Atom(name: 'ImplTokenBalanceState.balance', context: context);
 
   @override
   int get balance {
@@ -26,7 +26,7 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
   }
 
   late final _$tokenModelsAtom =
-      Atom(name: '_TokenBalanceState.tokenModels', context: context);
+      Atom(name: 'ImplTokenBalanceState.tokenModels', context: context);
 
   @override
   List<TokenModel> get tokenModels {
@@ -42,7 +42,7 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
   }
 
   late final _$tokenBalanceAtom =
-      Atom(name: '_TokenBalanceState.tokenBalance', context: context);
+      Atom(name: 'ImplTokenBalanceState.tokenBalance', context: context);
 
   @override
   TokenBalanceModel? get tokenBalance {
@@ -58,7 +58,7 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
   }
 
   late final _$giftCardLDAtom =
-      Atom(name: '_TokenBalanceState.giftCardLD', context: context);
+      Atom(name: 'ImplTokenBalanceState.giftCardLD', context: context);
 
   @override
   int get giftCardLD {
@@ -74,7 +74,7 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
   }
 
   late final _$getErrorAtom =
-      Atom(name: '_TokenBalanceState.getError', context: context);
+      Atom(name: 'ImplTokenBalanceState.getError', context: context);
 
   @override
   String? get getError {
@@ -90,7 +90,7 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
   }
 
   late final _$getTokenBalanceAsyncAction =
-      AsyncAction('_TokenBalanceState.getTokenBalance', context: context);
+      AsyncAction('ImplTokenBalanceState.getTokenBalance', context: context);
 
   @override
   Future<void> getTokenBalance() {
@@ -98,7 +98,7 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
   }
 
   late final _$getTokenBalanceHistoryAsyncAction = AsyncAction(
-      '_TokenBalanceState.getTokenBalanceHistory',
+      'ImplTokenBalanceState.getTokenBalanceHistory',
       context: context);
 
   @override
@@ -107,17 +107,17 @@ mixin _$TokenBalanceState on _TokenBalanceState, Store {
         .run(() => super.getTokenBalanceHistory());
   }
 
-  late final _$_TokenBalanceStateActionController =
-      ActionController(name: '_TokenBalanceState', context: context);
+  late final _$ImplTokenBalanceStateActionController =
+      ActionController(name: 'ImplTokenBalanceState', context: context);
 
   @override
   int getTokenBalanceByBrand({String? brand}) {
-    final _$actionInfo = _$_TokenBalanceStateActionController.startAction(
-        name: '_TokenBalanceState.getTokenBalanceByBrand');
+    final _$actionInfo = _$ImplTokenBalanceStateActionController.startAction(
+        name: 'ImplTokenBalanceState.getTokenBalanceByBrand');
     try {
       return super.getTokenBalanceByBrand(brand: brand);
     } finally {
-      _$_TokenBalanceStateActionController.endAction(_$actionInfo);
+      _$ImplTokenBalanceStateActionController.endAction(_$actionInfo);
     }
   }
 

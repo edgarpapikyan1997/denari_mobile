@@ -54,7 +54,7 @@ class BalanceWidget extends StatelessWidget {
                           "$leadingTitle ",
                           style: textStyle,
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                   Assets.media.icons.token
                       .svg(height: tokenIconHeight, width: tokenIconWidth),
                   const SizedBox(width: 4),

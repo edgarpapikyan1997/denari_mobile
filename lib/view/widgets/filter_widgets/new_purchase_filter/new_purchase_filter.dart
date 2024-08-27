@@ -95,20 +95,22 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
                 isEnabled: true,
                 isWhite: false,
                 title: 'qr.generateQR'.tr(),
-                onTap: () async {
+                onTap: () {
                   loadingState.startLoading();
-                  await _transactionsState.sendTransaction(_transactionModel!);
+                  _transactionsState.sendTransaction(_transactionModel!);
                   loadingState.stopLoading();
                   loadingState.isLoading == true
                       ? const CircularProgressIndicator()
-                      : _transactionsState.isSuccessful == "true"
+                      : _transactionsState.isSuccessful == true
                           ? customBottomSheet(
                               context: context,
                               type: BottomSheetType.congrats,
                               title: 'bottomSheet.congratsEaredToken'.tr(),
                               asset: Assets.media.images.fireworks.path,
-                              tokens: '100',
-                              balance: '300',
+                              tokens: _transactionModel!.tokenAddedAmount
+                                  .toString(),
+                              balance: _transactionModel!.amountTokensUsed
+                                  .toString(),
                             )
                           : SnackBarAction(
                               label: 'Something went wrong',

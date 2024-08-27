@@ -2,7 +2,6 @@ import 'package:denari_app/data/advertisements/repository/impl/advertisements_re
 import 'package:denari_app/data/authentication/repository/impl/auth_repository.dart';
 import 'package:denari_app/data/notifications/repository/impl/firebase_messages_repository.dart';
 import 'package:denari_app/data/profile/repository/impl/profile_repository.dart';
-import 'package:denari_app/data/transactions/repositoriy/transactions_repository.dart';
 import 'package:denari_app/utils/env/config.dart';
 import 'package:denari_app/utils/network/api_native_dio.dart';
 import 'package:denari_app/utils/network/data/token_preferences.dart';

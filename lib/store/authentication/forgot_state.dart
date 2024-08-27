@@ -7,12 +7,12 @@ import 'package:mobx/mobx.dart';
 
 part 'forgot_state.g.dart';
 
-class ForgotState = _ForgotState with _$ForgotState;
+class ForgotState = ImplForgotState with _$ForgotState;
 
-abstract class _ForgotState with Store {
+abstract class ImplForgotState with Store {
   final AuthRepository _repository;
 
-  _ForgotState({required AuthRepository authRepository})
+  ImplForgotState({required AuthRepository authRepository})
       : _repository = authRepository;
 
   @observable

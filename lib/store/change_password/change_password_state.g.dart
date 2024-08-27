@@ -8,52 +8,52 @@ part of 'change_password_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$ChangePasswordState on _ChangePasswordState, Store {
+mixin _$ChangePasswordState on ImplChangePasswordState, Store {
   Computed<bool>? _$isPasswordValidComputed;
 
   @override
   bool get isPasswordValid =>
       (_$isPasswordValidComputed ??= Computed<bool>(() => super.isPasswordValid,
-              name: '_ChangePasswordState.isPasswordValid'))
+              name: 'ImplChangePasswordState.isPasswordValid'))
           .value;
   Computed<bool>? _$isNewPasswordValidComputed;
 
   @override
   bool get isNewPasswordValid => (_$isNewPasswordValidComputed ??=
           Computed<bool>(() => super.isNewPasswordValid,
-              name: '_ChangePasswordState.isNewPasswordValid'))
+              name: 'ImplChangePasswordState.isNewPasswordValid'))
       .value;
   Computed<bool>? _$isPhoneValidComputed;
 
   @override
   bool get isPhoneValid =>
       (_$isPhoneValidComputed ??= Computed<bool>(() => super.isPhoneValid,
-              name: '_ChangePasswordState.isPhoneValid'))
+              name: 'ImplChangePasswordState.isPhoneValid'))
           .value;
   Computed<bool>? _$isCodeValidComputed;
 
   @override
   bool get isCodeValid =>
       (_$isCodeValidComputed ??= Computed<bool>(() => super.isCodeValid,
-              name: '_ChangePasswordState.isCodeValid'))
+              name: 'ImplChangePasswordState.isCodeValid'))
           .value;
   Computed<bool>? _$changeButtonEnabledComputed;
 
   @override
   bool get changeButtonEnabled => (_$changeButtonEnabledComputed ??=
           Computed<bool>(() => super.changeButtonEnabled,
-              name: '_ChangePasswordState.changeButtonEnabled'))
+              name: 'ImplChangePasswordState.changeButtonEnabled'))
       .value;
   Computed<bool>? _$sendButtonEnabledComputed;
 
   @override
   bool get sendButtonEnabled => (_$sendButtonEnabledComputed ??= Computed<bool>(
           () => super.sendButtonEnabled,
-          name: '_ChangePasswordState.sendButtonEnabled'))
+          name: 'ImplChangePasswordState.sendButtonEnabled'))
       .value;
 
-  late final _$changePasswordErrorAtom =
-      Atom(name: '_ChangePasswordState.changePasswordError', context: context);
+  late final _$changePasswordErrorAtom = Atom(
+      name: 'ImplChangePasswordState.changePasswordError', context: context);
 
   @override
   String? get changePasswordError {
@@ -69,7 +69,7 @@ mixin _$ChangePasswordState on _ChangePasswordState, Store {
   }
 
   late final _$passwordAtom =
-      Atom(name: '_ChangePasswordState.password', context: context);
+      Atom(name: 'ImplChangePasswordState.password', context: context);
 
   @override
   String get password {
@@ -85,7 +85,7 @@ mixin _$ChangePasswordState on _ChangePasswordState, Store {
   }
 
   late final _$newPasswordAtom =
-      Atom(name: '_ChangePasswordState.newPassword', context: context);
+      Atom(name: 'ImplChangePasswordState.newPassword', context: context);
 
   @override
   String get newPassword {
@@ -101,7 +101,7 @@ mixin _$ChangePasswordState on _ChangePasswordState, Store {
   }
 
   late final _$passwordRepeatAtom =
-      Atom(name: '_ChangePasswordState.passwordRepeat', context: context);
+      Atom(name: 'ImplChangePasswordState.passwordRepeat', context: context);
 
   @override
   String get passwordRepeat {
@@ -117,7 +117,7 @@ mixin _$ChangePasswordState on _ChangePasswordState, Store {
   }
 
   late final _$phoneAtom =
-      Atom(name: '_ChangePasswordState.phone', context: context);
+      Atom(name: 'ImplChangePasswordState.phone', context: context);
 
   @override
   PhoneNumber? get phone {
@@ -133,7 +133,7 @@ mixin _$ChangePasswordState on _ChangePasswordState, Store {
   }
 
   late final _$codeAtom =
-      Atom(name: '_ChangePasswordState.code', context: context);
+      Atom(name: 'ImplChangePasswordState.code', context: context);
 
   @override
   String get code {
@@ -149,7 +149,7 @@ mixin _$ChangePasswordState on _ChangePasswordState, Store {
   }
 
   late final _$loadingAtom =
-      Atom(name: '_ChangePasswordState.loading', context: context);
+      Atom(name: 'ImplChangePasswordState.loading', context: context);
 
   @override
   bool get loading {
@@ -165,7 +165,7 @@ mixin _$ChangePasswordState on _ChangePasswordState, Store {
   }
 
   late final _$codeSentAtom =
-      Atom(name: '_ChangePasswordState.codeSent', context: context);
+      Atom(name: 'ImplChangePasswordState.codeSent', context: context);
 
   @override
   String? get codeSent {
@@ -181,7 +181,7 @@ mixin _$ChangePasswordState on _ChangePasswordState, Store {
   }
 
   late final _$changePasswordAsyncAction =
-      AsyncAction('_ChangePasswordState.changePassword', context: context);
+      AsyncAction('ImplChangePasswordState.changePassword', context: context);
 
   @override
   Future<void> changePassword() {
@@ -189,68 +189,68 @@ mixin _$ChangePasswordState on _ChangePasswordState, Store {
   }
 
   late final _$getCodeAsyncAction =
-      AsyncAction('_ChangePasswordState.getCode', context: context);
+      AsyncAction('ImplChangePasswordState.getCode', context: context);
 
   @override
   Future<void> getCode() {
     return _$getCodeAsyncAction.run(() => super.getCode());
   }
 
-  late final _$_ChangePasswordStateActionController =
-      ActionController(name: '_ChangePasswordState', context: context);
+  late final _$ImplChangePasswordStateActionController =
+      ActionController(name: 'ImplChangePasswordState', context: context);
 
   @override
   void setPassword(String value) {
-    final _$actionInfo = _$_ChangePasswordStateActionController.startAction(
-        name: '_ChangePasswordState.setPassword');
+    final _$actionInfo = _$ImplChangePasswordStateActionController.startAction(
+        name: 'ImplChangePasswordState.setPassword');
     try {
       return super.setPassword(value);
     } finally {
-      _$_ChangePasswordStateActionController.endAction(_$actionInfo);
+      _$ImplChangePasswordStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setNewPassword(String value) {
-    final _$actionInfo = _$_ChangePasswordStateActionController.startAction(
-        name: '_ChangePasswordState.setNewPassword');
+    final _$actionInfo = _$ImplChangePasswordStateActionController.startAction(
+        name: 'ImplChangePasswordState.setNewPassword');
     try {
       return super.setNewPassword(value);
     } finally {
-      _$_ChangePasswordStateActionController.endAction(_$actionInfo);
+      _$ImplChangePasswordStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPasswordRepeat(String value) {
-    final _$actionInfo = _$_ChangePasswordStateActionController.startAction(
-        name: '_ChangePasswordState.setPasswordRepeat');
+    final _$actionInfo = _$ImplChangePasswordStateActionController.startAction(
+        name: 'ImplChangePasswordState.setPasswordRepeat');
     try {
       return super.setPasswordRepeat(value);
     } finally {
-      _$_ChangePasswordStateActionController.endAction(_$actionInfo);
+      _$ImplChangePasswordStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPhone(PhoneNumber value) {
-    final _$actionInfo = _$_ChangePasswordStateActionController.startAction(
-        name: '_ChangePasswordState.setPhone');
+    final _$actionInfo = _$ImplChangePasswordStateActionController.startAction(
+        name: 'ImplChangePasswordState.setPhone');
     try {
       return super.setPhone(value);
     } finally {
-      _$_ChangePasswordStateActionController.endAction(_$actionInfo);
+      _$ImplChangePasswordStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setCode(String value) {
-    final _$actionInfo = _$_ChangePasswordStateActionController.startAction(
-        name: '_ChangePasswordState.setCode');
+    final _$actionInfo = _$ImplChangePasswordStateActionController.startAction(
+        name: 'ImplChangePasswordState.setCode');
     try {
       return super.setCode(value);
     } finally {
-      _$_ChangePasswordStateActionController.endAction(_$actionInfo);
+      _$ImplChangePasswordStateActionController.endAction(_$actionInfo);
     }
   }
 

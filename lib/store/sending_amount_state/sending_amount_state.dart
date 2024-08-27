@@ -2,9 +2,9 @@ import 'package:mobx/mobx.dart';
 
 part 'sending_amount_state.g.dart';
 
-class SendingAmountState = _SendingAmountState with _$SendingAmountState;
+class SendingAmountState = ImplSendingAmountState with _$SendingAmountState;
 
-abstract class _SendingAmountState with Store {
+abstract class ImplSendingAmountState with Store {
   @observable
   int currentBalance = 0;
 

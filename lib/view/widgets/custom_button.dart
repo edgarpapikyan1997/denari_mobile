@@ -1,8 +1,5 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-
-import '../../store/custom_button_state/custom_button_state.dart';
 import '../../utils/themes/app_colors.dart';
 
 class CustomButton extends StatefulWidget {

@@ -8,24 +8,24 @@ part of 'invite_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$InviteState on _InviteState, Store {
+mixin _$InviteState on ImplInviteState, Store {
   Computed<bool>? _$isContactValidComputed;
 
   @override
   bool get isContactValid =>
       (_$isContactValidComputed ??= Computed<bool>(() => super.isContactValid,
-              name: '_InviteState.isContactValid'))
+              name: 'ImplInviteState.isContactValid'))
           .value;
   Computed<bool>? _$inviteButtonEnabledComputed;
 
   @override
   bool get inviteButtonEnabled => (_$inviteButtonEnabledComputed ??=
           Computed<bool>(() => super.inviteButtonEnabled,
-              name: '_InviteState.inviteButtonEnabled'))
+              name: 'ImplInviteState.inviteButtonEnabled'))
       .value;
 
   late final _$inviteErrorAtom =
-      Atom(name: '_InviteState.inviteError', context: context);
+      Atom(name: 'ImplInviteState.inviteError', context: context);
 
   @override
   String? get inviteError {
@@ -41,7 +41,7 @@ mixin _$InviteState on _InviteState, Store {
   }
 
   late final _$contactAtom =
-      Atom(name: '_InviteState.contact', context: context);
+      Atom(name: 'ImplInviteState.contact', context: context);
 
   @override
   String get contact {
@@ -57,7 +57,7 @@ mixin _$InviteState on _InviteState, Store {
   }
 
   late final _$loadingAtom =
-      Atom(name: '_InviteState.loading', context: context);
+      Atom(name: 'ImplInviteState.loading', context: context);
 
   @override
   bool get loading {
@@ -73,24 +73,24 @@ mixin _$InviteState on _InviteState, Store {
   }
 
   late final _$inviteAsyncAction =
-      AsyncAction('_InviteState.invite', context: context);
+      AsyncAction('ImplInviteState.invite', context: context);
 
   @override
   Future<void> invite() {
     return _$inviteAsyncAction.run(() => super.invite());
   }
 
-  late final _$_InviteStateActionController =
-      ActionController(name: '_InviteState', context: context);
+  late final _$ImplInviteStateActionController =
+      ActionController(name: 'ImplInviteState', context: context);
 
   @override
   void setContact(String value) {
-    final _$actionInfo = _$_InviteStateActionController.startAction(
-        name: '_InviteState.setContact');
+    final _$actionInfo = _$ImplInviteStateActionController.startAction(
+        name: 'ImplInviteState.setContact');
     try {
       return super.setContact(value);
     } finally {
-      _$_InviteStateActionController.endAction(_$actionInfo);
+      _$ImplInviteStateActionController.endAction(_$actionInfo);
     }
   }
 

@@ -8,13 +8,13 @@ import 'package:mobx/mobx.dart';
 
 part 'profile_state.g.dart';
 
-class ProfileState = _ProfileState with _$ProfileState;
+class ProfileState = ImplProfileState with _$ProfileState;
 
-abstract class _ProfileState with Store {
+abstract class ImplProfileState with Store {
   final AuthRepository _authRepository;
   final ProfileRepository _profileRepository;
 
-  _ProfileState({
+  ImplProfileState({
     required AuthRepository authRepository,
     required ProfileRepository profileRepository,
   })  : _authRepository = authRepository,

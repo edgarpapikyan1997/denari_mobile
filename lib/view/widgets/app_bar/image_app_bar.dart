@@ -1,10 +1,5 @@
-import 'package:denari_app/data/shops/shop_unit_model/shop_unit_model.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:pinput/pinput.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../../data/shops/shops_repository/impl/shops_repository.dart';
-import '../../../store/shops/shops_state/shops_state.dart';
-import '../../../utils/di/config.dart';
 import '../../../utils/padding_utility/padding_utility.dart';
 import '../../../utils/themes/app_colors.dart';
 

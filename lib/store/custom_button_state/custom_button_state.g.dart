@@ -8,9 +8,9 @@ part of 'custom_button_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$CustomButtonState on _CustomButtonState, Store {
+mixin _$CustomButtonState on ImplCustomButtonState, Store {
   late final _$isButtonEnabledAtom =
-      Atom(name: '_CustomButtonState.isButtonEnabled', context: context);
+      Atom(name: 'ImplCustomButtonState.isButtonEnabled', context: context);
 
   @override
   bool get isButtonEnabled {
@@ -26,7 +26,7 @@ mixin _$CustomButtonState on _CustomButtonState, Store {
   }
 
   late final _$indexAtom =
-      Atom(name: '_CustomButtonState.index', context: context);
+      Atom(name: 'ImplCustomButtonState.index', context: context);
 
   @override
   int get index {
@@ -42,7 +42,7 @@ mixin _$CustomButtonState on _CustomButtonState, Store {
   }
 
   late final _$isPressedAtom =
-      Atom(name: '_CustomButtonState.isPressed', context: context);
+      Atom(name: 'ImplCustomButtonState.isPressed', context: context);
 
   @override
   bool get isPressed {
@@ -57,17 +57,17 @@ mixin _$CustomButtonState on _CustomButtonState, Store {
     });
   }
 
-  late final _$_CustomButtonStateActionController =
-      ActionController(name: '_CustomButtonState', context: context);
+  late final _$ImplCustomButtonStateActionController =
+      ActionController(name: 'ImplCustomButtonState', context: context);
 
   @override
   void updateButton(bool newValue) {
-    final _$actionInfo = _$_CustomButtonStateActionController.startAction(
-        name: '_CustomButtonState.updateButton');
+    final _$actionInfo = _$ImplCustomButtonStateActionController.startAction(
+        name: 'ImplCustomButtonState.updateButton');
     try {
       return super.updateButton(newValue);
     } finally {
-      _$_CustomButtonStateActionController.endAction(_$actionInfo);
+      _$ImplCustomButtonStateActionController.endAction(_$actionInfo);
     }
   }
 

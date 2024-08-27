@@ -8,12 +8,12 @@ import '../../utils/network/utils/use_case.dart';
 
 part 'token_balance_state.g.dart';
 
-class TokenBalanceState = _TokenBalanceState with _$TokenBalanceState;
+class TokenBalanceState = ImplTokenBalanceState with _$TokenBalanceState;
 
-abstract class _TokenBalanceState with Store {
+abstract class ImplTokenBalanceState with Store {
   final TokenRepository? _tokenRepository;
 
-  _TokenBalanceState({
+  ImplTokenBalanceState({
     required TokenRepository? tokenRepository,
   }) : _tokenRepository = tokenRepository;
 

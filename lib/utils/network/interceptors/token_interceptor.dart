@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:denari_app/utils/di/config.dart';
 import 'package:denari_app/utils/env/config.dart';
 import 'package:denari_app/utils/listeners/auth_listener.dart';
-import 'package:denari_app/utils/network/api_native_dio.dart';
 import 'package:denari_app/utils/network/data/token_preferences.dart';
 import 'package:denari_app/utils/network/model/api_token.dart';
 import 'package:denari_app/utils/network/utils/response_helper.dart';
@@ -67,7 +65,7 @@ class TokenInterceptor extends QueuedInterceptor {
     late final ApiToken refreshedToken;
     try {
       refreshedToken = await _refreshToken(await token);
-    } catch (error, st) {
+    } catch (error) {
       authListener.logout();
       throw DioException(
         requestOptions: response.requestOptions,
@@ -118,7 +116,9 @@ class TokenInterceptor extends QueuedInterceptor {
   Future<void> setToken(ApiToken token) async {
     try {
       await preferencesRepository.setToken(token);
-    } catch (e) {}
+    } catch (e) {
+
+    }
   }
 
   Future<void> clearToken() async {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:denari_app/data/transactions/model/transaction_model.dart';
 import 'package:denari_app/data/transactions/repositoriy/transactions_repository.dart';
@@ -19,14 +20,18 @@ final class ImplTransactionsRepository extends TransactionsRepository {
       '${_config.host}/transactions',
       data: jsonEncode(data.toJson()),
     );
-    print(data);
-    if (result.data != null) {
-      print(result.data);
-
-      return TransactionModel.fromJson(result.data);
-
+    if (result.statusCode == 201) {
+      if (result.data != null && result.data.isNotEmpty) {
+        final transaction = TransactionModel.fromJson(result.data);
+        log("TRANSACTION REPOSITORY >>> id ${transaction.id}");
+        return transaction;
+      } else {
+        log('No transaction data returned from the server, but the transaction was created.');
+        return null;
+      }
+    } else {
+      log('Failed to create transaction: ${result.statusCode}');
+      return null;
     }
-    print(result.data.toString());
-    return null;
   }
 }

@@ -1,7 +1,5 @@
 // ignore_for_file: avoid_print
-
 import 'dart:async';
-
 import 'dart:io' show Platform;
 import 'package:bloc/bloc.dart';
 import 'package:denari_app/data/profile/model/profile_model.dart';

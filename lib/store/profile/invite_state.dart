@@ -4,12 +4,12 @@ import 'package:mobx/mobx.dart';
 
 part 'invite_state.g.dart';
 
-class InviteState = _InviteState with _$InviteState;
+class InviteState = ImplInviteState with _$InviteState;
 
-abstract class _InviteState with Store {
+abstract class ImplInviteState with Store {
   final ProfileRepository _repository;
 
-  _InviteState({
+  ImplInviteState({
     required ProfileRepository profileRepository,
   }) : _repository = profileRepository;
 

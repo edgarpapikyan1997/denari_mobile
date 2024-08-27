@@ -8,52 +8,52 @@ part of 'profile_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$ProfileState on _ProfileState, Store {
+mixin _$ProfileState on ImplProfileState, Store {
   Computed<bool>? _$isNameValidComputed;
 
   @override
   bool get isNameValid =>
       (_$isNameValidComputed ??= Computed<bool>(() => super.isNameValid,
-              name: '_ProfileState.isNameValid'))
+              name: 'ImplProfileState.isNameValid'))
           .value;
   Computed<bool>? _$isEmailValidComputed;
 
   @override
   bool get isEmailValid =>
       (_$isEmailValidComputed ??= Computed<bool>(() => super.isEmailValid,
-              name: '_ProfileState.isEmailValid'))
+              name: 'ImplProfileState.isEmailValid'))
           .value;
   Computed<bool>? _$isPasswordValidComputed;
 
   @override
   bool get isPasswordValid =>
       (_$isPasswordValidComputed ??= Computed<bool>(() => super.isPasswordValid,
-              name: '_ProfileState.isPasswordValid'))
+              name: 'ImplProfileState.isPasswordValid'))
           .value;
   Computed<bool>? _$isPhoneValidComputed;
 
   @override
   bool get isPhoneValid =>
       (_$isPhoneValidComputed ??= Computed<bool>(() => super.isPhoneValid,
-              name: '_ProfileState.isPhoneValid'))
+              name: 'ImplProfileState.isPhoneValid'))
           .value;
   Computed<bool>? _$isBirthdayValidComputed;
 
   @override
   bool get isBirthdayValid =>
       (_$isBirthdayValidComputed ??= Computed<bool>(() => super.isBirthdayValid,
-              name: '_ProfileState.isBirthdayValid'))
+              name: 'ImplProfileState.isBirthdayValid'))
           .value;
   Computed<bool>? _$updateButtonEnabledComputed;
 
   @override
   bool get updateButtonEnabled => (_$updateButtonEnabledComputed ??=
           Computed<bool>(() => super.updateButtonEnabled,
-              name: '_ProfileState.updateButtonEnabled'))
+              name: 'ImplProfileState.updateButtonEnabled'))
       .value;
 
   late final _$profileAtom =
-      Atom(name: '_ProfileState.profile', context: context);
+      Atom(name: 'ImplProfileState.profile', context: context);
 
   @override
   ProfileModel get profile {
@@ -69,7 +69,7 @@ mixin _$ProfileState on _ProfileState, Store {
   }
 
   late final _$getErrorAtom =
-      Atom(name: '_ProfileState.getError', context: context);
+      Atom(name: 'ImplProfileState.getError', context: context);
 
   @override
   String? get getError {
@@ -85,7 +85,7 @@ mixin _$ProfileState on _ProfileState, Store {
   }
 
   late final _$updateErrorAtom =
-      Atom(name: '_ProfileState.updateError', context: context);
+      Atom(name: 'ImplProfileState.updateError', context: context);
 
   @override
   String? get updateError {
@@ -100,7 +100,7 @@ mixin _$ProfileState on _ProfileState, Store {
     });
   }
 
-  late final _$nameAtom = Atom(name: '_ProfileState.name', context: context);
+  late final _$nameAtom = Atom(name: 'ImplProfileState.name', context: context);
 
   @override
   String get name {
@@ -115,7 +115,8 @@ mixin _$ProfileState on _ProfileState, Store {
     });
   }
 
-  late final _$emailAtom = Atom(name: '_ProfileState.email', context: context);
+  late final _$emailAtom =
+      Atom(name: 'ImplProfileState.email', context: context);
 
   @override
   String get email {
@@ -131,7 +132,7 @@ mixin _$ProfileState on _ProfileState, Store {
   }
 
   late final _$passwordAtom =
-      Atom(name: '_ProfileState.password', context: context);
+      Atom(name: 'ImplProfileState.password', context: context);
 
   @override
   String get password {
@@ -146,7 +147,8 @@ mixin _$ProfileState on _ProfileState, Store {
     });
   }
 
-  late final _$phoneAtom = Atom(name: '_ProfileState.phone', context: context);
+  late final _$phoneAtom =
+      Atom(name: 'ImplProfileState.phone', context: context);
 
   @override
   PhoneNumber? get phone {
@@ -162,7 +164,7 @@ mixin _$ProfileState on _ProfileState, Store {
   }
 
   late final _$birthdayAtom =
-      Atom(name: '_ProfileState.birthday', context: context);
+      Atom(name: 'ImplProfileState.birthday', context: context);
 
   @override
   DateTime? get birthday {
@@ -177,7 +179,7 @@ mixin _$ProfileState on _ProfileState, Store {
     });
   }
 
-  late final _$codeAtom = Atom(name: '_ProfileState.code', context: context);
+  late final _$codeAtom = Atom(name: 'ImplProfileState.code', context: context);
 
   @override
   String get code {
@@ -193,7 +195,7 @@ mixin _$ProfileState on _ProfileState, Store {
   }
 
   late final _$loadingAtom =
-      Atom(name: '_ProfileState.loading', context: context);
+      Atom(name: 'ImplProfileState.loading', context: context);
 
   @override
   bool get loading {
@@ -209,7 +211,7 @@ mixin _$ProfileState on _ProfileState, Store {
   }
 
   late final _$isCodeValidAtom =
-      Atom(name: '_ProfileState.isCodeValid', context: context);
+      Atom(name: 'ImplProfileState.isCodeValid', context: context);
 
   @override
   bool get isCodeValid {
@@ -225,7 +227,7 @@ mixin _$ProfileState on _ProfileState, Store {
   }
 
   late final _$codeSentErrorAtom =
-      Atom(name: '_ProfileState.codeSentError', context: context);
+      Atom(name: 'ImplProfileState.codeSentError', context: context);
 
   @override
   String? get codeSentError {
@@ -241,7 +243,7 @@ mixin _$ProfileState on _ProfileState, Store {
   }
 
   late final _$getProfileAsyncAction =
-      AsyncAction('_ProfileState.getProfile', context: context);
+      AsyncAction('ImplProfileState.getProfile', context: context);
 
   @override
   Future<void> getProfile() {
@@ -249,7 +251,7 @@ mixin _$ProfileState on _ProfileState, Store {
   }
 
   late final _$updateProfileAsyncAction =
-      AsyncAction('_ProfileState.updateProfile', context: context);
+      AsyncAction('ImplProfileState.updateProfile', context: context);
 
   @override
   Future<void> updateProfile() {
@@ -257,79 +259,79 @@ mixin _$ProfileState on _ProfileState, Store {
   }
 
   late final _$getCodeAsyncAction =
-      AsyncAction('_ProfileState.getCode', context: context);
+      AsyncAction('ImplProfileState.getCode', context: context);
 
   @override
   Future<void> getCode() {
     return _$getCodeAsyncAction.run(() => super.getCode());
   }
 
-  late final _$_ProfileStateActionController =
-      ActionController(name: '_ProfileState', context: context);
+  late final _$ImplProfileStateActionController =
+      ActionController(name: 'ImplProfileState', context: context);
 
   @override
   void setName(String value) {
-    final _$actionInfo = _$_ProfileStateActionController.startAction(
-        name: '_ProfileState.setName');
+    final _$actionInfo = _$ImplProfileStateActionController.startAction(
+        name: 'ImplProfileState.setName');
     try {
       return super.setName(value);
     } finally {
-      _$_ProfileStateActionController.endAction(_$actionInfo);
+      _$ImplProfileStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setEmail(String value) {
-    final _$actionInfo = _$_ProfileStateActionController.startAction(
-        name: '_ProfileState.setEmail');
+    final _$actionInfo = _$ImplProfileStateActionController.startAction(
+        name: 'ImplProfileState.setEmail');
     try {
       return super.setEmail(value);
     } finally {
-      _$_ProfileStateActionController.endAction(_$actionInfo);
+      _$ImplProfileStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPassword(String value) {
-    final _$actionInfo = _$_ProfileStateActionController.startAction(
-        name: '_ProfileState.setPassword');
+    final _$actionInfo = _$ImplProfileStateActionController.startAction(
+        name: 'ImplProfileState.setPassword');
     try {
       return super.setPassword(value);
     } finally {
-      _$_ProfileStateActionController.endAction(_$actionInfo);
+      _$ImplProfileStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPhone(PhoneNumber value) {
-    final _$actionInfo = _$_ProfileStateActionController.startAction(
-        name: '_ProfileState.setPhone');
+    final _$actionInfo = _$ImplProfileStateActionController.startAction(
+        name: 'ImplProfileState.setPhone');
     try {
       return super.setPhone(value);
     } finally {
-      _$_ProfileStateActionController.endAction(_$actionInfo);
+      _$ImplProfileStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setBirthday(DateTime value) {
-    final _$actionInfo = _$_ProfileStateActionController.startAction(
-        name: '_ProfileState.setBirthday');
+    final _$actionInfo = _$ImplProfileStateActionController.startAction(
+        name: 'ImplProfileState.setBirthday');
     try {
       return super.setBirthday(value);
     } finally {
-      _$_ProfileStateActionController.endAction(_$actionInfo);
+      _$ImplProfileStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setCode(String value) {
-    final _$actionInfo = _$_ProfileStateActionController.startAction(
-        name: '_ProfileState.setCode');
+    final _$actionInfo = _$ImplProfileStateActionController.startAction(
+        name: 'ImplProfileState.setCode');
     try {
       return super.setCode(value);
     } finally {
-      _$_ProfileStateActionController.endAction(_$actionInfo);
+      _$ImplProfileStateActionController.endAction(_$actionInfo);
     }
   }
 

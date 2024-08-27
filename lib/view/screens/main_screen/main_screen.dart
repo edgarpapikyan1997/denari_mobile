@@ -95,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
       // Set the timeout to 10 seconds
       await Future.any([
         _shopsState.getAllShops(),
-        Future.delayed(Duration(seconds: 10)).then((_) {
+        Future.delayed(const Duration(seconds: 10)).then((_) {
           throw TimeoutException('Data fetching timed out');
         }),
       ]);
@@ -114,8 +114,8 @@ class _MainScreenState extends State<MainScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Failed to load data. Please try again later.'),
-          SizedBox(height: 16),
+          const Text('Failed to load data. Please try again later.'),
+          const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
               // Retry logic
@@ -124,7 +124,7 @@ class _MainScreenState extends State<MainScreen> {
                 initPrefs();
               });
             },
-            child: Text('Retry'),
+            child: const Text('Retry'),
           ),
         ],
       ),

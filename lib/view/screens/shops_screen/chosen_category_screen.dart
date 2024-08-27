@@ -1,7 +1,7 @@
+import 'dart:developer';
+
 import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/constants/app_sizes/app_sizes.dart';
-import 'package:denari_app/constants/categories.dart';
-import 'package:denari_app/data/shops/shops_repository/shops_repository.dart';
 import 'package:denari_app/store/categories_state/categories_state.dart';
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
@@ -9,7 +9,6 @@ import 'package:denari_app/view/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import '../../../constants/shop_tems.dart';
 import '../../../data/shops/shops_repository/impl/shops_repository.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../store/loading_state/loading_state.dart';
@@ -49,10 +48,10 @@ class _ChosenCategoryScreenState extends State<ChosenCategoryScreen> {
     if (widget.categoriesState != null) {
       categoriesState = widget.categoriesState;
     }
-    print(categoriesState!.currentCategory!);
+    log(categoriesState!.currentCategory!);
     await  _shopsState.getShopsByCategory(
         categories: widget.categoriesState!.currentCategory!);
-    print(_shopsState.shops);
+    log("${_shopsState.shops}");
     _loadingState.stopLoading();
   }
 

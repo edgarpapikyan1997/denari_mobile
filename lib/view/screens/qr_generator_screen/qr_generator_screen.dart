@@ -7,11 +7,8 @@ import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-
-import '../../../constants/bottom_sheet_type.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../utils/padding_utility/padding_utility.dart';
-import '../../widgets/bottom_sheet/custom_bottom_sheet.dart';
 
 class QrGeneratorScreen extends StatelessWidget {
   final String transactionID;
@@ -52,8 +49,7 @@ class QrGeneratorScreen extends StatelessWidget {
             children: [
               const Spacer(),
               QrImageView(
-                data:
-                    "${transactionModel.userId}\n${transactionModel.date}\n${transactionModel.status}\n${transactionModel.shopId}\n${transactionModel.amountGiftCardsUsing}\n${transactionModel.amountTokensUsed}",
+                data: transactionID,
                 size: 195,
               ),
               const Delimiter(16),

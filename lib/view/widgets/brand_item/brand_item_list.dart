@@ -11,10 +11,10 @@ class BrandItemList extends StatefulWidget {
       {super.key, required this.brandItems, this.itemsToLoad = 8});
 
   @override
-  _BrandItemListState createState() => _BrandItemListState();
+  BrandItemListState createState() => BrandItemListState();
 }
 
-class _BrandItemListState extends State<BrandItemList> {
+class BrandItemListState extends State<BrandItemList> {
   final ScrollController _scrollController = ScrollController();
   BrandItemSelectState brandItemSelectState = BrandItemSelectState();
   List<BrandItemWidget> _displayedItems = [];

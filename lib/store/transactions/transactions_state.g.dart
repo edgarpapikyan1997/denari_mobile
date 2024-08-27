@@ -13,13 +13,13 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
       Atom(name: 'ImplTransactionsState.transactionModel', context: context);
 
   @override
-  TransactionModel get transactionModel {
+  TransactionModel? get transactionModel {
     _$transactionModelAtom.reportRead();
     return super.transactionModel;
   }
 
   @override
-  set transactionModel(TransactionModel value) {
+  set transactionModel(TransactionModel? value) {
     _$transactionModelAtom.reportWrite(value, super.transactionModel, () {
       super.transactionModel = value;
     });
@@ -61,13 +61,13 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
       Atom(name: 'ImplTransactionsState.isSuccessful', context: context);
 
   @override
-  String get isSuccessful {
+  bool get isSuccessful {
     _$isSuccessfulAtom.reportRead();
     return super.isSuccessful;
   }
 
   @override
-  set isSuccessful(String value) {
+  set isSuccessful(bool value) {
     _$isSuccessfulAtom.reportWrite(value, super.isSuccessful, () {
       super.isSuccessful = value;
     });
@@ -77,7 +77,7 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
       AsyncAction('ImplTransactionsState.sendTransaction', context: context);
 
   @override
-  Future<void> sendTransaction(TransactionModel transactionModel) {
+  Future<String?> sendTransaction(TransactionModel transactionModel) {
     return _$sendTransactionAsyncAction
         .run(() => super.sendTransaction(transactionModel));
   }

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-
 part 'transaction_model.g.dart';
+
 
 @JsonSerializable()
 class TransactionModel {
@@ -25,12 +25,14 @@ class TransactionModel {
   @JsonKey(defaultValue: '')
   final String? comment;
   @JsonKey(defaultValue: '')
-  final String userId;
+  final String? userId;
   @JsonKey(defaultValue: 0)
   final int? giftCardAmount;
+  @JsonKey(defaultValue: '')
+  final String? cashierId;
 
   const TransactionModel({
-     this.id,
+    this.id,
     required this.date,
     required this.shopId,
     this.addressShopId,
@@ -40,8 +42,9 @@ class TransactionModel {
     this.amountGiftCardsUsing,
     required this.status,
     this.comment,
-    required this.userId,
+     this.userId,
     this.giftCardAmount,
+    this.cashierId,
   });
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
@@ -62,6 +65,7 @@ class TransactionModel {
     final String? comment,
     final String? userId,
     final int? giftCardAmount,
+    final String? cashierId,
   }) {
     return TransactionModel(
       id: id ?? this.id,
@@ -76,6 +80,7 @@ class TransactionModel {
       comment: comment ?? this.comment,
       userId: userId ?? this.userId,
       giftCardAmount: giftCardAmount ?? this.giftCardAmount,
+      cashierId: cashierId ?? this.cashierId,
     );
   }
 }

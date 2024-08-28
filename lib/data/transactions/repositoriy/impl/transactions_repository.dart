@@ -16,9 +16,10 @@ final class ImplTransactionsRepository extends TransactionsRepository {
 
   @override
   Future<TransactionModel?> sendTransaction(TransactionModel data) async {
+    print(data.toJson());
     final result = await _client.post(
       '${_config.host}/transactions',
-      data: jsonEncode(data.toJson()),
+      data: data.toJson(),
     );
     if (result.statusCode == 201) {
       if (result.data != null && result.data.isNotEmpty) {

@@ -21,6 +21,7 @@ import '../../../data/profile/repository/profile_repository.dart';
 import '../../../data/shops/shops_repository/impl/shops_repository.dart';
 import '../../../data/transactions/model/transaction_model.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../store/filters/slider_state/slider_state.dart';
 import '../../../store/loading_state/loading_state.dart';
 import '../../../store/profile/profile_state.dart';
 import '../../../store/shops/shops_state/shops_state.dart';
@@ -44,18 +45,17 @@ class StoreFieldItemScreen extends StatefulWidget {
 }
 
 class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
+  SliderState giftSliderState = SliderState();
+  SliderState tokenSliderState = SliderState();
   final ProfileState _profileState = ProfileState(
     authRepository: di.get<AuthRepository>(),
     profileRepository: di.get<ProfileRepository>(),
   );
   final ShopsState _shopState =
       ShopsState(shopsRepository: di.get<ImplShopsRepository>());
-
   final TransactionsState _transactionsState = TransactionsState(
       transactionsRepository: di.get<TransactionsRepository>());
-
   ShopsUnitModel? storeData;
-
   final LoadingState _loadingState = LoadingState();
   bool isEmpty = false;
   List<String> imageList = [];
@@ -98,13 +98,17 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                   _transactionsState.sendTransaction(
                     TransactionModel(
                       giftCardAmount:
-                          _shopState.shopsUnitModel?.giftCards[index].value ??
-                              0,
+                          _shopState.shopsUnitModel!.giftCards[index].value,
+                      amountGiftCardsUsing:
+                          _shopState.shopsUnitModel?.giftCards[index].value,
+                      tokenAddedAmount: 0,
+                      amountTokensUsed: 0,
+                      transactionsAmount:
+                          _shopState.shopsUnitModel?.giftCards[index].value,
                       shopId: widget.uniqueID,
                       status: 'status.onHold',
                       date: DateTime.now().toString(),
                       addressShopId: 0,
-                      userId: _profileState.profile.id,
                     ),
                   );
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -122,8 +126,8 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                 },
                 addButtons: true,
                 addCloseButton: true,
-                image: _shopState.shopsUnitModel?.imageUrl,
-                itemTitle: _shopState.shopsUnitModel?.name ?? 'Undefined',
+                image: _shopState.shopsUnitModel!.imageUrl,
+                itemTitle: _shopState.shopsUnitModel!.name,
                 itemTitleChevronRight: true,
                 underInfoCostText: Text(
                   'Gift Card ${_shopState.shopsUnitModel?.giftCards[index].value}',
@@ -181,7 +185,8 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                                 storeImage: storeData!.imageUrl,
                                 items: [
                                   StoreItemInfoCreator(
-                                    svgPicture: Assets.media.icons.phoneCall.svg(),
+                                    svgPicture:
+                                        Assets.media.icons.phoneCall.svg(),
                                     textValue: storeData!.branch[0].phone,
                                   ),
                                   StoreItemInfoCreator(
@@ -203,7 +208,8 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                               ),
                               const Delimiter(16),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: StoreFieldProperty(
@@ -233,10 +239,13 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                                       title: "shops.tokenBalance".tr(),
                                       secondaryValue: BalanceWidget(
                                         isTokenBalance: true,
-                                        balance: _shopState.shopsUnitModel
-                                                ?.shopUserTokens[0].tokenBalance ??
+                                        balance: _shopState
+                                                .shopsUnitModel
+                                                ?.shopUserTokens[0]
+                                                .tokenBalance ??
                                             0,
-                                        textStyle: context.theme.headline5.semiBold,
+                                        textStyle:
+                                            context.theme.headline5.semiBold,
                                       ),
                                     ),
                                   ),
@@ -282,16 +291,20 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                                 onTap: () {
                                   _shopState.shopsUnitModel != null
                                       ? showModalSheet(
-                                    context: context,
-                                    child: SizedBox(
-                                      child: NewPurchaseFilter(
-                                        shopUnitModel:
-                                        _shopState.shopsUnitModel!,
-                                        profileModel:
-                                        _profileState.profile,
-                                      ),
-                                    ),
-                                  ) : null;
+                                          context: context,
+                                          child: SizedBox(
+                                            child: NewPurchaseFilter(
+                                              shopUnitModel:
+                                                  _shopState.shopsUnitModel!,
+                                              profileModel:
+                                                  _profileState.profile,
+                                              giftSliderState: giftSliderState,
+                                              tokenSliderState:
+                                                  tokenSliderState,
+                                            ),
+                                          ),
+                                        )
+                                      : null;
                                 }),
                           )
                         ],

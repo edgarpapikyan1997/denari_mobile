@@ -13,7 +13,7 @@ abstract class ImplTransactionsState with Store {
   }) : _transactionsRepository = transactionsRepository;
 
   @observable
-  TransactionModel? transactionModel = TransactionModel.fromJson({});
+  TransactionModel? transactionModel;
 
   @observable
   String? getError;
@@ -32,6 +32,7 @@ abstract class ImplTransactionsState with Store {
       if (data != null) {
         isSuccessful = true;
         this.transactionModel = data;
+
       } else {
         isSuccessful = false;
       }

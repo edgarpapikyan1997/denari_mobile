@@ -24,11 +24,15 @@ import '../../bottom_sheet/variants/modal_sheet.dart';
 class NewPurchaseFilter extends StatefulWidget {
   final ShopsUnitModel shopUnitModel;
   final ProfileModel profileModel;
+  final SliderState giftSliderState;
+  final SliderState tokenSliderState;
 
   const NewPurchaseFilter({
     super.key,
     required this.shopUnitModel,
     required this.profileModel,
+    required this.giftSliderState,
+    required this.tokenSliderState,
   });
 
   @override
@@ -36,8 +40,6 @@ class NewPurchaseFilter extends StatefulWidget {
 }
 
 class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
-  SliderState giftSliderState = SliderState();
-  SliderState tokenSliderState = SliderState();
   LoadingState loadingState = LoadingState();
   final TransactionsState _transactionsState = TransactionsState(
       transactionsRepository: di.get<TransactionsRepository>());
@@ -51,11 +53,11 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
       shopId: widget.shopUnitModel.branch[0].shopId,
       status: 'status.onHold'.tr(),
       userId: widget.profileModel.id,
-      giftCardAmount: giftSliderState.maxGift,
-      amountGiftCardsUsing: giftSliderState.giftValue,
-      tokenAddedAmount: giftSliderState.maxToken,
-      amountTokensUsed: giftSliderState.tokenValue,
-      transactionsAmount: giftSliderState.tokenValue,
+      giftCardAmount: widget.giftSliderState.maxGift,
+      amountGiftCardsUsing: widget.giftSliderState.giftValue,
+      tokenAddedAmount: widget.giftSliderState.maxToken,
+      amountTokensUsed: widget.giftSliderState.tokenValue,
+      transactionsAmount: widget.giftSliderState.tokenValue,
     );
   }
 
@@ -78,14 +80,14 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
             ),
             const Delimiter(24),
             PurchaseAmountConfigurator(
-              sliderState: giftSliderState,
+              sliderState: widget.giftSliderState,
               shopsUnitModel: widget.shopUnitModel,
               previewTitle: 'shops.redeemGift'.tr(),
               isToken: false,
             ),
             const Delimiter(24),
             PurchaseAmountConfigurator(
-              sliderState: tokenSliderState,
+              sliderState: widget.tokenSliderState,
               shopsUnitModel: widget.shopUnitModel,
               previewTitle: 'shops.redeemToken'.tr(),
               isToken: true,
@@ -112,10 +114,15 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
                               balance: _transactionModel!.amountTokensUsed
                                   .toString(),
                             )
-                          : SnackBarAction(
-                              label: 'Something went wrong',
-                              onPressed: () {},
-                            );
+                          :  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      duration: const Duration(seconds: 3),
+                      content: _transactionsState.isSuccessful == true
+                          ? const Text('Transaction sent: Status onHold')
+                          : const Text('Something went wrong'),
+                    ),
+                  );
+
                   showModalSheet(
                     context: context,
                     child: SizedBox(

@@ -26,20 +26,20 @@ abstract class ImplTransactionsState with Store {
 
 
   @action
-  Future<String?> sendTransaction(TransactionModel transactionModel) async {
+  Future<bool> sendTransaction(TransactionModel transactionModel) async {
     try {
       final data = await _transactionsRepository.sendTransaction(transactionModel);
       if (data != null) {
         isSuccessful = true;
         this.transactionModel = data;
-
       } else {
         isSuccessful = false;
       }
     } catch (error) {
       getError = error.toString();
+      isSuccessful = false;
     }
-    return null;
+    return isSuccessful;
   }
 
 }

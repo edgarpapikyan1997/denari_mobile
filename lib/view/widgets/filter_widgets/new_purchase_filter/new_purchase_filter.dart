@@ -24,15 +24,11 @@ import '../../bottom_sheet/variants/modal_sheet.dart';
 class NewPurchaseFilter extends StatefulWidget {
   final ShopsUnitModel shopUnitModel;
   final ProfileModel profileModel;
-  final SliderState giftSliderState;
-  final SliderState tokenSliderState;
 
   const NewPurchaseFilter({
     super.key,
     required this.shopUnitModel,
     required this.profileModel,
-    required this.giftSliderState,
-    required this.tokenSliderState,
   });
 
   @override
@@ -40,6 +36,7 @@ class NewPurchaseFilter extends StatefulWidget {
 }
 
 class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
+  final SliderState sliderState = SliderState();
   LoadingState loadingState = LoadingState();
   final TransactionsState _transactionsState = TransactionsState(
       transactionsRepository: di.get<TransactionsRepository>());
@@ -48,17 +45,6 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
   @override
   void initState() {
     super.initState();
-    _transactionModel = TransactionModel(
-      date: DateTime.now().toString(),
-      shopId: widget.shopUnitModel.branch[0].shopId,
-      status: 'status.onHold'.tr(),
-      userId: widget.profileModel.id,
-      giftCardAmount: widget.giftSliderState.maxGift,
-      amountGiftCardsUsing: widget.giftSliderState.giftValue,
-      tokenAddedAmount: widget.giftSliderState.maxToken,
-      amountTokensUsed: widget.giftSliderState.tokenValue,
-      transactionsAmount: widget.giftSliderState.tokenValue,
-    );
   }
 
   @override
@@ -80,14 +66,14 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
             ),
             const Delimiter(24),
             PurchaseAmountConfigurator(
-              sliderState: widget.giftSliderState,
+              sliderState: sliderState,
               shopsUnitModel: widget.shopUnitModel,
               previewTitle: 'shops.redeemGift'.tr(),
               isToken: false,
             ),
             const Delimiter(24),
             PurchaseAmountConfigurator(
-              sliderState: widget.tokenSliderState,
+              sliderState: sliderState,
               shopsUnitModel: widget.shopUnitModel,
               previewTitle: 'shops.redeemToken'.tr(),
               isToken: true,
@@ -98,7 +84,20 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
                 isWhite: false,
                 title: 'qr.generateQR'.tr(),
                 onTap: () {
+                  sliderState.changeGiftCardLDValue(sliderState.maxGift);
+                  sliderState.changeTokenValue(sliderState.maxToken);
                   loadingState.startLoading();
+                  _transactionModel = TransactionModel(
+                    addressShopId: 12,
+                    date: DateTime.now().toString(),
+                    shopId: widget.shopUnitModel.branch[0].shopId,
+                    status: 'status.onHold'.tr(),
+                    giftCardAmount: sliderState.transactionAmount,
+                    amountGiftCardsUsing: sliderState.giftValue,
+                    tokenAddedAmount: sliderState.maxToken,
+                    amountTokensUsed: sliderState.tokenValue,
+                    transactionsAmount: sliderState.transactionAmount,
+                  );
                   _transactionsState.sendTransaction(_transactionModel!);
                   loadingState.stopLoading();
                   loadingState.isLoading == true
@@ -114,15 +113,7 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
                               balance: _transactionModel!.amountTokensUsed
                                   .toString(),
                             )
-                          :  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      duration: const Duration(seconds: 3),
-                      content: _transactionsState.isSuccessful == true
-                          ? const Text('Transaction sent: Status onHold')
-                          : const Text('Something went wrong'),
-                    ),
-                  );
-
+                          : null;
                   showModalSheet(
                     context: context,
                     child: SizedBox(

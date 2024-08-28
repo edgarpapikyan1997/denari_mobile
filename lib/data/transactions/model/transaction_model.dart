@@ -4,8 +4,8 @@ part 'transaction_model.g.dart';
 
 @JsonSerializable()
 class TransactionModel {
-  @JsonKey(defaultValue: '')
-  final String? id;
+  // @JsonKey(defaultValue: '')
+  // final String? id;
   @JsonKey(defaultValue: '')
   final String date;
   @JsonKey(defaultValue: '')
@@ -24,15 +24,15 @@ class TransactionModel {
   final String status;
   @JsonKey(defaultValue: '')
   final String? comment;
-  @JsonKey(defaultValue: '')
-  final String? userId;
+  // @JsonKey(defaultValue: '')
+  // final String? userId;
   @JsonKey(defaultValue: 0)
   final int? giftCardAmount;
-  @JsonKey(defaultValue: '')
-  final String? cashierId;
+  // @JsonKey(defaultValue: '')
+  // final String? cashierId;
 
   const TransactionModel({
-    this.id,
+    // this.id,
     required this.date,
     required this.shopId,
     this.addressShopId,
@@ -42,9 +42,9 @@ class TransactionModel {
     this.amountGiftCardsUsing,
     required this.status,
     this.comment,
-     this.userId,
+     // this.userId,
     this.giftCardAmount,
-    this.cashierId,
+    // this.cashierId,
   });
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
@@ -53,7 +53,7 @@ class TransactionModel {
   Map<String, dynamic> toJson() => _$TransactionModelToJson(this);
 
   TransactionModel copyWith({
-    final String? id,
+    // final String? id,
     final String? date,
     final String? shopId,
     final int? addressShopId,
@@ -63,12 +63,12 @@ class TransactionModel {
     final int? amountGiftCardsUsing,
     final String? status,
     final String? comment,
-    final String? userId,
+    // final String? userId,
     final int? giftCardAmount,
-    final String? cashierId,
+    // final String? cashierId,
   }) {
     return TransactionModel(
-      id: id ?? this.id,
+      // id: id ?? this.id,
       date: date ?? this.date,
       shopId: shopId ?? this.shopId,
       addressShopId: addressShopId ?? this.addressShopId,
@@ -78,9 +78,9 @@ class TransactionModel {
       amountGiftCardsUsing: amountGiftCardsUsing ?? this.amountGiftCardsUsing,
       status: status ?? this.status,
       comment: comment ?? this.comment,
-      userId: userId ?? this.userId,
+      // userId: userId ?? this.userId,
       giftCardAmount: giftCardAmount ?? this.giftCardAmount,
-      cashierId: cashierId ?? this.cashierId,
+      // cashierId: cashierId ?? this.cashierId,
     );
   }
 }

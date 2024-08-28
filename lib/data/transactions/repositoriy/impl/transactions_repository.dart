@@ -21,10 +21,10 @@ final class ImplTransactionsRepository extends TransactionsRepository {
       '${_config.host}/transactions',
       data: data.toJson(),
     );
+    print(result.data.toString());
     if (result.statusCode == 201) {
       if (result.data != null && result.data.isNotEmpty) {
         final transaction = TransactionModel.fromJson(result.data);
-        log("TRANSACTION REPOSITORY >>> id ${transaction.id}");
         return transaction;
       } else {
         log('No transaction data returned from the server, but the transaction was created.');

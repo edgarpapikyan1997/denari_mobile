@@ -77,7 +77,7 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
       AsyncAction('ImplTransactionsState.sendTransaction', context: context);
 
   @override
-  Future<String?> sendTransaction(TransactionModel transactionModel) {
+  Future<bool> sendTransaction(TransactionModel transactionModel) {
     return _$sendTransactionAsyncAction
         .run(() => super.sendTransaction(transactionModel));
   }

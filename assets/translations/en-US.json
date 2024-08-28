@@ -193,5 +193,10 @@
   },
   "qr" : {
    "generateQR" : "Generate QR code"
+  },
+  "transaction" : {
+   "transactionSent" : "Transaction sent: status onHold",
+    "transactionError" : "Something went wrong"
+
   }
 }

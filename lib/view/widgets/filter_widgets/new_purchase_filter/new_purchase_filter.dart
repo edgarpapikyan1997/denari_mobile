@@ -9,16 +9,14 @@ import 'package:denari_app/view/widgets/filter_widgets/new_purchase_filter/purch
 import 'package:denari_app/view/widgets/preview_banner/preview_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../../../constants/bottom_sheet_type.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../data/shops/shop_unit_model/shop_unit_model.dart';
 import '../../../../data/transactions/repositoriy/transactions_repository.dart';
-import '../../../../gen/assets.gen.dart';
 import '../../../../store/filters/slider_state/slider_state.dart';
 import '../../../../store/transactions/transactions_state.dart';
 import '../../../../utils/di/config.dart';
 import '../../../../utils/extensions/extensions.dart';
 import '../../../screens/qr_generator_screen/qr_generator_screen.dart';
-import '../../bottom_sheet/custom_bottom_sheet.dart';
 import '../../bottom_sheet/variants/modal_sheet.dart';
 
 class NewPurchaseFilter extends StatefulWidget {
@@ -36,27 +34,59 @@ class NewPurchaseFilter extends StatefulWidget {
 }
 
 class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
-  SliderState giftSliderState = SliderState();
-  SliderState tokenSliderState = SliderState();
+  final SliderState sliderState = SliderState();
   LoadingState loadingState = LoadingState();
   final TransactionsState _transactionsState = TransactionsState(
       transactionsRepository: di.get<TransactionsRepository>());
   TransactionModel? _transactionModel;
+  String transactionID = '';
 
   @override
   void initState() {
     super.initState();
+  }
+
+  Future<void> sendTransaction(BuildContext context) async {
     _transactionModel = TransactionModel(
+      addressShopId: 12,
       date: DateTime.now().toString(),
       shopId: widget.shopUnitModel.branch[0].shopId,
       status: 'status.onHold'.tr(),
-      userId: widget.profileModel.id,
-      giftCardAmount: giftSliderState.maxGift,
-      amountGiftCardsUsing: giftSliderState.giftValue,
-      tokenAddedAmount: giftSliderState.maxToken,
-      amountTokensUsed: giftSliderState.tokenValue,
-      transactionsAmount: giftSliderState.tokenValue,
+      giftCardAmount: 0,
+      amountGiftCardsUsing: sliderState.giftValue,
+      tokenAddedAmount: sliderState.tokenValue,
+      amountTokensUsed: sliderState.tokenValue,
+      transactionsAmount: sliderState.transactionAmount,
     );
+    await _transactionsState.sendTransaction(_transactionModel!);
+    if (!mounted) return;
+    if (_transactionsState.transactionReceiveModel != null) {
+      loadingState.stopLoading();
+      showModalSheet(
+        context: context,
+        child: SizedBox(
+          width: context.width,
+          child: QrGeneratorScreen(
+            transactionID: _transactionsState.transactionReceiveModel!.id!,
+            onTap: () {
+              context.pop();
+            },
+          ),
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            duration: const Duration(seconds: 3),
+            content: Text('transaction.transactionSent'.tr())),
+      );
+    } else {
+      loadingState.stopLoading();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            duration: const Duration(seconds: 3),
+            content: Text('transaction.transactionIDError'.tr())),
+      );
+    }
   }
 
   @override
@@ -67,78 +97,51 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
       left: 16,
       right: 16,
       child: Observer(builder: (_) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
+        return Stack(
           children: [
-            const BottomSheetUpperPiece(),
-            const Delimiter(28),
-            PreviewBanner(
-              leadingBanner: 'shops.newPurchase'.tr(),
-              bannerUnderText: 'shops.selectAmount'.tr(),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const BottomSheetUpperPiece(),
+                const Delimiter(28),
+                PreviewBanner(
+                  leadingBanner: 'shops.newPurchase'.tr(),
+                  bannerUnderText: 'shops.selectAmount'.tr(),
+                ),
+                const Delimiter(24),
+                PurchaseAmountConfigurator(
+                  sliderState: sliderState,
+                  shopsUnitModel: widget.shopUnitModel,
+                  previewTitle: 'shops.redeemGift'.tr(),
+                  isToken: false,
+                ),
+                const Delimiter(24),
+                PurchaseAmountConfigurator(
+                  sliderState: sliderState,
+                  shopsUnitModel: widget.shopUnitModel,
+                  previewTitle: 'shops.redeemToken'.tr(),
+                  isToken: true,
+                ),
+                const Delimiter(24),
+                CustomButton(
+                    isEnabled: true,
+                    isWhite: false,
+                    title: 'qr.generateQR'.tr(),
+                    onTap: () async {
+                      sliderState.changeGiftCardLDValue(sliderState.giftValue);
+                      sliderState.changeTokenValue(sliderState.tokenValue);
+                      loadingState.startLoading();
+                      await sendTransaction(context);
+                    }),
+              ],
             ),
-            const Delimiter(24),
-            PurchaseAmountConfigurator(
-              sliderState: giftSliderState,
-              shopsUnitModel: widget.shopUnitModel,
-              previewTitle: 'shops.redeemGift'.tr(),
-              isToken: false,
-            ),
-            const Delimiter(24),
-            PurchaseAmountConfigurator(
-              sliderState: tokenSliderState,
-              shopsUnitModel: widget.shopUnitModel,
-              previewTitle: 'shops.redeemToken'.tr(),
-              isToken: true,
-            ),
-            const Delimiter(24),
-            CustomButton(
-                isEnabled: true,
-                isWhite: false,
-                title: 'qr.generateQR'.tr(),
-                onTap: () {
-                  loadingState.startLoading();
-                  _transactionsState.sendTransaction(_transactionModel!);
-                  loadingState.stopLoading();
-                  loadingState.isLoading == true
-                      ? const CircularProgressIndicator()
-                      : _transactionsState.isSuccessful == true
-                          ? customBottomSheet(
-                              context: context,
-                              type: BottomSheetType.congrats,
-                              title: 'bottomSheet.congratsEaredToken'.tr(),
-                              asset: Assets.media.images.fireworks.path,
-                              tokens: _transactionModel!.tokenAddedAmount
-                                  .toString(),
-                              balance: _transactionModel!.amountTokensUsed
-                                  .toString(),
-                            )
-                          : SnackBarAction(
-                              label: 'Something went wrong',
-                              onPressed: () {},
-                            );
-                  showModalSheet(
-                    context: context,
-                    child: SizedBox(
-                      width: context.width,
-                      child: QrGeneratorScreen(
-                        transactionModel: _transactionModel!,
-                        transactionID: widget.profileModel.id,
-                        onTap: () {
-                          customBottomSheet(
-                            context: context,
-                            type: BottomSheetType.congrats,
-                            title: 'bottomSheet.congratsEaredToken'.tr(),
-                            asset: Assets.media.images.fireworks.path,
-                            tokens:
-                                _transactionModel!.amountTokensUsed.toString(),
-                            balance:
-                                _transactionModel!.tokenAddedAmount.toString(),
-                          );
-                        },
-                      ),
-                    ),
-                  );
-                })
+            if (loadingState.isLoading == true)
+              const Positioned(
+                bottom: 220,
+                left: 0,
+                right: 0,
+                child: Center(child: CircularProgressIndicator()),
+              )
           ],
         );
       }),

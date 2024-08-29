@@ -73,15 +73,42 @@ mixin _$SliderState on SliderConfigState, Store {
     });
   }
 
+  late final _$transactionAmountAtom =
+      Atom(name: 'SliderConfigState.transactionAmount', context: context);
+
+  @override
+  int get transactionAmount {
+    _$transactionAmountAtom.reportRead();
+    return super.transactionAmount;
+  }
+
+  @override
+  set transactionAmount(int value) {
+    _$transactionAmountAtom.reportWrite(value, super.transactionAmount, () {
+      super.transactionAmount = value;
+    });
+  }
+
   late final _$SliderConfigStateActionController =
       ActionController(name: 'SliderConfigState', context: context);
 
   @override
-  void changeValue(int newValue) {
+  void changeTokenValue(int newValue) {
     final _$actionInfo = _$SliderConfigStateActionController.startAction(
-        name: 'SliderConfigState.changeValue');
+        name: 'SliderConfigState.changeTokenValue');
     try {
-      return super.changeValue(newValue);
+      return super.changeTokenValue(newValue);
+    } finally {
+      _$SliderConfigStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeGiftCardLDValue(int newValue) {
+    final _$actionInfo = _$SliderConfigStateActionController.startAction(
+        name: 'SliderConfigState.changeGiftCardLDValue');
+    try {
+      return super.changeGiftCardLDValue(newValue);
     } finally {
       _$SliderConfigStateActionController.endAction(_$actionInfo);
     }
@@ -93,7 +120,8 @@ mixin _$SliderState on SliderConfigState, Store {
 maxToken: ${maxToken},
 maxGift: ${maxGift},
 giftValue: ${giftValue},
-tokenValue: ${tokenValue}
+tokenValue: ${tokenValue},
+transactionAmount: ${transactionAmount}
     ''';
   }
 }

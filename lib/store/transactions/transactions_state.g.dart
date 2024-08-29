@@ -25,6 +25,23 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
     });
   }
 
+  late final _$transactionReceiveModelAtom = Atom(
+      name: 'ImplTransactionsState.transactionReceiveModel', context: context);
+
+  @override
+  TransactionReceiveModel? get transactionReceiveModel {
+    _$transactionReceiveModelAtom.reportRead();
+    return super.transactionReceiveModel;
+  }
+
+  @override
+  set transactionReceiveModel(TransactionReceiveModel? value) {
+    _$transactionReceiveModelAtom
+        .reportWrite(value, super.transactionReceiveModel, () {
+      super.transactionReceiveModel = value;
+    });
+  }
+
   late final _$getErrorAtom =
       Atom(name: 'ImplTransactionsState.getError', context: context);
 
@@ -77,7 +94,7 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
       AsyncAction('ImplTransactionsState.sendTransaction', context: context);
 
   @override
-  Future<String?> sendTransaction(TransactionModel transactionModel) {
+  Future<bool> sendTransaction(TransactionModel transactionModel) {
     return _$sendTransactionAsyncAction
         .run(() => super.sendTransaction(transactionModel));
   }
@@ -86,6 +103,7 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
   String toString() {
     return '''
 transactionModel: ${transactionModel},
+transactionReceiveModel: ${transactionReceiveModel},
 getError: ${getError},
 transactionID: ${transactionID},
 isSuccessful: ${isSuccessful}

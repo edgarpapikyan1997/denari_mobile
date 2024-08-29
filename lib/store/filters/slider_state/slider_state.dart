@@ -17,9 +17,17 @@ abstract class SliderConfigState with Store {
   @observable
   int tokenValue = 0;
 
+  @observable
+  int transactionAmount = 0;
+
   @action
-  void changeValue(int newValue) {
-    giftValue = newValue;
+  void changeTokenValue(int newValue) {
     tokenValue = newValue;
+    transactionAmount = giftValue + tokenValue;
+  }
+  @action
+  void changeGiftCardLDValue(int newValue) {
+    giftValue = newValue;
+    transactionAmount = giftValue + tokenValue;
   }
 }

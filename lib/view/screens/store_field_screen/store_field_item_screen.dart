@@ -21,6 +21,7 @@ import '../../../data/profile/repository/profile_repository.dart';
 import '../../../data/shops/shops_repository/impl/shops_repository.dart';
 import '../../../data/transactions/model/transaction_model.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../store/filters/slider_state/slider_state.dart';
 import '../../../store/loading_state/loading_state.dart';
 import '../../../store/profile/profile_state.dart';
 import '../../../store/shops/shops_state/shops_state.dart';
@@ -44,18 +45,17 @@ class StoreFieldItemScreen extends StatefulWidget {
 }
 
 class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
+  SliderState giftSliderState = SliderState();
+  SliderState tokenSliderState = SliderState();
   final ProfileState _profileState = ProfileState(
     authRepository: di.get<AuthRepository>(),
     profileRepository: di.get<ProfileRepository>(),
   );
   final ShopsState _shopState =
-      ShopsState(shopsRepository: di.get<ImplShopsRepository>());
-
+  ShopsState(shopsRepository: di.get<ImplShopsRepository>());
   final TransactionsState _transactionsState = TransactionsState(
       transactionsRepository: di.get<TransactionsRepository>());
-
   ShopsUnitModel? storeData;
-
   final LoadingState _loadingState = LoadingState();
   bool isEmpty = false;
   List<String> imageList = [];
@@ -68,15 +68,25 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
 
   void initPrefs() async {
     _loadingState.startLoading();
+
     await _profileState.getProfile();
     await _shopState.getShopByID(id: widget.uniqueID);
+
+    // After async operations, check if the widget is still mounted
+    if (!mounted) return;
+
     storeData = _shopState.shopsUnitModel;
+
     if (_shopState.shopsUnitModel?.imageUrl != null) {
       imageList.add(_shopState.shopsUnitModel!.imageUrl);
     }
+
     isEmpty = imageList.isEmpty;
     _loadingState.stopLoading();
+
+    // Here you can safely update the UI or use the context because you've checked if the widget is still mounted
   }
+
 
   List<Widget> getGiftCardOptions() {
     return List.generate(_shopState.shopsUnitModel!.giftCards.length, (index) {
@@ -85,7 +95,7 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
         child: BrandItemWidget(
           avatar: Assets.media.icons.card.path,
           brandName:
-              'Gift Card ${_shopState.shopsUnitModel?.giftCards[index].value}',
+          'Gift Card ${_shopState.shopsUnitModel?.giftCards[index].value}',
           addDivider: true,
           tokenBalance: _shopState.shopsUnitModel?.giftCards[index].value ?? 0,
           tealButton: GestureDetector(
@@ -94,25 +104,29 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                 secondButtonTitle: 'Buy',
                 firstButtonTitle: 'Close',
                 context: context,
-                onConfirmSecond: () {
-                  _transactionsState.sendTransaction(
+                onConfirmSecond: () async {
+                  final success = await _transactionsState.sendTransaction(
                     TransactionModel(
-                      giftCardAmount:
-                          _shopState.shopsUnitModel?.giftCards[index].value ??
-                              0,
+                      giftCardAmount: _shopState.shopsUnitModel!.giftCards[index].value,
+                      amountGiftCardsUsing:
+                      _shopState.shopsUnitModel?.giftCards[index].value,
+                      tokenAddedAmount: 0,
+                      amountTokensUsed:
+                      _shopState.shopsUnitModel?.giftCards[index].value,
+                      transactionsAmount:
+                      _shopState.shopsUnitModel?.giftCards[index].value,
                       shopId: widget.uniqueID,
                       status: 'status.onHold',
                       date: DateTime.now().toString(),
-                      addressShopId: 0,
-                      userId: _profileState.profile.id,
+                      addressShopId: 12,
                     ),
                   );
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       duration: const Duration(seconds: 3),
-                      content: _transactionsState.isSuccessful == true
-                          ? const Text('Transaction sent: Status onHold')
-                          : const Text('Something went wrong'),
+                      content: success
+                          ? Text('transaction.transactionSent'.tr())
+                          : Text('transaction.transactionError'.tr()),
                     ),
                   );
                   context.pop();
@@ -122,22 +136,22 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                 },
                 addButtons: true,
                 addCloseButton: true,
-                image: _shopState.shopsUnitModel?.imageUrl,
-                itemTitle: _shopState.shopsUnitModel?.name ?? 'Undefined',
+                image: _shopState.shopsUnitModel!.imageUrl,
+                itemTitle: _shopState.shopsUnitModel!.name,
                 itemTitleChevronRight: true,
                 underInfoCostText: Text(
                   'Gift Card ${_shopState.shopsUnitModel?.giftCards[index].value}',
                   style: context.theme.body1,
                 ),
                 itemInfoCost:
-                    '${_shopState.shopsUnitModel?.giftCards[index].value}',
+                '${_shopState.shopsUnitModel?.giftCards[index].value}',
               );
             },
             child: Assets.media.icons.chevronRight.svg(),
           ),
           iconAvatar: Assets.media.icons.card.svg(
             colorFilter:
-                const ColorFilter.mode(AppColors.yellowDark, BlendMode.srcIn),
+            const ColorFilter.mode(AppColors.yellowDark, BlendMode.srcIn),
           ),
         ),
       );
@@ -152,154 +166,160 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
         child: _loadingState.isLoading
             ? const Center(child: CircularProgressIndicator())
             : Scaffold(
-                appBar: PreferredSize(
-                  preferredSize: AppSizes.backGroundImagePrefSize,
-                  child: CustomAppBar(
-                    appBarType: isEmpty ? AppBarType.regular : AppBarType.image,
-                    imageList: imageList,
-                    leadingIcon: GestureDetector(
-                        onTap: () {
-                          context.pop();
-                        },
-                        child: Assets.media.icons.chevronLeft.svg(
-                          colorFilter: ColorFilter.mode(
-                              isEmpty ? AppColors.black : AppColors.white,
-                              BlendMode.srcIn),
-                        )),
-                  ),
-                ),
-                body: PaddingUtility(
-                  all: 16,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              StoreItemInfo(
-                                storeName: storeData!.name,
-                                storeImage: storeData!.imageUrl,
-                                items: [
-                                  StoreItemInfoCreator(
-                                    svgPicture: Assets.media.icons.phoneCall.svg(),
-                                    textValue: storeData!.branch[0].phone,
-                                  ),
-                                  StoreItemInfoCreator(
-                                    svgPicture: Assets.media.icons.map.svg(),
-                                    textValue:
-                                        "${storeData!.branch[0].street}, ${storeData!.branch[0].city}",
-                                  ),
-                                ],
-                              ),
-                              const Delimiter(12),
-                              StoreFieldProperty(
-                                asset: Assets.media.icons.store.svg(
-                                    colorFilter: const ColorFilter.mode(
-                                        AppColors.yellowDark, BlendMode.srcIn)),
-                                title: '${storeData!.branch.length} Branches',
-                                onTap: () {
-                                  context.push('/mapScreen', extra: storeData);
-                                },
-                              ),
-                              const Delimiter(16),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: StoreFieldProperty(
-                                      isRow: false,
-                                      title: "shops.cashbackRate".tr(),
-                                      secondaryValue: Text(
-                                        '${_shopState.shopsUnitModel?.cashback ?? 0}%',
-                                        style: context.theme.headline5.semiBold,
-                                      ),
-                                    ),
-                                  ),
-                                  const Delimiter(8),
-                                  Expanded(
-                                    child: StoreFieldProperty(
-                                      isRow: false,
-                                      title: "shops.currentBalance".tr(),
-                                      secondaryValue: Text(
-                                        '${_shopState.shopsUnitModel?.shopUserTokens[0].giftCardBalance ?? 0} LD',
-                                        style: context.theme.headline5.semiBold,
-                                      ),
-                                    ),
-                                  ),
-                                  const Delimiter(8),
-                                  Expanded(
-                                    child: StoreFieldProperty(
-                                      isRow: false,
-                                      title: "shops.tokenBalance".tr(),
-                                      secondaryValue: BalanceWidget(
-                                        isTokenBalance: true,
-                                        balance: _shopState.shopsUnitModel
-                                                ?.shopUserTokens[0].tokenBalance ??
-                                            0,
-                                        textStyle: context.theme.headline5.semiBold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Delimiter(16),
-                              // StoreFieldProperty(
-                              //   asset: Assets.media.icons.handShake.svg(
-                              //       colorFilter: const ColorFilter.mode(
-                              //           AppColors.yellowDark, BlendMode.srcIn)),
-                              //   title: 'Allianse (4)',
-                              //   onTap: () {
-                              //     context.push('/alliance', extra: true);
-                              //   },
-                              // ),
-                              // const Delimiter(32),
-                              PreviewBanner(
-                                  leadingBanner: 'shops.giftCardOptions'.tr()),
-                              const Delimiter(12),
-                              Column(
-                                children: getGiftCardOptions(),
-                              ),
-                              const Delimiter(8),
-                            ],
-                          ),
+          appBar: PreferredSize(
+            preferredSize: AppSizes.backGroundImagePrefSize,
+            child: CustomAppBar(
+              appBarType: isEmpty ? AppBarType.regular : AppBarType.image,
+              imageList: imageList,
+              leadingIcon: GestureDetector(
+                  onTap: () {
+                    context.pop();
+                  },
+                  child: Assets.media.icons.chevronLeft.svg(
+                    colorFilter: ColorFilter.mode(
+                        isEmpty ? AppColors.black : AppColors.white,
+                        BlendMode.srcIn),
+                  )),
+            ),
+          ),
+          body: PaddingUtility(
+            all: 16,
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        StoreItemInfo(
+                          storeName: storeData!.name,
+                          storeImage: storeData!.imageUrl,
+                          items: [
+                            StoreItemInfoCreator(
+                              svgPicture:
+                              Assets.media.icons.phoneCall.svg(),
+                              textValue: storeData!.branch[0].phone,
+                            ),
+                            StoreItemInfoCreator(
+                              svgPicture: Assets.media.icons.map.svg(),
+                              textValue:
+                              "${storeData!.branch[0].street}, ${storeData!.branch[0].city}",
+                            ),
+                          ],
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CustomButton(
-                                isEnabled: true,
-                                isWhite: true,
-                                title: 'shops.redemeToken'.tr(),
-                                onTap: () {}),
-                          ),
-                          const Delimiter(8),
-                          Expanded(
-                            child: CustomButton(
-                                isEnabled: true,
-                                isWhite: false,
-                                title: 'shops.newPurchase'.tr(),
-                                onTap: () {
-                                  _shopState.shopsUnitModel != null
-                                      ? showModalSheet(
-                                    context: context,
-                                    child: SizedBox(
-                                      child: NewPurchaseFilter(
-                                        shopUnitModel:
-                                        _shopState.shopsUnitModel!,
-                                        profileModel:
-                                        _profileState.profile,
-                                      ),
-                                    ),
-                                  ) : null;
-                                }),
-                          )
-                        ],
-                      ),
-                    ],
+                        const Delimiter(12),
+                        StoreFieldProperty(
+                          asset: Assets.media.icons.store.svg(
+                              colorFilter: const ColorFilter.mode(
+                                  AppColors.yellowDark, BlendMode.srcIn)),
+                          title: '${storeData!.branch.length} Branches',
+                          onTap: () {
+                            context.push('/mapScreen', extra: storeData);
+                          },
+                        ),
+                        const Delimiter(16),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: StoreFieldProperty(
+                                isRow: false,
+                                title: "shops.cashbackRate".tr(),
+                                secondaryValue: Text(
+                                  '${_shopState.shopsUnitModel?.cashback ?? 0}%',
+                                  style: context.theme.headline5.semiBold,
+                                ),
+                              ),
+                            ),
+                            const Delimiter(8),
+                            Expanded(
+                              child: StoreFieldProperty(
+                                isRow: false,
+                                title: "shops.currentBalance".tr(),
+                                secondaryValue: Text(
+                                  '${_shopState.shopsUnitModel?.shopUserTokens[0].giftCardBalance ?? 0} LD',
+                                  style: context.theme.headline5.semiBold,
+                                ),
+                              ),
+                            ),
+                            const Delimiter(8),
+                            Expanded(
+                              child: StoreFieldProperty(
+                                isRow: false,
+                                title: "shops.tokenBalance".tr(),
+                                secondaryValue: BalanceWidget(
+                                  isTokenBalance: true,
+                                  balance: _shopState
+                                      .shopsUnitModel
+                                      ?.shopUserTokens[0]
+                                      .tokenBalance ??
+                                      0,
+                                  textStyle:
+                                  context.theme.headline5.semiBold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Delimiter(16),
+                        // StoreFieldProperty(
+                        //   asset: Assets.media.icons.handShake.svg(
+                        //       colorFilter: const ColorFilter.mode(
+                        //           AppColors.yellowDark, BlendMode.srcIn)),
+                        //   title: 'Allianse (4)',
+                        //   onTap: () {
+                        //     context.push('/alliance', extra: true);
+                        //   },
+                        // ),
+                        // const Delimiter(32),
+                        PreviewBanner(
+                            leadingBanner: 'shops.giftCardOptions'.tr()),
+                        const Delimiter(12),
+                        Column(
+                          children: getGiftCardOptions(),
+                        ),
+                        const Delimiter(8),
+                      ],
+                    ),
                   ),
                 ),
-              ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomButton(
+                          isEnabled: true,
+                          isWhite: true,
+                          title: 'shops.redemeToken'.tr(),
+                          onTap: () {}),
+                    ),
+                    const Delimiter(8),
+                    Expanded(
+                      child: CustomButton(
+                          isEnabled: true,
+                          isWhite: false,
+                          title: 'shops.newPurchase'.tr(),
+                          onTap: () {
+                            _shopState.shopsUnitModel != null
+                                ? showModalSheet(
+                              context: context,
+                              child: SizedBox(
+                                child: NewPurchaseFilter(
+                                  shopUnitModel:
+                                  _shopState.shopsUnitModel!,
+                                  profileModel:
+                                  _profileState.profile,
+                                ),
+                              ),
+                            )
+                                : null;
+                          }),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       );
     });
   }

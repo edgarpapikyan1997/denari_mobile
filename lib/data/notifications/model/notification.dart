@@ -49,11 +49,11 @@ class Notification {
   }) {
     return Notification(
       id: id ?? this.id,
-      message: body ?? this.message,
+      message: body ?? message,
       createdAt: createdAt ?? this.createdAt,
       read: read ?? this.read,
       title: title ?? this.title,
-      userId: user ?? this.userId,
+      userId: user ?? userId,
     );
   }
 

@@ -71,7 +71,7 @@ class _PurchaseAmountConfiguratorState
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        '${widget.isToken ? widget.sliderState.giftValue.toInt() : widget.sliderState.tokenValue.toInt()}',
+                        '${widget.isToken ? widget.sliderState.tokenValue.toInt() : widget.sliderState.giftValue.toInt()}',
                         style: context.theme.body1,
                       ),
                     ),
@@ -110,9 +110,10 @@ class _PurchaseAmountConfiguratorState
                 : widget.sliderState.maxGift.toDouble(),
             onChanged: (double value) {
               if (widget.isToken) {
-                widget.sliderState.changeValue(value.toInt());
-              } else {
-                widget.sliderState.changeValue(value.toInt());
+                widget.sliderState.changeTokenValue(value.toInt());
+              }
+              if (widget.isToken == false) {
+                widget.sliderState.changeGiftCardLDValue(value.toInt());
               }
             },
           ),

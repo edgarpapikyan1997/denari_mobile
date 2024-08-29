@@ -1,5 +1,4 @@
 import 'package:denari_app/constants/app_sizes/app_sizes.dart';
-import 'package:denari_app/data/transactions/model/transaction_model.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/view/widgets/custom_app_bar.dart';
 import 'package:denari_app/view/widgets/custom_button.dart';
@@ -12,14 +11,13 @@ import '../../../utils/padding_utility/padding_utility.dart';
 
 class QrGeneratorScreen extends StatelessWidget {
   final String transactionID;
-  final TransactionModel transactionModel;
   final VoidCallback onTap;
 
   const QrGeneratorScreen(
       {super.key,
       required this.transactionID,
       required this.onTap,
-      required this.transactionModel});
+      });
 
   @override
   Widget build(BuildContext context) {

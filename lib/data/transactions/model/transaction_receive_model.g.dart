@@ -1,13 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'transaction_model.dart';
+part of 'transaction_receive_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) =>
-    TransactionModel(
+TransactionReceiveModel _$TransactionReceiveModelFromJson(
+        Map<String, dynamic> json) =>
+    TransactionReceiveModel(
+      id: json['id'] as String? ?? '',
       date: json['date'] as String? ?? '',
       shopId: json['shopId'] as String? ?? '',
       addressShopId: (json['addressShopId'] as num?)?.toInt() ?? 0,
@@ -17,11 +19,16 @@ TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) =>
       amountGiftCardsUsing:
           (json['amountGiftCardsUsing'] as num?)?.toInt() ?? 0,
       status: json['status'] as String? ?? '',
+      comment: json['comment'] as String? ?? '',
+      userId: json['userId'] as String? ?? '',
       giftCardAmount: (json['giftCardAmount'] as num?)?.toInt() ?? 0,
+      cashierId: json['cashierId'] as String? ?? '',
     );
 
-Map<String, dynamic> _$TransactionModelToJson(TransactionModel instance) =>
+Map<String, dynamic> _$TransactionReceiveModelToJson(
+        TransactionReceiveModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'date': instance.date,
       'shopId': instance.shopId,
       'addressShopId': instance.addressShopId,
@@ -30,5 +37,8 @@ Map<String, dynamic> _$TransactionModelToJson(TransactionModel instance) =>
       'amountTokensUsed': instance.amountTokensUsed,
       'amountGiftCardsUsing': instance.amountGiftCardsUsing,
       'status': instance.status,
+      'comment': instance.comment,
+      'userId': instance.userId,
       'giftCardAmount': instance.giftCardAmount,
+      'cashierId': instance.cashierId,
     };

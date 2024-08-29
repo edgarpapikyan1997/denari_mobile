@@ -1,10 +1,9 @@
-import 'dart:convert';
 import 'dart:developer';
-
 import 'package:denari_app/data/transactions/model/transaction_model.dart';
 import 'package:denari_app/data/transactions/repositoriy/transactions_repository.dart';
 import 'package:denari_app/utils/env/config.dart';
 import 'package:dio/dio.dart';
+import '../../model/transaction_receive_model.dart';
 
 final class ImplTransactionsRepository extends TransactionsRepository {
   final Dio _client;
@@ -15,16 +14,16 @@ final class ImplTransactionsRepository extends TransactionsRepository {
         _config = config;
 
   @override
-  Future<TransactionModel?> sendTransaction(TransactionModel data) async {
-    print(data.toJson());
+  Future<TransactionReceiveModel?> sendTransaction(
+      TransactionModel data) async {
     final result = await _client.post(
       '${_config.host}/transactions',
       data: data.toJson(),
     );
-    print(result.data.toString());
+
     if (result.statusCode == 201) {
       if (result.data != null && result.data.isNotEmpty) {
-        final transaction = TransactionModel.fromJson(result.data);
+        final transaction = TransactionReceiveModel.fromJson(result.data);
         return transaction;
       } else {
         log('No transaction data returned from the server, but the transaction was created.');

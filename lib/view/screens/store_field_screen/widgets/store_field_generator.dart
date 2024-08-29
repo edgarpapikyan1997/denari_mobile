@@ -40,7 +40,6 @@ class StoreFieldGenerator extends StatelessWidget {
                 '/storeFieldItemScreen',
                 extra: storeFieldList[index].id,
               );
-              print( storeFieldList[index].id);
             },
             child: StoreFieldWidget(
               asset: storeField.imageUrl,

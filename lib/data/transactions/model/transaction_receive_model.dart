@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'transaction_model.g.dart';
+part 'transaction_receive_model.g.dart';
 
 
 @JsonSerializable()
-class TransactionModel {
-  // @JsonKey(defaultValue: '')
-  // final String? id;
+class TransactionReceiveModel {
+  @JsonKey(defaultValue: '')
+  final String? id;
   @JsonKey(defaultValue: '')
   final String date;
   @JsonKey(defaultValue: '')
@@ -22,17 +22,17 @@ class TransactionModel {
   final int? amountGiftCardsUsing;
   @JsonKey(defaultValue: '')
   final String status;
-  // @JsonKey(defaultValue: '')
-  // final String? comment;
-  // @JsonKey(defaultValue: '')
-  // final String? userId;
+  @JsonKey(defaultValue: '')
+  final String? comment;
+  @JsonKey(defaultValue: '')
+  final String? userId;
   @JsonKey(defaultValue: 0)
   final int? giftCardAmount;
-  // @JsonKey(defaultValue: '')
-  // final String? cashierId;
+  @JsonKey(defaultValue: '')
+  final String? cashierId;
 
-  const TransactionModel({
-    // this.id,
+  const TransactionReceiveModel({
+    this.id,
     required this.date,
     required this.shopId,
     this.addressShopId,
@@ -41,19 +41,19 @@ class TransactionModel {
     this.amountTokensUsed,
     this.amountGiftCardsUsing,
     required this.status,
-    // this.comment,
-     // this.userId,
+    this.comment,
+    this.userId,
     this.giftCardAmount,
-    // this.cashierId,
+    this.cashierId,
   });
 
-  factory TransactionModel.fromJson(Map<String, dynamic> json) =>
-      _$TransactionModelFromJson(json);
+  factory TransactionReceiveModel.fromJson(Map<String, dynamic> json) =>
+      _$TransactionReceiveModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TransactionModelToJson(this);
+  Map<String, dynamic> toJson() => _$TransactionReceiveModelToJson(this);
 
-  TransactionModel copyWith({
-    // final String? id,
+  TransactionReceiveModel copyWith({
+    final String? id,
     final String? date,
     final String? shopId,
     final int? addressShopId,
@@ -62,13 +62,13 @@ class TransactionModel {
     final int? amountTokensUsed,
     final int? amountGiftCardsUsing,
     final String? status,
-    // final String? comment,
-    // final String? userId,
+    final String? comment,
+    final String? userId,
     final int? giftCardAmount,
-    // final String? cashierId,
+    final String? cashierId,
   }) {
-    return TransactionModel(
-      // id: id ?? this.id,
+    return TransactionReceiveModel(
+      id: id ?? this.id,
       date: date ?? this.date,
       shopId: shopId ?? this.shopId,
       addressShopId: addressShopId ?? this.addressShopId,
@@ -77,10 +77,10 @@ class TransactionModel {
       amountTokensUsed: amountTokensUsed ?? this.amountTokensUsed,
       amountGiftCardsUsing: amountGiftCardsUsing ?? this.amountGiftCardsUsing,
       status: status ?? this.status,
-      // comment: comment ?? this.comment,
-      // userId: userId ?? this.userId,
+      comment: comment ?? this.comment,
+      userId: userId ?? this.userId,
       giftCardAmount: giftCardAmount ?? this.giftCardAmount,
-      // cashierId: cashierId ?? this.cashierId,
+      cashierId: cashierId ?? this.cashierId,
     );
   }
 }

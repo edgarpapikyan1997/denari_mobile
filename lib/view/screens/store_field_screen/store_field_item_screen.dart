@@ -68,15 +68,25 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
 
   void initPrefs() async {
     _loadingState.startLoading();
+
     await _profileState.getProfile();
     await _shopState.getShopByID(id: widget.uniqueID);
+
+    // After async operations, check if the widget is still mounted
+    if (!mounted) return;
+
     storeData = _shopState.shopsUnitModel;
+
     if (_shopState.shopsUnitModel?.imageUrl != null) {
       imageList.add(_shopState.shopsUnitModel!.imageUrl);
     }
+
     isEmpty = imageList.isEmpty;
     _loadingState.stopLoading();
+
+    // Here you can safely update the UI or use the context because you've checked if the widget is still mounted
   }
+
 
   List<Widget> getGiftCardOptions() {
     return List.generate(_shopState.shopsUnitModel!.giftCards.length, (index) {
@@ -97,12 +107,12 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                 onConfirmSecond: () async {
                   final success = await _transactionsState.sendTransaction(
                     TransactionModel(
-                      giftCardAmount:
-                      _shopState.shopsUnitModel!.giftCards[index].value,
+                      giftCardAmount: _shopState.shopsUnitModel!.giftCards[index].value,
                       amountGiftCardsUsing:
                       _shopState.shopsUnitModel?.giftCards[index].value,
                       tokenAddedAmount: 0,
-                      amountTokensUsed: 0,
+                      amountTokensUsed:
+                      _shopState.shopsUnitModel?.giftCards[index].value,
                       transactionsAmount:
                       _shopState.shopsUnitModel?.giftCards[index].value,
                       shopId: widget.uniqueID,
@@ -130,8 +140,7 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                 itemTitle: _shopState.shopsUnitModel!.name,
                 itemTitleChevronRight: true,
                 underInfoCostText: Text(
-                  'Gift Card ${_shopState.shopsUnitModel?.giftCards[index]
-                      .value}',
+                  'Gift Card ${_shopState.shopsUnitModel?.giftCards[index].value}',
                   style: context.theme.body1,
                 ),
                 itemInfoCost:
@@ -193,8 +202,7 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                             StoreItemInfoCreator(
                               svgPicture: Assets.media.icons.map.svg(),
                               textValue:
-                              "${storeData!.branch[0].street}, ${storeData!
-                                  .branch[0].city}",
+                              "${storeData!.branch[0].street}, ${storeData!.branch[0].city}",
                             ),
                           ],
                         ),
@@ -218,8 +226,7 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                                 isRow: false,
                                 title: "shops.cashbackRate".tr(),
                                 secondaryValue: Text(
-                                  '${_shopState.shopsUnitModel?.cashback ??
-                                      0}%',
+                                  '${_shopState.shopsUnitModel?.cashback ?? 0}%',
                                   style: context.theme.headline5.semiBold,
                                 ),
                               ),
@@ -230,9 +237,7 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                                 isRow: false,
                                 title: "shops.currentBalance".tr(),
                                 secondaryValue: Text(
-                                  '${_shopState.shopsUnitModel
-                                      ?.shopUserTokens[0].giftCardBalance ??
-                                      0} LD',
+                                  '${_shopState.shopsUnitModel?.shopUserTokens[0].giftCardBalance ?? 0} LD',
                                   style: context.theme.headline5.semiBold,
                                 ),
                               ),
@@ -305,7 +310,8 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                                   _profileState.profile,
                                 ),
                               ),
-                            ) : null;
+                            )
+                                : null;
                           }),
                     )
                   ],

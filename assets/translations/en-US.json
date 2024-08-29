@@ -196,7 +196,8 @@
   },
   "transaction" : {
    "transactionSent" : "Transaction sent: status onHold",
-    "transactionError" : "Something went wrong"
+    "transactionError" : "Something went wrong",
+    "transactionIDError" : "Can't get Transaction ID : TRY AGAIN"
 
   }
 }

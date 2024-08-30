@@ -32,26 +32,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   void initState() {
-    reaction(
-      (reaction) => _state.codeSent,
-      (value) {
-        if (value == 'true') {
-          context.goNamed(
-            Routes.code,
-            extra: RegModel(
-              name: _state.name,
-              email: _state.email,
-              password: _state.password,
-              phone: _state.phone!.completeNumber,
-              code: '',
-            ),
-          );
-        } else if (value != null) {
-          Message.show(value);
-        }
-      },
-      equals: (_, __) => false,
-    );
+    // reaction(
+    //   (reaction) => _state.codeSent,
+    //   (value) {
+    //     if (value == 'true') {
+    //       context.goNamed(
+    //         Routes.code,
+    //         extra: RegModel(
+    //           name: _state.name,
+    //           email: _state.email,
+    //           password: _state.password,
+    //           phone: _state.phone!.completeNumber,
+    //           code: '',
+    //         ),
+    //       );
+    //     } else if (value != null) {
+    //       Message.show(value);
+    //     }
+    //   },
+    //   equals: (_, __) => false,
+    // );
     super.initState();
   }
 
@@ -108,7 +108,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Observer(
                 builder: (_) => ButtonPrimary(
                   label: 'sign.create_now'.tr(),
-                  onPressed: _state.createButtonEnabled ? _state.getCode : null,
+                  onPressed: () async {
+                    await  _state.getCode();
+                    final String? value = _state.codeSent;
+                    if (value == 'true') {
+                      context.pushNamed(
+                        Routes.code,
+                        extra: RegModel(
+                          name: _state.name,
+                          email: _state.email,
+                          password: _state.password,
+                          phone: _state.phone!.completeNumber,
+                          code: '',
+                        ),
+                      );
+                    }else {
+                      Message.show(value!);
+                    }
+                  }
+                  // _state.createButtonEnabled ? _state.getCode : null,
                 ),
               ),
               const Delimiter(),

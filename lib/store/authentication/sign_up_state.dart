@@ -108,6 +108,7 @@ abstract class ImplSignUpState with Store {
     loading = false;
   }
 
+
   @action
   Future<void> getCode() async {
     loading = true;
@@ -115,6 +116,7 @@ abstract class ImplSignUpState with Store {
       (data) => codeSent = 'true',
       (error) => codeSent = error,
     );
+    print("CODE SENT FROM STATE $codeSent");
     loading = false;
   }
 }

@@ -52,7 +52,7 @@ dependencies:
   # bloc
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
-
+  device_info_plus: ^10.1.2
   cupertino_icons: ^1.0.6
   easy_localization: ^3.0.7
   go_router: ^14.2.0
@@ -61,7 +61,6 @@ dependencies:
   pinput: ^5.0.0
   json_annotation: ^4.9.0
   shared_preferences: ^2.2.3
-  device_info_plus: ^10.1.0
   package_info_plus: ^8.0.2
   mobx: ^2.3.3+2
   flutter_mobx: ^2.2.1+1

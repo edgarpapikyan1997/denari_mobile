@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:566463012532:android:d91c0bffde93c8efac81e1",
         "android_client_info": {
-          "package_name": "com.example.denari_app"
+          "package_name": "com.denari.app"
         }
       },
       "oauth_client": [],

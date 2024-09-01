@@ -30,7 +30,7 @@ abstract class ImplSignUpState with Store {
   void setName(String value) => name = value;
 
   @observable
-  String email = "";
+  String? email = "";
 
   @action
   void setEmail(String value) => email = value;
@@ -63,10 +63,15 @@ abstract class ImplSignUpState with Store {
   bool get isNameValid => name.isNotEmpty;
 
   @computed
-  bool get isEmailValid =>
-      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-          .hasMatch(email) ||
-      email.isEmpty;
+  bool get isEmailValid {
+    if (email == null) {
+      email = "";
+    }
+    RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(email!) ||
+        email!.isEmpty;
+    return true;
+  }
 
   @computed
   bool get isPasswordValid => password.length >= 8;
@@ -90,10 +95,12 @@ abstract class ImplSignUpState with Store {
 
   @action
   Future<void> register() async {
+    if (!createButtonEnabled) return;
+
     loading = true;
     final model = RegModel(
       name: name,
-      email: email,
+      email: email == null || email!.isEmpty ? "" : email,
       password: password,
       phone: phone.print(),
       code: code,

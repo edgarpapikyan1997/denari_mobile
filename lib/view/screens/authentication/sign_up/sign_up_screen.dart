@@ -15,7 +15,6 @@ import 'package:denari_app/view/widgets/welcome_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobx/mobx.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -116,7 +115,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Routes.code,
                         extra: RegModel(
                           name: _state.name,
-                          email: _state.email,
+                          email: _state.email ?? '',
                           password: _state.password,
                           phone: _state.phone!.completeNumber,
                           code: '',

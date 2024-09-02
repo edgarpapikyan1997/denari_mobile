@@ -64,11 +64,9 @@ abstract class ImplSignUpState with Store {
 
   @computed
   bool get isEmailValid {
-    if (email == null) {
-      email = "";
-    }
+    email ??= "";
     RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-            .hasMatch(email!) ||
+        .hasMatch(email!) ||
         email!.isEmpty;
     return true;
   }
@@ -88,10 +86,10 @@ abstract class ImplSignUpState with Store {
   @computed
   bool get createButtonEnabled =>
       isNameValid &&
-      isEmailValid &&
-      isPasswordValid &&
-      isPhoneValid &&
-      !loading;
+          isEmailValid &&
+          isPasswordValid &&
+          isPhoneValid &&
+          !loading;
 
   @action
   Future<void> register() async {
@@ -106,11 +104,11 @@ abstract class ImplSignUpState with Store {
       code: code,
     );
     (await handle(() => _repository.register(model))).then(
-      (data) {
+          (data) {
         _tokenPreferences.setToken(data);
         signUp = 'true';
       },
-      (error) => signUp = error,
+          (error) => signUp = error,
     );
     loading = false;
   }
@@ -119,8 +117,8 @@ abstract class ImplSignUpState with Store {
   Future<void> getCode() async {
     loading = true;
     (await handle(() => _repository.verify(phone.print()))).then(
-      (data) => codeSent = 'true',
-      (error) => codeSent = error,
+          (data) => codeSent = 'true',
+          (error) => codeSent = error,
     );
     loading = false;
   }

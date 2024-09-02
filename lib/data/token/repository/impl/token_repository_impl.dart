@@ -20,15 +20,12 @@ final class ImplTokenRepository extends TokenRepository {
     final result = await _client.get(
       '${_config.host}/shops/nonZeroTokens',
     );
-    log(result.toString());
-    List<TokenModel> models = result.data;
-    return models;
+    return result.list(TokenModel.fromJson);
   }
 
   @override
   Future<TokenBalanceModel> getTokenBalance() async {
     final result = await _client.get('${_config.host}/user/tokenBalance');
-    log(result.toString());
     return result.item(TokenBalanceModel.fromJson);
   }
 }

@@ -18,7 +18,7 @@ abstract class ImplTokenBalanceState with Store {
   }) : _tokenRepository = tokenRepository;
 
   @observable
-  int? balance;
+  int? balance = 0;
 
   @observable
   List<TokenModel> tokenModels = [];
@@ -47,7 +47,7 @@ abstract class ImplTokenBalanceState with Store {
   @action
   Future<void> getTokenBalanceHistory() async {
     try {
-      final data = await _tokenRepository!.getUserTokenBalanceHistory();
+      final List<TokenModel> data = await _tokenRepository!.getUserTokenBalanceHistory();
       tokenModels = data;
     } catch (error) {
       getError = error.toString();

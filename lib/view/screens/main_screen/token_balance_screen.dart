@@ -36,10 +36,11 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
 
   Future<void> initPrefs() async {
     _loadingState.startLoading();
-    await _tokenBalanceState
-        .getTokenBalance(); // Wait for the balance to be fetched
+    await _tokenBalanceState.getTokenBalance();
+    await _tokenBalanceState.getTokenBalanceHistory();
     itemsLength = _tokenBalanceState.tokenModels.length;
     _loadingState.stopLoading();
+    print(_tokenBalanceState.tokenModels);
   }
 
   @override
@@ -106,21 +107,29 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
                     PreviewBanner(
                       leadingBanner: 'balance.tokens'.tr(),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
                     Expanded(
                       child: BrandItemList(
                         brandItems: List.generate(
-                          itemsLength,
+                          _tokenBalanceState.tokenModels.length,
                           (index) => BrandItemWidget(
                             isToken: true,
-                            avatar: Assets.media.images.toyStory.path,
-                            brandName: 'McDonalds',
-                            secondaryInfo: const Text(
-                              'June 16, 2024, 18:23',
-                            ),
-                            // tokenBalance: TokenBalanceState().getTokenBalanceByBrand(),
+                            avatar:
+                                _tokenBalanceState.tokenModels[index].imageUrl,
+                            brandName:
+                                _tokenBalanceState.tokenModels[index].name,
+                            secondaryInfo: _tokenBalanceState
+                                            .tokenModels[index].description !=
+                                        null ||
+                                    _tokenBalanceState
+                                        .tokenModels[index].description!.isEmpty
+                                ? null
+                                : Text(
+                                    "${_tokenBalanceState.tokenModels[index].description}",
+                                  ),
+                            tokenBalance: _tokenBalanceState.tokenModels[index]
+                                    .shopUserTokens?[0].tokenBalance
+                                    .toInt() ??
+                                0,
                             // tealButton: Icon(Icons.chevron_right),
                           ),
                         ),

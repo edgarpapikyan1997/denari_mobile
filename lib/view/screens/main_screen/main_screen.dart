@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/data/advertisements/repository/advertisements_repository.dart';
 import 'package:denari_app/store/categories_state/categories_state.dart';
@@ -74,17 +73,14 @@ class _MainScreenState extends State<MainScreen> {
         Category(type: CategoryType.travel, iconColor: categoriesState.itemColor),
         Category(type: CategoryType.other, iconColor: categoriesState.itemColor),
       ];
-
       initCategories();
       _tokenBalanceState.getTokenBalance();
-
-      // Wrap your shop fetching logic in a Future with timeout
       await _tryFetchingDataWithTimeout();
       _loadingState.stopLoading();
     } catch (e) {
       _loadingState.stopLoading();
       setState(() {
-        hasError = true; // Indicate that an error occurred
+        hasError = true;
       });
     }
   }
@@ -92,20 +88,17 @@ class _MainScreenState extends State<MainScreen> {
 
   Future<void> _tryFetchingDataWithTimeout() async {
     try {
-      // Set the timeout to 10 seconds
       await Future.any([
         _shopsState.getAllShops(),
-        Future.delayed(const Duration(seconds: 10)).then((_) {
+        Future.delayed(const Duration(seconds: 3)).then((_) {
           throw TimeoutException('Data fetching timed out');
         }),
       ]);
     } catch (e) {
       if (e is TimeoutException) {
-        // Retry fetching the data
         await _retryFetchingData();
       } else {
-        // If it's another type of error, rethrow it
-        throw e;
+        rethrow;
       }
     }
   }
@@ -177,7 +170,7 @@ class _MainScreenState extends State<MainScreen> {
       create: (context) =>
           AdvertisementsBloc(repository: di.get<AdvertisementsRepository>())
             ..add(AdvertisementsFetchEvent()),
-      child: Observer(builder: (context) {
+      child: Observer(builder: (_) {
         return Scaffold(
           appBar: PreferredSize(
             preferredSize: AppSizes.prefSizes,
@@ -195,110 +188,106 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
           ),
-          body: Observer(builder: (_) {
-            return _loadingState.isLoading == true
-                ? const Expanded(
-                    child: Align(
-                        alignment: Alignment.center,
-                        child: CircularProgressIndicator()),
-                  )
-                : Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            color: AppColors.yellowLight,
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.greyDark.withOpacity(0.6),
-                                blurRadius: 8,
-                                blurStyle: BlurStyle.outer,
-                                spreadRadius: 0,
-                              ),
-                            ]),
-                        child: mainScreenFields(),
-                      ),
-                      Expanded(
-                        child: PaddingUtility.only(
-                          left: 16,
-                          right: 16,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                const AdvertisementsWidget(),
-                                const Delimiter(32),
-                                PreviewBanner(
-                                  leadingBanner: 'main.topCategories'.tr(),
-                                  previewStyle: context.theme.headline5.bold,
-                                  tealButton: TextButton(
-                                    onPressed: () {
-                                      categoriesState.selectCategory(
-                                        categoryName: categories[0].name,
-                                        newCategoryType: categories[0].type,
-                                      );
-                                      bottomNavBarState.changeIndex(3);
-                                      context.push('/shopsScreen');
-                                    },
-                                    style: ButtonStyle(
-                                      padding:
-                                          WidgetStateProperty.all<EdgeInsets>(
-                                              EdgeInsets.zero),
-                                      minimumSize:
-                                          WidgetStateProperty.all<Size>(
-                                              Size.zero),
-                                      tapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                    ),
-                                    child: Text(
-                                      'main.seeAll'.tr(),
-                                      style: context
-                                          .theme.headline4.regular.yellowDark,
-                                    ),
-                                  ),
-                                ).paddingOnly(bottom: 16),
-                                CategoryFieldGenerator(
-                                  categoriesState: categoriesState,
-                                  categories: categories,
-                                ).paddingOnly(bottom: 24),
-                                PreviewBanner(
-                                  leadingBanner: 'main.popularStores'.tr(),
-                                  previewStyle:
-                                      context.theme.headline3.semiBold,
-                                  tealButton: TextButton(
-                                    onPressed: () {
-                                      categoriesState.selectCategory(
-                                          categoryName: categories[0].name,
-                                          newCategoryType: categories[0].type);
-                                      bottomNavBarState.changeIndex(3);
-                                      context.push('/shopsScreen');
-                                    },
-                                    style: ButtonStyle(
-                                      padding:
-                                          WidgetStateProperty.all<EdgeInsets>(
-                                              EdgeInsets.zero),
-                                      minimumSize:
-                                          WidgetStateProperty.all<Size>(
-                                              Size.zero),
-                                      tapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                    ),
-                                    child: Text(
-                                      'main.seeAll'.tr(),
-                                      style: context
-                                          .theme.headline4.regular.yellowDark,
-                                    ),
-                                  ),
-                                ).paddingOnly(bottom: 16),
-                                StoreFieldGenerator(
-                                    isGrid: false,
-                                    storeFieldList: _shopsState.shops),
-                              ],
+          body: _loadingState.isLoading == true
+              ? const Align(
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator())
+              : Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: AppColors.yellowLight,
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.greyDark.withOpacity(0.6),
+                              blurRadius: 8,
+                              blurStyle: BlurStyle.outer,
+                              spreadRadius: 0,
                             ),
+                          ]),
+                      child: mainScreenFields(),
+                    ),
+                    Expanded(
+                      child: PaddingUtility.only(
+                        left: 16,
+                        right: 16,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              const AdvertisementsWidget(),
+                              const Delimiter(32),
+                              PreviewBanner(
+                                leadingBanner: 'main.topCategories'.tr(),
+                                previewStyle: context.theme.headline5.bold,
+                                tealButton: TextButton(
+                                  onPressed: () {
+                                    categoriesState.selectCategory(
+                                      categoryName: categories[0].name,
+                                      newCategoryType: categories[0].type,
+                                    );
+                                    bottomNavBarState.changeIndex(3);
+                                    context.push('/shopsScreen');
+                                  },
+                                  style: ButtonStyle(
+                                    padding:
+                                        WidgetStateProperty.all<EdgeInsets>(
+                                            EdgeInsets.zero),
+                                    minimumSize:
+                                        WidgetStateProperty.all<Size>(
+                                            Size.zero),
+                                    tapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                  ),
+                                  child: Text(
+                                    'main.seeAll'.tr(),
+                                    style: context
+                                        .theme.headline4.regular.yellowDark,
+                                  ),
+                                ),
+                              ).paddingOnly(bottom: 16),
+                              CategoryFieldGenerator(
+                                categoriesState: categoriesState,
+                                categories: categories,
+                              ).paddingOnly(bottom: 24),
+                              PreviewBanner(
+                                leadingBanner: 'main.popularStores'.tr(),
+                                previewStyle:
+                                    context.theme.headline3.semiBold,
+                                tealButton: TextButton(
+                                  onPressed: () {
+                                    categoriesState.selectCategory(
+                                        categoryName: categories[0].name,
+                                        newCategoryType: categories[0].type);
+                                    bottomNavBarState.changeIndex(3);
+                                    context.push('/shopsScreen');
+                                  },
+                                  style: ButtonStyle(
+                                    padding:
+                                        WidgetStateProperty.all<EdgeInsets>(
+                                            EdgeInsets.zero),
+                                    minimumSize:
+                                        WidgetStateProperty.all<Size>(
+                                            Size.zero),
+                                    tapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                  ),
+                                  child: Text(
+                                    'main.seeAll'.tr(),
+                                    style: context
+                                        .theme.headline4.regular.yellowDark,
+                                  ),
+                                ),
+                              ).paddingOnly(bottom: 16),
+                              StoreFieldGenerator(
+                                  isGrid: false,
+                                  storeFieldList: _shopsState.shops),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  );
-          }),
+                    ),
+                  ],
+                ),
         );
       }),
     );

@@ -18,7 +18,7 @@ abstract class ImplTokenBalanceState with Store {
   }) : _tokenRepository = tokenRepository;
 
   @observable
-  int balance = 0;
+  int? balance = 0;
 
   @observable
   List<TokenModel> tokenModels = [];
@@ -34,19 +34,24 @@ abstract class ImplTokenBalanceState with Store {
 
   @action
   Future<void> getTokenBalance() async {
-    (await handle(() => _tokenRepository!.getTokenBalance())).then(
-      (data) => tokenBalance = data,
-      (error) => getError = error,
-    );
-    balance = tokenBalance!.totalBalance;
+    try {
+      final data = await _tokenRepository!.getTokenBalance();
+      tokenBalance = data;
+      balance = int.parse(tokenBalance!.totalBalance);
+    } catch (error) {
+      getError = error.toString();
+      balance = 0;
+    }
   }
 
   @action
   Future<void> getTokenBalanceHistory() async {
-    (await handle(() => _tokenRepository!.getUserTokenBalanceHistory())).then(
-      (data) => tokenModels = data,
-      (error) => getError = error,
-    );
+    try {
+      final List<TokenModel> data = await _tokenRepository!.getUserTokenBalanceHistory();
+      tokenModels = data;
+    } catch (error) {
+      getError = error.toString();
+    }
   }
 
   @action
@@ -56,3 +61,6 @@ abstract class ImplTokenBalanceState with Store {
     return brandToken;
   }
 }
+
+
+

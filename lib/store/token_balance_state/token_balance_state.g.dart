@@ -13,13 +13,13 @@ mixin _$TokenBalanceState on ImplTokenBalanceState, Store {
       Atom(name: 'ImplTokenBalanceState.balance', context: context);
 
   @override
-  int get balance {
+  int? get balance {
     _$balanceAtom.reportRead();
     return super.balance;
   }
 
   @override
-  set balance(int value) {
+  set balance(int? value) {
     _$balanceAtom.reportWrite(value, super.balance, () {
       super.balance = value;
     });

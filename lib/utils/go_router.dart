@@ -192,7 +192,7 @@ final GoRouter router = GoRouter(
         path: '/qrScanner',
         builder: (context, state) {
 
-          return QrScannerScreen();
+          return const QrScannerScreen();
         }),
     GoRoute(
       name: Routes.signIn,

@@ -99,7 +99,6 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
       left: 16,
       right: 16,
       child: Observer(builder: (_) {
-        print("is qr scanned >>> ${widget.isQRScanned}");
         return Stack(
           children: [
             Column(

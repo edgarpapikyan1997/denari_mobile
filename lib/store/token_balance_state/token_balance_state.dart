@@ -4,7 +4,6 @@ import 'dart:math';
 
 import '../../data/token/model/token_balance/token_balance_model.dart';
 import '../../data/token/model/token_model.dart';
-import '../../utils/network/utils/use_case.dart';
 
 part 'token_balance_state.g.dart';
 

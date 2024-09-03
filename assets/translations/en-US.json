@@ -30,6 +30,7 @@
     "error_adv": "Error get advertisements"
   },
   "balance": {
+    "balance" : "Balance:",
     "tokenBalance": "Token Balance",
     "viewEarnedToken": "View your earned token",
     "tokens": "Tokens",
@@ -192,7 +193,8 @@
     "cancelled": "Cancelled"
   },
   "qr" : {
-   "generateQR" : "Generate QR code"
+   "generateQR" : "Generate QR code",
+    "scanningError" : "Scanning error occurred"
   },
   "transaction" : {
    "transactionSent" : "Transaction sent: status onHold",

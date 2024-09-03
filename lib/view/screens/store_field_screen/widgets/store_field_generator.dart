@@ -1,5 +1,6 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
+import 'package:denari_app/view/screens/store_field_screen/widgets/store_field_arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../data/shops/shops_model/shops_model.dart';
@@ -38,7 +39,10 @@ class StoreFieldGenerator extends StatelessWidget {
             onTap: () {
               context.push(
                 '/storeFieldItemScreen',
-                extra: storeFieldList[index].id,
+                extra: StoreFieldItemArguments(
+                  uniqueID: storeFieldList[index].id,
+                  isQRScanned: false,
+                ),
               );
             },
             child: StoreFieldWidget(
@@ -73,7 +77,10 @@ class StoreFieldGenerator extends StatelessWidget {
               onTap: () {
                 context.push(
                   '/storeFieldItemScreen',
-                  extra: storeFieldList[index].id,
+                  extra: StoreFieldItemArguments(
+                    uniqueID: storeFieldList[index].id,
+                    isQRScanned: false,
+                  ),
                 );
               },
               child: StoreFieldWidget(

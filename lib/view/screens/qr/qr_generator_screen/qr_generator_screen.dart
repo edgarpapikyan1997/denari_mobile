@@ -6,8 +6,10 @@ import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import '../../../gen/assets.gen.dart';
-import '../../../utils/padding_utility/padding_utility.dart';
+
+import '../../../../gen/assets.gen.dart';
+import '../../../../utils/padding_utility/padding_utility.dart';
+
 
 class QrGeneratorScreen extends StatelessWidget {
   final String transactionID;

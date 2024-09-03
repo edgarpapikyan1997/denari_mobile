@@ -145,7 +145,6 @@ class _MainScreenState extends State<MainScreen> {
 
 
   Widget mainScreenFields() {
-    print("profile id is >>>>${_profileState.profile.id}");
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

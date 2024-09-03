@@ -17,7 +17,7 @@ class QrScannerScreen extends StatefulWidget {
   State<QrScannerScreen> createState() => _QrScannerState();
 }
 
-class _QrScannerState extends State<QrScannerScreen> {
+class _QrScannerState extends State<QrScannerScreen> with WidgetsBindingObserver {
   final ShopsState _shopsState = ShopsState(
     shopsRepository: di.get<ImplShopsRepository>(),
   );
@@ -32,16 +32,26 @@ class _QrScannerState extends State<QrScannerScreen> {
   void initState() {
     super.initState();
     initPrefs();
+    WidgetsBinding.instance.addObserver(this); // Add observer
   }
 
   @override
   void dispose() {
     mobileScannerController.dispose();
+    WidgetsBinding.instance.removeObserver(this); // Remove observer
     super.dispose();
   }
 
   Future<void> initPrefs() async {
     await _shopsState.getAllShops();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // Handle resume event and potentially reset the scanner
+      qrScannerState.reset();
+    }
   }
 
   @override
@@ -54,10 +64,9 @@ class _QrScannerState extends State<QrScannerScreen> {
               MobileScanner(
                 controller: mobileScannerController,
                 onDetect: (capture) async {
-                  // Only proceed if scanning is enabled
                   if (!qrScannerState.isScanningEnabled) return;
 
-                  qrScannerState.disableScanner(); // Disable scanner after a successful scan
+                  qrScannerState.disableScanner();
                   qrScannerState.animateQRScanner();
 
                   if (_shopsState.shops.isNotEmpty &&

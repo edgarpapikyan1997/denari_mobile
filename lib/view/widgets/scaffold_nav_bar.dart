@@ -28,7 +28,7 @@ class ScaffoldNavBar extends StatefulWidget {
 
 class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
   final qrIdReceiver = GetIt.instance<QRIdReceiver>();
-  final qrScannerState = QRScannerState(); // Reference to QRScannerState
+  final qrScannerState = QRScannerState();
   int selectedValue = 0;
   ThemeData theme =
   SchedulerBinding.instance.platformDispatcher.platformBrightness ==
@@ -118,8 +118,8 @@ class _ScaffoldNavBarState extends State<ScaffoldNavBar> {
                 context.goNamed(Routes.notifications);
                 break;
               case 2:
-              // Enable scanner before navigating
-                qrScannerState.enableScanner();
+                qrScannerState.reset(); // Reset QR Scanner state
+                qrScannerState.enableScanner(); // Ensure the scanner is enabled
                 context.push("/qrScanner");
                 break;
               case 3:

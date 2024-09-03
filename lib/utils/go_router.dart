@@ -191,6 +191,7 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: '/qrScanner',
         builder: (context, state) {
+
           return QrScannerScreen();
         }),
     GoRoute(

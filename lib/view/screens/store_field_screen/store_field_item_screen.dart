@@ -24,6 +24,7 @@ import '../../../gen/assets.gen.dart';
 import '../../../store/filters/slider_state/slider_state.dart';
 import '../../../store/loading_state/loading_state.dart';
 import '../../../store/profile/profile_state.dart';
+import '../../../store/qr_scanner_state/qr_scanner_state.dart';
 import '../../../store/shops/shops_state/shops_state.dart';
 import '../../../utils/di/config.dart';
 import '../../../utils/themes/app_colors.dart';
@@ -47,6 +48,7 @@ class StoreFieldItemScreen extends StatefulWidget {
 }
 
 class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
+  final qrScannerState = QRScannerState();
   SliderState giftSliderState = SliderState();
   SliderState tokenSliderState = SliderState();
   final ProfileState _profileState = ProfileState(
@@ -59,6 +61,7 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
       transactionsRepository: di.get<TransactionsRepository>());
   ShopsUnitModel? storeData;
   final LoadingState _loadingState = LoadingState();
+
   bool isEmpty = false;
   List<String> imageList = [];
   String? uniqueID;
@@ -194,9 +197,13 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                     imageList: imageList,
                     leadingIcon: GestureDetector(
                         onTap: () {
-                          widget.isQRScanned == true
-                              ? context.go('/')
-                              : context.pop();
+                          if (widget.isQRScanned == true) {
+                            qrScannerState.disableScanner();
+                            context.go('/');
+                          } else {
+                            context.pop();
+
+                          }
                         },
                         child: Assets.media.icons.chevronLeft.svg(
                           colorFilter: ColorFilter.mode(

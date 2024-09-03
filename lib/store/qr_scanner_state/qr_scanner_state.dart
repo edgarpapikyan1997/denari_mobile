@@ -2,6 +2,7 @@ import 'package:mobx/mobx.dart';
 
 part 'qr_scanner_state.g.dart';
 
+
 class QRScannerState = ImplQRScannerState with _$QRScannerState;
 
 abstract class ImplQRScannerState with Store {
@@ -12,7 +13,7 @@ abstract class ImplQRScannerState with Store {
   double imageSize = 250.0;
 
   @observable
-  bool isScanningEnabled = true; // State to control scanner
+  bool isScanningEnabled = true;
 
   @action
   Future<void> animateQRScanner() async {
@@ -33,6 +34,13 @@ abstract class ImplQRScannerState with Store {
 
   @action
   void enableScanner() {
+    isScanningEnabled = true;
+  }
+
+  @action
+  void reset() {
+    isScanning = false;
+    imageSize = 250.0;
     isScanningEnabled = true;
   }
 }

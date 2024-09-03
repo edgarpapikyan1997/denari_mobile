@@ -138,6 +138,7 @@
 				331C8082294A63A400263BE5 /* RunnerTests */,
 				306D1B2F43DDE7E156EF9829 /* Pods */,
 				004EC4695065ACF9E74BBF68 /* Frameworks */,
+				56EDD939CF30F83B6CBECCAF /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -266,6 +267,7 @@
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
+				493A03F5FF3B144E5EB53C62 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

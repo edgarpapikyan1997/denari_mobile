@@ -72,6 +72,7 @@ class _PurchaseAmountConfiguratorState
                         color: AppColors.yellowLight.withOpacity(0.3),
                       ),
                       child: PaddingUtility.only(
+                        left: 16,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,

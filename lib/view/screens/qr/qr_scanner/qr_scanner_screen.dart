@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-
 import '../../../../data/shops/shops_repository/impl/shops_repository.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../store/shops/shops_state/shops_state.dart';

@@ -33,11 +33,13 @@ import '../../widgets/custom_app_bar.dart';
 import '../../widgets/filter_widgets/new_purchase_filter/new_purchase_filter.dart';
 
 class StoreFieldItemScreen extends StatefulWidget {
-  final String uniqueID;
+  final String? uniqueID;
+  final bool? isQRScanned;
 
   const StoreFieldItemScreen({
     super.key,
     required this.uniqueID,
+    this.isQRScanned = false,
   });
 
   @override
@@ -52,13 +54,15 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
     profileRepository: di.get<ProfileRepository>(),
   );
   final ShopsState _shopState =
-  ShopsState(shopsRepository: di.get<ImplShopsRepository>());
+      ShopsState(shopsRepository: di.get<ImplShopsRepository>());
   final TransactionsState _transactionsState = TransactionsState(
       transactionsRepository: di.get<TransactionsRepository>());
   ShopsUnitModel? storeData;
   final LoadingState _loadingState = LoadingState();
   bool isEmpty = false;
   List<String> imageList = [];
+  String? uniqueID;
+  bool? isQRScanned;
 
   @override
   void initState() {
@@ -68,11 +72,16 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
 
   void initPrefs() async {
     _loadingState.startLoading();
+    if (widget.uniqueID != null) {
+      uniqueID = widget.uniqueID;
+    }
+    if (widget.isQRScanned != null) {
+      isQRScanned = widget.isQRScanned;
+    }
 
     await _profileState.getProfile();
-    await _shopState.getShopByID(id: widget.uniqueID);
+    await _shopState.getShopByID(id: widget.uniqueID!);
 
-    // After async operations, check if the widget is still mounted
     if (!mounted) return;
 
     storeData = _shopState.shopsUnitModel;
@@ -83,10 +92,21 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
 
     isEmpty = imageList.isEmpty;
     _loadingState.stopLoading();
-
-    // Here you can safely update the UI or use the context because you've checked if the widget is still mounted
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.isQRScanned!) {
+        showModalSheet(
+          context: context,
+          child: SizedBox(
+            child: NewPurchaseFilter(
+              isQRScanned: isQRScanned ?? widget.isQRScanned,
+              shopUnitModel: _shopState.shopsUnitModel!,
+              profileModel: _profileState.profile,
+            ),
+          ),
+        );
+      }
+    });
   }
-
 
   List<Widget> getGiftCardOptions() {
     return List.generate(_shopState.shopsUnitModel!.giftCards.length, (index) {
@@ -95,7 +115,7 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
         child: BrandItemWidget(
           avatar: Assets.media.icons.card.path,
           brandName:
-          'Gift Card ${_shopState.shopsUnitModel?.giftCards[index].value}',
+              'Gift Card ${_shopState.shopsUnitModel?.giftCards[index].value}',
           addDivider: true,
           tokenBalance: _shopState.shopsUnitModel?.giftCards[index].value ?? 0,
           tealButton: GestureDetector(
@@ -107,15 +127,16 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                 onConfirmSecond: () async {
                   final success = await _transactionsState.sendTransaction(
                     TransactionModel(
-                      giftCardAmount: _shopState.shopsUnitModel!.giftCards[index].value,
+                      giftCardAmount:
+                          _shopState.shopsUnitModel!.giftCards[index].value,
                       amountGiftCardsUsing:
-                      _shopState.shopsUnitModel?.giftCards[index].value,
+                          _shopState.shopsUnitModel?.giftCards[index].value,
                       tokenAddedAmount: 0,
                       amountTokensUsed:
-                      _shopState.shopsUnitModel?.giftCards[index].value,
+                          _shopState.shopsUnitModel?.giftCards[index].value,
                       transactionsAmount:
-                      _shopState.shopsUnitModel?.giftCards[index].value,
-                      shopId: widget.uniqueID,
+                          _shopState.shopsUnitModel?.giftCards[index].value,
+                      shopId: widget.uniqueID!,
                       status: 'status.onHold',
                       date: DateTime.now().toString(),
                       addressShopId: 12,
@@ -144,14 +165,14 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
                   style: context.theme.body1,
                 ),
                 itemInfoCost:
-                '${_shopState.shopsUnitModel?.giftCards[index].value}',
+                    '${_shopState.shopsUnitModel?.giftCards[index].value}',
               );
             },
             child: Assets.media.icons.chevronRight.svg(),
           ),
           iconAvatar: Assets.media.icons.card.svg(
             colorFilter:
-            const ColorFilter.mode(AppColors.yellowDark, BlendMode.srcIn),
+                const ColorFilter.mode(AppColors.yellowDark, BlendMode.srcIn),
           ),
         ),
       );
@@ -166,160 +187,163 @@ class _StoreFieldItemScreenState extends State<StoreFieldItemScreen> {
         child: _loadingState.isLoading
             ? const Center(child: CircularProgressIndicator())
             : Scaffold(
-          appBar: PreferredSize(
-            preferredSize: AppSizes.backGroundImagePrefSize,
-            child: CustomAppBar(
-              appBarType: isEmpty ? AppBarType.regular : AppBarType.image,
-              imageList: imageList,
-              leadingIcon: GestureDetector(
-                  onTap: () {
-                    context.pop();
-                  },
-                  child: Assets.media.icons.chevronLeft.svg(
-                    colorFilter: ColorFilter.mode(
-                        isEmpty ? AppColors.black : AppColors.white,
-                        BlendMode.srcIn),
-                  )),
-            ),
-          ),
-          body: PaddingUtility(
-            all: 16,
-            child: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        StoreItemInfo(
-                          storeName: storeData!.name,
-                          storeImage: storeData!.imageUrl,
-                          items: [
-                            StoreItemInfoCreator(
-                              svgPicture:
-                              Assets.media.icons.phoneCall.svg(),
-                              textValue: storeData!.branch[0].phone,
-                            ),
-                            StoreItemInfoCreator(
-                              svgPicture: Assets.media.icons.map.svg(),
-                              textValue:
-                              "${storeData!.branch[0].street}, ${storeData!.branch[0].city}",
-                            ),
-                          ],
-                        ),
-                        const Delimiter(12),
-                        StoreFieldProperty(
-                          asset: Assets.media.icons.store.svg(
-                              colorFilter: const ColorFilter.mode(
-                                  AppColors.yellowDark, BlendMode.srcIn)),
-                          title: '${storeData!.branch.length} Branches',
-                          onTap: () {
-                            context.push('/mapScreen', extra: storeData);
-                          },
-                        ),
-                        const Delimiter(16),
-                        Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: StoreFieldProperty(
-                                isRow: false,
-                                title: "shops.cashbackRate".tr(),
-                                secondaryValue: Text(
-                                  '${_shopState.shopsUnitModel?.cashback ?? 0}%',
-                                  style: context.theme.headline5.semiBold,
-                                ),
-                              ),
-                            ),
-                            const Delimiter(8),
-                            Expanded(
-                              child: StoreFieldProperty(
-                                isRow: false,
-                                title: "shops.currentBalance".tr(),
-                                secondaryValue: Text(
-                                  '${_shopState.shopsUnitModel?.shopUserTokens[0].giftCardBalance ?? 0} LD',
-                                  style: context.theme.headline5.semiBold,
-                                ),
-                              ),
-                            ),
-                            const Delimiter(8),
-                            Expanded(
-                              child: StoreFieldProperty(
-                                isRow: false,
-                                title: "shops.tokenBalance".tr(),
-                                secondaryValue: BalanceWidget(
-                                  isTokenBalance: true,
-                                  balance: _shopState
-                                      .shopsUnitModel
-                                      ?.shopUserTokens[0]
-                                      .tokenBalance ??
-                                      0,
-                                  textStyle:
-                                  context.theme.headline5.semiBold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Delimiter(16),
-                        // StoreFieldProperty(
-                        //   asset: Assets.media.icons.handShake.svg(
-                        //       colorFilter: const ColorFilter.mode(
-                        //           AppColors.yellowDark, BlendMode.srcIn)),
-                        //   title: 'Allianse (4)',
-                        //   onTap: () {
-                        //     context.push('/alliance', extra: true);
-                        //   },
-                        // ),
-                        // const Delimiter(32),
-                        PreviewBanner(
-                            leadingBanner: 'shops.giftCardOptions'.tr()),
-                        const Delimiter(12),
-                        Column(
-                          children: getGiftCardOptions(),
-                        ),
-                        const Delimiter(8),
-                      ],
-                    ),
+                appBar: PreferredSize(
+                  preferredSize: AppSizes.backGroundImagePrefSize,
+                  child: CustomAppBar(
+                    appBarType: isEmpty ? AppBarType.regular : AppBarType.image,
+                    imageList: imageList,
+                    leadingIcon: GestureDetector(
+                        onTap: () {
+                          widget.isQRScanned == true
+                              ? context.go('/')
+                              : context.pop();
+                        },
+                        child: Assets.media.icons.chevronLeft.svg(
+                          colorFilter: ColorFilter.mode(
+                              isEmpty ? AppColors.black : AppColors.white,
+                              BlendMode.srcIn),
+                        )),
                   ),
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomButton(
-                          isEnabled: true,
-                          isWhite: true,
-                          title: 'shops.redemeToken'.tr(),
-                          onTap: () {}),
-                    ),
-                    const Delimiter(8),
-                    Expanded(
-                      child: CustomButton(
-                          isEnabled: true,
-                          isWhite: false,
-                          title: 'shops.newPurchase'.tr(),
-                          onTap: () {
-                            _shopState.shopsUnitModel != null
-                                ? showModalSheet(
-                              context: context,
-                              child: SizedBox(
-                                child: NewPurchaseFilter(
-                                  shopUnitModel:
-                                  _shopState.shopsUnitModel!,
-                                  profileModel:
-                                  _profileState.profile,
-                                ),
+                body: PaddingUtility(
+                  all: 16,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              StoreItemInfo(
+                                storeName: storeData!.name,
+                                storeImage: storeData!.imageUrl,
+                                items: [
+                                  StoreItemInfoCreator(
+                                    svgPicture:
+                                        Assets.media.icons.phoneCall.svg(),
+                                    textValue: storeData!.branch[0].phone,
+                                  ),
+                                  StoreItemInfoCreator(
+                                    svgPicture: Assets.media.icons.map.svg(),
+                                    textValue:
+                                        "${storeData!.branch[0].street}, ${storeData!.branch[0].city}",
+                                  ),
+                                ],
                               ),
-                            )
-                                : null;
-                          }),
-                    )
-                  ],
+                              const Delimiter(12),
+                              StoreFieldProperty(
+                                asset: Assets.media.icons.store.svg(
+                                    colorFilter: const ColorFilter.mode(
+                                        AppColors.yellowDark, BlendMode.srcIn)),
+                                title: '${storeData!.branch.length} Branches',
+                                onTap: () {
+                                  context.push('/mapScreen', extra: storeData);
+                                },
+                              ),
+                              const Delimiter(16),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: StoreFieldProperty(
+                                      isRow: false,
+                                      title: "shops.cashbackRate".tr(),
+                                      secondaryValue: Text(
+                                        '${_shopState.shopsUnitModel?.cashback ?? 0}%',
+                                        style: context.theme.headline5.semiBold,
+                                      ),
+                                    ),
+                                  ),
+                                  const Delimiter(8),
+                                  Expanded(
+                                    child: StoreFieldProperty(
+                                      isRow: false,
+                                      title: "shops.currentBalance".tr(),
+                                      secondaryValue: Text(
+                                        '${_shopState.shopsUnitModel?.shopUserTokens[0].giftCardBalance ?? 0} LD',
+                                        style: context.theme.headline5.semiBold,
+                                      ),
+                                    ),
+                                  ),
+                                  const Delimiter(8),
+                                  Expanded(
+                                    child: StoreFieldProperty(
+                                      isRow: false,
+                                      title: "shops.tokenBalance".tr(),
+                                      secondaryValue: BalanceWidget(
+                                        isTokenBalance: true,
+                                        balance: _shopState
+                                                .shopsUnitModel
+                                                ?.shopUserTokens[0]
+                                                .tokenBalance ??
+                                            0,
+                                        textStyle:
+                                            context.theme.headline5.semiBold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const Delimiter(16),
+                              // StoreFieldProperty(
+                              //   asset: Assets.media.icons.handShake.svg(
+                              //       colorFilter: const ColorFilter.mode(
+                              //           AppColors.yellowDark, BlendMode.srcIn)),
+                              //   title: 'Allianse (4)',
+                              //   onTap: () {
+                              //     context.push('/alliance', extra: true);
+                              //   },
+                              // ),
+                              // const Delimiter(32),
+                              PreviewBanner(
+                                  leadingBanner: 'shops.giftCardOptions'.tr()),
+                              const Delimiter(12),
+                              Column(
+                                children: getGiftCardOptions(),
+                              ),
+                              const Delimiter(8),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomButton(
+                                isEnabled: true,
+                                isWhite: true,
+                                title: 'shops.redemeToken'.tr(),
+                                onTap: () {}),
+                          ),
+                          const Delimiter(8),
+                          Expanded(
+                            child: CustomButton(
+                                isEnabled: true,
+                                isWhite: false,
+                                title: 'shops.newPurchase'.tr(),
+                                onTap: () {
+                                  _shopState.shopsUnitModel != null
+                                      ? showModalSheet(
+                                          context: context,
+                                          child: SizedBox(
+                                            child: NewPurchaseFilter(
+                                              isQRScanned: widget.isQRScanned!,
+                                              shopUnitModel:
+                                                  _shopState.shopsUnitModel!,
+                                              profileModel:
+                                                  _profileState.profile,
+                                            ),
+                                          ),
+                                        )
+                                      : null;
+                                }),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
-        ),
+              ),
       );
     });
   }

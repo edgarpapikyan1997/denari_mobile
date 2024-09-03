@@ -30,7 +30,7 @@ ThemeData lightTheme = ThemeData(
     thumbColor: AppColors.white,
     activeTrackColor: AppColors.yellowDark,
     inactiveTrackColor: AppColors.borderColor,
-    rangeThumbShape: RoundRangeSliderThumbShape(
+    rangeThumbShape: const RoundRangeSliderThumbShape(
       enabledThumbRadius: 12,
       disabledThumbRadius: 12,
       pressedElevation: 20,

@@ -71,7 +71,6 @@ class _QrScannerState extends State<QrScannerScreen> with WidgetsBindingObserver
 
                   if (_shopsState.shops.isNotEmpty &&
                       _shopsState.shops[0].id.isNotEmpty) {
-                    print(_shopsState.shops[0].id);
                     context.push(
                       '/storeFieldItemScreen',
                       extra: StoreFieldItemArguments(

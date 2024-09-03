@@ -96,7 +96,7 @@ class _PurchaseAmountConfiguratorState
                                       ),
                                     ],
                                   )
-                                : Container(
+                                :  SizedBox(
                                     width: context.width / 3,
                                     child: Align(
                                       alignment: Alignment.centerLeft,

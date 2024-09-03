@@ -15,10 +15,13 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/app_sizes/app_sizes.dart';
 import '../../../constants/categories.dart';
+import '../../../data/authentication/repository/auth_repository.dart';
+import '../../../data/profile/repository/profile_repository.dart';
 import '../../../data/shops/shops_repository/impl/shops_repository.dart';
 import '../../../data/token/repository/impl/token_repository_impl.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../model/qr_id.dart';
+import '../../../store/profile/profile_state.dart';
 import '../../../store/shops/shops_state/shops_state.dart';
 import '../../../utils/di/config.dart';
 import '../../../utils/themes/app_colors.dart';
@@ -42,6 +45,11 @@ class _MainScreenState extends State<MainScreen> {
   final ShopsState _shopsState = ShopsState(
     shopsRepository: di.get<ImplShopsRepository>(),
   );
+  final ProfileState _profileState = ProfileState(
+    authRepository: di.get<AuthRepository>(),
+    profileRepository: di.get<ProfileRepository>(),
+  );
+
   final LoadingState _loadingState = LoadingState();
   final TokenBalanceState _tokenBalanceState =
       TokenBalanceState(tokenRepository: di.get<ImplTokenRepository>());
@@ -74,6 +82,7 @@ class _MainScreenState extends State<MainScreen> {
         Category(type: CategoryType.other, iconColor: categoriesState.itemColor),
       ];
       initCategories();
+      _profileState.getProfile();
       _tokenBalanceState.getTokenBalance();
       await _tryFetchingDataWithTimeout();
       _loadingState.stopLoading();
@@ -136,6 +145,7 @@ class _MainScreenState extends State<MainScreen> {
 
 
   Widget mainScreenFields() {
+    print("profile id is >>>>${_profileState.profile.id}");
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -153,7 +163,7 @@ class _MainScreenState extends State<MainScreen> {
           asset: Assets.media.icons.qrCode.svg(),
           title: 'main.myQRCode'.tr(),
           navigationTitle: '/myQRCode',
-          userID: '12345678',
+          userID: _profileState.profile.id,
         ),
         MainScreenField(
           asset: Assets.media.icons.creditCardSync.svg(),

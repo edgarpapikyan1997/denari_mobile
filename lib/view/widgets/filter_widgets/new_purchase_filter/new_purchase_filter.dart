@@ -16,15 +16,17 @@ import '../../../../store/filters/slider_state/slider_state.dart';
 import '../../../../store/transactions/transactions_state.dart';
 import '../../../../utils/di/config.dart';
 import '../../../../utils/extensions/extensions.dart';
-import '../../../screens/qr_generator_screen/qr_generator_screen.dart';
+import '../../../screens/qr/qr_generator_screen/qr_generator_screen.dart';
 import '../../bottom_sheet/variants/modal_sheet.dart';
 
 class NewPurchaseFilter extends StatefulWidget {
+  final bool? isQRScanned;
   final ShopsUnitModel shopUnitModel;
   final ProfileModel profileModel;
 
   const NewPurchaseFilter({
     super.key,
+    this.isQRScanned = false,
     required this.shopUnitModel,
     required this.profileModel,
   });
@@ -97,6 +99,7 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
       left: 16,
       right: 16,
       child: Observer(builder: (_) {
+        print("is qr scanned >>> ${widget.isQRScanned}");
         return Stack(
           children: [
             Column(
@@ -110,17 +113,19 @@ class _NewPurchaseFilterState extends State<NewPurchaseFilter> {
                 ),
                 const Delimiter(24),
                 PurchaseAmountConfigurator(
+                  isQRScanned: widget.isQRScanned ?? false,
                   sliderState: sliderState,
                   shopsUnitModel: widget.shopUnitModel,
                   previewTitle: 'shops.redeemGift'.tr(),
-                  isToken: false,
+                  isToken: widget.isQRScanned == true ? true : false,
                 ),
                 const Delimiter(24),
                 PurchaseAmountConfigurator(
+                  isQRScanned: widget.isQRScanned ?? false,
                   sliderState: sliderState,
                   shopsUnitModel: widget.shopUnitModel,
                   previewTitle: 'shops.redeemToken'.tr(),
-                  isToken: true,
+                  isToken:  widget.isQRScanned == true ? false : true,
                 ),
                 const Delimiter(24),
                 CustomButton(

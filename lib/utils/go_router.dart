@@ -30,8 +30,10 @@ import '../view/screens/main_screen/my_gift_cards_screen.dart';
 import '../view/screens/map_screen/map_screen.dart';
 import '../view/screens/notifications/notification_screen.dart';
 import '../view/screens/profile/profile_screen.dart';
+import '../view/screens/qr/qr_scanner/qr_scanner_screen.dart';
 import '../view/screens/send_gift_screen/send_gift_screen.dart';
 import '../view/screens/shops_screen/shop_screen.dart';
+import '../view/screens/store_field_screen/widgets/store_field_arguments.dart';
 import '../view/widgets/scaffold_nav_bar.dart';
 import 'listeners/auth_listener.dart';
 
@@ -156,8 +158,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/storeFieldItemScreen',
       builder: (context, state) {
+        final args = state.extra as StoreFieldItemArguments?;
         return StoreFieldItemScreen(
-          uniqueID: state.extra as String,
+          uniqueID: args?.uniqueID,
+          isQRScanned: args?.isQRScanned,
         );
       },
     ),
@@ -184,6 +188,12 @@ final GoRouter router = GoRouter(
                 return SendGiftCardScreen(brandItemWidget: brandItemWidget);
               }),
         ]),
+    GoRoute(
+        path: '/qrScanner',
+        builder: (context, state) {
+
+          return QrScannerScreen();
+        }),
     GoRoute(
       name: Routes.signIn,
       path: '/${Routes.signIn}',

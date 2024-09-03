@@ -40,7 +40,6 @@ class _TokenBalanceScreenState extends State<TokenBalanceScreen> {
     await _tokenBalanceState.getTokenBalanceHistory();
     itemsLength = _tokenBalanceState.tokenModels.length;
     _loadingState.stopLoading();
-    print(_tokenBalanceState.tokenModels);
   }
 
   @override

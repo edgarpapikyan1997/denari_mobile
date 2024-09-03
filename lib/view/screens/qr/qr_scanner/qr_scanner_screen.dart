@@ -71,6 +71,7 @@ class _QrScannerState extends State<QrScannerScreen> with WidgetsBindingObserver
 
                   if (_shopsState.shops.isNotEmpty &&
                       _shopsState.shops[0].id.isNotEmpty) {
+                    print(_shopsState.shops[0].id);
                     context.push(
                       '/storeFieldItemScreen',
                       extra: StoreFieldItemArguments(
@@ -79,7 +80,12 @@ class _QrScannerState extends State<QrScannerScreen> with WidgetsBindingObserver
                       ),
                     );
                   } else {
-                    print('No shops found or ID is empty');
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: const Duration(seconds: 3),
+                        content: Text('qr.scanningError'.tr()),
+                      ),
+                    );
                   }
                 },
                 overlayBuilder: (context, constraints) {

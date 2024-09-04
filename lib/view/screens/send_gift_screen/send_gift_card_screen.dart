@@ -1,3 +1,4 @@
+import 'package:denari_app/constants/app_sizes/app_sizes.dart';
 import 'package:denari_app/store/custom_button_state/custom_button_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
@@ -50,7 +51,7 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size(0, 88),
+        preferredSize: AppSizes.prefSizes,
         child: CustomAppBar(
           appBarType: AppBarType.regular,
           leadingIcon: GestureDetector(

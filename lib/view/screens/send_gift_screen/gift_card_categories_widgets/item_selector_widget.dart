@@ -76,7 +76,7 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                                 width: 4,
                               ),
                               Text(
-                                "${widget.tokenItems![index].shopUserTokens![0].tokenBalance}",
+                                "${widget.tokenItems![index].shopUserTokens![0].tokenBalance.toInt()}",
                                 style: context.theme.body3.lightGreyText,
                               ),
                             ],
@@ -131,7 +131,8 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                                           .selectItem(index!);
                                       widget.brandItemSelectState.setItemWidget(
                                         BrandItemWidget(
-                                            avatar: Assets.media.images.toyStory.path,
+                                            avatar: Assets
+                                                .media.images.toyStory.path,
                                             brandName: 'McDonalds',
                                             tokenBalance: 50),
                                       );

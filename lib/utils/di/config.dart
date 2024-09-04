@@ -1,5 +1,6 @@
 import 'package:denari_app/data/advertisements/repository/impl/advertisements_repository.dart';
 import 'package:denari_app/data/authentication/repository/impl/auth_repository.dart';
+import 'package:denari_app/data/gift_card/repository/impl/gift_card_repository_impl.dart';
 import 'package:denari_app/data/notifications/repository/impl/firebase_messages_repository.dart';
 import 'package:denari_app/data/profile/repository/impl/profile_repository.dart';
 import 'package:denari_app/utils/env/config.dart';
@@ -20,6 +21,8 @@ configDi(Config config) {
   di.add(ApiNativeDio(di.get<TokenPreferences>()));
   di.add(ImplAuthRepository(client: di.get<Dio>(), config: di.get<Config>()));
   di.add(ImplTokenRepository(client: di.get<Dio>(), config: di.get<Config>()));
+  di.add(ImplGiftCardRepository(client: di.get<Dio>(), config: di.get<Config>()));
+
   di.add(
       ImplProfileRepository(client: di.get<Dio>(), config: di.get<Config>()));
   di.add(FirebaseMessagesRepository(

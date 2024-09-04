@@ -1,5 +1,7 @@
 import 'package:denari_app/constants/app_sizes/app_sizes.dart';
+import 'package:denari_app/data/gift_card/repository/impl/gift_card_repository_impl.dart';
 import 'package:denari_app/store/brand_item_select_state/brand_item_select_state.dart';
+import 'package:denari_app/store/gift_card_balance_state/gift_card_balance_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:denari_app/view/screens/send_gift_screen/gift_card_categories_widgets/item_selector_widget.dart';
@@ -32,7 +34,9 @@ class SendGiftScreen extends StatefulWidget {
 class _SendGiftScreenState extends State<SendGiftScreen> {
   final LoadingState _loadingState = LoadingState();
   final TokenBalanceState _tokenBalanceState =
-  TokenBalanceState(tokenRepository: di.get<ImplTokenRepository>());
+      TokenBalanceState(tokenRepository: di.get<ImplTokenRepository>());
+  final GiftCardBalanceState _giftCardBalanceState = GiftCardBalanceState(
+      giftCardRepository: di.get<ImplGiftCardRepository>());
   final BrandItemSelectState sendGiftItemSelectState = BrandItemSelectState();
   final BrandItemSelectState tokenItemSelectState = BrandItemSelectState();
   CategoriesState? categoriesState = CategoriesState();
@@ -56,7 +60,8 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
     initCategories();
     await _tokenBalanceState.getTokenBalance();
     await _tokenBalanceState.getTokenBalanceHistory();
-
+    await _giftCardBalanceState.getGiftCardBalance();
+    await _giftCardBalanceState.getGiftCardBalanceHistory();
     _loadingState.stopLoading();
   }
 
@@ -100,6 +105,7 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
               categoriesState?.currentCategory == categories[0].name
                   ? Expanded(
                       child: ItemSelectorWidget(
+                        giftItems: _giftCardBalanceState.giftCardModels,
                         brandItemSelectState: sendGiftItemSelectState,
                         isToken: false,
                         previewTitle: 'giftCard.selectGift'.tr(),

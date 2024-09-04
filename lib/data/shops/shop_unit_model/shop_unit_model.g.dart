@@ -18,7 +18,8 @@ ShopsUnitModel _$ShopsUnitModelFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       giftCards: (json['giftCards'] as List<dynamic>?)
-              ?.map((e) => GiftCardModel.fromJson(e as Map<String, dynamic>))
+              ?.map(
+                  (e) => ShopGiftCardModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       shopUserTokens: (json['shopUserTokens'] as List<dynamic>?)

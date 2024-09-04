@@ -1,15 +1,13 @@
-import 'package:denari_app/data/gift_card_model/gift_card_model.dart';
+import 'package:denari_app/data/gift_card/model/gift_card_model.dart';
 import 'package:denari_app/data/token/model/token_model.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:pinput/pinput.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../store/brand_item_select_state/brand_item_select_state.dart';
 import '../../../widgets/brand_item/brand_item_widget.dart';
 import '../../../widgets/no_data_widget.dart';
 import '../../../widgets/preview_banner/preview_banner.dart';
-import 'item_selector_item.dart';
 
 class ItemSelectorWidget extends StatefulWidget {
   final bool isToken;
@@ -113,10 +111,10 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                             widget.giftItems!.length,
                             (index) => BrandItemWidget(
                               topPadding: 16,
-                              avatar: "widget.giftItems![index].imageUrl",
-                              brandName: widget.giftItems![index].uniqueID,
+                              avatar: widget.giftItems![index].imageUrl,
+                              brandName: widget.giftItems![index].name,
                               secondaryInfo: Text(
-                                "${widget.giftItems![index].value}",
+                                widget.giftItems![index].shopGiftCardModel![0].totalBalance,
                                 style: context.theme.body3.lightGreyText,
                               ),
                               tealButton: SizedBox(

@@ -10,12 +10,12 @@ GiftCardBalanceModel _$GiftCardBalanceModelFromJson(
         Map<String, dynamic> json) =>
     GiftCardBalanceModel(
       userId: json['userId'] as String? ?? '',
-      totalBalance: json['totalBalance'] as String? ?? '0',
+      giftCardBalance: (json['giftCardBalance'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$GiftCardBalanceModelToJson(
         GiftCardBalanceModel instance) =>
     <String, dynamic>{
       'userId': instance.userId,
-      'totalBalance': instance.totalBalance,
+      'giftCardBalance': instance.giftCardBalance,
     };

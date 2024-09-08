@@ -22,7 +22,7 @@ abstract class ImplBrandItemSelectState with Store {
   }
 
   @action
-  void selectItem(int newIndex, ) {
+  void selectItem(int newIndex) {
     index = newIndex;
   }
 

@@ -84,9 +84,10 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                         height: 16,
                       ),
                       BrandItemWidget(
+                        brandItemWrapperColor: AppColors.whiteGrey,
                         isToken: widget.brandItemWidget.isToken,
-                        avatar: Assets.media.images.toyStory.path,
-                        brandName: 'McDonalds',
+                        avatar: widget.brandItemWidget.avatar,
+                        brandName: widget.brandItemWidget.brandName,
                         tokenBalance: 50,
                         addDivider: false,
                         topPadding: 8,

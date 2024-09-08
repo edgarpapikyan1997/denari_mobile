@@ -13,13 +13,15 @@ class ItemSelectorWidget extends StatefulWidget {
   final bool isToken;
   final List<TokenModel>? tokenItems;
   final List<GiftCardModel>? giftItems;
-  final BrandItemSelectState brandItemSelectState;
+  final BrandItemSelectState? sendGiftItemSelectState;
+  final BrandItemSelectState? tokenItemSelectState;
   final String previewTitle;
   final Widget? tealButton;
 
   const ItemSelectorWidget({
     super.key,
-    required this.brandItemSelectState,
+    this.sendGiftItemSelectState,
+    this.tokenItemSelectState,
     required this.isToken,
     required this.previewTitle,
     this.tealButton,
@@ -84,11 +86,11 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                             width: 24,
                             child: Radio(
                                 value: index,
-                                groupValue: widget.brandItemSelectState.index,
+                                groupValue: widget.tokenItemSelectState!.index,
                                 onChanged: (index) {
-                                  widget.brandItemSelectState
+                                  widget.tokenItemSelectState!
                                       .selectItem(index!);
-                                  widget.brandItemSelectState.setItemWidget(
+                                  widget.tokenItemSelectState!.setItemWidget(
                                     BrandItemWidget(
                                         avatar:
                                             Assets.media.images.toyStory.path,
@@ -114,7 +116,7 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                               avatar: widget.giftItems![index].imageUrl,
                               brandName: widget.giftItems![index].name,
                               secondaryInfo: Text(
-                                widget.giftItems![index].shopGiftCardModel![0].totalBalance,
+                                "${widget.giftItems![index].shopGiftCardModel![0].giftCardBalance}",
                                 style: context.theme.body3.lightGreyText,
                               ),
                               tealButton: SizedBox(
@@ -123,11 +125,12 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                                 child: Radio(
                                     value: index,
                                     groupValue:
-                                        widget.brandItemSelectState.index,
+                                        widget.sendGiftItemSelectState!.index,
                                     onChanged: (index) {
-                                      widget.brandItemSelectState
+                                      widget.sendGiftItemSelectState!
                                           .selectItem(index!);
-                                      widget.brandItemSelectState.setItemWidget(
+                                      widget.sendGiftItemSelectState!
+                                          .setItemWidget(
                                         BrandItemWidget(
                                             avatar: Assets
                                                 .media.images.toyStory.path,

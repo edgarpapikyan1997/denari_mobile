@@ -6,12 +6,12 @@ part 'gift_card_balance_model.g.dart';
 class GiftCardBalanceModel {
   @JsonKey(defaultValue: '')
   final String userId;
-  @JsonKey(defaultValue: "0")
-  final String totalBalance;
+  @JsonKey(defaultValue: 0)
+  final int giftCardBalance;
 
   const GiftCardBalanceModel({
     required this.userId,
-    required this.totalBalance,
+    required this.giftCardBalance,
   });
 
   factory GiftCardBalanceModel.fromJson(Map<String, dynamic> json) =>
@@ -21,12 +21,11 @@ class GiftCardBalanceModel {
 
   GiftCardBalanceModel copyWith({
     String? userId,
-    String? totalBalance,
-
+    int? giftCardBalance,
   }) {
     return GiftCardBalanceModel(
       userId: userId ?? this.userId,
-      totalBalance: totalBalance ?? this.totalBalance,
+      giftCardBalance: giftCardBalance ?? this.giftCardBalance,
     );
   }
 }

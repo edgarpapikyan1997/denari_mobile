@@ -19,7 +19,6 @@ final class ImplGiftCardRepository extends GiftCardRepository {
     final result = await _client.get(
       '${_config.host}/shops/nonZeroBalance',
     );
-    print(result.toString());
     return result.list(GiftCardModel.fromJson);
   }
 

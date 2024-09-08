@@ -34,7 +34,7 @@ abstract class ImplGiftCardBalanceState with Store {
     try {
       final data = await _giftCardRepository!.getGiftCardBalance();
       giftCardBalance = data;
-      balance = int.parse(giftCardBalance!.totalBalance);
+      balance = giftCardBalance!.giftCardBalance;
     } catch (error) {
       getError = error.toString();
       balance = 0;

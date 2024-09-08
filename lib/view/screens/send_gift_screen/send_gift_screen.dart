@@ -43,12 +43,15 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
   late final List<Category> categories;
 
   int? items = 15;
-  bool isToken = false;
+  bool isToken = true;
 
   @override
   void initState() {
     super.initState();
     initPrefs();
+    categoriesState?.currentCategory == categories[0].name
+        ? isToken = false
+        : isToken = true;
   }
 
   Future<void> initPrefs() async {
@@ -102,55 +105,89 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
               const SizedBox(
                 height: 24,
               ),
-              categoriesState?.currentCategory == categories[0].name
-                  ? Expanded(
-                      child: ItemSelectorWidget(
-                        giftItems: _giftCardBalanceState.giftCardModels,
-                        brandItemSelectState: sendGiftItemSelectState,
-                        isToken: false,
-                        previewTitle: 'giftCard.selectGift'.tr(),
-                      ),
+              _loadingState.isLoading == true
+                  ? const Expanded(
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: CircularProgressIndicator()),
                     )
                   : Expanded(
-                      child: ItemSelectorWidget(
-                        tokenItems: _tokenBalanceState.tokenModels,
-                        brandItemSelectState: tokenItemSelectState,
-                        isToken: true,
-                        previewTitle: 'giftCard.totalBalanceTokens'.tr(),
-                        tealButton: BalanceWidget(
-                          isTokenBalance: true,
-                          balance: _tokenBalanceState.balance!.toInt(),
-                          textStyle: context.theme.headline2.bold,
-                          tokenIconHeight: 20,
-                          tokenIconWidth: 18,
-                        ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          categoriesState?.currentCategory == categories[0].name
+                              ? Expanded(
+                                  child: ItemSelectorWidget(
+                                    giftItems:
+                                        _giftCardBalanceState.giftCardModels,
+                                    sendGiftItemSelectState:
+                                        sendGiftItemSelectState,
+                                    isToken: false,
+                                    previewTitle: 'giftCard.selectGift'.tr(),
+                                  ),
+                                )
+                              : Expanded(
+                                  child: ItemSelectorWidget(
+                                    tokenItems: _tokenBalanceState.tokenModels,
+                                    tokenItemSelectState: tokenItemSelectState,
+                                    isToken: true,
+                                    previewTitle:
+                                        'giftCard.totalBalanceTokens'.tr(),
+                                    tealButton: BalanceWidget(
+                                      isTokenBalance: true,
+                                      balance:
+                                          _tokenBalanceState.balance!.toInt(),
+                                      textStyle: context.theme.headline2.bold,
+                                      tokenIconHeight: 20,
+                                      tokenIconWidth: 18,
+                                    ),
+                                  ),
+                                ),
+                          CustomButton(
+                            isEnabled: true,
+                            isWhite: false,
+                            title: 'giftCard.continue'.tr(),
+                            onTap: () {
+                              context.pushNamed(
+                                "sendGiftCardScreen",
+                                extra: BrandItemWidget(
+                                  isToken: categoriesState?.currentCategory ==
+                                          categories[0].name
+                                      ? isToken = false
+                                      : isToken = true,
+                                  avatar: isToken
+                                      ? _tokenBalanceState
+                                          .tokenModels[
+                                              tokenItemSelectState.index]
+                                          .imageUrl
+                                      : _giftCardBalanceState
+                                          .giftCardModels[
+                                              sendGiftItemSelectState.index]
+                                          .imageUrl,
+                                  brandName: isToken
+                                      ? _tokenBalanceState
+                                          .tokenModels[
+                                              tokenItemSelectState.index]
+                                          .name
+                                      : _giftCardBalanceState
+                                          .giftCardModels[
+                                              sendGiftItemSelectState.index]
+                                          .name,
+                                  tokenBalance: 50,
+                                  addDivider: false,
+                                  topPadding: 8,
+                                  bottomPadding: 8,
+                                  leftPadding: 12,
+                                  rightPadding: 12,
+                                  wrapperColor: AppColors.whiteGrey,
+                                ),
+                              );
+
+                            },
+                          ),
+                        ],
                       ),
                     ),
-              CustomButton(
-                isEnabled: true,
-                isWhite: false,
-                title: 'giftCard.continue'.tr(),
-                onTap: () {
-                  context.goNamed(
-                    "sendGiftCardScreen",
-                    extra: BrandItemWidget(
-                      isToken:
-                          categoriesState?.currentCategory == categories[0].name
-                              ? false
-                              : true,
-                      avatar: Assets.media.images.toyStory.path,
-                      brandName: 'McDonalds',
-                      tokenBalance: 50,
-                      addDivider: false,
-                      topPadding: 8,
-                      bottomPadding: 8,
-                      leftPadding: 12,
-                      rightPadding: 12,
-                      wrapperColor: AppColors.whiteGrey,
-                    ),
-                  );
-                },
-              )
             ],
           ),
         );

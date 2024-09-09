@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../store/brand_item_select_state/brand_item_select_state.dart';
+import '../../../../utils/themes/app_colors.dart';
 import '../../../widgets/brand_item/brand_item_widget.dart';
 import '../../../widgets/no_data_widget.dart';
 import '../../../widgets/preview_banner/preview_banner.dart';
@@ -34,6 +35,7 @@ class ItemSelectorWidget extends StatefulWidget {
 }
 
 class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
+
   @override
   void initState() {
     super.initState();
@@ -123,6 +125,8 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                                 height: 24,
                                 width: 24,
                                 child: Radio(
+                                  activeColor: AppColors.black,
+                                    focusColor: AppColors.black,
                                     value: index,
                                     groupValue:
                                         widget.sendGiftItemSelectState!.index,
@@ -132,10 +136,15 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                                       widget.sendGiftItemSelectState!
                                           .setItemWidget(
                                         BrandItemWidget(
-                                            avatar: Assets
-                                                .media.images.toyStory.path,
-                                            brandName: 'McDonalds',
-                                            tokenBalance: 50),
+                                          avatar:
+                                              widget.giftItems![index].imageUrl,
+                                          brandName:
+                                              widget.giftItems![index].name,
+                                          tokenBalance: widget
+                                              .giftItems![index]
+                                              .shopGiftCardModel![0]
+                                              .giftCardBalance,
+                                        ),
                                       );
                                     }),
                               ),

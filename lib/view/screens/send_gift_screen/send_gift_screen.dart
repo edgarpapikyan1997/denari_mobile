@@ -74,6 +74,11 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -173,7 +178,18 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                                           .giftCardModels[
                                               sendGiftItemSelectState.index]
                                           .name,
-                                  tokenBalance: 50,
+                                  tokenBalance: isToken
+                                      ? _tokenBalanceState
+                                          .tokenModels[
+                                              tokenItemSelectState.index]
+                                          .shopUserTokens![0]
+                                          .tokenBalance
+                                          .toInt()
+                                      : _giftCardBalanceState
+                                          .giftCardModels[
+                                              sendGiftItemSelectState.index]
+                                          .shopGiftCardModel![0]
+                                          .giftCardBalance,
                                   addDivider: false,
                                   topPadding: 8,
                                   bottomPadding: 8,
@@ -182,7 +198,6 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                                   wrapperColor: AppColors.whiteGrey,
                                 ),
                               );
-
                             },
                           ),
                         ],

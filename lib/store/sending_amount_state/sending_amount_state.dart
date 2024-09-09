@@ -1,3 +1,4 @@
+import 'package:denari_app/data/user_finder/repository/user_finder_repository.dart';
 import 'package:mobx/mobx.dart';
 
 part 'sending_amount_state.g.dart';
@@ -14,8 +15,17 @@ abstract class ImplSendingAmountState with Store {
   @observable
   bool isAmountHigher = true;
 
+  @observable
+  String sendingContactInfo = "";
+
   @computed
-  bool get isError => sendingAmount > currentBalance;
+  bool get isError => sendingAmount < 0;
+
+  @action
+  void setContactInfo({required String newContactInfo}) {
+    sendingContactInfo = newContactInfo;
+  }
+
 
   @action
   void setCurrentBalance({required int valueFromBalance}) {

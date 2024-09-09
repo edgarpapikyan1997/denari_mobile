@@ -48,10 +48,8 @@ class _ChosenCategoryScreenState extends State<ChosenCategoryScreen> {
     if (widget.categoriesState != null) {
       categoriesState = widget.categoriesState;
     }
-    log(categoriesState!.currentCategory!);
     await  _shopsState.getShopsByCategory(
         categories: widget.categoriesState!.currentCategory!);
-    log("${_shopsState.shops}");
     _loadingState.stopLoading();
   }
 

@@ -105,7 +105,8 @@
     "yourPurchase": "Your purchase of $",
     "at": "at",
     "earnedYou": "earned you",
-    "wouldYouRate": "How would you rate your experience?"
+    "wouldYouRate": "How would you rate your experience?",
+    "userNotFound" : "The user was not found"
   },
   "profile": {
     "data": "Profile data",

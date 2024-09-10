@@ -30,6 +30,8 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
     final brandItems = [
       for (var i = 0; i < 10; ++i)
         BrandItemWidget(
+          topPadding: 16,
+          addDivider: true,
           avatar: Assets.media.images.toyStory.path,
           brandName: '$brandName$i',
           tokenBalance: _tokenBalanceState.balance,

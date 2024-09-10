@@ -1,4 +1,3 @@
-import 'package:denari_app/data/shops/gift_card_model/gift_card_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'gift_card_balance/gift_card_balance_model.dart';

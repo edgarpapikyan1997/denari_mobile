@@ -1,4 +1,3 @@
-import 'package:denari_app/data/user_finder/repository/user_finder_repository.dart';
 import 'package:mobx/mobx.dart';
 
 part 'sending_amount_state.g.dart';

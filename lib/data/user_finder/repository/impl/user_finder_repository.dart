@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:denari_app/data/user_finder/model/user_finder_model.dart';
-import 'package:denari_app/utils/network/utils/response_helper.dart';
 import 'package:dio/dio.dart';
 import '../../../../utils/env/config.dart';
 import '../user_finder_repository.dart';

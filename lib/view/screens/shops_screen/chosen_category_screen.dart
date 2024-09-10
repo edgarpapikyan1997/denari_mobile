@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/constants/app_sizes/app_sizes.dart';

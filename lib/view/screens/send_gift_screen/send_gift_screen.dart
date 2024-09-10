@@ -97,8 +97,11 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
         ),
       ),
       body: Observer(builder: (context) {
-        return PaddingUtility(
-          all: 16,
+        return PaddingUtility.only(
+          top: 16,
+          left: 16,
+          right: 16,
+          bottom: 35,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -156,6 +159,8 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                               context.pushNamed(
                                 "sendGiftCardScreen",
                                 extra: BrandItemWidget(
+                                  wrapperColor: AppColors.whiteGrey,
+                                  brandItemWrapperColor: AppColors.whiteGrey,
                                   isToken: categoriesState?.currentCategory ==
                                           categories[0].name
                                       ? isToken = false
@@ -190,12 +195,20 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                                               sendGiftItemSelectState.index]
                                           .shopGiftCardModel![0]
                                           .giftCardBalance,
+                                  shopId: isToken
+                                      ? _tokenBalanceState
+                                          .tokenModels[
+                                              tokenItemSelectState.index]
+                                          .uniqueId
+                                      : _giftCardBalanceState
+                                          .giftCardModels[
+                                              sendGiftItemSelectState.index]
+                                          .uniqueId,
                                   addDivider: false,
                                   topPadding: 8,
                                   bottomPadding: 8,
                                   leftPadding: 12,
                                   rightPadding: 12,
-                                  wrapperColor: AppColors.whiteGrey,
                                 ),
                               );
                             },

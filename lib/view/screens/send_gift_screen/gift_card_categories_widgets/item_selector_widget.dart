@@ -35,7 +35,6 @@ class ItemSelectorWidget extends StatefulWidget {
 }
 
 class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
-
   @override
   void initState() {
     super.initState();
@@ -87,6 +86,8 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                             height: 24,
                             width: 24,
                             child: Radio(
+                                activeColor: AppColors.black,
+                                focusColor: AppColors.black,
                                 value: index,
                                 groupValue: widget.tokenItemSelectState!.index,
                                 onChanged: (index) {
@@ -94,10 +95,13 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                                       .selectItem(index!);
                                   widget.tokenItemSelectState!.setItemWidget(
                                     BrandItemWidget(
-                                        avatar:
-                                            Assets.media.images.toyStory.path,
-                                        brandName: 'McDonalds',
-                                        tokenBalance: 50),
+                                      avatar:
+                                          widget.tokenItems![index].imageUrl,
+                                      brandName: widget.tokenItems![index].name,
+                                      tokenBalance: widget.tokenItems![index]
+                                          .shopUserTokens![0].tokenBalance
+                                          .toInt(),
+                                    ),
                                   );
                                 }),
                           ),
@@ -125,7 +129,7 @@ class _ItemSelectorWidgetState extends State<ItemSelectorWidget> {
                                 height: 24,
                                 width: 24,
                                 child: Radio(
-                                  activeColor: AppColors.black,
+                                    activeColor: AppColors.black,
                                     focusColor: AppColors.black,
                                     value: index,
                                     groupValue:

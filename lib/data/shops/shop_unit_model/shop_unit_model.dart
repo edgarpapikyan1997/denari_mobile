@@ -1,17 +1,9 @@
-import 'package:denari_app/data/gift_card_model/gift_card_model.dart';
 import 'package:denari_app/data/shops/shop_user_token/shop_user_token.dart';
 import 'package:json_annotation/json_annotation.dart';
+import '../gift_card_model/gift_card_model.dart';
 import '../shop_branch_model/shop_branch_model.dart';
 
 part 'shop_unit_model.g.dart';
-
-/*
- "UniqueID": "85058c82-3fd6-4d3c-9579-34ce574560b7",
-  "name": "TestShop6",
-  "imageUrl": "https://trikky.ru/wp-content/blogs.dir/1/files/2023/03/23/64356786be3b154b36dd9c03ead497de.jpg",
-  "description": "",
-  "cashback": 3,
- */
 
 @JsonSerializable()
 class ShopsUnitModel {
@@ -32,7 +24,7 @@ class ShopsUnitModel {
   @JsonKey(defaultValue: [])
   final List<ShopsBranchModel> branch;
   @JsonKey(defaultValue: [])
-  final List<GiftCardModel> giftCards;
+  final List<ShopGiftCardModel> giftCards;
   @JsonKey(defaultValue: [])
   final List<ShopUserToken> shopUserTokens;
 
@@ -59,7 +51,7 @@ class ShopsUnitModel {
     String? description,
     String? imageUrl,
     List<ShopsBranchModel>? branch,
-    List<GiftCardModel>? giftCards,
+    List<ShopGiftCardModel>? giftCards,
     List<ShopUserToken>? shopUserTokens,
   }) {
     return ShopsUnitModel(

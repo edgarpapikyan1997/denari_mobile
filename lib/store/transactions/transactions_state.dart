@@ -1,7 +1,10 @@
 import 'package:denari_app/data/transactions/repositoriy/transactions_repository.dart';
 import 'package:mobx/mobx.dart';
+import '../../data/transactions/model/send_to_contact/send_to_contact_model.dart';
 import '../../data/transactions/model/transaction_model.dart';
 import '../../data/transactions/model/transaction_receive_model.dart';
+import '../../utils/network/utils/use_case.dart';
+
 part 'transactions_state.g.dart';
 
 class TransactionsState = ImplTransactionsState with _$TransactionsState;
@@ -28,11 +31,11 @@ abstract class ImplTransactionsState with Store {
   @observable
   bool isSuccessful = false;
 
-
   @action
   Future<bool> sendTransaction(TransactionModel transactionModel) async {
     try {
-      final data = await _transactionsRepository.sendTransaction(transactionModel);
+      final data =
+          await _transactionsRepository.sendTransaction(transactionModel);
       if (data != null) {
         isSuccessful = true;
         transactionReceiveModel = data;
@@ -46,4 +49,16 @@ abstract class ImplTransactionsState with Store {
     return isSuccessful;
   }
 
+  @action
+  Future<void> sendAmountToUser(SendToUserModel data, bool isToken) async {
+    (await handle(
+            () => _transactionsRepository.sendAmountToUser(data, isToken)))
+        .then(
+      (data) {
+        isSuccessful = true;
+        getError = 'true';
+      },
+      (error) => getError = error,
+    );
+  }
 }

@@ -64,8 +64,35 @@ mixin _$SendingAmountState on ImplSendingAmountState, Store {
     });
   }
 
+  late final _$sendingContactInfoAtom =
+      Atom(name: 'ImplSendingAmountState.sendingContactInfo', context: context);
+
+  @override
+  String get sendingContactInfo {
+    _$sendingContactInfoAtom.reportRead();
+    return super.sendingContactInfo;
+  }
+
+  @override
+  set sendingContactInfo(String value) {
+    _$sendingContactInfoAtom.reportWrite(value, super.sendingContactInfo, () {
+      super.sendingContactInfo = value;
+    });
+  }
+
   late final _$ImplSendingAmountStateActionController =
       ActionController(name: 'ImplSendingAmountState', context: context);
+
+  @override
+  void setContactInfo({required String newContactInfo}) {
+    final _$actionInfo = _$ImplSendingAmountStateActionController.startAction(
+        name: 'ImplSendingAmountState.setContactInfo');
+    try {
+      return super.setContactInfo(newContactInfo: newContactInfo);
+    } finally {
+      _$ImplSendingAmountStateActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setCurrentBalance({required int valueFromBalance}) {
@@ -95,6 +122,7 @@ mixin _$SendingAmountState on ImplSendingAmountState, Store {
 currentBalance: ${currentBalance},
 sendingAmount: ${sendingAmount},
 isAmountHigher: ${isAmountHigher},
+sendingContactInfo: ${sendingContactInfo},
 isError: ${isError}
     ''';
   }

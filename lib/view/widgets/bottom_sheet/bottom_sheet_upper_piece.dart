@@ -8,8 +8,7 @@ class BottomSheetUpperPiece extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 4),
-      margin: const EdgeInsets.only(bottom: 4),
+
       height: 4,
       width: 40,
       decoration: BoxDecoration(

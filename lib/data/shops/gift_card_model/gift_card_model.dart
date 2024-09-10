@@ -3,7 +3,7 @@ part 'gift_card_model.g.dart';
 
 
 @JsonSerializable()
-class GiftCardModel {
+class ShopGiftCardModel {
   @JsonKey(defaultValue: '', includeToJson: false, name: 'UniqueID')
   final String uniqueID;
   @JsonKey(defaultValue: 0)
@@ -11,24 +11,24 @@ class GiftCardModel {
   @JsonKey(defaultValue: '')
   final String shopId;
 
-  const GiftCardModel({
+  const ShopGiftCardModel({
     required this.uniqueID,
     required this.value,
     required this.shopId,
 
   });
 
-  factory GiftCardModel.fromJson(Map<String, dynamic> json) =>
-      _$GiftCardModelFromJson(json);
+  factory ShopGiftCardModel.fromJson(Map<String, dynamic> json) =>
+      _$ShopGiftCardModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$GiftCardModelToJson(this);
+  Map<String, dynamic> toJson() => _$ShopGiftCardModelToJson(this);
 
-  GiftCardModel copyWith({
+  ShopGiftCardModel copyWith({
     String? uniqueID,
     int? value,
     String? shopId,
   }) {
-    return GiftCardModel(
+    return ShopGiftCardModel(
       uniqueID: uniqueID ?? this.uniqueID,
       value: value ?? this.value,
       shopId: shopId ?? this.shopId

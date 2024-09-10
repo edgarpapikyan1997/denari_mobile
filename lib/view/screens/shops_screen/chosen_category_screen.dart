@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/constants/app_sizes/app_sizes.dart';
@@ -48,10 +47,8 @@ class _ChosenCategoryScreenState extends State<ChosenCategoryScreen> {
     if (widget.categoriesState != null) {
       categoriesState = widget.categoriesState;
     }
-    log(categoriesState!.currentCategory!);
     await  _shopsState.getShopsByCategory(
         categories: widget.categoriesState!.currentCategory!);
-    log("${_shopsState.shops}");
     _loadingState.stopLoading();
   }
 

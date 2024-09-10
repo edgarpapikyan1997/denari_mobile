@@ -38,11 +38,15 @@ class _CustomButtonState extends State<CustomButton>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.onTap();
-        _controller.forward();
-        Future.delayed(const Duration(milliseconds: 100), () {
-          _controller.reverse();
-        });
+        if(widget.isEnabled != true) {
+          return;
+        }else {
+          _controller.forward();
+          Future.delayed(const Duration(milliseconds: 200), () {
+            _controller.reverse();
+          });
+          widget.onTap();
+        }
       },
       child: ScaleTransition(
         scale: Tween<double>(

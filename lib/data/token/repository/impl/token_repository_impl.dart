@@ -22,6 +22,8 @@ final class ImplTokenRepository extends TokenRepository {
     return result.list(TokenModel.fromJson);
   }
 
+
+
   @override
   Future<TokenBalanceModel> getTokenBalance() async {
     final result = await _client.get('${_config.host}/user/tokenBalance');

@@ -4,8 +4,6 @@ part 'transaction_model.g.dart';
 
 @JsonSerializable()
 class TransactionModel {
-  // @JsonKey(defaultValue: '')
-  // final String? id;
   @JsonKey(defaultValue: '')
   final String date;
   @JsonKey(defaultValue: '')
@@ -22,17 +20,11 @@ class TransactionModel {
   final int? amountGiftCardsUsing;
   @JsonKey(defaultValue: '')
   final String status;
-  // @JsonKey(defaultValue: '')
-  // final String? comment;
-  // @JsonKey(defaultValue: '')
-  // final String? userId;
   @JsonKey(defaultValue: 0)
   final int? giftCardAmount;
-  // @JsonKey(defaultValue: '')
-  // final String? cashierId;
+
 
   const TransactionModel({
-    // this.id,
     required this.date,
     required this.shopId,
     this.addressShopId,
@@ -41,10 +33,8 @@ class TransactionModel {
     this.amountTokensUsed,
     this.amountGiftCardsUsing,
     required this.status,
-    // this.comment,
-     // this.userId,
+
     this.giftCardAmount,
-    // this.cashierId,
   });
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
@@ -53,7 +43,6 @@ class TransactionModel {
   Map<String, dynamic> toJson() => _$TransactionModelToJson(this);
 
   TransactionModel copyWith({
-    // final String? id,
     final String? date,
     final String? shopId,
     final int? addressShopId,
@@ -62,10 +51,7 @@ class TransactionModel {
     final int? amountTokensUsed,
     final int? amountGiftCardsUsing,
     final String? status,
-    // final String? comment,
-    // final String? userId,
     final int? giftCardAmount,
-    // final String? cashierId,
   }) {
     return TransactionModel(
       // id: id ?? this.id,
@@ -77,10 +63,8 @@ class TransactionModel {
       amountTokensUsed: amountTokensUsed ?? this.amountTokensUsed,
       amountGiftCardsUsing: amountGiftCardsUsing ?? this.amountGiftCardsUsing,
       status: status ?? this.status,
-      // comment: comment ?? this.comment,
-      // userId: userId ?? this.userId,
+
       giftCardAmount: giftCardAmount ?? this.giftCardAmount,
-      // cashierId: cashierId ?? this.cashierId,
     );
   }
 }

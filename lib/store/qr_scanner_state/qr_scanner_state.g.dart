@@ -41,6 +41,22 @@ mixin _$QRScannerState on ImplQRScannerState, Store {
     });
   }
 
+  late final _$isScanningEnabledAtom =
+      Atom(name: 'ImplQRScannerState.isScanningEnabled', context: context);
+
+  @override
+  bool get isScanningEnabled {
+    _$isScanningEnabledAtom.reportRead();
+    return super.isScanningEnabled;
+  }
+
+  @override
+  set isScanningEnabled(bool value) {
+    _$isScanningEnabledAtom.reportWrite(value, super.isScanningEnabled, () {
+      super.isScanningEnabled = value;
+    });
+  }
+
   late final _$animateQRScannerAsyncAction =
       AsyncAction('ImplQRScannerState.animateQRScanner', context: context);
 
@@ -49,11 +65,48 @@ mixin _$QRScannerState on ImplQRScannerState, Store {
     return _$animateQRScannerAsyncAction.run(() => super.animateQRScanner());
   }
 
+  late final _$ImplQRScannerStateActionController =
+      ActionController(name: 'ImplQRScannerState', context: context);
+
+  @override
+  void disableScanner() {
+    final _$actionInfo = _$ImplQRScannerStateActionController.startAction(
+        name: 'ImplQRScannerState.disableScanner');
+    try {
+      return super.disableScanner();
+    } finally {
+      _$ImplQRScannerStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void enableScanner() {
+    final _$actionInfo = _$ImplQRScannerStateActionController.startAction(
+        name: 'ImplQRScannerState.enableScanner');
+    try {
+      return super.enableScanner();
+    } finally {
+      _$ImplQRScannerStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void reset() {
+    final _$actionInfo = _$ImplQRScannerStateActionController.startAction(
+        name: 'ImplQRScannerState.reset');
+    try {
+      return super.reset();
+    } finally {
+      _$ImplQRScannerStateActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 isScanning: ${isScanning},
-imageSize: ${imageSize}
+imageSize: ${imageSize},
+isScanningEnabled: ${isScanningEnabled}
     ''';
   }
 }

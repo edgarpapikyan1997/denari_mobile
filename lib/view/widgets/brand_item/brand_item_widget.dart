@@ -1,6 +1,5 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
-import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../utils/themes/app_colors.dart';
@@ -11,6 +10,7 @@ class BrandItemWidget extends StatelessWidget {
   final String brandName;
   final bool isToken;
   final Color wrapperColor;
+  final Color? brandItemWrapperColor;
   final Widget? secondaryInfo;
   final int? tokenBalance;
   final Widget? tealButton;
@@ -21,9 +21,11 @@ class BrandItemWidget extends StatelessWidget {
   final double rightPadding;
   final String? lastUpdate;
   final SvgPicture? iconAvatar;
+  final String? shopId;
 
   const BrandItemWidget({
     super.key,
+    this.brandItemWrapperColor,
     required this.avatar,
     required this.brandName,
     this.isToken = false,
@@ -38,14 +40,19 @@ class BrandItemWidget extends StatelessWidget {
     this.wrapperColor = AppColors.white,
     this.lastUpdate,
     this.iconAvatar,
+    this.shopId,
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        PaddingUtility.only(
-          top: 16,
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 12,vertical: topPadding),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: brandItemWrapperColor,
+          ),
           child: Row(
             children: [
               iconAvatar != null
@@ -60,8 +67,8 @@ class BrandItemWidget extends StatelessWidget {
                           fit: BoxFit.fill,
                           image: NetworkImage(avatar!),
                         ),
-                        border:
-                            Border.all(width: 1, color: AppColors.borderColor),
+                        border: Border.all(
+                            width: 1, color: AppColors.borderColor),
                       ),
                     ),
               const SizedBox(
@@ -69,7 +76,7 @@ class BrandItemWidget extends StatelessWidget {
               ),
               secondaryInfo != null
                   ? Expanded(
-                    child: Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -80,10 +87,11 @@ class BrandItemWidget extends StatelessWidget {
                             height: 2,
                           ),
                           SizedBox(
-                              width: context.width / 1.5, child: secondaryInfo!),
+                              width: context.width / 1.5,
+                              child: secondaryInfo!),
                         ],
                       ),
-                  )
+                    )
                   : Text(
                       brandName,
                       style: context.theme.headline4.regular,
@@ -94,6 +102,8 @@ class BrandItemWidget extends StatelessWidget {
                       isTokenBalance: isToken,
                       tokenIconHeight: 20,
                       tokenIconWidth: 18,
+                      horizontalPadding: 12,
+                      verticalPadding: 6,
                       balance: tokenBalance!,
                       textStyle: context.theme.headline4,
                       color: wrapperColor,
@@ -103,11 +113,11 @@ class BrandItemWidget extends StatelessWidget {
             ],
           ),
         ),
-        addDivider
-            ? const SizedBox(
-                height: 16,
-              )
-            : const SizedBox(),
+        // addDivider
+        //     ? const SizedBox(
+        //         height: 8,
+        //       )
+        //     : const SizedBox(),
         addDivider
             ? const Divider(
                 height: 1,

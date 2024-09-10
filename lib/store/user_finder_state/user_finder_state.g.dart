@@ -25,19 +25,19 @@ mixin _$UserFinderState on ImplUserFinderState, Store {
     });
   }
 
-  late final _$contactInfoAtom =
-      Atom(name: 'ImplUserFinderState.contactInfo', context: context);
+  late final _$contactExistAtom =
+      Atom(name: 'ImplUserFinderState.contactExist', context: context);
 
   @override
-  String get contactInfo {
-    _$contactInfoAtom.reportRead();
-    return super.contactInfo;
+  bool get contactExist {
+    _$contactExistAtom.reportRead();
+    return super.contactExist;
   }
 
   @override
-  set contactInfo(String value) {
-    _$contactInfoAtom.reportWrite(value, super.contactInfo, () {
-      super.contactInfo = value;
+  set contactExist(bool value) {
+    _$contactExistAtom.reportWrite(value, super.contactExist, () {
+      super.contactExist = value;
     });
   }
 
@@ -53,7 +53,7 @@ mixin _$UserFinderState on ImplUserFinderState, Store {
   String toString() {
     return '''
 contactInfoError: ${contactInfoError},
-contactInfo: ${contactInfo}
+contactExist: ${contactExist}
     ''';
   }
 }

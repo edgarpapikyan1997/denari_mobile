@@ -13,18 +13,16 @@ final class ImplUserFinderRepository extends UserFinderRepository {
         _config = config;
 
   @override
-  Future<String?> findUser(String contactInfo) async {
-    try {
+  Future<bool> findUser(String contactInfo) async {
+    print(contactInfo);
       final result = await _client.post(
         '${_config.host}/user/findUserByContactInfo',
         data: jsonEncode({
           'contactInfo': contactInfo,
         }),
       );
-      return result.data;
-    } catch (e) {
-      log('Error: $e');
-      return null;
+      print("RESULT STATUS CODE >>> ${result.statusCode == 200}");
+      return result.statusCode == 200;;
     }
   }
-}
+

@@ -25,6 +25,12 @@ abstract class ImplSendingAmountState with Store {
     sendingContactInfo = newContactInfo;
   }
 
+  @action
+  void resetSendingInfo() {
+    sendingContactInfo = "";
+    sendingAmount = 0;
+  }
+
 
   @action
   void setCurrentBalance({required int valueFromBalance}) {

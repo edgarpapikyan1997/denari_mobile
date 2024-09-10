@@ -1,4 +1,3 @@
-
 import 'package:mobx/mobx.dart';
 
 import '../../data/user_finder/repository/user_finder_repository.dart';
@@ -19,13 +18,14 @@ abstract class ImplUserFinderState with Store {
   String? contactInfoError;
 
   @observable
-  String contactInfo = "";
+  bool contactExist = false;
 
   @action
   Future<void> findUser(String contactInfo) async {
     (await handle(() => _userFinderRepository.findUser(contactInfo))).then(
       (data) {
-        contactInfoError = 'true';
+        print(data);
+        contactExist = data;
       },
       (error) => contactInfoError = error,
     );

@@ -1,3 +1,3 @@
 abstract class UserFinderRepository {
-  Future<String?> findUser(String contactInfo);
+  Future<bool> findUser(String contactInfo);
 }

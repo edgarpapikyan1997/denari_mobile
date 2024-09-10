@@ -168,8 +168,9 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                                   ? buttonState.isButtonEnabled = true
                                   : buttonState.isButtonEnabled = false;
                             },
-                            error: sendingAmountState.isError || sendingAmountState.sendingAmount >
-                                brandItemWidget!.tokenBalance!.toInt()
+                            error: sendingAmountState.isError ||
+                                    sendingAmountState.sendingAmount >
+                                        brandItemWidget!.tokenBalance!.toInt()
                                 ? 'Amount is higher than balance'
                                 : null,
                           ),
@@ -213,7 +214,8 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                               sendingAmountState
                                           .sendingContactInfo.isNotEmpty &&
                                       sendingAmountState
-                                              .sendingContactInfo.length >= 9
+                                              .sendingContactInfo.length >=
+                                          9
                                   ? buttonState.isButtonEnabled = true
                                   : buttonState.isButtonEnabled = false;
                             },
@@ -237,15 +239,15 @@ class _SendGiftCardScreenState extends State<SendGiftCardScreen> {
                       await _userFinderState
                           .findUser(sendingAmountState.sendingContactInfo);
                       amountController = TextEditingController();
-                      if (_userFinderState.contactInfoError != "true") {
+                      if (_userFinderState.contactExist == true) {
+                        await sendGiftToUser(context);
+                      } else {
                         customBottomSheet(
                             context: context,
                             type: BottomSheetType.alert,
                             title: 'bottomSheet.userNotFound'.tr(),
                             description:
                                 "Do you want to send a Gift card to this user?");
-                      } else {
-                        await sendGiftToUser(context);
                       }
                       _loadingState.stopLoading();
                     },

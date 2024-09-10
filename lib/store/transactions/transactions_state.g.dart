@@ -99,6 +99,15 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
         .run(() => super.sendTransaction(transactionModel));
   }
 
+  late final _$sendAmountToUserAsyncAction =
+      AsyncAction('ImplTransactionsState.sendAmountToUser', context: context);
+
+  @override
+  Future<void> sendAmountToUser(SendToUserModel data, bool isToken) {
+    return _$sendAmountToUserAsyncAction
+        .run(() => super.sendAmountToUser(data, isToken));
+  }
+
   @override
   String toString() {
     return '''

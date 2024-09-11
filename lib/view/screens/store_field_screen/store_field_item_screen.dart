@@ -28,7 +28,7 @@ import '../../../store/qr_scanner_state/qr_scanner_state.dart';
 import '../../../store/shops/shops_state/shops_state.dart';
 import '../../../utils/di/config.dart';
 import '../../../utils/themes/app_colors.dart';
-import '../../widgets/bottom_sheet/Item_info_bottom_sheet.dart';
+import '../../widgets/bottom_sheet/item_info_bottom_sheet.dart';
 import '../../widgets/bottom_sheet/variants/modal_sheet.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/filter_widgets/new_purchase_filter/new_purchase_filter.dart';

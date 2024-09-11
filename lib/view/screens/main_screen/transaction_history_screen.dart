@@ -19,7 +19,7 @@ import '../../../constants/app_bar_type.dart';
 import '../../../constants/app_sizes/app_sizes.dart';
 import '../../../constants/categories.dart';
 import '../../../store/token_balance_state/token_balance_state.dart';
-import '../../widgets/bottom_sheet/Item_info_bottom_sheet.dart';
+import '../../widgets/bottom_sheet/item_info_bottom_sheet.dart';
 import '../../widgets/bottom_sheet/custom_bottom_sheet.dart';
 import '../../widgets/brand_item/brand_item_list.dart';
 import '../../widgets/category/category.dart';

@@ -75,6 +75,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
         iconHeight: 12,
         iconWidth: 10,
         purchaseDate: DateTime(2024, 8, i == 5 ? i + 1 : i),
+        addPreviewBanner: true,
+
       ));
     }
     return items;
@@ -164,7 +166,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                         purchaseDate: item.purchaseDate,
                         onTap: () {
                           showItemInfoBottomSheet(
-                            height: context.height - 50,
+                            // height: context.height - 50,
                             context: context,
                             addCloseButton: true,
                             image: item.avatar,
@@ -172,26 +174,30 @@ class _TransactionScreenState extends State<TransactionScreen> {
                             dateTime: DateFormat('MMMM d, y, HH:mm')
                                 .format(item.purchaseDate!),
                             itemInfoCost: "${item.balanceLD}",
-                            tokenBalance: BalanceWidget(
-                              color: AppColors.whiteGrey,
-                              verticalPadding: 5,
-                              horizontalPadding: 12,
-                              addPlusChar: true,
-                              title: 'balance.tokens'.tr(),
-                              isTokenBalance: true,
-                              tokenIconWidth: 13,
-                              tokenIconHeight: 14,
-                              balance: item.tokenBalance!,
-                            ),
-                            itemInfo: ItemInfo(
-                              id: '12345678',
-                              status: item.secondaryInfo as StatusWidget,
-                              storeAddress:
-                                  'Ikea, 2 34th St - Bur Dubai - Al Fahidi - Dubai',
-                              balanceLD: item.balanceLD,
-                              tokenBalance: item.tokenBalance,
-                              commentByStore: 'Awaiting confirmation of payment',
-                            ),
+                            // tokenBalance: BalanceWidget(
+                            //   color: AppColors.whiteGrey,
+                            //   verticalPadding: 5,
+                            //   horizontalPadding: 12,
+                            //   addPlusChar: true,
+                            //   title: 'balance.tokens'.tr(),
+                            //   isTokenBalance: true,
+                            //   tokenIconWidth: 13,
+                            //   tokenIconHeight: 14,
+                            //   balance: item.tokenBalance!,
+                            // ),
+                            // itemInfo: ItemInfo(
+                            //   id: '12345678',
+                            //   status: item.secondaryInfo as StatusWidget,
+                            //   storeAddress:
+                            //       'Ikea, 2 34th St - Bur Dubai - Al Fahidi - Dubai',
+                            //   balanceLD: item.balanceLD,
+                            //   tokenBalance: item.tokenBalance,
+                            //   commentByStore: 'Awaiting confirmation of payment',
+                            // ),
+                            onConfirmSecond: () {  },
+                            onConfirmFirst: () {  },
+                            firstButtonTitle: 'No',
+                            secondButtonTitle: 'Yes',
                           );
                         },
                       ),

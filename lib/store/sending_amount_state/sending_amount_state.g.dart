@@ -8,16 +8,16 @@ part of 'sending_amount_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$SendingAmountState on _SendingAmountState, Store {
+mixin _$SendingAmountState on ImplSendingAmountState, Store {
   Computed<bool>? _$isErrorComputed;
 
   @override
   bool get isError => (_$isErrorComputed ??= Computed<bool>(() => super.isError,
-          name: '_SendingAmountState.isError'))
+          name: 'ImplSendingAmountState.isError'))
       .value;
 
   late final _$currentBalanceAtom =
-      Atom(name: '_SendingAmountState.currentBalance', context: context);
+      Atom(name: 'ImplSendingAmountState.currentBalance', context: context);
 
   @override
   int get currentBalance {
@@ -33,7 +33,7 @@ mixin _$SendingAmountState on _SendingAmountState, Store {
   }
 
   late final _$sendingAmountAtom =
-      Atom(name: '_SendingAmountState.sendingAmount', context: context);
+      Atom(name: 'ImplSendingAmountState.sendingAmount', context: context);
 
   @override
   int get sendingAmount {
@@ -49,7 +49,7 @@ mixin _$SendingAmountState on _SendingAmountState, Store {
   }
 
   late final _$isAmountHigherAtom =
-      Atom(name: '_SendingAmountState.isAmountHigher', context: context);
+      Atom(name: 'ImplSendingAmountState.isAmountHigher', context: context);
 
   @override
   bool get isAmountHigher {
@@ -64,28 +64,55 @@ mixin _$SendingAmountState on _SendingAmountState, Store {
     });
   }
 
-  late final _$_SendingAmountStateActionController =
-      ActionController(name: '_SendingAmountState', context: context);
+  late final _$sendingContactInfoAtom =
+      Atom(name: 'ImplSendingAmountState.sendingContactInfo', context: context);
+
+  @override
+  String get sendingContactInfo {
+    _$sendingContactInfoAtom.reportRead();
+    return super.sendingContactInfo;
+  }
+
+  @override
+  set sendingContactInfo(String value) {
+    _$sendingContactInfoAtom.reportWrite(value, super.sendingContactInfo, () {
+      super.sendingContactInfo = value;
+    });
+  }
+
+  late final _$ImplSendingAmountStateActionController =
+      ActionController(name: 'ImplSendingAmountState', context: context);
+
+  @override
+  void setContactInfo({required String newContactInfo}) {
+    final _$actionInfo = _$ImplSendingAmountStateActionController.startAction(
+        name: 'ImplSendingAmountState.setContactInfo');
+    try {
+      return super.setContactInfo(newContactInfo: newContactInfo);
+    } finally {
+      _$ImplSendingAmountStateActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setCurrentBalance({required int valueFromBalance}) {
-    final _$actionInfo = _$_SendingAmountStateActionController.startAction(
-        name: '_SendingAmountState.setCurrentBalance');
+    final _$actionInfo = _$ImplSendingAmountStateActionController.startAction(
+        name: 'ImplSendingAmountState.setCurrentBalance');
     try {
       return super.setCurrentBalance(valueFromBalance: valueFromBalance);
     } finally {
-      _$_SendingAmountStateActionController.endAction(_$actionInfo);
+      _$ImplSendingAmountStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setSendingAmount({required int amount}) {
-    final _$actionInfo = _$_SendingAmountStateActionController.startAction(
-        name: '_SendingAmountState.setSendingAmount');
+    final _$actionInfo = _$ImplSendingAmountStateActionController.startAction(
+        name: 'ImplSendingAmountState.setSendingAmount');
     try {
       return super.setSendingAmount(amount: amount);
     } finally {
-      _$_SendingAmountStateActionController.endAction(_$actionInfo);
+      _$ImplSendingAmountStateActionController.endAction(_$actionInfo);
     }
   }
 
@@ -95,6 +122,7 @@ mixin _$SendingAmountState on _SendingAmountState, Store {
 currentBalance: ${currentBalance},
 sendingAmount: ${sendingAmount},
 isAmountHigher: ${isAmountHigher},
+sendingContactInfo: ${sendingContactInfo},
 isError: ${isError}
     ''';
   }

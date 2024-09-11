@@ -18,6 +18,7 @@ import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../data/authentication/model/reset_pass_model.dart';
+import '../data/shops/shop_unit_model/shop_unit_model.dart';
 import '../view/screens/authentication/code/forgot_code_screen.dart';
 import '../view/screens/authentication/code/sign_up_code_screen.dart';
 import '../view/screens/authentication/forgot/forgot_screen.dart';
@@ -30,8 +31,10 @@ import '../view/screens/main_screen/transaction_history_screen.dart';
 import '../view/screens/map_screen/map_screen.dart';
 import '../view/screens/notifications/notification_screen.dart';
 import '../view/screens/profile/profile_screen.dart';
+import '../view/screens/qr/qr_scanner/qr_scanner_screen.dart';
 import '../view/screens/send_gift_screen/send_gift_screen.dart';
 import '../view/screens/shops_screen/shop_screen.dart';
+import '../view/screens/store_field_screen/widgets/store_field_arguments.dart';
 import '../view/widgets/scaffold_nav_bar.dart';
 import 'listeners/auth_listener.dart';
 
@@ -89,9 +92,9 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: '/storeFieldItemScreen',
+          path: '/shopScreenFilter',
           builder: (context, state) {
-            return const StoreFieldItemScreen();
+            return const ShopScreenFilter();
           },
         ),
         GoRoute(
@@ -159,15 +162,21 @@ final GoRouter router = GoRouter(
           return const TransactionScreen();
         }),
     GoRoute(
-      path: '/shopScreenFilter',
+      path: '/storeFieldItemScreen',
       builder: (context, state) {
-        return const ShopScreenFilter();
+        final args = state.extra as StoreFieldItemArguments?;
+        return StoreFieldItemScreen(
+          uniqueID: args?.uniqueID,
+          isQRScanned: args?.isQRScanned,
+        );
       },
     ),
     GoRoute(
       path: '/mapScreen',
       builder: (context, state) {
-        return const MapScreen();
+        return MapScreen(
+          storeData: state.extra as ShopsUnitModel,
+        );
       },
     ),
     GoRoute(
@@ -180,11 +189,16 @@ final GoRouter router = GoRouter(
               name: 'sendGiftCardScreen',
               path: 'sendGiftCardScreen',
               builder: (context, state) {
-                BrandItemWidget brandItemWidget =
-                    state.extra as BrandItemWidget;
+                BrandItemWidget? brandItemWidget =
+                    state.extra as BrandItemWidget?;
                 return SendGiftCardScreen(brandItemWidget: brandItemWidget);
               }),
         ]),
+    GoRoute(
+        path: '/qrScanner',
+        builder: (context, state) {
+          return const QrScannerScreen();
+        }),
     GoRoute(
       name: Routes.signIn,
       path: '/${Routes.signIn}',

@@ -13,13 +13,13 @@ mixin _$SliderState on SliderConfigState, Store {
       Atom(name: 'SliderConfigState.maxToken', context: context);
 
   @override
-  double get maxToken {
+  int get maxToken {
     _$maxTokenAtom.reportRead();
     return super.maxToken;
   }
 
   @override
-  set maxToken(double value) {
+  set maxToken(int value) {
     _$maxTokenAtom.reportWrite(value, super.maxToken, () {
       super.maxToken = value;
     });
@@ -29,13 +29,13 @@ mixin _$SliderState on SliderConfigState, Store {
       Atom(name: 'SliderConfigState.maxGift', context: context);
 
   @override
-  double get maxGift {
+  int get maxGift {
     _$maxGiftAtom.reportRead();
     return super.maxGift;
   }
 
   @override
-  set maxGift(double value) {
+  set maxGift(int value) {
     _$maxGiftAtom.reportWrite(value, super.maxGift, () {
       super.maxGift = value;
     });
@@ -45,13 +45,13 @@ mixin _$SliderState on SliderConfigState, Store {
       Atom(name: 'SliderConfigState.giftValue', context: context);
 
   @override
-  double get giftValue {
+  int get giftValue {
     _$giftValueAtom.reportRead();
     return super.giftValue;
   }
 
   @override
-  set giftValue(double value) {
+  set giftValue(int value) {
     _$giftValueAtom.reportWrite(value, super.giftValue, () {
       super.giftValue = value;
     });
@@ -61,15 +61,31 @@ mixin _$SliderState on SliderConfigState, Store {
       Atom(name: 'SliderConfigState.tokenValue', context: context);
 
   @override
-  double get tokenValue {
+  int get tokenValue {
     _$tokenValueAtom.reportRead();
     return super.tokenValue;
   }
 
   @override
-  set tokenValue(double value) {
+  set tokenValue(int value) {
     _$tokenValueAtom.reportWrite(value, super.tokenValue, () {
       super.tokenValue = value;
+    });
+  }
+
+  late final _$transactionAmountAtom =
+      Atom(name: 'SliderConfigState.transactionAmount', context: context);
+
+  @override
+  int get transactionAmount {
+    _$transactionAmountAtom.reportRead();
+    return super.transactionAmount;
+  }
+
+  @override
+  set transactionAmount(int value) {
+    _$transactionAmountAtom.reportWrite(value, super.transactionAmount, () {
+      super.transactionAmount = value;
     });
   }
 
@@ -77,11 +93,22 @@ mixin _$SliderState on SliderConfigState, Store {
       ActionController(name: 'SliderConfigState', context: context);
 
   @override
-  void changeValue(double newValue) {
+  void changeTokenValue(int newValue) {
     final _$actionInfo = _$SliderConfigStateActionController.startAction(
-        name: 'SliderConfigState.changeValue');
+        name: 'SliderConfigState.changeTokenValue');
     try {
-      return super.changeValue(newValue);
+      return super.changeTokenValue(newValue);
+    } finally {
+      _$SliderConfigStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeGiftCardLDValue(int newValue) {
+    final _$actionInfo = _$SliderConfigStateActionController.startAction(
+        name: 'SliderConfigState.changeGiftCardLDValue');
+    try {
+      return super.changeGiftCardLDValue(newValue);
     } finally {
       _$SliderConfigStateActionController.endAction(_$actionInfo);
     }
@@ -93,7 +120,8 @@ mixin _$SliderState on SliderConfigState, Store {
 maxToken: ${maxToken},
 maxGift: ${maxGift},
 giftValue: ${giftValue},
-tokenValue: ${tokenValue}
+tokenValue: ${tokenValue},
+transactionAmount: ${transactionAmount}
     ''';
   }
 }

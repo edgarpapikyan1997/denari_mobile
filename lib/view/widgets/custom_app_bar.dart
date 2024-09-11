@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget {
   final Text? title;
   final Widget? tealIcon;
   final AppBarType appBarType;
-  final List<String?>? imageList;
+  final List<String>? imageList;
 
   const CustomAppBar({
     super.key,

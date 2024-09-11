@@ -31,10 +31,15 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
     final brandItems = [
       for (var i = 0; i < 10; ++i)
         BrandItemWidget(
+          topPadding: 16,
+          addDivider: true,
           avatar: Assets.media.images.toyStory.path,
           brandName: '$brandName$i',
           balanceLD: _tokenBalanceState.balance,
-
+          iconHeight: 13,
+          iconWidth: 14,
+          addPlus: false,
+          addPreviewBanner: false,
           tealButton: GestureDetector(
             onTap: () {
               showItemInfoBottomSheet(

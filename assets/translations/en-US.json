@@ -26,9 +26,15 @@
     "qrOfTransaction": "QR code of the Transaction",
     "showThisQr": "Show this QR code to the seller to get bonuses or pay with a gift card",
     "getTokens": "To get tokens for a purchase or use the accumulated points, show the screen to the seller in the store.",
-    "dontLeaveScreen": "Please do not leave the screen before confirming the purchase."
+    "dontLeaveScreen": "Please do not leave the screen before confirming the purchase.",
+    "error_adv": "Error get advertisements",
+    "userFound" : "User found",
+    "giftWillSend" : "The gift will be sent directly to",
+    "tokenWillSend" : "The tokens will be sent directly to",
+    "backToHome" : "Back to Home"
   },
   "balance": {
+    "balance" : "Balance:",
     "tokenBalance": "Token Balance",
     "viewEarnedToken": "View your earned token",
     "tokens": "Tokens",
@@ -103,7 +109,8 @@
     "yourPurchase": "Your purchase of $",
     "at": "at",
     "earnedYou": "earned you",
-    "wouldYouRate": "How would you rate your experience?"
+    "wouldYouRate": "How would you rate your experience?",
+    "userNotFound" : "The user was not found"
   },
   "profile": {
     "data": "Profile data",
@@ -152,6 +159,7 @@
     "empty": "There are no new events or messages requiring your attention at this time."
   },
   "shops": {
+    "allShops": "See all shops",
     "shops": "Shops",
     "all": "All",
     "location": "Location",
@@ -181,15 +189,28 @@
     "selectAmount": "Select the amount and number of tokens to be withdrawn.",
     "redeemGift": "Redeem from Gift Cards",
     "redeemToken": "Redeem from Tokens",
-    "max": "max"
+    "max": "max",
+    "dailyFrom": "Daily from"
   },
-  "transaction": {
+  "status": {
+    "onHold": "On Hold",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "qr" : {
+   "generateQR" : "Generate QR code",
+    "scanningError" : "Scanning error occurred"
+  },
+  "transaction" : {
+   "transactionSent" : "Transaction sent: status onHold",
+    "transactionError" : "Something went wrong",
+    "transactionIDError" : "Can't get Transaction ID : TRY AGAIN",
     "transaction": "Transaction",
     "id": "ID:",
     "status": "Status",
     "storeAddress": "Store Address",
     "details": "Details",
     "commentByStore": "Comment by Store",
-   "transactionAmount" : "Transaction Amount"
+    "transactionAmount" : "Transaction Amount"
   }
 }

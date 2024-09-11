@@ -33,8 +33,8 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     reaction(
-      (reaction) => _state.signIn,
-      (value) {
+          (reaction) => _state.signIn,
+          (value) {
         if (value == 'true') {
           authListener.login();
         } else if (value != null) {

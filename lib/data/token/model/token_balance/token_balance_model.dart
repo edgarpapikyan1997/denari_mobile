@@ -7,7 +7,7 @@ part 'token_balance_model.g.dart';
 class TokenBalanceModel {
   @JsonKey(defaultValue: '')
   final String userId;
-  @JsonKey(defaultValue: '')
+  @JsonKey(defaultValue: "0")
   final String totalBalance;
 
   const TokenBalanceModel({

@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.denariApp</string>
+	<string>com.denari.app</string>
 	<key>PROJECT_ID</key>
 	<string>denari-84a55</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:566463012532:ios:7aa0a582cc2080cdac81e1</string>
+	<string>1:566463012532:ios:817855951911d93bac81e1</string>
+	<key>DATABASE_URL</key>
+	<string>https://denari-84a55-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>

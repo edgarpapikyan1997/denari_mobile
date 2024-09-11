@@ -6,21 +6,28 @@ class SliderState = SliderConfigState with _$SliderState;
 
 abstract class SliderConfigState with Store {
   @observable
-  double maxToken = 40;
+  int maxToken = 0;
 
   @observable
-  double maxGift = 650;
+  int maxGift = 0;
 
   @observable
-  double giftValue = 0;
+  int giftValue = 0;
 
   @observable
-  double tokenValue = 0;
+  int tokenValue = 0;
+
+  @observable
+  int transactionAmount = 0;
 
   @action
-  void changeValue(double newValue) {
-
-    giftValue = newValue;
+  void changeTokenValue(int newValue) {
     tokenValue = newValue;
+    transactionAmount = giftValue + tokenValue;
+  }
+  @action
+  void changeGiftCardLDValue(int newValue) {
+    giftValue = newValue;
+    transactionAmount = giftValue + tokenValue;
   }
 }

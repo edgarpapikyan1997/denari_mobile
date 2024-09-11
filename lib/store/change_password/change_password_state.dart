@@ -7,12 +7,12 @@ import 'package:mobx/mobx.dart';
 
 part 'change_password_state.g.dart';
 
-class ChangePasswordState = _ChangePasswordState with _$ChangePasswordState;
+class ChangePasswordState = ImplChangePasswordState with _$ChangePasswordState;
 
-abstract class _ChangePasswordState with Store {
+abstract class ImplChangePasswordState with Store {
   final AuthRepository _repository;
 
-  _ChangePasswordState({required AuthRepository authRepository})
+  ImplChangePasswordState({required AuthRepository authRepository})
       : _repository = authRepository;
 
   @observable

@@ -14,6 +14,10 @@ ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) => ProfileModel(
       dateOfBirth: json['dateOfBirth'] as String? ?? '',
       createdAt: json['createdAt'] as String? ?? '',
       code: json['code'] as String? ?? '',
+      allowGPSLocation: json['allowGPSLocation'] as bool? ?? false,
+      transactionNotification:
+          json['transactionNotification'] as bool? ?? false,
+      advertisements: json['advertisements'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$ProfileModelToJson(ProfileModel instance) =>
@@ -23,4 +27,7 @@ Map<String, dynamic> _$ProfileModelToJson(ProfileModel instance) =>
       'name': instance.name,
       'dateOfBirth': instance.dateOfBirth,
       'code': instance.code,
+      'allowGPSLocation': instance.allowGPSLocation,
+      'transactionNotification': instance.transactionNotification,
+      'advertisements': instance.advertisements,
     };

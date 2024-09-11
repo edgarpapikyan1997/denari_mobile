@@ -249,9 +249,9 @@ class $AssetsMediaImagesGen {
   AssetGenImage get coffe =>
       const AssetGenImage('assets/media/images/Coffe.png');
 
-  /// File path: assets/media/images/channel.png
-  AssetGenImage get channel =>
-      const AssetGenImage('assets/media/images/channel.png');
+  /// File path: assets/media/images/Frame.png
+  AssetGenImage get frame =>
+      const AssetGenImage('assets/media/images/Frame.png');
 
   /// File path: assets/media/images/credit-card-1.png
   AssetGenImage get creditCard1 =>
@@ -280,6 +280,10 @@ class $AssetsMediaImagesGen {
   AssetGenImage get ratedStar =>
       const AssetGenImage('assets/media/images/ratedStar.png');
 
+  /// File path: assets/media/images/safety-warning-heat.png
+  AssetGenImage get safetyWarningHeat =>
+      const AssetGenImage('assets/media/images/safety-warning-heat.png');
+
   /// File path: assets/media/images/skyteam.png
   AssetGenImage get skyteam =>
       const AssetGenImage('assets/media/images/skyteam.png');
@@ -302,7 +306,7 @@ class $AssetsMediaImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         coffe,
-        channel,
+        frame,
         creditCard1,
         cryptoCurrencyNamecoin,
         filledStar,
@@ -310,6 +314,7 @@ class $AssetsMediaImagesGen {
         image9,
         img,
         ratedStar,
+        safetyWarningHeat,
         skyteam,
         star,
         taskListClock,

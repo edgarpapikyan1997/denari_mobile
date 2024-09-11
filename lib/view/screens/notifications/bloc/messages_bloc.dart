@@ -1,16 +1,13 @@
 // ignore_for_file: avoid_print
-
 import 'dart:async';
-
 import 'dart:io' show Platform;
 import 'package:bloc/bloc.dart';
 import 'package:denari_app/data/profile/model/profile_model.dart';
 import 'package:denari_app/data/profile/repository/profile_repository.dart';
 import 'package:denari_app/utils/log/logging.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'repository/messages_repository.dart';
-import 'model/notification.dart';
+import '../../../../data/notifications/repository/messages_repository.dart';
+import '../../../../data/notifications/model/notification.dart';
 
 abstract class MessagesState {}
 
@@ -53,6 +50,8 @@ class InitializedMessagesEvent extends MessagesEvent {}
 
 class SubscribeToNotificationsEvent extends MessagesEvent {}
 
+class UnSubscribeNotificationsEvent extends MessagesEvent {}
+
 class UpdateNotificationsEvent extends MessagesEvent {
   final List<Notification>? notifications;
 
@@ -83,6 +82,7 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
   final MessagesRepository _messagesRepository;
   final ProfileRepository _profileRepository;
   String? _fcmToken;
+  StreamSubscription<List<Notification>>? _subscriptionNotifications;
 
   MessagesBloc(
       {required MessagesRepository messagesRepository,
@@ -93,6 +93,7 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
     on<InitializedMessagesEvent>(_onInitializedNotificationsEvent);
     on<UninitializedMessagesEvent>(_onUninitializedNotificationsEvent);
     on<SubscribeToNotificationsEvent>(_onListenNotifications);
+    on<UnSubscribeNotificationsEvent>(_onDisposeNotifications);
     on<UpdateNotificationsEvent>(_updateNotifications);
     on<DeleteNotificationsEvent>(_deleteNotifications);
     on<UpdateNotificationEvent>(_updateNotification);
@@ -188,24 +189,13 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
       return;
     }
     final platform = Platform.isAndroid ? 'android' : 'ios';
-    _messagesRepository.saveTokenToDatabase(
-        user.phone, platform, token);
+    _messagesRepository.saveTokenToDatabase(user.phone, platform, token);
   }
 
-  void _handleNotificationsUpdate(DatabaseEvent event) {
+  void _handleNotificationsUpdate(List<Notification> event) {
     List<Notification> notifications = [];
-    if (event.snapshot.children.isNotEmpty) {
-      notifications = event.snapshot.children
-          .map(
-            (e) {
-              var id = {'id': e.key};
-              return Notification.fromObject(
-                  (e.value as Map<Object?, Object?>)..addAll(id));
-            },
-          )
-          .toList(growable: false)
-          .reversed
-          .toList(growable: false);
+    if (event.isNotEmpty) {
+      notifications = event.reversed.toList(growable: false);
     }
     add(UpdateNotificationsEvent(notifications));
   }
@@ -215,7 +205,8 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
     Emitter<MessagesState> emit,
   ) async {
     final notificationsStream = _messagesRepository.getNotificationStream();
-    notificationsStream.listen(_handleNotificationsUpdate);
+    _subscriptionNotifications =
+        notificationsStream.listen(_handleNotificationsUpdate);
   }
 
   Future<void> _updateNotifications(
@@ -233,7 +224,7 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
     }
     List<Notification>? notifications;
     for (var element in event.notifications ?? <Notification>[]) {
-      if (element.user == user.phone) {
+      if (element.userId == user.phone) {
         notifications ??= [];
         notifications.add(element);
       }
@@ -265,5 +256,13 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
     Emitter<MessagesState> emit,
   ) async {
     await _messagesRepository.deleteNotification(event.notification);
+  }
+
+  Future<void> _onDisposeNotifications(
+    UnSubscribeNotificationsEvent event,
+    Emitter<MessagesState> emit,
+  ) async {
+    await _subscriptionNotifications?.cancel();
+    _subscriptionNotifications = null;
   }
 }

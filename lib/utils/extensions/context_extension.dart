@@ -269,6 +269,8 @@ extension TextStyleHelpers on TextStyle {
 
   TextStyle get bold => copyWith(fontWeight: FontWeight.w700);
 
+  TextStyle get height1 =>  copyWith(height: 1.4);
+
   TextStyle get regularItalic => copyWith(
         fontWeight: FontWeight.w400,
         fontStyle: FontStyle.italic,
@@ -283,6 +285,8 @@ extension TextStyleHelpers on TextStyle {
         fontWeight: FontWeight.w600,
         fontStyle: FontStyle.italic,
       );
+
+
 }
 
 extension GlobalKeyEx on GlobalKey {

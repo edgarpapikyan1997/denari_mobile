@@ -1,6 +1,5 @@
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
-import '../../../../gen/assets.gen.dart';
 
 class StoreFieldWidget extends StatelessWidget {
   final String? asset;
@@ -12,7 +11,7 @@ class StoreFieldWidget extends StatelessWidget {
 
   const StoreFieldWidget({
     super.key,
-    required this.asset,
+    this.asset,
     required this.title,
     required this.description,
     required this.height,
@@ -24,9 +23,8 @@ class StoreFieldWidget extends StatelessWidget {
     return SizedBox(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: Image.asset(
-          /// must be some image of unavailable data
-          asset ?? Assets.media.images.coffe.path,
+        child: Image.network(
+          asset ?? '',
           height: height,
           width: width,
           fit: BoxFit.fitWidth,

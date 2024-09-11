@@ -7,11 +7,11 @@ class Notification {
   @JsonKey(includeFromJson: true, includeToJson: false)
   final String id;
   @JsonKey(defaultValue: '')
-  final String user;
+  final String userId;
   @JsonKey(defaultValue: '')
   final String title;
   @JsonKey(defaultValue: '')
-  final String body;
+  final String message;
   @JsonKey(defaultValue: '')
   final String createdAt;
   @JsonKey(defaultValue: false)
@@ -19,11 +19,11 @@ class Notification {
 
   const Notification({
     required this.id,
-    required this.body,
+    required this.message,
     required this.createdAt,
     required this.read,
     required this.title,
-    required this.user,
+    required this.userId,
   });
 
   factory Notification.fromObject(Map<Object?, Object?> map) {
@@ -49,11 +49,11 @@ class Notification {
   }) {
     return Notification(
       id: id ?? this.id,
-      body: body ?? this.body,
+      message: body ?? message,
       createdAt: createdAt ?? this.createdAt,
       read: read ?? this.read,
       title: title ?? this.title,
-      user: user ?? this.user,
+      userId: user ?? userId,
     );
   }
 
@@ -61,10 +61,10 @@ class Notification {
   String toString() {
     return 'Notification: { '
         'id: $id\n'
-        'body: $body\n'
+        'body: $message\n'
         'createdAt: $createdAt\n'
         'read: $read\n'
         'title: $title\n'
-        'user: $user }\n';
+        'user: $userId }\n';
   }
 }

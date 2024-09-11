@@ -10,16 +10,24 @@ import '../delimiter.dart';
 class BrandItemWidget extends StatelessWidget {
   final String? avatar;
   final String brandName;
+  final bool isToken;
+  final Color wrapperColor;
+  final Color? brandItemWrapperColor;
   final Widget? secondaryInfo;
   final int? tokenBalance;
   final int? balanceLD;
   final Widget? tealButton;
   final bool addDivider;
-  final DateTime? lastUpdate;
+  final double bottomPadding;
+  final double topPadding;
+  final double leftPadding;
+  final double rightPadding;
+  final String? lastUpdate;
   final DateTime? purchaseDate;
   final SvgPicture? iconAvatar;
-  final Color tokenColor;
-  final Color balanceColor;
+  final String? shopId;
+  final Color? tokenColor;
+  final Color? balanceColor;
   final TextStyle? balanceLDStyle;
   final TextStyle? tokenBalanceStyle;
   final double iconHeight;
@@ -27,132 +35,119 @@ class BrandItemWidget extends StatelessWidget {
   final bool addPlus;
   final bool addPreviewBanner;
   final VoidCallback? onTap; // Add an onTap callback
-
   const BrandItemWidget({
     super.key,
+    this.brandItemWrapperColor,
     required this.avatar,
     required this.brandName,
+    this.isToken = false,
     this.secondaryInfo,
     this.tokenBalance,
-    this.balanceLD,
     this.tealButton,
     this.addDivider = true,
-    this.tokenColor = AppColors.white,
-    this.balanceColor = AppColors.white,
+    this.bottomPadding = 0,
+    this.topPadding = 0,
+    this.leftPadding = 0,
+    this.rightPadding = 0,
+    this.wrapperColor = AppColors.white,
     this.lastUpdate,
-    this.purchaseDate,
     this.iconAvatar,
+    this.balanceLD,
+    this.purchaseDate,
+    this.tokenColor,
+     this.balanceColor,
     this.balanceLDStyle,
     this.tokenBalanceStyle,
-    this.iconHeight = 20,
-    this.iconWidth = 10,
-    this.addPlus = false,
-    this.addPreviewBanner = false,
-    this.onTap, // Include the onTap callback
+     this.iconHeight = 24,
+     this.iconWidth = 24,
+     this.addPlus = false,
+     this.addPreviewBanner = false,
+    this.onTap,
+    this.shopId,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onTap, // Assign the onTap event to GestureDetector
-      child: Container(
-        width: context.width,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            addPreviewBanner == true
-                ? PreviewBanner(
-              leadingBanner: purchaseDate!.weekday.toString(),
-            )
-                : const Delimiter(16),
-            Row(
-              children: [
-                iconAvatar != null
-                    ? iconAvatar!
-                    : Container(
-                  height: 48,
-                  width: 48,
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage(avatar!),
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 12,vertical: topPadding),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: brandItemWrapperColor,
+          ),
+          child: Row(
+            children: [
+              iconAvatar != null
+                  ? iconAvatar!
+                  : Container(
+                      height: 48,
+                      width: 48,
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(avatar!),
+                        ),
+                        border: Border.all(
+                            width: 1, color: AppColors.borderColor),
+                      ),
                     ),
-                    border: Border.all(
-                        width: 1, color: AppColors.borderColor),
-                  ),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                secondaryInfo != null
-                    ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
+              const SizedBox(
+                width: 8,
+              ),
+              secondaryInfo != null
+                  ? Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            brandName,
+                            style: context.theme.body1,
+                          ),
+                          const SizedBox(
+                            height: 2,
+                          ),
+                          SizedBox(
+                              width: context.width / 1.5,
+                              child: secondaryInfo!),
+                        ],
+                      ),
+                    )
+                  : Text(
                       brandName,
-                      style: context.theme.body1,
+                      style: context.theme.headline4.regular,
                     ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    secondaryInfo!,
-                  ],
-                )
-                    : Text(
-                  brandName,
-                  style: context.theme.headline4.regular,
-                ),
-                const Spacer(),
-                Column(
-                  children: [
-                    balanceLD != null
-                        ? BalanceWidget(
-                      isTokenBalance: false,
+              const Spacer(),
+              tokenBalance != null
+                  ? BalanceWidget(
+                      isTokenBalance: isToken,
                       tokenIconHeight: 20,
                       tokenIconWidth: 18,
-                      balance: balanceLD!,
-                      textStyle: balanceLDStyle ??
-                          context.theme.headline4,
-                      color: balanceColor,
-                    )
-                        : SizedBox(),
-                    if (tokenBalance != null && balanceLD != null)
-                      const Delimiter(4),
-                    tokenBalance != null
-                        ? BalanceWidget(
-                      isTokenBalance: true,
-                      horizontalPadding: 5,
-                      verticalPadding: 2,
-                      tokenIconHeight: iconHeight,
-                      tokenIconWidth: iconWidth,
+                      horizontalPadding: 12,
+                      verticalPadding: 6,
                       balance: tokenBalance!,
-                      textStyle: tokenBalanceStyle ??
-                          context.theme.headline4,
-                      color: tokenColor,
-                      addPlusChar: addPlus,
+                      textStyle: context.theme.headline4,
+                      color: wrapperColor,
                     )
-                        : SizedBox(),
-                  ],
-                ),
-                tealButton ?? const SizedBox(),
-              ],
-            ),
-            addDivider
-                ? const SizedBox(
-              height: 16,
-            )
-                : const SizedBox(),
-            addDivider
-                ? const Divider(
-              height: 1,
-              color: AppColors.borderColor,
-            )
-                : const SizedBox(),
-          ],
+                  : const SizedBox(),
+              tealButton ?? const SizedBox(),
+            ],
+          ),
         ),
-      ),
+        // addDivider
+        //     ? const SizedBox(
+        //         height: 8,
+        //       )
+        //     : const SizedBox(),
+        addDivider
+            ? const Divider(
+                height: 1,
+                color: AppColors.borderColor,
+              )
+            : const SizedBox(),
+      ],
     );
   }
 }

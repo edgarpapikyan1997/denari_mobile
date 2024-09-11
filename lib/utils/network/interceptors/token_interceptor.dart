@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:denari_app/utils/di/config.dart';
 import 'package:denari_app/utils/env/config.dart';
 import 'package:denari_app/utils/listeners/auth_listener.dart';
@@ -7,6 +6,7 @@ import 'package:denari_app/utils/network/data/token_preferences.dart';
 import 'package:denari_app/utils/network/model/api_token.dart';
 import 'package:denari_app/utils/network/utils/response_helper.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 
 class TokenInterceptor extends QueuedInterceptor {
   final TokenPreferences preferencesRepository;
@@ -116,7 +116,9 @@ class TokenInterceptor extends QueuedInterceptor {
   Future<void> setToken(ApiToken token) async {
     try {
       await preferencesRepository.setToken(token);
-    } catch (e) {}
+    } catch (e) {
+
+    }
   }
 
   Future<void> clearToken() async {
@@ -129,10 +131,10 @@ class TokenInterceptor extends QueuedInterceptor {
       response?.statusCode == 403;
 
   static Future<ApiToken> _refreshToken(token) async {
-    final response = await di.get<Dio>().post(
-          '${di.get<Config>().host}/refresh-token',
-          data: jsonEncode({'refreshToken': token?.refreshToken ?? ''}),
-        );
+    final response = await DioForNative().post(
+      '${di.get<Config>().host}/refresh-token',
+      data: jsonEncode({'refreshToken': token?.refreshToken ?? ''}),
+    );
     return response.item(ApiToken.fromJson);
   }
 }

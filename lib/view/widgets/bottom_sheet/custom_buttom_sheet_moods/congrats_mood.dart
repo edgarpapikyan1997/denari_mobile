@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import '../../../../gen/assets.gen.dart';
 import '../../../../store/custom_button_state/custom_button_state.dart';
 import '../../../../utils/padding_utility/padding_utility.dart';
 import '../../../../utils/themes/app_colors.dart';
@@ -20,9 +21,9 @@ class CongratsMood extends StatefulWidget {
 
   const CongratsMood(
       {super.key,
-      required this.asset,
+       this.asset,
       this.title,
-      required this.tokens,
+       this.tokens,
       this.balance});
 
   @override
@@ -56,8 +57,8 @@ class _CongratsMoodState extends State<CongratsMood> {
             top: 36,
             bottom: 24,
             child: widget.asset == null || widget.asset!.isNotEmpty
-                ? Image.asset(widget.asset!)
-                : const SizedBox(),
+                ? Assets.media.images.fireworks.image()
+                : Image.asset(widget.asset!),
           ),
           PaddingUtility.only(
             left: 35,
@@ -138,6 +139,8 @@ class _CongratsMoodState extends State<CongratsMood> {
                       isEnabled: customButtonState.isButtonEnabled,
                       isWhite: false,
                       onTap: () {
+                        context.pop();
+                        context.pop();
                         context.pop();
                       },
                     ),

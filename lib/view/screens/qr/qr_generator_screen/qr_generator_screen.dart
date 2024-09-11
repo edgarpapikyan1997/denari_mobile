@@ -7,17 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-import '../../../constants/bottom_sheet_type.dart';
-import '../../../gen/assets.gen.dart';
-import '../../../utils/padding_utility/padding_utility.dart';
-import '../../widgets/bottom_sheet/custom_bottom_sheet.dart';
+import '../../../../gen/assets.gen.dart';
+import '../../../../utils/padding_utility/padding_utility.dart';
+
 
 class QrGeneratorScreen extends StatelessWidget {
-  final String userID;
-  final String token;
+  final String transactionID;
+  final VoidCallback onTap;
 
   const QrGeneratorScreen(
-      {super.key, required this.userID, required this.token});
+      {super.key,
+      required this.transactionID,
+      required this.onTap,
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class QrGeneratorScreen extends StatelessWidget {
             children: [
               const Spacer(),
               QrImageView(
-                data: userID,
+                data: transactionID,
                 size: 195,
               ),
               const Delimiter(16),
@@ -67,17 +69,7 @@ class QrGeneratorScreen extends StatelessWidget {
                 isEnabled: true,
                 isWhite: false,
                 title: 'buttons.close'.tr(),
-                onTap: () {
-                  customBottomSheet(
-                    context: context,
-                    type: BottomSheetType.congrats,
-                    title: 'bottomSheet.congratsEaredToken'.tr(),
-                    description: 'Description',
-                    asset: Assets.media.images.fireworks.path,
-                    tokens: token,
-                    balance: '100',
-                  );
-                },
+                onTap: onTap,
               ),
             ],
           ),

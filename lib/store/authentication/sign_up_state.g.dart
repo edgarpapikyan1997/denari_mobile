@@ -8,44 +8,45 @@ part of 'sign_up_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$SignUpState on _SignUpState, Store {
+mixin _$SignUpState on ImplSignUpState, Store {
   Computed<bool>? _$isNameValidComputed;
 
   @override
   bool get isNameValid =>
       (_$isNameValidComputed ??= Computed<bool>(() => super.isNameValid,
-              name: '_SignUpState.isNameValid'))
+              name: 'ImplSignUpState.isNameValid'))
           .value;
   Computed<bool>? _$isEmailValidComputed;
 
   @override
   bool get isEmailValid =>
       (_$isEmailValidComputed ??= Computed<bool>(() => super.isEmailValid,
-              name: '_SignUpState.isEmailValid'))
+              name: 'ImplSignUpState.isEmailValid'))
           .value;
   Computed<bool>? _$isPasswordValidComputed;
 
   @override
   bool get isPasswordValid =>
       (_$isPasswordValidComputed ??= Computed<bool>(() => super.isPasswordValid,
-              name: '_SignUpState.isPasswordValid'))
+              name: 'ImplSignUpState.isPasswordValid'))
           .value;
   Computed<bool>? _$isPhoneValidComputed;
 
   @override
   bool get isPhoneValid =>
       (_$isPhoneValidComputed ??= Computed<bool>(() => super.isPhoneValid,
-              name: '_SignUpState.isPhoneValid'))
+              name: 'ImplSignUpState.isPhoneValid'))
           .value;
   Computed<bool>? _$createButtonEnabledComputed;
 
   @override
   bool get createButtonEnabled => (_$createButtonEnabledComputed ??=
           Computed<bool>(() => super.createButtonEnabled,
-              name: '_SignUpState.createButtonEnabled'))
+              name: 'ImplSignUpState.createButtonEnabled'))
       .value;
 
-  late final _$signUpAtom = Atom(name: '_SignUpState.signUp', context: context);
+  late final _$signUpAtom =
+      Atom(name: 'ImplSignUpState.signUp', context: context);
 
   @override
   String? get signUp {
@@ -60,7 +61,7 @@ mixin _$SignUpState on _SignUpState, Store {
     });
   }
 
-  late final _$nameAtom = Atom(name: '_SignUpState.name', context: context);
+  late final _$nameAtom = Atom(name: 'ImplSignUpState.name', context: context);
 
   @override
   String get name {
@@ -75,23 +76,24 @@ mixin _$SignUpState on _SignUpState, Store {
     });
   }
 
-  late final _$emailAtom = Atom(name: '_SignUpState.email', context: context);
+  late final _$emailAtom =
+      Atom(name: 'ImplSignUpState.email', context: context);
 
   @override
-  String get email {
+  String? get email {
     _$emailAtom.reportRead();
     return super.email;
   }
 
   @override
-  set email(String value) {
+  set email(String? value) {
     _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
     });
   }
 
   late final _$passwordAtom =
-      Atom(name: '_SignUpState.password', context: context);
+      Atom(name: 'ImplSignUpState.password', context: context);
 
   @override
   String get password {
@@ -106,7 +108,8 @@ mixin _$SignUpState on _SignUpState, Store {
     });
   }
 
-  late final _$phoneAtom = Atom(name: '_SignUpState.phone', context: context);
+  late final _$phoneAtom =
+      Atom(name: 'ImplSignUpState.phone', context: context);
 
   @override
   PhoneNumber? get phone {
@@ -121,7 +124,7 @@ mixin _$SignUpState on _SignUpState, Store {
     });
   }
 
-  late final _$codeAtom = Atom(name: '_SignUpState.code', context: context);
+  late final _$codeAtom = Atom(name: 'ImplSignUpState.code', context: context);
 
   @override
   String get code {
@@ -137,7 +140,7 @@ mixin _$SignUpState on _SignUpState, Store {
   }
 
   late final _$loadingAtom =
-      Atom(name: '_SignUpState.loading', context: context);
+      Atom(name: 'ImplSignUpState.loading', context: context);
 
   @override
   bool get loading {
@@ -153,7 +156,7 @@ mixin _$SignUpState on _SignUpState, Store {
   }
 
   late final _$codeSentAtom =
-      Atom(name: '_SignUpState.codeSent', context: context);
+      Atom(name: 'ImplSignUpState.codeSent', context: context);
 
   @override
   String? get codeSent {
@@ -169,7 +172,7 @@ mixin _$SignUpState on _SignUpState, Store {
   }
 
   late final _$registerAsyncAction =
-      AsyncAction('_SignUpState.register', context: context);
+      AsyncAction('ImplSignUpState.register', context: context);
 
   @override
   Future<void> register() {
@@ -177,68 +180,68 @@ mixin _$SignUpState on _SignUpState, Store {
   }
 
   late final _$getCodeAsyncAction =
-      AsyncAction('_SignUpState.getCode', context: context);
+      AsyncAction('ImplSignUpState.getCode', context: context);
 
   @override
   Future<void> getCode() {
     return _$getCodeAsyncAction.run(() => super.getCode());
   }
 
-  late final _$_SignUpStateActionController =
-      ActionController(name: '_SignUpState', context: context);
+  late final _$ImplSignUpStateActionController =
+      ActionController(name: 'ImplSignUpState', context: context);
 
   @override
   void setName(String value) {
-    final _$actionInfo = _$_SignUpStateActionController.startAction(
-        name: '_SignUpState.setName');
+    final _$actionInfo = _$ImplSignUpStateActionController.startAction(
+        name: 'ImplSignUpState.setName');
     try {
       return super.setName(value);
     } finally {
-      _$_SignUpStateActionController.endAction(_$actionInfo);
+      _$ImplSignUpStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setEmail(String value) {
-    final _$actionInfo = _$_SignUpStateActionController.startAction(
-        name: '_SignUpState.setEmail');
+    final _$actionInfo = _$ImplSignUpStateActionController.startAction(
+        name: 'ImplSignUpState.setEmail');
     try {
       return super.setEmail(value);
     } finally {
-      _$_SignUpStateActionController.endAction(_$actionInfo);
+      _$ImplSignUpStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPassword(String value) {
-    final _$actionInfo = _$_SignUpStateActionController.startAction(
-        name: '_SignUpState.setPassword');
+    final _$actionInfo = _$ImplSignUpStateActionController.startAction(
+        name: 'ImplSignUpState.setPassword');
     try {
       return super.setPassword(value);
     } finally {
-      _$_SignUpStateActionController.endAction(_$actionInfo);
+      _$ImplSignUpStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPhone(PhoneNumber value) {
-    final _$actionInfo = _$_SignUpStateActionController.startAction(
-        name: '_SignUpState.setPhone');
+    final _$actionInfo = _$ImplSignUpStateActionController.startAction(
+        name: 'ImplSignUpState.setPhone');
     try {
       return super.setPhone(value);
     } finally {
-      _$_SignUpStateActionController.endAction(_$actionInfo);
+      _$ImplSignUpStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setCode(String value) {
-    final _$actionInfo = _$_SignUpStateActionController.startAction(
-        name: '_SignUpState.setCode');
+    final _$actionInfo = _$ImplSignUpStateActionController.startAction(
+        name: 'ImplSignUpState.setCode');
     try {
       return super.setCode(value);
     } finally {
-      _$_SignUpStateActionController.endAction(_$actionInfo);
+      _$ImplSignUpStateActionController.endAction(_$actionInfo);
     }
   }
 

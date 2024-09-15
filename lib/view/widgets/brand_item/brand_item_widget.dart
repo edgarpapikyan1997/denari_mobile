@@ -72,74 +72,77 @@ class BrandItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.only(top: topPadding, bottom:  bottomPadding,),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: brandItemWrapperColor,
-          ),
-          child: Row(
-            children: [
-              iconAvatar != null
-                  ? iconAvatar!
-                  : Container(
-                      height: 48,
-                      width: 48,
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: NetworkImage(avatar!),
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.only(top: topPadding, bottom:  bottomPadding,),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: brandItemWrapperColor,
+            ),
+            child: Row(
+              children: [
+                iconAvatar != null
+                    ? iconAvatar!
+                    : Container(
+                        height: 48,
+                        width: 48,
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(avatar!),
+                          ),
+                          border:
+                              Border.all(width: 1, color: AppColors.borderColor),
                         ),
-                        border:
-                            Border.all(width: 1, color: AppColors.borderColor),
                       ),
-                    ),
-              const SizedBox(
-                width: 8,
-              ),
-              secondaryInfo != null
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          brandName,
-                          style: context.theme.body1,
-                        ),
-                        const SizedBox(
-                          height: 2,
-                        ),
-                        secondaryInfo!,
-                      ],
-                    )
-                  : Text(
-                      brandName,
-                      style: context.theme.headline4.regular,
-                    ),
-              const Spacer(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: balanceWidgets ?? [],
-              ),
-              tealButton ?? const SizedBox(),
-            ],
+                const SizedBox(
+                  width: 8,
+                ),
+                secondaryInfo != null
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            brandName,
+                            style: context.theme.body1,
+                          ),
+                          const SizedBox(
+                            height: 2,
+                          ),
+                          secondaryInfo!,
+                        ],
+                      )
+                    : Text(
+                        brandName,
+                        style: context.theme.headline4.regular,
+                      ),
+                const Spacer(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: balanceWidgets ?? [],
+                ),
+                tealButton ?? const SizedBox(),
+              ],
+            ),
           ),
-        ),
-        // addDivider
-        //     ? const SizedBox(
-        //         height: 8,
-        //       )
-        //     : const SizedBox(),
-        addDivider
-            ? const Divider(
-                height: 1,
-                color: AppColors.borderColor,
-              )
-            : const SizedBox(),
-      ],
+          // addDivider
+          //     ? const SizedBox(
+          //         height: 8,
+          //       )
+          //     : const SizedBox(),
+          addDivider
+              ? const Divider(
+                  height: 1,
+                  color: AppColors.borderColor,
+                )
+              : const SizedBox(),
+        ],
+      ),
     );
   }
 }

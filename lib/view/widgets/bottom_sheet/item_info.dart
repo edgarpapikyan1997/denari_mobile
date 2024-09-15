@@ -12,18 +12,22 @@ class ItemInfo extends StatelessWidget {
   final String? id;
   final StatusWidget status;
   final String? storeAddress;
-  final int? balanceLD;
-  final int? tokenBalance;
   final String? commentByStore;
+  final int? transactionAmount;
+  final int? tokensAddedAmount;
+  final int? amountTokensUsed;
+  final int? amountGiftCardsUsed;
 
   const ItemInfo({
     super.key,
     this.id,
     required this.status,
     this.storeAddress,
-    this.balanceLD,
-    this.tokenBalance,
-    this.commentByStore,
+    this.transactionAmount,
+    this.tokensAddedAmount,
+    this.amountTokensUsed,
+    this.amountGiftCardsUsed,
+    this.commentByStore = '',
   });
 
   Row itemInfoUnit({
@@ -49,13 +53,12 @@ class ItemInfo extends StatelessWidget {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return PaddingUtility.only(
       top: 32,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         children: [
           itemInfoUnit(
             context: context,
@@ -83,7 +86,21 @@ class ItemInfo extends StatelessWidget {
             context: context,
             title: 'transaction.transactionAmount'.tr(),
             value: BalanceWidget(
-              balance: balanceLD ?? 0,
+              balance: transactionAmount ?? 0,
+              textStyle: context.theme.body1.semiBold,
+            ),
+            addSpacer: true,
+            titleStyle: context.theme.body1,
+          ),
+          const Delimiter(12),
+          itemInfoUnit(
+            context: context,
+            title: 'transaction.tokensAddedAmount'.tr(),
+            value: BalanceWidget(
+              isTokenBalance: true,
+              tokenIconWidth: 18,
+              tokenIconHeight: 20,
+              balance: tokensAddedAmount ?? 0,
               textStyle: context.theme.body1.semiBold,
             ),
             addSpacer: true,
@@ -97,7 +114,7 @@ class ItemInfo extends StatelessWidget {
               isTokenBalance: true,
               tokenIconWidth: 18,
               tokenIconHeight: 20,
-              balance: tokenBalance ?? 0,
+              balance: amountTokensUsed ?? 0,
               textStyle: context.theme.body1.semiBold,
             ),
             addSpacer: true,
@@ -108,49 +125,35 @@ class ItemInfo extends StatelessWidget {
             context: context,
             title: 'transaction.transactionAmount'.tr(),
             value: BalanceWidget(
-              isTokenBalance: true,
-              tokenIconWidth: 18,
-              tokenIconHeight: 20,
-              balance: tokenBalance ?? 0,
+              balance: amountGiftCardsUsed ?? 0,
               textStyle: context.theme.body1.semiBold,
             ),
             addSpacer: true,
             titleStyle: context.theme.body1,
           ),
-          const Delimiter(12),
-          itemInfoUnit(
-            context: context,
-            title: 'transaction.transactionAmount'.tr(),
-            value: BalanceWidget(
-              balance: balanceLD ?? 0,
-              textStyle: context.theme.body1.semiBold,
-            ),
-            addSpacer: true,
-            titleStyle: context.theme.body1,
-          ),
-          commentByStore != null
+         commentByStore!.isEmpty != true
               ? Column(
-            children: [
-              const Delimiter(24),
-              PreviewBanner(
-                leadingBanner: 'transaction.commentByStore'.tr(),
-              ),
-              const Delimiter(12),
-              Container(
-                width: context.width,
-                height: 52,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: AppColors.whiteGrey),
-                child: Center(
-                  child: Text(
-                    commentByStore!,
-                    style: context.theme.body1,
-                  ),
-                ),
-              )
-            ],
-          )
+                  children: [
+                    const Delimiter(24),
+                    PreviewBanner(
+                      leadingBanner: 'transaction.commentByStore'.tr(),
+                    ),
+                    const Delimiter(12),
+                    Container(
+                      width: context.width,
+                      height: 52,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: AppColors.whiteGrey),
+                      child: Center(
+                        child: Text(
+                          commentByStore!,
+                          style: context.theme.body1,
+                        ),
+                      ),
+                    )
+                  ],
+                )
               : const SizedBox(),
         ],
       ),

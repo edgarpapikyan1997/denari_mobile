@@ -5,15 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../utils/themes/app_colors.dart';
+import '../balance_widget.dart';
 import '../custom_button.dart';
 import 'bottom_sheet_upper_piece.dart';
+import 'item_info.dart';
 
 void showItemInfoBottomSheet({
   required BuildContext context,
-  required VoidCallback onConfirmSecond,
-  required VoidCallback onConfirmFirst,
-  required String firstButtonTitle,
-  required String secondButtonTitle,
+  VoidCallback? onConfirmSecond,
+  VoidCallback? onConfirmFirst,
+  String? firstButtonTitle,
+  String? secondButtonTitle,
   required String itemTitle,
   bool addButtons = false,
   bool addCloseButton = false,
@@ -22,9 +24,12 @@ void showItemInfoBottomSheet({
   String? dateTime,
   String? image,
   String? itemInfoCost = '0',
+  BalanceWidget? tokenBalance,
+  ItemInfo? itemInfo,
 }) {
   showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
     builder: (BuildContext context) {
       return Container(
         width: context.width,
@@ -40,90 +45,94 @@ void showItemInfoBottomSheet({
             const BottomSheetUpperPiece(),
             addCloseButton
                 ? Align(
-                alignment: Alignment.topRight,
-                child: GestureDetector(
-                    onTap: () {
-                      context.pop();
-                    },
-                    child: Assets.media.icons.sloseCenter.svg()))
-                .paddingOnly(bottom: 4)
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                            onTap: () {
+                              context.pop();
+                            },
+                            child: Assets.media.icons.sloseCenter.svg()))
+                    .paddingOnly(bottom: 4)
                 : const SizedBox(),
             dateTime != null
                 ? Text(
-              dateTime,
-              style: context.theme.body3,
-            ).paddingOnly(bottom: 16)
+                    dateTime,
+                    style: context.theme.body3,
+                  ).paddingOnly(bottom: 16)
                 : const SizedBox(),
             image != null
                 ? ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              child: Image.network(
-                image,
-                height: 76,
-                width: 76,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.whiteGrey,
-                      borderRadius: BorderRadius.circular(12),
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    child: Image.network(
+                      image,
+                      height: 76,
+                      width: 76,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.whiteGrey,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          height: 76,
+                          width: 76,
+                          child: Assets.media.images.safetyWarningHeat.image(),
+                        );
+                      },
                     ),
-                    height: 76,
-                    width: 76,
-                    child: Assets.media.images.safetyWarningHeat.image(),
-                  );
-                },
-              ),
-            )
+                  )
                 : const SizedBox(),
             const Delimiter(8),
             itemTitleChevronRight
                 ? GestureDetector(
-              onTap: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
+                    onTap: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          itemTitle,
+                          style: context.theme.body4.medium,
+                        ),
+                        Assets.media.icons.chevronRight.svg(),
+                      ],
+                    ),
+                  ).paddingOnly(bottom: 8)
+                : Text(
                     itemTitle,
                     style: context.theme.body4.medium,
-                  ),
-                  Assets.media.icons.chevronRight.svg(),
-                ],
-              ),
-            ).paddingOnly(bottom: 8)
-                : Text(
-              itemTitle,
-              style: context.theme.body4.medium,
-            ).paddingOnly(bottom: 8),
+                  ).paddingOnly(bottom: 8),
             Text(
               '$itemInfoCost LD',
               style: context.theme.headline1,
             ).paddingOnly(bottom: 8),
+            tokenBalance ?? const SizedBox(),
             PaddingUtility.only(
                 bottom: 32, child: underInfoCostText ?? const SizedBox()),
+            Expanded(
+                child:
+                    SingleChildScrollView(child: itemInfo ?? const SizedBox())),
             addButtons
                 ? Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                    child: CustomButton(
-                      title: firstButtonTitle,
-                      isEnabled: true,
-                      isWhite: true,
-                      onTap: onConfirmFirst,
-                    )),
-                const SizedBox(
-                  width: 8,
-                ),
-                Expanded(
-                    child: CustomButton(
-                      title: secondButtonTitle,
-                      isEnabled: true,
-                      isWhite: false,
-                      onTap: onConfirmSecond,
-                    )),
-              ],
-            )
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                          child: CustomButton(
+                        title: firstButtonTitle!,
+                        isEnabled: true,
+                        isWhite: true,
+                        onTap: onConfirmFirst!,
+                      )),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Expanded(
+                          child: CustomButton(
+                        title: secondButtonTitle!,
+                        isEnabled: true,
+                        isWhite: false,
+                        onTap: onConfirmSecond!,
+                      )),
+                    ],
+                  )
                 : const SizedBox(),
           ],
         ),

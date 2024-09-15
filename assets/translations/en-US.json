@@ -211,6 +211,9 @@
     "storeAddress": "Store Address",
     "details": "Details",
     "commentByStore": "Comment by Store",
-    "transactionAmount" : "Transaction Amount"
+    "transactionAmount" : "Transaction Amount",
+    "tokensAddedAmount" : "Tokens added amount",
+    "amountTokensUser" : "Amount tokens used",
+    "amountGiftCardsUsed" : "Amount gift cards used"
   }
 }

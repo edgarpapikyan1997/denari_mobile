@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:denari_app/constants/bottom_sheet_type.dart';
 import 'package:denari_app/data/transactions/model/transaction_receive_model.dart';
 import 'package:denari_app/store/brand_item_select_state/brand_item_select_state.dart';
@@ -71,39 +69,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
     _loadingState.stopLoading();
   }
 
-  // List<BrandItemWidget> getBrandItems({required BuildContext context}) {
-  //   List<BrandItemWidget> items = [];
-  //   for (var i = 20; i > 1; --i) {
-  //     if (i % 3 == 1) {
-  //       status = 'status.completed'.tr();
-  //     } else if (i == 2 || i == 5) {
-  //       status = 'status.cancelled'.tr();
-  //     } else {
-  //       status = 'status.onHold'.tr();
-  //     }
-  //     items.add(BrandItemWidget(
-  //       addPlus: true,
-  //       topPadding: 16,
-  //       avatar: Assets.media.images.coffe.path,
-  //       brandName: 'Toy Story$i',
-  //       secondaryInfo: status != null ? StatusWidget(status: status!) : null,
-  //       tokenBalanceStyle: context.theme.body2,
-  //       balanceLD: 20 * i,
-  //       tokenBalance: 100 * i,
-  //       addDivider: true,
-  //       tokenColor: AppColors.whiteGrey,
-  //       iconHeight: 12,
-  //       iconWidth: 10,
-  //       purchaseDate: DateTime(2024, 8, i == 5 ? i + 1 : i),
-  //       addPreviewBanner: true,
-  //     ));
-  //   }
-  //   return items;
-  // }
-
   String formatDate(DateTime date) {
     final now = DateTime.now();
-    final difference = now.difference(date).inDays;
+    final difference = now
+        .difference(date)
+        .inDays;
     if (difference == 0) return "Today";
     if (difference == 1) return "Yesterday";
     return DateFormat('MMMM dd, yyyy').format(date);
@@ -146,113 +116,104 @@ class _TransactionScreenState extends State<TransactionScreen> {
         body: _loadingState.isLoading == true
             ? const Center(child: CircularProgressIndicator())
             : PaddingUtility.symmetric(
-                horizontal: 16,
-                child: ListView.builder(
-                  controller: _scrollController,
-                  itemCount: items.length, // _transactionsState.transactionHistoryModels.length,
-                  itemBuilder: (context, index) {
-                    if (items.isNotEmpty) {
-                      final item =
-                      items[index];
-                      final DateTime? currentDate = item?.date.toDate();
-                      final DateTime? previousDate = index > 0
-                          ? items[index - 1]?.date
-                              .toDate()
-                          : null;
-                      bool showDateHeader = previousDate == null ||
-                          currentDate?.day != previousDate.day;
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (showDateHeader)
-                            Text(
-                              formatDate(currentDate!),
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
+          horizontal: 16,
+          child: ListView.builder(
+            controller: _scrollController,
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              if (items.isNotEmpty) {
+                final item = items[index];
+                final DateTime? currentDate = item?.date.toDate();
+                final DateTime? previousDate =
+                index > 0 ? items[index - 1]?.date.toDate() : null;
+                bool showDateHeader = previousDate == null ||
+                    currentDate?.day != previousDate.day;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (showDateHeader)
+                      Text(
+                        formatDate(currentDate!),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    BrandItemWidget(
+                      topPadding: 16,
+                      bottomPadding: 32,
+                      addDivider: showDateHeader ? true : false,
+                      secondaryInfo: StatusWidget(status: item!.status),
+                      avatar: item.shop.imageUrl,
+                      brandName: item.shop.name,
+                      addPlus: false,
+                      balanceLD: item.transactionsAmount,
+                      tokenBalance: item.tokenAddedAmount,
+                      purchaseDate: item.date.toDate(),
+                      balanceWidgets: [
+                        BalanceWidget(
+                          isTokenBalance: false,
+                          tokenIconHeight: 20,
+                          tokenIconWidth: 18,
+                          horizontalPadding: 12,
+                          verticalPadding: 6,
+                          balance: item.amountGiftCardsUsing!,
+                          textStyle: context.theme.headline4,
+                        ),
+                        BalanceWidget(
+                          isTokenBalance: true,
+                          tokenIconHeight: 20,
+                          tokenIconWidth: 18,
+                          horizontalPadding: 12,
+                          verticalPadding: 6,
+                          balance: item.amountTokensUsed!,
+                          textStyle: context.theme.headline4,
+                          color: AppColors.whiteGrey,
+                        ),
+                      ],
+                      onTap: () {
+                        showItemInfoBottomSheet(
+                            addButtons: false,
+                            context: context,
+                            addCloseButton: true,
+                            image: item.shop.imageUrl,
+                            itemTitle: item.shop.name,
+                            dateTime: DateFormat('MMMM d, y, HH:mm')
+                                .format(item.date.toDate()!),
+                            itemInfoCost: "${item.amountGiftCardsUsing}",
+                            tokenBalance: BalanceWidget(
+                              color: AppColors.whiteGrey,
+                              verticalPadding: 5,
+                              horizontalPadding: 12,
+                              addPlusChar: true,
+                              title: 'balance.tokens'.tr(),
+                              isTokenBalance: true,
+                              tokenIconWidth: 13,
+                              tokenIconHeight: 14,
+                              balance: item.amountTokensUsed!,
                             ),
-                          BrandItemWidget(
-                            topPadding: 16,
-                            bottomPadding: 32,
-                            addDivider: showDateHeader ? true : false,
-                            secondaryInfo: StatusWidget(status: item!.status),
-                            avatar: item.shop.imageUrl,
-                            brandName: item.shop.name,
-                            addPlus: false,
-                            // secondaryInfo: item.secondaryInfo,
-                            // tokenBalanceStyle: item.tokenBalanceStyle,
-                            balanceLD: item.transactionsAmount,
-                            tokenBalance: item.tokenAddedAmount,
-                            // tokenColor: item.tokenColor,
-                            // iconHeight: item.iconHeight,
-                            // iconWidth: item.iconWidth,
-                            purchaseDate: item.date.toDate(),
-                            balanceWidgets: [
-                              BalanceWidget(
-                                isTokenBalance: false,
-                                tokenIconHeight: 20,
-                                tokenIconWidth: 18,
-                                horizontalPadding: 12,
-                                verticalPadding: 6,
-                                balance: item.amountGiftCardsUsing!,
-                                textStyle: context.theme.headline4,
-                              ),
-                              BalanceWidget(
-                                isTokenBalance: true,
-                                tokenIconHeight: 20,
-                                tokenIconWidth: 18,
-                                horizontalPadding: 12,
-                                verticalPadding: 6,
-                                balance: item.tokenAddedAmount!,
-                                textStyle: context.theme.headline4,
-                                color: AppColors.whiteGrey,
-                              ),
-                            ],
-                            onTap: () {
-                              showItemInfoBottomSheet(
-                                // height: context.height - 50,
-                                context: context,
-                                addCloseButton: true,
-                                image: item.avatar,
-                                itemTitle: item.brandName,
-                                dateTime: DateFormat('MMMM d, y, HH:mm')
-                                    .format(item.purchaseDate!),
-                                itemInfoCost: "${item.balanceLD}",
-                                tokenBalance: BalanceWidget(
-                                  color: AppColors.whiteGrey,
-                                  verticalPadding: 5,
-                                  horizontalPadding: 12,
-                                  addPlusChar: true,
-                                  title: 'balance.tokens'.tr(),
-                                  isTokenBalance: true,
-                                  tokenIconWidth: 13,
-                                  tokenIconHeight: 14,
-                                  balance: item.tokenBalance!,
-                                ),
-                                itemInfo: ItemInfo(
-                                  id: '12345678',
-                                  status: item.secondaryInfo as StatusWidget,
-                                  storeAddress:
-                                      'Ikea, 2 34th St - Bur Dubai - Al Fahidi - Dubai',
-                                  balanceLD: item.balanceLD,
-                                  tokenBalance: item.tokenBalance,
-                                  commentByStore: 'Awaiting confirmation of payment',
-                                ),
-                                onConfirmSecond: () {},
-                                onConfirmFirst: () {},
-                                firstButtonTitle: 'No',
-                                secondButtonTitle: 'Yes',
-                              );
-                            },
-                          ),
-                        ],
-                      );
-                    }
-                    return SizedBox();
-                  },
-                ),
-              ),
+                            itemInfo: ItemInfo(
+                              id: item.id,
+                              status: StatusWidget(status: item.status),
+                              storeAddress:
+                              '${item.address?.street ?? ''} ${item.address
+                                  ?.city ?? ''}',
+                              commentByStore: item.comment,
+                              transactionAmount: item.transactionsAmount,
+                              tokensAddedAmount: item.tokenAddedAmount,
+                              amountTokensUsed: item.amountTokensUsed,
+                              amountGiftCardsUsed: item.amountGiftCardsUsing,
+                            ),
+                        );
+                      },
+                    ),
+                  ],
+                );
+              }
+              return SizedBox();
+            },
+          ),
+        ),
       );
     });
   }

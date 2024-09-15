@@ -1,6 +1,7 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/view/widgets/preview_banner/preview_banner.dart';
+import 'package:denari_app/view/widgets/status_widget/status_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../utils/themes/app_colors.dart';
@@ -35,10 +36,12 @@ class BrandItemWidget extends StatelessWidget {
   final bool addPlus;
   final bool addPreviewBanner;
   final VoidCallback? onTap; // Add an onTap callback
+  final List<BalanceWidget>? balanceWidgets;
+
   const BrandItemWidget({
     super.key,
     this.brandItemWrapperColor,
-    required this.avatar,
+     this.avatar,
     required this.brandName,
     this.isToken = false,
     this.secondaryInfo,
@@ -55,15 +58,16 @@ class BrandItemWidget extends StatelessWidget {
     this.balanceLD,
     this.purchaseDate,
     this.tokenColor,
-     this.balanceColor,
+    this.balanceColor,
     this.balanceLDStyle,
     this.tokenBalanceStyle,
-     this.iconHeight = 24,
-     this.iconWidth = 24,
-     this.addPlus = false,
-     this.addPreviewBanner = false,
+    this.iconHeight = 24,
+    this.iconWidth = 24,
+    this.addPlus = false,
+    this.addPreviewBanner = false,
     this.onTap,
     this.shopId,
+    this.balanceWidgets,
   });
 
   @override
@@ -71,7 +75,7 @@ class BrandItemWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 12,vertical: topPadding),
+          padding: EdgeInsets.only(top: topPadding, bottom:  bottomPadding,),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: brandItemWrapperColor,
@@ -90,48 +94,36 @@ class BrandItemWidget extends StatelessWidget {
                           fit: BoxFit.fill,
                           image: NetworkImage(avatar!),
                         ),
-                        border: Border.all(
-                            width: 1, color: AppColors.borderColor),
+                        border:
+                            Border.all(width: 1, color: AppColors.borderColor),
                       ),
                     ),
               const SizedBox(
                 width: 8,
               ),
               secondaryInfo != null
-                  ? Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            brandName,
-                            style: context.theme.body1,
-                          ),
-                          const SizedBox(
-                            height: 2,
-                          ),
-                          SizedBox(
-                              width: context.width / 1.5,
-                              child: secondaryInfo!),
-                        ],
-                      ),
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          brandName,
+                          style: context.theme.body1,
+                        ),
+                        const SizedBox(
+                          height: 2,
+                        ),
+                        secondaryInfo!,
+                      ],
                     )
                   : Text(
                       brandName,
                       style: context.theme.headline4.regular,
                     ),
               const Spacer(),
-              tokenBalance != null
-                  ? BalanceWidget(
-                      isTokenBalance: isToken,
-                      tokenIconHeight: 20,
-                      tokenIconWidth: 18,
-                      horizontalPadding: 12,
-                      verticalPadding: 6,
-                      balance: tokenBalance!,
-                      textStyle: context.theme.headline4,
-                      color: wrapperColor,
-                    )
-                  : const SizedBox(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: balanceWidgets ?? [],
+              ),
               tealButton ?? const SizedBox(),
             ],
           ),

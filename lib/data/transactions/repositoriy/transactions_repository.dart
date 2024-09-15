@@ -6,5 +6,7 @@ import '../model/transaction_model.dart';
 abstract class TransactionsRepository {
   Future<TransactionReceiveModel?> sendTransaction(TransactionModel data);
   Future<String?> sendAmountToUser(SendToUserModel data, bool isToken);
+  Future<List<TransactionReceiveModel?>> getTransactionsHistory();
 
-}
+
+  }

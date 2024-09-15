@@ -23,6 +23,10 @@ TransactionReceiveModel _$TransactionReceiveModelFromJson(
       userId: json['userId'] as String? ?? '',
       giftCardAmount: (json['giftCardAmount'] as num?)?.toInt() ?? 0,
       cashierId: json['cashierId'] as String? ?? '',
+      address: json['address'] == null
+          ? null
+          : ShopsBranchModel.fromJson(json['address'] as Map<String, dynamic>),
+      shop: ShopsModel.fromJson(json['shop'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TransactionReceiveModelToJson(
@@ -41,4 +45,6 @@ Map<String, dynamic> _$TransactionReceiveModelToJson(
       'userId': instance.userId,
       'giftCardAmount': instance.giftCardAmount,
       'cashierId': instance.cashierId,
+      'address': instance.address,
+      'shop': instance.shop,
     };

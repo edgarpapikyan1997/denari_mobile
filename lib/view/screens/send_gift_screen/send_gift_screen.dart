@@ -204,6 +204,26 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
                                           .giftCardModels[
                                               sendGiftItemSelectState.index]
                                           .uniqueId,
+                                  balanceWidgets: [
+                                    BalanceWidget(
+                                      balance: isToken
+                                          ? _tokenBalanceState
+                                              .tokenModels[
+                                                  tokenItemSelectState.index]
+                                              .shopUserTokens![0]
+                                              .tokenBalance
+                                              .toInt()
+                                          : _giftCardBalanceState
+                                              .giftCardModels[
+                                                  sendGiftItemSelectState.index]
+                                              .shopGiftCardModel![0]
+                                              .giftCardBalance,
+                                      isTokenBalance: isToken,
+                                      tokenIconHeight: 14,
+                                      tokenIconWidth: 13,
+                                      textStyle: context.theme.headline4,
+                                    )
+                                  ],
                                   addDivider: false,
                                   topPadding: 8,
                                   bottomPadding: 8,

@@ -95,6 +95,17 @@ mixin _$SendingAmountState on ImplSendingAmountState, Store {
   }
 
   @override
+  void resetSendingInfo() {
+    final _$actionInfo = _$ImplSendingAmountStateActionController.startAction(
+        name: 'ImplSendingAmountState.resetSendingInfo');
+    try {
+      return super.resetSendingInfo();
+    } finally {
+      _$ImplSendingAmountStateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setCurrentBalance({required int valueFromBalance}) {
     final _$actionInfo = _$ImplSendingAmountStateActionController.startAction(
         name: 'ImplSendingAmountState.setCurrentBalance');

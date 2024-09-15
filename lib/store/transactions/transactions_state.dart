@@ -23,6 +23,9 @@ abstract class ImplTransactionsState with Store {
   TransactionReceiveModel? transactionReceiveModel;
 
   @observable
+  List<TransactionReceiveModel?> transactionHistoryModels = [];
+
+  @observable
   String? getError;
 
   @observable
@@ -60,5 +63,16 @@ abstract class ImplTransactionsState with Store {
       },
       (error) => getError = error,
     );
+  }
+
+  @action
+  Future<void> getTransactionsHistory() async {
+    (await handle(() => _transactionsRepository.getTransactionsHistory())).then(
+      (data) {
+        transactionHistoryModels = data;
+      },
+      (error) => getError = error,
+    );
+    await Future.delayed(const Duration(milliseconds: 200));
   }
 }

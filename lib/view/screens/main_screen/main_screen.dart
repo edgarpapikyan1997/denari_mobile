@@ -120,7 +120,6 @@ class _MainScreenState extends State<MainScreen> {
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
-              // Retry logic
               setState(() {
                 hasError = false;
                 initPrefs();
@@ -135,7 +134,6 @@ class _MainScreenState extends State<MainScreen> {
 
   Future<void> _retryFetchingData() async {
     try {
-      // Retry fetching shops data
       await _shopsState.getAllShops();
     } catch (e) {
       throw Exception('Failed after retry');

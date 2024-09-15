@@ -27,12 +27,11 @@ class BalanceWidget extends StatelessWidget {
     this.horizontalPadding = 0,
     this.verticalPadding = 0,
     required this.balance,
-     this.textStyle,
+    this.textStyle,
     this.title = "",
     this.color,
     this.onTap,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,8 @@ class BalanceWidget extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 4),
         padding: EdgeInsets.symmetric(
-            horizontal: horizontalPadding, vertical: verticalPadding),
+            horizontal: horizontalPadding,
+            vertical: verticalPadding),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: color,

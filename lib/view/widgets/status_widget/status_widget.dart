@@ -1,4 +1,5 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
+import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../utils/themes/app_colors.dart';
 
@@ -22,22 +23,25 @@ class _StatusWidgetState extends State<StatusWidget> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       decoration: BoxDecoration(
-        color: widget.status == 'onHold'
+        color: widget.status == 'status.onHold'.tr() ||
+                widget.status == 'status.onHold'
             ? statusColor = AppColors.statusOnHold
-            : widget.status == 'cancelled'
+            : widget.status == 'status.cancelled'.tr()
                 ? statusColor = AppColors.statusCancelled
-                : widget.status == 'completed'
+                : widget.status == 'status.completed'.tr()
                     ? statusColor = AppColors.statusComplete
                     : null,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
-        widget.status,
-        style: widget.status == 'onHold'
+        textAlign: TextAlign.center,
+        widget.status == 'status.onHold' ? 'status.onHold'.tr() : widget.status,
+        style: widget.status == 'status.onHold'.tr() ||
+                widget.status == 'status.onHold'
             ? context.theme.body2.statusOnHold
-            : widget.status == 'cancelled'
+            : widget.status == 'status.cancelled'.tr()
                 ? context.theme.body2.alertRed
-                : widget.status == 'completed'
+                : widget.status == 'status.completed'.tr()
                     ? context.theme.body2.completed
                     : null,
         softWrap: true,

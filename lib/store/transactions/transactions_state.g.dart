@@ -42,6 +42,23 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
     });
   }
 
+  late final _$transactionHistoryModelsAtom = Atom(
+      name: 'ImplTransactionsState.transactionHistoryModels', context: context);
+
+  @override
+  List<TransactionReceiveModel?> get transactionHistoryModels {
+    _$transactionHistoryModelsAtom.reportRead();
+    return super.transactionHistoryModels;
+  }
+
+  @override
+  set transactionHistoryModels(List<TransactionReceiveModel?> value) {
+    _$transactionHistoryModelsAtom
+        .reportWrite(value, super.transactionHistoryModels, () {
+      super.transactionHistoryModels = value;
+    });
+  }
+
   late final _$getErrorAtom =
       Atom(name: 'ImplTransactionsState.getError', context: context);
 
@@ -108,11 +125,22 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
         .run(() => super.sendAmountToUser(data, isToken));
   }
 
+  late final _$getTransactionsHistoryAsyncAction = AsyncAction(
+      'ImplTransactionsState.getTransactionsHistory',
+      context: context);
+
+  @override
+  Future<void> getTransactionsHistory() {
+    return _$getTransactionsHistoryAsyncAction
+        .run(() => super.getTransactionsHistory());
+  }
+
   @override
   String toString() {
     return '''
 transactionModel: ${transactionModel},
 transactionReceiveModel: ${transactionReceiveModel},
+transactionHistoryModels: ${transactionHistoryModels},
 getError: ${getError},
 transactionID: ${transactionID},
 isSuccessful: ${isSuccessful}

@@ -3,6 +3,7 @@ import 'package:denari_app/data/transactions/model/send_to_contact/send_to_conta
 import 'package:denari_app/data/transactions/model/transaction_model.dart';
 import 'package:denari_app/data/transactions/repositoriy/transactions_repository.dart';
 import 'package:denari_app/utils/env/config.dart';
+import 'package:denari_app/utils/network/utils/response_helper.dart';
 import 'package:dio/dio.dart';
 import '../../model/transaction_receive_model.dart';
 
@@ -15,8 +16,8 @@ final class ImplTransactionsRepository extends TransactionsRepository {
         _config = config;
 
   @override
-  Future<TransactionReceiveModel?> sendTransaction(TransactionModel data) async
-  {
+  Future<TransactionReceiveModel?> sendTransaction(
+      TransactionModel data) async {
     final result = await _client.post(
       '${_config.host}/transactions',
       data: data.toJson(),
@@ -44,5 +45,23 @@ final class ImplTransactionsRepository extends TransactionsRepository {
       data: data.toJson(),
     );
     return result.data.toString();
+  }
+
+  @override
+  Future<List<TransactionReceiveModel?>> getTransactionsHistory() async {
+    final response = await _client.get('${_config.host}/transactions/user');
+
+    if (response.statusCode == 200 && response.data != null) {
+      final List<dynamic> transactionsData = response.data['transactions'];
+      final List<TransactionReceiveModel?> transactionsList = transactionsData
+          .map((transaction) => TransactionReceiveModel.fromJson(transaction as Map<String, dynamic>))
+          .toList();
+      return transactionsList;
+    }
+    else {
+      log('Failed to retrieve transactions: ${response.statusCode}');
+      return [];
+    }
+
   }
 }

@@ -1,7 +1,20 @@
 import 'package:json_annotation/json_annotation.dart';
+
+import '../../shops/shop_branch_model/shop_branch_model.dart';
+import '../../shops/shops_model/shops_model.dart';
+
 part 'transaction_receive_model.g.dart';
 
-
+/*
+flutter: \^[[38;5;46m│       "shop": {<…>
+flutter: \^[[38;5;46m│         "name": "TestShop6"<…>
+flutter: \^[[38;5;46m│       },<…>
+flutter: \^[[38;5;46m│       "address": {<…>
+flutter: \^[[38;5;46m│         "street": "Dzerzhinsky Avenue, 1E",<…>
+flutter: \^[[38;5;46m│         "city": " Minsk"<…>
+flutter: \^[[38;5;46m│       }<…>
+flutter: \^[[38;5;46m│     },<…>
+ */
 @JsonSerializable()
 class TransactionReceiveModel {
   @JsonKey(defaultValue: '')
@@ -30,6 +43,10 @@ class TransactionReceiveModel {
   final int? giftCardAmount;
   @JsonKey(defaultValue: '')
   final String? cashierId;
+  @JsonKey(defaultValue: '')
+  final ShopsBranchModel? address;
+  @JsonKey(defaultValue: null)
+  final ShopsModel shop;
 
   const TransactionReceiveModel({
     this.id,
@@ -45,6 +62,8 @@ class TransactionReceiveModel {
     this.userId,
     this.giftCardAmount,
     this.cashierId,
+    this.address,
+    required this.shop
   });
 
   factory TransactionReceiveModel.fromJson(Map<String, dynamic> json) =>
@@ -66,6 +85,8 @@ class TransactionReceiveModel {
     final String? userId,
     final int? giftCardAmount,
     final String? cashierId,
+    final ShopsBranchModel? address,
+    final ShopsModel? shop,
   }) {
     return TransactionReceiveModel(
       id: id ?? this.id,
@@ -81,6 +102,8 @@ class TransactionReceiveModel {
       userId: userId ?? this.userId,
       giftCardAmount: giftCardAmount ?? this.giftCardAmount,
       cashierId: cashierId ?? this.cashierId,
+      address: address ?? this.address,
+      shop: shop ?? this.shop,
     );
   }
 }

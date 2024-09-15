@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'shops_model.g.dart';
 
+part 'shops_model.g.dart';
 
 @JsonSerializable()
 class ShopsModel {
@@ -14,11 +14,7 @@ class ShopsModel {
   final String description;
 
   const ShopsModel(
-      {required this.id,
-      required this.name,
-  required this.imageUrl,
-  required this.description
-      });
+      {this.id = '', required this.name, this.imageUrl = '', this.description = ''});
 
   factory ShopsModel.fromJson(Map<String, dynamic> json) =>
       _$ShopsModelFromJson(json);
@@ -30,7 +26,6 @@ class ShopsModel {
     String? name,
     String? imageUrl,
     String? description,
-
   }) {
     return ShopsModel(
       id: id ?? this.id,

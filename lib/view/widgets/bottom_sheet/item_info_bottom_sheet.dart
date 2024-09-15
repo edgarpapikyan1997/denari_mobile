@@ -1,3 +1,4 @@
+import 'package:denari_app/constants/app_sizes/app_sizes.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
@@ -28,6 +29,8 @@ void showItemInfoBottomSheet({
   ItemInfo? itemInfo,
 }) {
   showModalBottomSheet(
+    constraints: BoxConstraints(
+        maxHeight: context.height - AppSizes.prefBottomSheetSize.height),
     context: context,
     isScrollControlled: true,
     builder: (BuildContext context) {
@@ -107,9 +110,7 @@ void showItemInfoBottomSheet({
             tokenBalance ?? const SizedBox(),
             PaddingUtility.only(
                 bottom: 32, child: underInfoCostText ?? const SizedBox()),
-            Expanded(
-                child:
-                    SingleChildScrollView(child: itemInfo ?? const SizedBox())),
+            Flexible(child: SingleChildScrollView(child: itemInfo ?? const SizedBox())),
             addButtons
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

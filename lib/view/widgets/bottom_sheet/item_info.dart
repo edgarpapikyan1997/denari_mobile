@@ -58,7 +58,6 @@ class ItemInfo extends StatelessWidget {
     return PaddingUtility.only(
       top: 32,
       child: Column(
-        // mainAxisSize: MainAxisSize.min,
         children: [
           itemInfoUnit(
             context: context,
@@ -141,7 +140,7 @@ class ItemInfo extends StatelessWidget {
                     const Delimiter(12),
                     Container(
                       width: context.width,
-                      height: 52,
+                      // height: 52,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           color: AppColors.whiteGrey),

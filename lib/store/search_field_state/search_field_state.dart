@@ -1,6 +1,7 @@
 // search_field_state.dart
+import 'package:denari_app/data/transactions/model/transaction_receive_model.dart';
+import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:mobx/mobx.dart';
-
 part 'search_field_state.g.dart';
 
 class SearchFieldState = ImplSearchFieldState with _$SearchFieldState;
@@ -13,18 +14,20 @@ abstract class ImplSearchFieldState with Store {
   bool showSuggestion = false;
 
   @observable
-  ObservableList<String> filteredSuggestions = ObservableList<String>();
+  ObservableList<dynamic> filteredSuggestions =
+      ObservableList<dynamic>();
 
   @action
-  void filterSuggestions(String query, List<String> searchList) {
+  void filterSuggestions(String query, List<dynamic> searchList) {
     if (query.isEmpty) {
-      filteredSuggestions = ObservableList<String>();
+      filteredSuggestions = ObservableList<dynamic>();
     } else {
-      filteredSuggestions = ObservableList<String>.of(
+      filteredSuggestions = ObservableList<dynamic>.of(
         searchList.where(
-              (item) => item.toLowerCase().contains(query.toLowerCase()),
+              (item) => item.shop.name.toLowerCase().contains(query.toLowerCase()),
         ),
       );
     }
   }
+
 }

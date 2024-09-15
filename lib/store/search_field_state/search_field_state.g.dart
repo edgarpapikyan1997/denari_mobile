@@ -45,13 +45,13 @@ mixin _$SearchFieldState on ImplSearchFieldState, Store {
       Atom(name: 'ImplSearchFieldState.filteredSuggestions', context: context);
 
   @override
-  ObservableList<String> get filteredSuggestions {
+  ObservableList<dynamic> get filteredSuggestions {
     _$filteredSuggestionsAtom.reportRead();
     return super.filteredSuggestions;
   }
 
   @override
-  set filteredSuggestions(ObservableList<String> value) {
+  set filteredSuggestions(ObservableList<dynamic> value) {
     _$filteredSuggestionsAtom.reportWrite(value, super.filteredSuggestions, () {
       super.filteredSuggestions = value;
     });
@@ -61,7 +61,7 @@ mixin _$SearchFieldState on ImplSearchFieldState, Store {
       ActionController(name: 'ImplSearchFieldState', context: context);
 
   @override
-  void filterSuggestions(String query, List<String> searchList) {
+  void filterSuggestions(String query, List<dynamic> searchList) {
     final _$actionInfo = _$ImplSearchFieldStateActionController.startAction(
         name: 'ImplSearchFieldState.filterSuggestions');
     try {

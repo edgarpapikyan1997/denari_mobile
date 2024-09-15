@@ -100,11 +100,12 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 ? Row(
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          context.push(
-                            '/search',
-                          );
-                        },
+                          onTap: () {
+                            context.push(
+                              '/searchScreen',
+                              extra: items,
+                            );
+                          },
                           child: Assets.media.icons.search.svg()),
                       const SizedBox(
                         width: 16,
@@ -149,7 +150,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
                       const SizedBox(),
                     ],
                   )
-                : PaddingUtility.symmetric(
+                :
+        PaddingUtility.symmetric(
                     horizontal: 16,
                     child: ListView.builder(
                       controller: _scrollController,

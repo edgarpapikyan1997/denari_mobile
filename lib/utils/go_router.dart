@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../data/authentication/model/reset_pass_model.dart';
 import '../data/shops/shop_unit_model/shop_unit_model.dart';
+import '../data/transactions/model/transaction_receive_model.dart';
 import '../view/screens/authentication/code/forgot_code_screen.dart';
 import '../view/screens/authentication/code/sign_up_code_screen.dart';
 import '../view/screens/authentication/forgot/forgot_screen.dart';
@@ -153,7 +154,9 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/searchScreen',
       builder: (context, state) {
-        return const SearchScreen(
+        final items = state.extra as List<dynamic>;
+        return  SearchScreen(
+          items: items,
         );
       },
     ),

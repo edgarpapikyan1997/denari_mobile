@@ -32,6 +32,7 @@ import '../../widgets/brand_item/brand_item_list.dart';
 import '../../widgets/category/category.dart';
 import '../../widgets/category/category_field_generator.dart';
 import '../../widgets/custom_app_bar.dart';
+import '../../widgets/no_data_widget.dart';
 
 class TransactionScreen extends StatefulWidget {
   const TransactionScreen({super.key});
@@ -71,9 +72,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
 
   String formatDate(DateTime date) {
     final now = DateTime.now();
-    final difference = now
-        .difference(date)
-        .inDays;
+    final difference = now.difference(date).inDays;
     if (difference == 0) return "Today";
     if (difference == 1) return "Yesterday";
     return DateFormat('MMMM dd, yyyy').format(date);
@@ -96,124 +95,163 @@ class _TransactionScreenState extends State<TransactionScreen> {
               "transaction.transaction".tr(),
               style: context.theme.headline4,
             ),
-            tealIcon: Row(
-              children: [
-                Assets.media.icons.search.svg(),
-                const SizedBox(
-                  width: 16,
-                ),
-                GestureDetector(
-                    onTap: () {
-                      context.push(
-                        '/shopScreenFilter',
-                      );
-                    },
-                    child: Assets.media.icons.filter.svg()),
-              ],
-            ),
+            tealIcon: _transactionsState.transactionHistoryModels.isNotEmpty ||
+                    _transactionsState.getError == null
+                ? Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          context.push(
+                            '/search',
+                          );
+                        },
+                          child: Assets.media.icons.search.svg()),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      GestureDetector(
+                          onTap: () {
+                            context.push(
+                              '/shopScreenFilter',
+                            );
+                          },
+                          child: Assets.media.icons.filter.svg()),
+                    ],
+                  )
+                : null,
           ),
         ),
         body: _loadingState.isLoading == true
             ? const Center(child: CircularProgressIndicator())
-            : PaddingUtility.symmetric(
-          horizontal: 16,
-          child: ListView.builder(
-            controller: _scrollController,
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              if (items.isNotEmpty) {
-                final item = items[index];
-                final DateTime? currentDate = item?.date.toDate();
-                final DateTime? previousDate =
-                index > 0 ? items[index - 1]?.date.toDate() : null;
-                bool showDateHeader = previousDate == null ||
-                    currentDate?.day != previousDate.day;
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (showDateHeader)
-                      Text(
-                        formatDate(currentDate!),
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    BrandItemWidget(
-                      topPadding: 16,
-                      bottomPadding: 32,
-                      addDivider: showDateHeader ? true : false,
-                      secondaryInfo: StatusWidget(status: item!.status),
-                      avatar: item.shop.imageUrl,
-                      brandName: item.shop.name,
-                      addPlus: false,
-                      balanceLD: item.transactionsAmount,
-                      tokenBalance: item.tokenAddedAmount,
-                      purchaseDate: item.date.toDate(),
-                      balanceWidgets: [
-                        BalanceWidget(
-                          isTokenBalance: false,
-                          tokenIconHeight: 20,
-                          tokenIconWidth: 18,
-                          horizontalPadding: 12,
-                          verticalPadding: 6,
-                          balance: item.amountGiftCardsUsing!,
-                          textStyle: context.theme.headline4,
-                        ),
-                        BalanceWidget(
-                          isTokenBalance: true,
-                          tokenIconHeight: 20,
-                          tokenIconWidth: 18,
-                          horizontalPadding: 12,
-                          verticalPadding: 6,
-                          balance: item.amountTokensUsed!,
-                          textStyle: context.theme.headline4,
-                          color: AppColors.whiteGrey,
-                        ),
-                      ],
-                      onTap: () {
-                        showItemInfoBottomSheet(
-                            addButtons: false,
-                            context: context,
-                            addCloseButton: true,
-                            image: item.shop.imageUrl,
-                            itemTitle: item.shop.name,
-                            dateTime: DateFormat('MMMM d, y, HH:mm')
-                                .format(item.date.toDate()!),
-                            itemInfoCost: "${item.amountGiftCardsUsing}",
-                            tokenBalance: BalanceWidget(
-                              color: AppColors.whiteGrey,
-                              verticalPadding: 5,
-                              horizontalPadding: 12,
-                              addPlusChar: true,
-                              title: 'balance.tokens'.tr(),
-                              isTokenBalance: true,
-                              tokenIconWidth: 13,
-                              tokenIconHeight: 14,
-                              balance: item.amountTokensUsed!,
+            : _transactionsState.transactionHistoryModels.isEmpty ||
+                    _transactionsState.getError != null
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _transactionsState.getError != null
+                          ? NoDataWidget(
+                              asset: Assets.media.images.cogIcon.image(
+                                height: 96,
+                                width: 96,
+                              ),
+                              title: "transaction.transactionError".tr(),
+                              description: "transaction.tryRestart".tr(),
+                            )
+                          : NoDataWidget(
+                              asset: Assets.media.images.taskListClock.image(
+                                height: 96,
+                                width: 96,
+                              ),
+                              title: "transaction.noTransaction".tr(),
+                              description:
+                                  "transaction.noTransactionDescription".tr(),
                             ),
-                            itemInfo: ItemInfo(
-                              id: item.id,
-                              status: StatusWidget(status: item.status),
-                              storeAddress:
-                              '${item.address?.street ?? ''} ${item.address
-                                  ?.city ?? ''}',
-                              commentByStore: item.comment,
-                              transactionAmount: item.transactionsAmount,
-                              tokensAddedAmount: item.tokenAddedAmount,
-                              amountTokensUsed: item.amountTokensUsed,
-                              amountGiftCardsUsed: item.amountGiftCardsUsing,
-                            ),
-                        );
+                      const SizedBox(),
+                    ],
+                  )
+                : PaddingUtility.symmetric(
+                    horizontal: 16,
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        if (items.isNotEmpty) {
+                          final item = items[index];
+                          final DateTime? currentDate = item?.date.toDate();
+                          final DateTime? previousDate = index > 0
+                              ? items[index - 1]?.date.toDate()
+                              : null;
+                          bool showDateHeader = previousDate == null ||
+                              currentDate?.day != previousDate.day;
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (showDateHeader)
+                                Text(
+                                  formatDate(currentDate!),
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              BrandItemWidget(
+                                topPadding: 16,
+                                bottomPadding: 32,
+                                addDivider: showDateHeader ? true : false,
+                                secondaryInfo:
+                                    StatusWidget(status: item!.status),
+                                avatar: item.shop.imageUrl,
+                                brandName: item.shop.name,
+                                addPlus: false,
+                                balanceLD: item.transactionsAmount,
+                                tokenBalance: item.tokenAddedAmount,
+                                purchaseDate: item.date.toDate(),
+                                balanceWidgets: [
+                                  BalanceWidget(
+                                    isTokenBalance: false,
+                                    tokenIconHeight: 20,
+                                    tokenIconWidth: 18,
+                                    horizontalPadding: 12,
+                                    verticalPadding: 6,
+                                    balance: item.amountGiftCardsUsing!,
+                                    textStyle: context.theme.headline4,
+                                  ),
+                                  BalanceWidget(
+                                    isTokenBalance: true,
+                                    tokenIconHeight: 20,
+                                    tokenIconWidth: 18,
+                                    horizontalPadding: 12,
+                                    verticalPadding: 6,
+                                    balance: item.amountTokensUsed!,
+                                    textStyle: context.theme.headline4,
+                                    color: AppColors.whiteGrey,
+                                  ),
+                                ],
+                                onTap: () {
+                                  showItemInfoBottomSheet(
+                                    addButtons: false,
+                                    context: context,
+                                    addCloseButton: true,
+                                    image: item.shop.imageUrl,
+                                    itemTitle: item.shop.name,
+                                    dateTime: DateFormat('MMMM d, y, HH:mm')
+                                        .format(item.date.toDate()!),
+                                    itemInfoCost:
+                                        "${item.amountGiftCardsUsing}",
+                                    tokenBalance: BalanceWidget(
+                                      color: AppColors.whiteGrey,
+                                      verticalPadding: 5,
+                                      horizontalPadding: 12,
+                                      addPlusChar: true,
+                                      title: 'balance.tokens'.tr(),
+                                      isTokenBalance: true,
+                                      tokenIconWidth: 13,
+                                      tokenIconHeight: 14,
+                                      balance: item.amountTokensUsed!,
+                                    ),
+                                    itemInfo: ItemInfo(
+                                      id: item.id,
+                                      status: StatusWidget(status: item.status),
+                                      storeAddress:
+                                          '${item.address?.street ?? ''} ${item.address?.city ?? ''}',
+                                      commentByStore: item.comment,
+                                      transactionAmount:
+                                          item.transactionsAmount,
+                                      tokensAddedAmount: item.tokenAddedAmount,
+                                      amountTokensUsed: item.amountTokensUsed,
+                                      amountGiftCardsUsed:
+                                          item.amountGiftCardsUsing,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          );
+                        }
+                        return SizedBox();
                       },
                     ),
-                  ],
-                );
-              }
-              return SizedBox();
-            },
-          ),
-        ),
+                  ),
       );
     });
   }

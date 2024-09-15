@@ -33,7 +33,7 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
         BrandItemWidget(
           topPadding: 16,
           addDivider: true,
-          avatar: Assets.media.images.toyStory.path,
+          avatar: Assets.media.images.skyteam.path,
           brandName: '$brandName$i',
           balanceLD: _tokenBalanceState.balance,
           iconHeight: 13,
@@ -53,7 +53,7 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
                 },
                 addButtons: true,
                 addCloseButton: true,
-                image: Assets.media.images.image9.path,
+                image: Assets.media.images.frame.path,
                 itemTitle: brandName,
                 itemTitleChevronRight: true,
                 underInfoCostText: Text(

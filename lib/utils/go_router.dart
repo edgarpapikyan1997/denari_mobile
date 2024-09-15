@@ -76,12 +76,6 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: '/searchScreen',
-          builder: (context, state) {
-            return const SearchScreen();
-          },
-        ),
-        GoRoute(
           path: '/chosenCategoryScreen',
           builder: (context, state) {
             final CategoriesState? categoriesState =
@@ -155,6 +149,13 @@ final GoRouter router = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '/searchScreen',
+      builder: (context, state) {
+        return const SearchScreen(
+        );
+      },
     ),
     GoRoute(
         path: '/transactions',

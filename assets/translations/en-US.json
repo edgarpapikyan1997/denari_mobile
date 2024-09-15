@@ -28,13 +28,13 @@
     "getTokens": "To get tokens for a purchase or use the accumulated points, show the screen to the seller in the store.",
     "dontLeaveScreen": "Please do not leave the screen before confirming the purchase.",
     "error_adv": "Error get advertisements",
-    "userFound" : "User found",
-    "giftWillSend" : "The gift will be sent directly to",
-    "tokenWillSend" : "The tokens will be sent directly to",
-    "backToHome" : "Back to Home"
+    "userFound": "User found",
+    "giftWillSend": "The gift will be sent directly to",
+    "tokenWillSend": "The tokens will be sent directly to",
+    "backToHome": "Back to Home"
   },
   "balance": {
-    "balance" : "Balance:",
+    "balance": "Balance:",
     "tokenBalance": "Token Balance",
     "viewEarnedToken": "View your earned token",
     "tokens": "Tokens",
@@ -110,7 +110,7 @@
     "at": "at",
     "earnedYou": "earned you",
     "wouldYouRate": "How would you rate your experience?",
-    "userNotFound" : "The user was not found"
+    "userNotFound": "The user was not found"
   },
   "profile": {
     "data": "Profile data",
@@ -197,23 +197,26 @@
     "completed": "Completed",
     "cancelled": "Cancelled"
   },
-  "qr" : {
-   "generateQR" : "Generate QR code",
-    "scanningError" : "Scanning error occurred"
+  "qr": {
+    "generateQR": "Generate QR code",
+    "scanningError": "Scanning error occurred"
   },
-  "transaction" : {
-   "transactionSent" : "Transaction sent: status onHold",
-    "transactionError" : "Something went wrong",
-    "transactionIDError" : "Can't get Transaction ID : TRY AGAIN",
+  "transaction": {
+    "transactionSent": "Transaction sent: status onHold",
+    "transactionError": "Something went wrong",
+    "tryRestart": "Try restarting your screen",
+    "transactionIDError": "Can't get Transaction ID : TRY AGAIN",
     "transaction": "Transaction",
     "id": "ID:",
     "status": "Status",
     "storeAddress": "Store Address",
     "details": "Details",
     "commentByStore": "Comment by Store",
-    "transactionAmount" : "Transaction Amount",
-    "tokensAddedAmount" : "Tokens added amount",
-    "amountTokensUser" : "Amount tokens used",
-    "amountGiftCardsUsed" : "Amount gift cards used"
+    "transactionAmount": "Transaction Amount",
+    "tokensAddedAmount": "Tokens added amount",
+    "amountTokensUser": "Amount tokens used",
+    "amountGiftCardsUsed": "Amount gift cards used",
+    "noTransaction": "No transaction",
+    "noTransactionDescription": "The transaction history begins after making the first purchase with the card."
   }
 }

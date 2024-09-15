@@ -50,18 +50,10 @@ final class ImplTransactionsRepository extends TransactionsRepository {
   @override
   Future<List<TransactionReceiveModel?>> getTransactionsHistory() async {
     final response = await _client.get('${_config.host}/transactions/user');
-
-    if (response.statusCode == 200 && response.data != null) {
       final List<dynamic> transactionsData = response.data['transactions'];
       final List<TransactionReceiveModel?> transactionsList = transactionsData
           .map((transaction) => TransactionReceiveModel.fromJson(transaction as Map<String, dynamic>))
           .toList();
       return transactionsList;
-    }
-    else {
-      log('Failed to retrieve transactions: ${response.statusCode}');
-      return [];
-    }
-
   }
 }

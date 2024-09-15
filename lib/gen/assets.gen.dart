@@ -245,13 +245,13 @@ class $AssetsMediaIconsGen {
 class $AssetsMediaImagesGen {
   const $AssetsMediaImagesGen();
 
-  /// File path: assets/media/images/Coffe.png
-  AssetGenImage get coffe =>
-      const AssetGenImage('assets/media/images/Coffe.png');
-
   /// File path: assets/media/images/Frame.png
   AssetGenImage get frame =>
       const AssetGenImage('assets/media/images/Frame.png');
+
+  /// File path: assets/media/images/cog-icon.png
+  AssetGenImage get cogIcon =>
+      const AssetGenImage('assets/media/images/cog-icon.png');
 
   /// File path: assets/media/images/credit-card-1.png
   AssetGenImage get creditCard1 =>
@@ -268,13 +268,6 @@ class $AssetsMediaImagesGen {
   /// File path: assets/media/images/fireworks.png
   AssetGenImage get fireworks =>
       const AssetGenImage('assets/media/images/fireworks.png');
-
-  /// File path: assets/media/images/image 9.png
-  AssetGenImage get image9 =>
-      const AssetGenImage('assets/media/images/image 9.png');
-
-  /// File path: assets/media/images/img.png
-  AssetGenImage get img => const AssetGenImage('assets/media/images/img.png');
 
   /// File path: assets/media/images/ratedStar.png
   AssetGenImage get ratedStar =>
@@ -295,31 +288,19 @@ class $AssetsMediaImagesGen {
   AssetGenImage get taskListClock =>
       const AssetGenImage('assets/media/images/task-list-clock.png');
 
-  /// File path: assets/media/images/toy-story-sample.png
-  AssetGenImage get toyStorySample =>
-      const AssetGenImage('assets/media/images/toy-story-sample.png');
-
-  /// File path: assets/media/images/toy_story.png
-  AssetGenImage get toyStory =>
-      const AssetGenImage('assets/media/images/toy_story.png');
-
   /// List of all assets
   List<AssetGenImage> get values => [
-        coffe,
         frame,
+        cogIcon,
         creditCard1,
         cryptoCurrencyNamecoin,
         filledStar,
         fireworks,
-        image9,
-        img,
         ratedStar,
         safetyWarningHeat,
         skyteam,
         star,
-        taskListClock,
-        toyStorySample,
-        toyStory
+        taskListClock
       ];
 }
 

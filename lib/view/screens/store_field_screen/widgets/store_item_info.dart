@@ -22,12 +22,8 @@ class StoreItemInfo extends StatefulWidget {
 }
 
 class _StoreItemInfoState extends State<StoreItemInfo> {
-  String brand = Assets.media.images.toyStory.path;
-  String name = 'Store Name';
   String rating = "4.5";
-  String phone = '+1 (123) 456-7890';
-  String city = '123 Main St, City';
-  String dateTime = 'Daily from 10:00 to 20:00';
+
 
   @override
   Widget build(BuildContext context) {

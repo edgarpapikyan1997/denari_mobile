@@ -19,24 +19,78 @@ abstract class ShopsStatePerformer with Store {
   List<ShopsModel> shops = [];
 
   @observable
+  ObservableList<bool> checkBoxValues =
+      ObservableList<bool>(); // Use ObservableList
+
+  @observable
+  ObservableList<bool> addressCheckBoxValues =
+      ObservableList<bool>(); // Use ObservableList
+
+  @observable
   String? getError;
 
   @observable
   ShopsUnitModel? shopsUnitModel;
 
+  @observable
+  ObservableList<String> checkedStoreNames = ObservableList<String>();
+
+  @observable
+  ObservableList<String> checkedAddressNames = ObservableList<String>();
+
+  @computed
+  bool get isAnyCheckBoxSelected => checkBoxValues.contains(true);
+
+  @action
+  void updateCheckBox({required int index, bool isAddress = false}) {
+    if (isAddress == false) {
+      checkBoxValues[index] = !checkBoxValues[index];
+      if (checkBoxValues[index] == true) {
+        checkedStoreNames.add(shops[index].name);
+      }
+      if (checkBoxValues[index] == false) {
+        checkedStoreNames.remove(shops[index].name);
+      }
+    } else {
+      addressCheckBoxValues[index] = !addressCheckBoxValues[index];
+      if (addressCheckBoxValues[index] == true) {
+        checkedAddressNames.add(shops[index].name);
+      }
+      if (addressCheckBoxValues[index] == false) {
+        checkedAddressNames.remove(shops[index].name);
+      }
+    }
+  }
+
+  @action
+  void checkBoxReset() {
+    for (int i = 0; i < checkBoxValues.length; i++) {
+      checkBoxValues[i] = false;
+      checkedStoreNames.clear();
+      checkedStoreNames = ObservableList<String>();
+    }
+  }
+
   @action
   Future<void> getAllShops() async {
     (await handle(() => _shopsRepository.getShops())).then(
-      (data) => shops = data,
+      (data) {
+        shops = data;
+        checkBoxValues =
+            ObservableList<bool>.of(List<bool>.filled(shops.length, false));
+      },
       (error) => getError = error,
     );
     await Future.delayed(const Duration(milliseconds: 200));
   }
+
   @action
   Future<void> getShopsByCategory({required String categories}) async {
-    (await handle(() => _shopsRepository.getShopsByCategory(categories: categories))).then(
-          (data) => shops = data,
-          (error) => getError = error,
+    (await handle(
+            () => _shopsRepository.getShopsByCategory(categories: categories)))
+        .then(
+      (data) => shops = data,
+      (error) => getError = error,
     );
     await Future.delayed(const Duration(milliseconds: 200));
   }

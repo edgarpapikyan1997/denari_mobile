@@ -4,10 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../../utils/themes/app_colors.dart';
 
-class KmField extends StatelessWidget {
+class RangeField extends StatelessWidget {
   final int fromDestination;
-
-  const KmField({super.key, required this.fromDestination});
+  final String label;
+  const RangeField({super.key, required this.fromDestination,
+    required this.label,});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class KmField extends StatelessWidget {
         child: Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            '$fromDestination km',
+            '$fromDestination $label',
             style: context.theme.body1,
           ),
         ),

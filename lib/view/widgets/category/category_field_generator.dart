@@ -9,13 +9,14 @@ import '../../../utils/themes/app_colors.dart';
 import 'category.dart';
 import 'category_widget.dart';
 
-class CategoryFieldGenerator extends StatefulWidget {
+class CategoryFieldGenerator extends StatelessWidget {
   final List<Category> categories;
   final CategoriesState categoriesState;
   final bool justSelector;
   final Color? unselectedColor;
   final Color? borderColor;
   final bool isRow;
+  final VoidCallback? onTap;
 
   const CategoryFieldGenerator({
     super.key,
@@ -25,13 +26,9 @@ class CategoryFieldGenerator extends StatefulWidget {
     this.unselectedColor,
     this.borderColor,
     this.isRow = true,
+    this.onTap,
   });
 
-  @override
-  State<CategoryFieldGenerator> createState() => _CategoryFieldGeneratorState();
-}
-
-class _CategoryFieldGeneratorState extends State<CategoryFieldGenerator> {
   Widget createWrapCollection({required BuildContext context}) {
     return Observer(
       builder: (_) {
@@ -40,12 +37,11 @@ class _CategoryFieldGeneratorState extends State<CategoryFieldGenerator> {
           spacing: 6,
           runSpacing: 6,
           children: List.generate(
-            widget.categories.length,
+            categories.length,
             (index) {
-              final category = widget.categories[index];
-              final isSelected = widget.categoriesState.selectedCategories
-                  .contains(category.type);
-
+              final category = categories[index];
+              final isSelected =
+                  categoriesState.selectedCategories.contains(category.type);
               return ActionChip(
                 backgroundColor:
                     isSelected ? AppColors.yellowLight2 : AppColors.whiteGrey,
@@ -62,9 +58,9 @@ class _CategoryFieldGeneratorState extends State<CategoryFieldGenerator> {
                 ),
                 onPressed: () {
                   if (isSelected) {
-                    widget.categoriesState.removeCategory(category.type);
+                    categoriesState.removeCategory(category.type);
                   } else {
-                    widget.categoriesState.addCategory(category.type);
+                    categoriesState.addCategory(category.type);
                   }
                 },
               );
@@ -80,25 +76,32 @@ class _CategoryFieldGeneratorState extends State<CategoryFieldGenerator> {
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: widget.categories.asMap().entries.map((entry) {
+        children: categories.asMap().entries.map((entry) {
           int index = entry.key;
           Category category = entry.value;
           return PaddingUtility.only(
-            right: index == widget.categories.length - 1 ? 0 : 8,
+            right: 8,
             child: CategoryWidget(
               categoryName: category.name,
               categoryIcon: category.icon,
-              categoriesState: widget.categoriesState,
-              unselectedColor: widget.unselectedColor,
-              borderColor: widget.borderColor,
+              categoriesState: categoriesState,
+              unselectedColor: unselectedColor,
+              borderColor: borderColor,
               onTap: () {
-                widget.categoriesState.selectCategory(
-                    categoryName: category.name,
-                    newCategoryType: category.type);
-                if (widget.justSelector != true &&
-                    category.type != CategoryType.all) {
-                  context.push('/chosenCategoryScreen',
-                      extra: widget.categoriesState);
+                if (categoriesState.categoryType == category.type) {
+                  categoriesState.unselectCategory();
+                } else {
+                  categoriesState.selectCategory(
+                      categoryName: category.name,
+                      newCategoryType: category.type);
+                  if (onTap != null) {
+                    onTap?.call();
+                  }
+                  if (justSelector != true &&
+                      category.type != CategoryType.all) {
+                    context.push('/chosenCategoryScreen',
+                        extra: categoriesState);
+                  }
                 }
               },
             ),
@@ -110,7 +113,7 @@ class _CategoryFieldGeneratorState extends State<CategoryFieldGenerator> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.isRow
+    return isRow
         ? createRowCollection(context: context)
         : createWrapCollection(context: context);
   }

@@ -36,4 +36,10 @@ abstract class CategoriesStatePerformer with Store {
     currentCategory = categoryName;
     categoryType = newCategoryType;
   }
+
+  @action
+  void unselectCategory() {
+    currentCategory = null;
+    categoryType = null;
+  }
 }

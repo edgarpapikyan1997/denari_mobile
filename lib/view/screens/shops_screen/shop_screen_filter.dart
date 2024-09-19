@@ -113,7 +113,7 @@ class _ShopScreenFilterState extends State<ShopScreenFilter> {
                 bannerUnderText: 'shops.enterMinMaxDistance'.tr(),
               ),
               const Delimiter(16),
-              const DistanceConfigurator(),
+              const DistanceConfigurator(rangeFrom: 0, rangeTo: 100, configuratorLabel: 'km',),
               const Delimiter(32),
               PreviewBanner(
                 leadingBanner: 'shops.workingNow'.tr(),

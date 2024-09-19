@@ -31,7 +31,8 @@
     "userFound": "User found",
     "giftWillSend": "The gift will be sent directly to",
     "tokenWillSend": "The tokens will be sent directly to",
-    "backToHome": "Back to Home"
+    "backToHome": "Back to Home",
+    "apply" : "Apply"
   },
   "balance": {
     "balance": "Balance:",
@@ -217,6 +218,18 @@
     "amountTokensUser": "Amount tokens used",
     "amountGiftCardsUsed": "Amount gift cards used",
     "noTransaction": "No transaction",
-    "noTransactionDescription": "The transaction history begins after making the first purchase with the card."
+    "noTransactionDescription": "The transaction history begins after making the first purchase with the card.",
+    "date" : "Date",
+    "selectOptions" : "Select a start and end date or choose from preset options.",
+    "today" : "Today",
+    "thisWeek" : "This Week",
+    "thisMonth" : "This Month",
+     "amountRange" : "Amount Range",
+    "enterAmount" : "Enter the minimum and maximum amount.",
+   "stores" : "Stores",
+    "notChosen" : "not chosen",
+     "selectFromList" : "Select a store from the list",
+    "branch" : "Branch"
+
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
@@ -20,7 +21,9 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  colorScheme: ColorScheme.fromSeed(seedColor: AppColors.yellowDark),
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: AppColors.yellowDark,
+  ),
   primaryColor: AppColors.yellowLight,
   scaffoldBackgroundColor: AppColors.white,
   canvasColor: AppColors.white,

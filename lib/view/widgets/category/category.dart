@@ -49,6 +49,12 @@ class Category {
         return 'main.other'.tr();
       case CategoryType.allNoIcon:
         return 'shops.all'.tr();
+      case CategoryType.today:
+        return 'transaction.today'.tr();
+      case CategoryType.thisWeek:
+        return 'transaction.thisWeek'.tr();
+      case CategoryType.thisMonth:
+        return 'transaction.thisMonth'.tr();
     }
   }
 

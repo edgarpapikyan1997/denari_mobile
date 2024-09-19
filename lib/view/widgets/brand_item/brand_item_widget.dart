@@ -35,8 +35,9 @@ class BrandItemWidget extends StatelessWidget {
   final double iconWidth;
   final bool addPlus;
   final bool addPreviewBanner;
-  final VoidCallback? onTap; // Add an onTap callback
+  final VoidCallback? onTap;
   final List<BalanceWidget>? balanceWidgets;
+  final bool? isCheckBoxSelected;
 
   const BrandItemWidget({
     super.key,
@@ -68,6 +69,7 @@ class BrandItemWidget extends StatelessWidget {
     this.onTap,
     this.shopId,
     this.balanceWidgets,
+    this.isCheckBoxSelected,
   });
 
   @override

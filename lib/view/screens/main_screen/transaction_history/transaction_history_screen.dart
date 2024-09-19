@@ -16,32 +16,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../gen/assets.gen.dart';
-import '../../../../store/categories_state/categories_state.dart';
-import '../../../../utils/themes/app_colors.dart';
-import '../../../constants/app_bar_type.dart';
-import '../../../constants/app_sizes/app_sizes.dart';
-import '../../../constants/categories.dart';
-import '../../../data/transactions/repositoriy/transactions_repository.dart';
-import '../../../store/token_balance_state/token_balance_state.dart';
-import '../../../store/transactions/transactions_state.dart';
-import '../../../utils/di/config.dart';
-import '../../widgets/bottom_sheet/item_info_bottom_sheet.dart';
-import '../../widgets/bottom_sheet/custom_bottom_sheet.dart';
-import '../../widgets/brand_item/brand_item_list.dart';
-import '../../widgets/category/category.dart';
-import '../../widgets/category/category_field_generator.dart';
-import '../../widgets/custom_app_bar.dart';
-import '../../widgets/no_data_widget.dart';
+import '../../../../../gen/assets.gen.dart';
+import '../../../../../store/categories_state/categories_state.dart';
+import '../../../../../utils/themes/app_colors.dart';
+import '../../../../constants/app_bar_type.dart';
+import '../../../../constants/app_sizes/app_sizes.dart';
+import '../../../../constants/categories.dart';
+import '../../../../data/transactions/repositoriy/transactions_repository.dart';
+import '../../../../store/token_balance_state/token_balance_state.dart';
+import '../../../../store/transactions/transactions_state.dart';
+import '../../../../utils/di/config.dart';
+import '../../../widgets/bottom_sheet/item_info_bottom_sheet.dart';
+import '../../../widgets/bottom_sheet/custom_bottom_sheet.dart';
+import '../../../widgets/brand_item/brand_item_list.dart';
+import '../../../widgets/category/category.dart';
+import '../../../widgets/category/category_field_generator.dart';
+import '../../../widgets/custom_app_bar.dart';
+import '../../../widgets/no_data_widget.dart';
 
-class TransactionScreen extends StatefulWidget {
-  const TransactionScreen({super.key});
+class TransactionHistoryScreen extends StatefulWidget {
+  const TransactionHistoryScreen({super.key});
 
   @override
-  State<TransactionScreen> createState() => _TransactionScreenState();
+  State<TransactionHistoryScreen> createState() =>
+      _TransactionHistoryScreenState();
 }
 
-class _TransactionScreenState extends State<TransactionScreen> {
+class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
   final TransactionsState _transactionsState = TransactionsState(
       transactionsRepository: di.get<TransactionsRepository>());
   final LoadingState _loadingState = LoadingState();
@@ -112,9 +113,16 @@ class _TransactionScreenState extends State<TransactionScreen> {
                       ),
                       GestureDetector(
                           onTap: () {
-                            context.push(
-                              '/shopScreenFilter',
+                            context.pushNamed(
+                              'transactionsFilter', // Use the route name here
+                              pathParameters: {
+                                'startDate': items.last!.date.toString(),
+                                'endDate': items.first!.date.toString(),
+                              },
                             );
+                            // context.push(
+                            //   '/transactions/transactionsFilter',
+                            // );
                           },
                           child: Assets.media.icons.filter.svg()),
                     ],
@@ -150,8 +158,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                       const SizedBox(),
                     ],
                   )
-                :
-        PaddingUtility.symmetric(
+                : PaddingUtility.symmetric(
                     horizontal: 16,
                     child: ListView.builder(
                       controller: _scrollController,
@@ -250,7 +257,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                             ],
                           );
                         }
-                        return SizedBox();
+                        return const SizedBox();
                       },
                     ),
                   ),

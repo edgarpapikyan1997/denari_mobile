@@ -8,7 +8,7 @@ import 'package:denari_app/view/screens/profile/pages/create_password_page.dart'
 import 'package:denari_app/view/screens/profile/pages/forgot_code_page.dart';
 import 'package:denari_app/view/screens/profile/pages/forgot_page.dart';
 import 'package:denari_app/view/screens/profile/pages/profile_page.dart';
-import 'package:denari_app/view/screens/search_screen.dart';
+import 'package:denari_app/view/screens/search_screen/search_screen.dart';
 import 'package:denari_app/view/screens/send_gift_screen/send_gift_card_screen.dart';
 import 'package:denari_app/view/screens/shops_screen/chosen_category_screen.dart';
 import 'package:denari_app/view/screens/shops_screen/shop_screen_filter.dart';
@@ -28,7 +28,8 @@ import '../view/screens/authentication/sign_in/sign_in_screen.dart';
 import '../view/screens/authentication/sign_up/sign_up_screen.dart';
 import '../view/screens/main_screen/main_screen.dart';
 import '../view/screens/main_screen/my_gift_cards_screen.dart';
-import '../view/screens/main_screen/transaction_history_screen.dart';
+import '../view/screens/main_screen/transaction_history/transaction_history_filter.dart';
+import '../view/screens/main_screen/transaction_history/transaction_history_screen.dart';
 import '../view/screens/map_screen/map_screen.dart';
 import '../view/screens/notifications/notification_screen.dart';
 import '../view/screens/profile/profile_screen.dart';
@@ -36,6 +37,7 @@ import '../view/screens/qr/qr_scanner/qr_scanner_screen.dart';
 import '../view/screens/send_gift_screen/send_gift_screen.dart';
 import '../view/screens/shops_screen/shop_screen.dart';
 import '../view/screens/store_field_screen/widgets/store_field_arguments.dart';
+import '../view/screens/store_list_screen/store_list_screen.dart';
 import '../view/widgets/scaffold_nav_bar.dart';
 import 'listeners/auth_listener.dart';
 
@@ -155,7 +157,7 @@ final GoRouter router = GoRouter(
       path: '/searchScreen',
       builder: (context, state) {
         final items = state.extra as List<dynamic>;
-        return  SearchScreen(
+        return SearchScreen(
           items: items,
         );
       },
@@ -163,8 +165,29 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: '/transactions',
         builder: (context, state) {
-          return const TransactionScreen();
-        }),
+          return const TransactionHistoryScreen();
+        },
+        routes: [
+          GoRoute(
+            path: 'transactionsFilter/:startDate/:endDate',
+            name: 'transactionsFilter',
+            builder: (context, state) => TransactionHistoryFilter(
+              startDate: state.pathParameters['startDate'],
+              endDate: state.pathParameters['endDate'],
+            ),
+          ),
+        ]),
+    GoRoute(
+      path: '/storeListScreen',
+      name: 'storeListScreen',
+      builder: (context, state) {
+        final args = state.extra as bool;
+        return StoreListScreen(
+          isAddress: args,
+        );
+      },
+    ),
+
     GoRoute(
       path: '/storeFieldItemScreen',
       builder: (context, state) {

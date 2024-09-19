@@ -1,21 +1,36 @@
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
 import '../../../../store/filters/distance_state/distance_configurator_state.dart';
 import 'km_field.dart';
 
 class DistanceConfigurator extends StatefulWidget {
-  const DistanceConfigurator({super.key});
+  final double rangeFrom;
+  final double rangeTo;
+  final String configuratorLabel;
+
+  const DistanceConfigurator({
+    super.key,
+    required this.rangeFrom,
+    required this.rangeTo,
+    required this.configuratorLabel,
+  });
 
   @override
   State<DistanceConfigurator> createState() => _DistanceConfiguratorState();
 }
 
 class _DistanceConfiguratorState extends State<DistanceConfigurator> {
-  DistanceConfiguratorState distanceConfiguratorState =
-      DistanceConfiguratorState();
-  RangeValues _currentRangeValues = const RangeValues(0, 100);
+  final DistanceConfiguratorState distanceConfiguratorState = DistanceConfiguratorState();
+
+  @override
+  void initState() {
+    super.initState();
+    distanceConfiguratorState.configure(
+      widget.rangeFrom.toInt(),
+      widget.rangeTo.toInt(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,27 +40,29 @@ class _DistanceConfiguratorState extends State<DistanceConfigurator> {
           Row(
             children: [
               Expanded(
-                  child: KmField(
-                fromDestination: distanceConfiguratorState.from,
-              )),
-              const SizedBox(
-                width: 8,
+                child: RangeField(
+                  fromDestination: distanceConfiguratorState.from,
+                  label: widget.configuratorLabel,
+                ),
               ),
+              const SizedBox(width: 8),
               Expanded(
-                  child: KmField(
-                fromDestination: distanceConfiguratorState.to,
-              )),
+                child: RangeField(
+                  fromDestination: distanceConfiguratorState.to,
+                  label: widget.configuratorLabel,
+                ),
+              ),
             ],
           ),
           const Delimiter(16),
           RangeSlider(
-            values: _currentRangeValues,
-            max: 100,
+            values: distanceConfiguratorState.currentRangeValues,
+            max: widget.rangeTo,
             onChanged: (RangeValues values) {
-              _currentRangeValues = values;
               distanceConfiguratorState.configure(
-                  _currentRangeValues.start.toInt(),
-                  _currentRangeValues.end.toInt());
+                values.start.toInt(),
+                values.end.toInt(),
+              );
             },
           ),
         ],

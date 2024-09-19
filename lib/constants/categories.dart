@@ -16,7 +16,10 @@ enum CategoryType {
   georgian,
   belarusian,
   desert,
-  allNoIcon
+  allNoIcon,
+  today,
+  thisWeek,
+  thisMonth
 }
 
 

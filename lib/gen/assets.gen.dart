@@ -73,6 +73,10 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/bigPin.svg
   SvgGenImage get bigPin => const SvgGenImage('assets/media/icons/bigPin.svg');
 
+  /// File path: assets/media/icons/calendar-days.svg
+  SvgGenImage get calendarDays =>
+      const SvgGenImage('assets/media/icons/calendar-days.svg');
+
   /// File path: assets/media/icons/camera.svg
   SvgGenImage get camera => const SvgGenImage('assets/media/icons/camera.svg');
 
@@ -205,6 +209,7 @@ class $AssetsMediaIconsGen {
         bellRing,
         bell,
         bigPin,
+        calendarDays,
         camera,
         card,
         chevronLeft,

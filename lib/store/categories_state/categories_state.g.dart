@@ -112,6 +112,17 @@ mixin _$CategoriesState on CategoriesStatePerformer, Store {
   }
 
   @override
+  void unselectCategory() {
+    final _$actionInfo = _$CategoriesStatePerformerActionController.startAction(
+        name: 'CategoriesStatePerformer.unselectCategory');
+    try {
+      return super.unselectCategory();
+    } finally {
+      _$CategoriesStatePerformerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 currentCategory: ${currentCategory},

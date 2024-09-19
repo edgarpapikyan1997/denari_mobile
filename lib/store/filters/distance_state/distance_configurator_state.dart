@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-
 part 'distance_configurator_state.g.dart';
 
-class DistanceConfiguratorState = DistanceConfigurator with _$DistanceConfiguratorState;
+class DistanceConfiguratorState = DistanceConfiguratorImpl with _$DistanceConfiguratorState;
 
-abstract class DistanceConfigurator with Store {
+abstract class DistanceConfiguratorImpl with Store {
 
   @observable
   int from = 0;
@@ -12,9 +12,12 @@ abstract class DistanceConfigurator with Store {
   @observable
   int to = 100;
 
+  @computed
+  RangeValues get currentRangeValues => RangeValues(from.toDouble(), to.toDouble());
+
   @action
-  void configure(int fromDestination, int toDestination){
-      from = fromDestination;
-      to = toDestination;
+  void configure(int fromDestination, int toDestination) {
+    from = fromDestination;
+    to = toDestination;
   }
 }

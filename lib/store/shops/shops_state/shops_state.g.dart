@@ -9,6 +9,14 @@ part of 'shops_state.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ShopsState on ShopsStatePerformer, Store {
+  Computed<bool>? _$isAnyCheckBoxSelectedComputed;
+
+  @override
+  bool get isAnyCheckBoxSelected => (_$isAnyCheckBoxSelectedComputed ??=
+          Computed<bool>(() => super.isAnyCheckBoxSelected,
+              name: 'ShopsStatePerformer.isAnyCheckBoxSelected'))
+      .value;
+
   late final _$shopsAtom =
       Atom(name: 'ShopsStatePerformer.shops', context: context);
 
@@ -22,6 +30,39 @@ mixin _$ShopsState on ShopsStatePerformer, Store {
   set shops(List<ShopsModel> value) {
     _$shopsAtom.reportWrite(value, super.shops, () {
       super.shops = value;
+    });
+  }
+
+  late final _$checkBoxValuesAtom =
+      Atom(name: 'ShopsStatePerformer.checkBoxValues', context: context);
+
+  @override
+  ObservableList<bool> get checkBoxValues {
+    _$checkBoxValuesAtom.reportRead();
+    return super.checkBoxValues;
+  }
+
+  @override
+  set checkBoxValues(ObservableList<bool> value) {
+    _$checkBoxValuesAtom.reportWrite(value, super.checkBoxValues, () {
+      super.checkBoxValues = value;
+    });
+  }
+
+  late final _$addressCheckBoxValuesAtom =
+      Atom(name: 'ShopsStatePerformer.addressCheckBoxValues', context: context);
+
+  @override
+  ObservableList<bool> get addressCheckBoxValues {
+    _$addressCheckBoxValuesAtom.reportRead();
+    return super.addressCheckBoxValues;
+  }
+
+  @override
+  set addressCheckBoxValues(ObservableList<bool> value) {
+    _$addressCheckBoxValuesAtom.reportWrite(value, super.addressCheckBoxValues,
+        () {
+      super.addressCheckBoxValues = value;
     });
   }
 
@@ -57,6 +98,38 @@ mixin _$ShopsState on ShopsStatePerformer, Store {
     });
   }
 
+  late final _$checkedStoreNamesAtom =
+      Atom(name: 'ShopsStatePerformer.checkedStoreNames', context: context);
+
+  @override
+  ObservableList<String> get checkedStoreNames {
+    _$checkedStoreNamesAtom.reportRead();
+    return super.checkedStoreNames;
+  }
+
+  @override
+  set checkedStoreNames(ObservableList<String> value) {
+    _$checkedStoreNamesAtom.reportWrite(value, super.checkedStoreNames, () {
+      super.checkedStoreNames = value;
+    });
+  }
+
+  late final _$checkedAddressNamesAtom =
+      Atom(name: 'ShopsStatePerformer.checkedAddressNames', context: context);
+
+  @override
+  ObservableList<String> get checkedAddressNames {
+    _$checkedAddressNamesAtom.reportRead();
+    return super.checkedAddressNames;
+  }
+
+  @override
+  set checkedAddressNames(ObservableList<String> value) {
+    _$checkedAddressNamesAtom.reportWrite(value, super.checkedAddressNames, () {
+      super.checkedAddressNames = value;
+    });
+  }
+
   late final _$getAllShopsAsyncAction =
       AsyncAction('ShopsStatePerformer.getAllShops', context: context);
 
@@ -82,12 +155,42 @@ mixin _$ShopsState on ShopsStatePerformer, Store {
     return _$getShopByIDAsyncAction.run(() => super.getShopByID(id: id));
   }
 
+  late final _$ShopsStatePerformerActionController =
+      ActionController(name: 'ShopsStatePerformer', context: context);
+
+  @override
+  void updateCheckBox({required int index, bool isAddress = false}) {
+    final _$actionInfo = _$ShopsStatePerformerActionController.startAction(
+        name: 'ShopsStatePerformer.updateCheckBox');
+    try {
+      return super.updateCheckBox(index: index, isAddress: isAddress);
+    } finally {
+      _$ShopsStatePerformerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void checkBoxReset() {
+    final _$actionInfo = _$ShopsStatePerformerActionController.startAction(
+        name: 'ShopsStatePerformer.checkBoxReset');
+    try {
+      return super.checkBoxReset();
+    } finally {
+      _$ShopsStatePerformerActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 shops: ${shops},
+checkBoxValues: ${checkBoxValues},
+addressCheckBoxValues: ${addressCheckBoxValues},
 getError: ${getError},
-shopsUnitModel: ${shopsUnitModel}
+shopsUnitModel: ${shopsUnitModel},
+checkedStoreNames: ${checkedStoreNames},
+checkedAddressNames: ${checkedAddressNames},
+isAnyCheckBoxSelected: ${isAnyCheckBoxSelected}
     ''';
   }
 }

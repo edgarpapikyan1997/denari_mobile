@@ -59,7 +59,6 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
     if (datePickerState.startDate == null && datePickerState.endDate == null) {
       datePickerState.startDate = widget.startDate?.toDate()!;
       minimumDate = datePickerState.startDate;
-      // datePickerState.endDate = widget.endDate?.toDate()!;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -73,7 +72,6 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
 
   void initPrefs() {
     _loadingState.startLoading();
-
     timeRange = [
       Category(type: CategoryType.today, iconColor: categoriesState.itemColor),
       Category(
@@ -240,54 +238,48 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
                         configuratorLabel: 'LD',
                       ),
                       const Delimiter(32),
-                      PreviewBanner(
-                        leadingBanner: 'transaction.stores'.tr(),
-                        bannerUnderText:
-                            _shopsState.checkedStoreNames.isNotEmpty
-                                ? _shopsState.checkedStoreNames.join(', ')
-                                : 'transaction.notChosen'.tr(),
-                        tealButton: GestureDetector(
-                          onTap: () async {
-                            _shopsState.checkedStoreNames =
-                                ObservableList<String>();
-                            ObservableList<String>? result = await context.pushNamed(
-                              'storeListScreen',
-                              extra: false
-                            );
-                            if (result != null) {
-                              _shopsState.checkedStoreNames = result;
-                            } else {
-                              _shopsState.checkBoxReset();
-                            }
-                          },
-                          child: Assets.media.icons.chevronRight.svg(),
-                        ),
+                      Observer(
+                        builder: (_) {
+                          return PreviewBanner(
+                            leadingBanner: 'transaction.stores'.tr(),
+                            bannerUnderText:
+                                _shopsState.checkedStoreItems.isNotEmpty
+                                    ? _shopsState.checkedStoreItems
+                                        .map((item) => item.values.first)
+                                        .join(', ')
+                                    : 'transaction.notChosen'.tr(),
+                            tealButton: GestureDetector(
+                              onTap: () async {
+                                _shopsState.checkedStoreItems =
+                                    await context.pushNamed(
+                                  'storeListScreen',
+                                ) as ObservableList<Map<String, dynamic>>;
+                              },
+                              child: Assets.media.icons.chevronRight.svg(),
+                            ),
+                          );
+                        },
                       ),
                       const Delimiter(32),
                       PreviewBanner(
                         leadingBanner: 'transaction.branch'.tr(),
-                        previewStyle: _shopsState.checkedStoreNames.isNotEmpty
+                        previewStyle: _shopsState.checkedStoreItems.isNotEmpty
                             ? context.theme.headline2.bold
                             : context.theme.headline2.bold.lightGreyText,
                         bannerUnderText:
-                            _shopsState.addressCheckBoxValues.isNotEmpty
-                                ? _shopsState.checkedAddressNames.join(', ')
+                            _shopsState.checkedAddressItems.isNotEmpty
+                                ? _shopsState.checkedAddressItems
+                                    .map((item) => item.values.first)
+                                    .join(', ')
                                 : 'transaction.notChosen'.tr(),
                         tealButton: GestureDetector(
                           onTap: () async {
-                            if (_shopsState.checkedStoreNames.isNotEmpty) {
-                              _shopsState.checkedAddressNames =
-                                  ObservableList<String>();
-                              ObservableList<String>? result =
-                                  await context.pushNamed(
-                                'storeListScreen',
-                                extra: true
-                              );
-                              if (result != null) {
-                                _shopsState.checkedStoreNames = result;
-                              } else {
-                                _shopsState.checkBoxReset();
-                              }
+                            if (_shopsState.checkedStoreItems.isNotEmpty ==
+                                true) {
+                              _shopsState.checkedAddressItems =
+                                  await context.pushNamed('branchListScreen',
+                                          extra: _shopsState.checkedStoreItems)
+                                      as ObservableList<Map<String, dynamic>>;
                             }
                           },
                           child: Assets.media.icons.chevronRight.svg(),

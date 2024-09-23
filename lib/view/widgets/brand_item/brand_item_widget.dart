@@ -1,5 +1,6 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:denari_app/view/widgets/preview_banner/preview_banner.dart';
 import 'package:denari_app/view/widgets/status_widget/status_widget.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class BrandItemWidget extends StatelessWidget {
   const BrandItemWidget({
     super.key,
     this.brandItemWrapperColor,
-     this.avatar,
+    this.avatar,
     required this.brandName,
     this.isToken = false,
     this.secondaryInfo,
@@ -78,58 +79,63 @@ class BrandItemWidget extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          Container(
-            padding: EdgeInsets.only(top: topPadding, bottom:  bottomPadding,),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: brandItemWrapperColor,
-            ),
-            child: Row(
-              children: [
-                iconAvatar != null
-                    ? iconAvatar!
-                    : Container(
-                        height: 48,
-                        width: 48,
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: NetworkImage(avatar!),
+          PaddingUtility.only(
+            top: topPadding,
+            bottom: bottomPadding,
+            child: Container(
+              width: context.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: brandItemWrapperColor,
+              ),
+              child: Row(
+                children: [
+                  iconAvatar != null
+                      ? iconAvatar!
+                      : Container(
+                          height: 48,
+                          width: 48,
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: NetworkImage(avatar!),
+                            ),
+                            border: Border.all(
+                                width: 1, color: AppColors.borderColor),
                           ),
-                          border:
-                              Border.all(width: 1, color: AppColors.borderColor),
                         ),
-                      ),
-                const SizedBox(
-                  width: 8,
-                ),
-                secondaryInfo != null
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
+                  const Delimiter(8),
+                  Expanded(
+                    child: secondaryInfo != null
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                brandName,
+                                style: context.theme.body1,
+                              ),
+                              const SizedBox(height: 2),
+                              secondaryInfo!,
+                            ],
+                          )
+                        : Text(
                             brandName,
-                            style: context.theme.body1,
+                            style: context.theme.headline4.regular,
                           ),
-                          const SizedBox(
-                            height: 2,
+                  ),
+                  balanceWidgets != null
+                      ? Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: balanceWidgets ?? [],
                           ),
-                          secondaryInfo!,
-                        ],
                       )
-                    : Text(
-                        brandName,
-                        style: context.theme.headline4.regular,
-                      ),
-                const Spacer(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: balanceWidgets ?? [],
-                ),
-                tealButton ?? const SizedBox(),
-              ],
+                      : const SizedBox(),
+                  tealButton ?? const SizedBox(),
+                ],
+              ),
             ),
           ),
           // addDivider

@@ -18,9 +18,8 @@ import '../../../utils/themes/app_colors.dart';
 import '../../widgets/brand_item/brand_item_widget.dart';
 
 class StoreListScreen extends StatefulWidget {
-  final bool isAddress;
 
-  const StoreListScreen({super.key, required this.isAddress});
+  const StoreListScreen({super.key,});
 
   @override
   State<StoreListScreen> createState() => _StoreListScreenState();
@@ -109,8 +108,7 @@ class _StoreListScreenState extends State<StoreListScreen> {
                               activeColor: Colors.black,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  _shopsState.updateCheckBox(
-                                      index: index, isAddress: false);
+                                  _shopsState.updateCheckBox(index: index, isAddress: false);
                                 });
                               },
                             ),
@@ -136,7 +134,7 @@ class _StoreListScreenState extends State<StoreListScreen> {
                         isWhite: false,
                         title: 'main.apply'.tr(),
                         onTap: () {
-                          context.pop(_shopsState.checkedStoreNames);
+                          context.pop(_shopsState.checkedStoreItems);
                         }),
                   ),
                 ],

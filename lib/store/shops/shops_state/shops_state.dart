@@ -20,11 +20,11 @@ abstract class ShopsStatePerformer with Store {
 
   @observable
   ObservableList<bool> checkBoxValues =
-      ObservableList<bool>(); // Use ObservableList
+      ObservableList<bool>();
 
   @observable
   ObservableList<bool> addressCheckBoxValues =
-      ObservableList<bool>(); // Use ObservableList
+      ObservableList<bool>();
 
   @observable
   String? getError;
@@ -33,10 +33,15 @@ abstract class ShopsStatePerformer with Store {
   ShopsUnitModel? shopsUnitModel;
 
   @observable
-  ObservableList<String> checkedStoreNames = ObservableList<String>();
+  List<ShopsUnitModel> shopsUnitModelList = [];
 
   @observable
-  ObservableList<String> checkedAddressNames = ObservableList<String>();
+  ObservableList<Map<String, dynamic>> checkedStoreItems =
+      ObservableList<Map<String, dynamic>>();
+
+  @observable
+  ObservableList<Map<String, dynamic>> checkedAddressItems =
+      ObservableList<Map<String, dynamic>>();
 
   @computed
   bool get isAnyCheckBoxSelected => checkBoxValues.contains(true);
@@ -46,18 +51,20 @@ abstract class ShopsStatePerformer with Store {
     if (isAddress == false) {
       checkBoxValues[index] = !checkBoxValues[index];
       if (checkBoxValues[index] == true) {
-        checkedStoreNames.add(shops[index].name);
+        checkedStoreItems.add({shops[index].id: shops[index].name});
       }
       if (checkBoxValues[index] == false) {
-        checkedStoreNames.remove(shops[index].name);
+        checkedStoreItems
+            .removeWhere((element) => element.containsKey(shops[index].id));
       }
     } else {
       addressCheckBoxValues[index] = !addressCheckBoxValues[index];
       if (addressCheckBoxValues[index] == true) {
-        checkedAddressNames.add(shops[index].name);
+        checkedAddressItems.add({shops[index].id: shops[index].name});
       }
       if (addressCheckBoxValues[index] == false) {
-        checkedAddressNames.remove(shops[index].name);
+        checkedAddressItems
+            .removeWhere((element) => element.containsKey(shops[index].id));
       }
     }
   }
@@ -66,8 +73,8 @@ abstract class ShopsStatePerformer with Store {
   void checkBoxReset() {
     for (int i = 0; i < checkBoxValues.length; i++) {
       checkBoxValues[i] = false;
-      checkedStoreNames.clear();
-      checkedStoreNames = ObservableList<String>();
+      checkedStoreItems.clear();
+      checkedStoreItems = ObservableList<Map<String, dynamic>>();
     }
   }
 
@@ -101,6 +108,28 @@ abstract class ShopsStatePerformer with Store {
       (data) => shopsUnitModel = data,
       (error) => getError = error,
     );
+    await Future.delayed(const Duration(milliseconds: 200));
+  }
+
+  @action
+  Future<void> getShopByIDtoList(
+      {required List<Map<String, dynamic>> items}) async {
+    await handle(() async {
+      await Future.forEach(items, (Map<String, dynamic> item) async {
+        final shopUnit =
+            await _shopsRepository.getShopByID(shopID: item.keys.first);
+        shopsUnitModelList.add(shopUnit);
+      });
+      addressCheckBoxValues =
+      ObservableList<bool>.of(List<bool>.filled(shopsUnitModelList.length, false));
+    }).then(
+      (data) {
+      },
+      onError: (error) {
+        getError = error;
+      },
+    );
+
     await Future.delayed(const Duration(milliseconds: 200));
   }
 }

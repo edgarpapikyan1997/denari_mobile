@@ -98,35 +98,35 @@ mixin _$ShopsState on ShopsStatePerformer, Store {
     });
   }
 
-  late final _$checkedStoreNamesAtom =
-      Atom(name: 'ShopsStatePerformer.checkedStoreNames', context: context);
+  late final _$checkedStoreItemsAtom =
+      Atom(name: 'ShopsStatePerformer.checkedStoreItems', context: context);
 
   @override
-  ObservableList<String> get checkedStoreNames {
-    _$checkedStoreNamesAtom.reportRead();
-    return super.checkedStoreNames;
+  ObservableList<Map<String, dynamic>> get checkedStoreItems {
+    _$checkedStoreItemsAtom.reportRead();
+    return super.checkedStoreItems;
   }
 
   @override
-  set checkedStoreNames(ObservableList<String> value) {
-    _$checkedStoreNamesAtom.reportWrite(value, super.checkedStoreNames, () {
-      super.checkedStoreNames = value;
+  set checkedStoreItems(ObservableList<Map<String, dynamic>> value) {
+    _$checkedStoreItemsAtom.reportWrite(value, super.checkedStoreItems, () {
+      super.checkedStoreItems = value;
     });
   }
 
-  late final _$checkedAddressNamesAtom =
-      Atom(name: 'ShopsStatePerformer.checkedAddressNames', context: context);
+  late final _$checkedAddressItemsAtom =
+      Atom(name: 'ShopsStatePerformer.checkedAddressItems', context: context);
 
   @override
-  ObservableList<String> get checkedAddressNames {
-    _$checkedAddressNamesAtom.reportRead();
-    return super.checkedAddressNames;
+  ObservableList<Map<String, dynamic>> get checkedAddressItems {
+    _$checkedAddressItemsAtom.reportRead();
+    return super.checkedAddressItems;
   }
 
   @override
-  set checkedAddressNames(ObservableList<String> value) {
-    _$checkedAddressNamesAtom.reportWrite(value, super.checkedAddressNames, () {
-      super.checkedAddressNames = value;
+  set checkedAddressItems(ObservableList<Map<String, dynamic>> value) {
+    _$checkedAddressItemsAtom.reportWrite(value, super.checkedAddressItems, () {
+      super.checkedAddressItems = value;
     });
   }
 
@@ -188,8 +188,8 @@ checkBoxValues: ${checkBoxValues},
 addressCheckBoxValues: ${addressCheckBoxValues},
 getError: ${getError},
 shopsUnitModel: ${shopsUnitModel},
-checkedStoreNames: ${checkedStoreNames},
-checkedAddressNames: ${checkedAddressNames},
+checkedStoreItems: ${checkedStoreItems},
+checkedAddressItems: ${checkedAddressItems},
 isAnyCheckBoxSelected: ${isAnyCheckBoxSelected}
     ''';
   }

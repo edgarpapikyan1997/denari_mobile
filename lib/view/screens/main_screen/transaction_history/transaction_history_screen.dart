@@ -11,9 +11,7 @@ import 'package:denari_app/view/widgets/bottom_sheet/variants/modal_sheet.dart';
 import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:denari_app/view/widgets/preview_banner/preview_banner.dart';
 import 'package:denari_app/view/widgets/status_widget/status_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../gen/assets.gen.dart';
@@ -158,8 +156,9 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                       const SizedBox(),
                     ],
                   )
-                : PaddingUtility.symmetric(
-                    horizontal: 16,
+                : PaddingUtility.only(
+                    left: 16,
+                    right: 16,
                     child: ListView.builder(
                       controller: _scrollController,
                       itemCount: items.length,

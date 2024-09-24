@@ -50,6 +50,7 @@ class PreviewBanner extends StatelessWidget {
                 style: underTextStyle ??
                     context.theme.headline4.regular.lightGreyText,
                 overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               )
             : const SizedBox()
       ],

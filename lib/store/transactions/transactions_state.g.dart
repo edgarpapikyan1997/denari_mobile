@@ -130,9 +130,19 @@ mixin _$TransactionsState on ImplTransactionsState, Store {
       context: context);
 
   @override
-  Future<void> getTransactionsHistory() {
-    return _$getTransactionsHistoryAsyncAction
-        .run(() => super.getTransactionsHistory());
+  Future<void> getTransactionsHistory(
+      {DateTime? startDate,
+      DateTime? endDate,
+      List<String>? stores,
+      int? minAmount,
+      int? maxAmount}) {
+    return _$getTransactionsHistoryAsyncAction.run(() => super
+        .getTransactionsHistory(
+            startDate: startDate,
+            endDate: endDate,
+            stores: stores,
+            minAmount: minAmount,
+            maxAmount: maxAmount));
   }
 
   @override

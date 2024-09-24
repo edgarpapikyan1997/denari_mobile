@@ -37,7 +37,7 @@ import '../view/screens/qr/qr_scanner/qr_scanner_screen.dart';
 import '../view/screens/send_gift_screen/send_gift_screen.dart';
 import '../view/screens/shops_screen/shop_screen.dart';
 import '../view/screens/store_field_screen/widgets/store_field_arguments.dart';
-import '../view/screens/store_list_screen/branch_list_screen.dart';
+import '../view/screens/store_list_screen/branch_list_screen/branch_list_screen.dart';
 import '../view/screens/store_list_screen/store_list_screen.dart';
 import '../view/widgets/scaffold_nav_bar.dart';
 import 'listeners/auth_listener.dart';
@@ -190,8 +190,9 @@ final GoRouter router = GoRouter(
       path: '/branchListScreen',
       name: 'branchListScreen',
       builder: (context, state) {
-        final List<Map<String, dynamic>>? shopItems =
-            state.extra as List<Map<String, dynamic>>?;
+        final shopItems = (state.extra as List<dynamic>?)
+            ?.map((e) => e as Map<String, dynamic>)
+            .toList();
         return BranchListScreen(
           chosenItems: shopItems,
         );

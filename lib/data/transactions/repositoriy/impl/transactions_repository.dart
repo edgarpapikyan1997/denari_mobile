@@ -48,12 +48,42 @@ final class ImplTransactionsRepository extends TransactionsRepository {
   }
 
   @override
-  Future<List<TransactionReceiveModel?>> getTransactionsHistory() async {
-    final response = await _client.get('${_config.host}/transactions/user');
-      final List<dynamic> transactionsData = response.data['transactions'];
-      final List<TransactionReceiveModel?> transactionsList = transactionsData
-          .map((transaction) => TransactionReceiveModel.fromJson(transaction as Map<String, dynamic>))
-          .toList();
-      return transactionsList;
+  Future<List<TransactionReceiveModel?>> getTransactionsHistory({
+    DateTime? startDate,
+    DateTime? endDate,
+    List<String>? stores,
+    int? minAmount,
+    int? maxAmount,
+  }) async {
+    final Map<String, dynamic> queryParameters = {};
+
+    if (startDate != null) {
+      queryParameters['startDate'] = startDate.toIso8601String();
+    }
+    if (endDate != null) {
+      queryParameters['endDate'] = endDate.toIso8601String();
+    }
+    if (stores != null && stores.isNotEmpty) {
+      queryParameters['stores'] = stores.join(',');
+    }
+    if (minAmount != null) {
+      queryParameters['minAmount'] = minAmount;
+    }
+    if (maxAmount != null) {
+      queryParameters['maxAmount'] = maxAmount;
+    }
+
+    final response = await _client.get(
+      '${_config.host}/transactions/user',
+      queryParameters: queryParameters,
+    );
+
+    final List<dynamic> transactionsData = response.data['transactions'];
+    final List<TransactionReceiveModel?> transactionsList = transactionsData
+        .map((transaction) => TransactionReceiveModel.fromJson(
+            transaction as Map<String, dynamic>))
+        .toList();
+
+    return transactionsList;
   }
 }

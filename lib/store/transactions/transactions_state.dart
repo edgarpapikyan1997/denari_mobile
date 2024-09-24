@@ -66,8 +66,19 @@ abstract class ImplTransactionsState with Store {
   }
 
   @action
-  Future<void> getTransactionsHistory() async {
-    (await handle(() => _transactionsRepository.getTransactionsHistory())).then(
+  Future<void> getTransactionsHistory(
+      {DateTime? startDate,
+      DateTime? endDate,
+      List<String>? stores,
+      int? minAmount,
+      int? maxAmount}) async {
+    (await handle(() => _transactionsRepository.getTransactionsHistory(
+      startDate: startDate,
+      endDate: endDate,
+      stores: stores,
+      maxAmount: maxAmount,
+      minAmount: minAmount,
+    ))).then(
       (data) {
         transactionHistoryModels = data;
       },

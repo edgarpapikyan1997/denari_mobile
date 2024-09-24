@@ -12,12 +12,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobx/mobx.dart';
 import '../../../../constants/app_bar_type.dart';
 import '../../../../constants/categories.dart';
 import '../../../../data/shops/shops_repository/impl/shops_repository.dart';
+import '../../../../data/transactions/repositoriy/transactions_repository.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../store/categories_state/categories_state.dart';
+import '../../../../store/transactions/transactions_state.dart';
 import '../../../../utils/di/config.dart';
 import '../../../../utils/themes/app_colors.dart';
 import '../../../widgets/bottom_sheet/variants/modal_sheet.dart';
@@ -48,6 +49,9 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
   final ShopsState _shopsState = ShopsState(
     shopsRepository: di.get<ImplShopsRepository>(),
   );
+  final TransactionsState _transactionsState = TransactionsState(
+      transactionsRepository: di.get<TransactionsRepository>());
+
   DateTime? minimumDate;
   late final List<Category> categories;
   late final List<Category> timeRange;
@@ -106,183 +110,223 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
             right: 16,
             bottom: 16,
             child: datePickerState.startDate != null
-                ? Column(
+                ? Stack(
+                    alignment: Alignment.bottomCenter,
                     children: [
-                      PreviewBanner(
-                        leadingBanner: 'transaction.date'.tr(),
-                        bannerUnderText: 'transaction.selectOptions'.tr(),
-                      ),
-                      const Delimiter(16),
-                      Row(
+                      Column(
                         children: [
-                          Expanded(
-                            child: DataPicker(
-                              sourceDate: datePickerState.startDate,
-                              onTap: () {
-                                showModalSheet(
-                                  isDismissible: false,
-                                  enableDrag: false,
-                                  context: context,
-                                  child: PaddingUtility.only(
-                                    bottom: 50,
-                                    left: 16,
-                                    right: 16,
-                                    child: SizedBox(
-                                      height: context.height / 2.2,
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            child: CupertinoDatePicker(
-                                              maximumDate: DateTime.now(),
-                                              minimumDate: minimumDate,
-                                              mode:
-                                                  CupertinoDatePickerMode.date,
-                                              initialDateTime: minimumDate,
-                                              onDateTimeChanged:
-                                                  (DateTime value) {
-                                                datePickerState
-                                                    .setStartDate(value);
-                                                datePickerState.endDate = null;
-                                              },
+                          PreviewBanner(
+                            leadingBanner: 'transaction.date'.tr(),
+                            bannerUnderText: 'transaction.selectOptions'.tr(),
+                          ),
+                          const Delimiter(16),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: DataPicker(
+                                  sourceDate: datePickerState.startDate,
+                                  onTap: () {
+                                    showModalSheet(
+                                      isDismissible: false,
+                                      enableDrag: false,
+                                      context: context,
+                                      child: PaddingUtility.only(
+                                        bottom: 50,
+                                        left: 16,
+                                        right: 16,
+                                        child: SizedBox(
+                                          height: context.height / 2.2,
+                                          child: Column(
+                                            children: [
+                                              Expanded(
+                                                child: CupertinoDatePicker(
+                                                  maximumDate: DateTime.now(),
+                                                  minimumDate: minimumDate,
+                                                  mode: CupertinoDatePickerMode
+                                                      .date,
+                                                  initialDateTime: minimumDate,
+                                                  onDateTimeChanged:
+                                                      (DateTime value) {
+                                                    datePickerState
+                                                        .setStartDate(value);
+                                                    datePickerState.endDate =
+                                                        null;
+                                                  },
+                                                ),
+                                              ),
+                                              const Delimiter(32),
+                                              CustomButton(
+                                                isEnabled: true,
+                                                isWhite: false,
+                                                onTap: () async {
+                                                  await Future.delayed(
+                                                      const Duration(
+                                                          milliseconds: 300));
+                                                  context.pop();
+                                                },
+                                                title: 'main.apply'.tr(),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              const Delimiter(8),
+                              Expanded(
+                                  child: DataPicker(
+                                sourceDate: datePickerState.endDate,
+                                onTap: () {
+                                  showModalSheet(
+                                    context: context,
+                                    child: PaddingUtility.only(
+                                      bottom: 50,
+                                      left: 16,
+                                      right: 16,
+                                      child: SizedBox(
+                                        height: context.height / 2.2,
+                                        child: Column(
+                                          children: [
+                                            Expanded(
+                                              child: CupertinoDatePicker(
+                                                maximumDate: DateTime.now(),
+                                                minimumDate:
+                                                    datePickerState.startDate,
+                                                mode: CupertinoDatePickerMode
+                                                    .date,
+                                                initialDateTime:
+                                                    datePickerState.startDate,
+                                                onDateTimeChanged:
+                                                    (DateTime value) {
+                                                  if (value.isBefore(
+                                                      DateTime.now())) ;
+                                                  datePickerState
+                                                      .setEndDate(value);
+                                                },
+                                              ),
                                             ),
-                                          ),
-                                          const Delimiter(32),
-                                          CustomButton(
-                                            isEnabled: true,
-                                            isWhite: false,
-                                            onTap: () async {
-                                              await Future.delayed(
-                                                  const Duration(
-                                                      milliseconds: 300));
-                                              context.pop();
-                                            },
-                                            title: 'main.apply'.tr(),
-                                          ),
-                                        ],
+                                            const Delimiter(32),
+                                            CustomButton(
+                                              isEnabled: true,
+                                              isWhite: false,
+                                              onTap: () async {
+                                                await Future.delayed(
+                                                    const Duration(
+                                                        milliseconds: 300));
+                                                context.pop();
+                                              },
+                                              title: 'main.apply'.tr(),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
-                            ),
+                                  );
+                                },
+                              )),
+                            ],
                           ),
-                          const Delimiter(8),
-                          Expanded(
-                              child: DataPicker(
-                            sourceDate: datePickerState.endDate,
-                            onTap: () {
-                              showModalSheet(
-                                context: context,
-                                child: PaddingUtility.only(
-                                  bottom: 50,
-                                  left: 16,
-                                  right: 16,
-                                  child: SizedBox(
-                                    height: context.height / 2.2,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                          child: CupertinoDatePicker(
-                                            maximumDate: DateTime.now(),
-                                            minimumDate:
-                                                datePickerState.startDate,
-                                            mode: CupertinoDatePickerMode.date,
-                                            initialDateTime:
-                                                datePickerState.startDate,
-                                            onDateTimeChanged:
-                                                (DateTime value) {
-                                              if (value
-                                                  .isBefore(DateTime.now())) ;
-                                              datePickerState.setEndDate(value);
-                                            },
-                                          ),
-                                        ),
-                                        const Delimiter(32),
-                                        CustomButton(
-                                          isEnabled: true,
-                                          isWhite: false,
-                                          onTap: () async {
-                                            await Future.delayed(const Duration(
-                                                milliseconds: 300));
-                                            context.pop();
-                                          },
-                                          title: 'main.apply'.tr(),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                          const Delimiter(16),
+                          CategoryFieldGenerator(
+                            isRow: true,
+                            justSelector: true,
+                            unselectedColor: AppColors.borderColor,
+                            categories: timeRange,
+                            categoriesState: categoriesState,
+                            onTap: () {},
+                          ),
+                          const Delimiter(32),
+                          PreviewBanner(
+                            leadingBanner: 'transaction.amountRange'.tr(),
+                            bannerUnderText: 'transaction.enterAmount'.tr(),
+                          ),
+                          const Delimiter(16),
+                          const DistanceConfigurator(
+                            rangeFrom: 0,
+                            rangeTo: 10000,
+                            configuratorLabel: 'LD',
+                          ),
+                          const Delimiter(32),
+                          Observer(
+                            builder: (_) {
+                              return PreviewBanner(
+                                leadingBanner: 'transaction.stores'.tr(),
+                                bannerUnderText:
+                                    _shopsState.checkedStoreItems.isNotEmpty
+                                        ? _shopsState.checkedStoreItems
+                                            .map((item) => item.values.first)
+                                            .join(', ')
+                                        : 'transaction.notChosen'.tr(),
+                                tealButton: GestureDetector(
+                                  onTap: () async {
+                                    _shopsState.checkedStoreItems =
+                                        await context.pushNamed(
+                                      'storeListScreen',
+                                    ) as List<Map<String, dynamic>>;
+                                  },
+                                  child: Assets.media.icons.chevronRight.svg(),
                                 ),
                               );
                             },
-                          )),
-                        ],
-                      ),
-                      const Delimiter(16),
-                      CategoryFieldGenerator(
-                        isRow: true,
-                        justSelector: true,
-                        unselectedColor: AppColors.borderColor,
-                        categories: timeRange,
-                        categoriesState: categoriesState,
-                        onTap: () {},
-                      ),
-                      const Delimiter(32),
-                      PreviewBanner(
-                        leadingBanner: 'transaction.amountRange'.tr(),
-                        bannerUnderText: 'transaction.enterAmount'.tr(),
-                      ),
-                      const Delimiter(16),
-                      const DistanceConfigurator(
-                        rangeFrom: 0,
-                        rangeTo: 10000,
-                        configuratorLabel: 'LD',
-                      ),
-                      const Delimiter(32),
-                      Observer(
-                        builder: (_) {
-                          return PreviewBanner(
-                            leadingBanner: 'transaction.stores'.tr(),
+                          ),
+                          const Delimiter(32),
+                          PreviewBanner(
+                            leadingBanner: 'transaction.branch'.tr(),
+                            previewStyle: _shopsState
+                                    .checkedStoreItems.isNotEmpty
+                                ? context.theme.headline2.bold
+                                : context.theme.headline2.bold.lightGreyText,
                             bannerUnderText:
-                                _shopsState.checkedStoreItems.isNotEmpty
-                                    ? _shopsState.checkedStoreItems
+                                _shopsState.checkedAddressItems.isNotEmpty
+                                    ? _shopsState.checkedAddressItems
                                         .map((item) => item.values.first)
                                         .join(', ')
                                     : 'transaction.notChosen'.tr(),
                             tealButton: GestureDetector(
                               onTap: () async {
-                                _shopsState.checkedStoreItems =
-                                    await context.pushNamed(
-                                  'storeListScreen',
-                                ) as ObservableList<Map<String, dynamic>>;
+                                if (_shopsState.checkedStoreItems.isNotEmpty ==
+                                    true) {
+                                  _shopsState.checkedAddressItems =
+                                      (await context.pushNamed(
+                                              'branchListScreen',
+                                              extra: _shopsState
+                                                  .checkedStoreItems))
+                                          as List<Map<String, dynamic>>;
+                                }
                               },
                               child: Assets.media.icons.chevronRight.svg(),
                             ),
-                          );
-                        },
+                          ),
+                        ],
                       ),
-                      const Delimiter(32),
-                      PreviewBanner(
-                        leadingBanner: 'transaction.branch'.tr(),
-                        previewStyle: _shopsState.checkedStoreItems.isNotEmpty
-                            ? context.theme.headline2.bold
-                            : context.theme.headline2.bold.lightGreyText,
-                        bannerUnderText:
-                            _shopsState.checkedAddressItems.isNotEmpty
-                                ? _shopsState.checkedAddressItems
-                                    .map((item) => item.values.first)
-                                    .join(', ')
-                                : 'transaction.notChosen'.tr(),
-                        tealButton: GestureDetector(
-                          onTap: () async {
-                            if (_shopsState.checkedStoreItems.isNotEmpty ==
-                                true) {
-                              _shopsState.checkedAddressItems =
-                                  await context.pushNamed('branchListScreen',
-                                          extra: _shopsState.checkedStoreItems)
-                                      as ObservableList<Map<String, dynamic>>;
-                            }
-                          },
-                          child: Assets.media.icons.chevronRight.svg(),
+                      Positioned(
+                        child: PaddingUtility.only(
+                          bottom: 36,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: CustomButton(
+                                    isEnabled: true,
+                                    isWhite: true,
+                                    title: 'shops.reset'.tr(),
+                                    onTap: () {}),
+                              ),
+                              const Delimiter(8),
+                              Expanded(
+                                child: CustomButton(
+                                    isEnabled:
+                                        _shopsState.isAnyCheckBoxSelected,
+                                    isWhite: false,
+                                    title: 'main.apply'.tr(),
+                                    onTap: () async {
+                                      _loadingState.startLoading();
+                                      _transactionsState.getTransactionsHistory();
+                                    }),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

@@ -19,12 +19,23 @@ abstract class ShopsStatePerformer with Store {
   List<ShopsModel> shops = [];
 
   @observable
-  ObservableList<bool> checkBoxValues =
-      ObservableList<bool>();
+  List<Map<String, dynamic>> chosenAddressItems = [];
 
   @observable
-  ObservableList<bool> addressCheckBoxValues =
-      ObservableList<bool>();
+  List<ShopsUnitModel> shopsUnitModelList = [];
+
+  @observable
+  List<Map<String, dynamic>> checkedStoreItems = [];
+
+  @observable
+  List<Map<String, dynamic>> checkedAddressItems = [];
+
+
+  @observable
+  ObservableList<bool> checkBoxValues = ObservableList<bool>();
+
+  @observable
+  ObservableList<bool> addressCheckBoxValues = ObservableList<bool>();
 
   @observable
   String? getError;
@@ -32,49 +43,66 @@ abstract class ShopsStatePerformer with Store {
   @observable
   ShopsUnitModel? shopsUnitModel;
 
-  @observable
-  List<ShopsUnitModel> shopsUnitModelList = [];
-
-  @observable
-  ObservableList<Map<String, dynamic>> checkedStoreItems =
-      ObservableList<Map<String, dynamic>>();
-
-  @observable
-  ObservableList<Map<String, dynamic>> checkedAddressItems =
-      ObservableList<Map<String, dynamic>>();
-
   @computed
-  bool get isAnyCheckBoxSelected => checkBoxValues.contains(true);
+  bool get isAnyCheckBoxSelected {
+    bool anyStoreSelected = checkBoxValues.contains(true);
 
+    bool anyAddressSelected = addressCheckBoxValues.contains(true);
+
+    bool anyItemsSelected = checkedStoreItems.isNotEmpty || checkedAddressItems.isNotEmpty;
+
+    return anyStoreSelected || anyAddressSelected || anyItemsSelected;
+  }
   @action
-  void updateCheckBox({required int index, bool isAddress = false}) {
-    if (isAddress == false) {
+  void updateCheckBox({
+    required int index,
+    int? branchIndex,
+    bool isAddress = false,
+  }) {
+    if (!isAddress) {
+      // For shop-level checkboxes
       checkBoxValues[index] = !checkBoxValues[index];
-      if (checkBoxValues[index] == true) {
+      if (checkBoxValues[index]) {
         checkedStoreItems.add({shops[index].id: shops[index].name});
-      }
-      if (checkBoxValues[index] == false) {
-        checkedStoreItems
-            .removeWhere((element) => element.containsKey(shops[index].id));
+      } else {
+        checkedStoreItems.removeWhere((element) => element.containsKey(shops[index].id));
       }
     } else {
-      addressCheckBoxValues[index] = !addressCheckBoxValues[index];
-      if (addressCheckBoxValues[index] == true) {
-        checkedAddressItems.add({shops[index].id: shops[index].name});
-      }
-      if (addressCheckBoxValues[index] == false) {
-        checkedAddressItems
-            .removeWhere((element) => element.containsKey(shops[index].id));
+      // For branch-level checkboxes
+      int addressIndex = index * shopsUnitModelList[index].branch.length + branchIndex!;
+      addressCheckBoxValues[addressIndex] = !addressCheckBoxValues[addressIndex];
+
+      if (addressCheckBoxValues[addressIndex]) {
+        checkedAddressItems.add({
+          shopsUnitModelList[index].uniqueID: "${shopsUnitModelList[index].branch[branchIndex].street}, ${shopsUnitModelList[index].branch[branchIndex].city}"
+        });
+      } else {
+        checkedAddressItems.removeWhere((element) =>
+            element.containsKey(shopsUnitModelList[index].uniqueID));
       }
     }
+
+    checkForButtonEnable();
+  }
+
+  void checkForButtonEnable() {
+    isAnyCheckBoxSelected;
   }
 
   @action
-  void checkBoxReset() {
-    for (int i = 0; i < checkBoxValues.length; i++) {
-      checkBoxValues[i] = false;
-      checkedStoreItems.clear();
-      checkedStoreItems = ObservableList<Map<String, dynamic>>();
+  void checkBoxReset({bool isAddress = false}) {
+    if (isAddress) {
+      for (int i = 0; i < checkBoxValues.length; i++) {
+        checkBoxValues[i] = false;
+        checkedStoreItems.clear();
+        checkedStoreItems = ObservableList<Map<String, dynamic>>();
+      }
+    } else {
+      for (int i = 0; i < addressCheckBoxValues.length; i++) {
+        addressCheckBoxValues[i] = false;
+        checkedAddressItems.clear();
+        checkedAddressItems = ObservableList<Map<String, dynamic>>();
+      }
     }
   }
 
@@ -120,11 +148,14 @@ abstract class ShopsStatePerformer with Store {
             await _shopsRepository.getShopByID(shopID: item.keys.first);
         shopsUnitModelList.add(shopUnit);
       });
+      int addressCount = 0;
+      for (var shopItem in shopsUnitModelList) {
+        addressCount += shopItem.branch.length;
+      }
       addressCheckBoxValues =
-      ObservableList<bool>.of(List<bool>.filled(shopsUnitModelList.length, false));
+          ObservableList<bool>.of(List<bool>.filled(addressCount, false));
     }).then(
-      (data) {
-      },
+      (data) {},
       onError: (error) {
         getError = error;
       },

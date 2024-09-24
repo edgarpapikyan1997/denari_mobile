@@ -33,6 +33,70 @@ mixin _$ShopsState on ShopsStatePerformer, Store {
     });
   }
 
+  late final _$chosenAddressItemsAtom =
+      Atom(name: 'ShopsStatePerformer.chosenAddressItems', context: context);
+
+  @override
+  List<Map<String, dynamic>> get chosenAddressItems {
+    _$chosenAddressItemsAtom.reportRead();
+    return super.chosenAddressItems;
+  }
+
+  @override
+  set chosenAddressItems(List<Map<String, dynamic>> value) {
+    _$chosenAddressItemsAtom.reportWrite(value, super.chosenAddressItems, () {
+      super.chosenAddressItems = value;
+    });
+  }
+
+  late final _$shopsUnitModelListAtom =
+      Atom(name: 'ShopsStatePerformer.shopsUnitModelList', context: context);
+
+  @override
+  List<ShopsUnitModel> get shopsUnitModelList {
+    _$shopsUnitModelListAtom.reportRead();
+    return super.shopsUnitModelList;
+  }
+
+  @override
+  set shopsUnitModelList(List<ShopsUnitModel> value) {
+    _$shopsUnitModelListAtom.reportWrite(value, super.shopsUnitModelList, () {
+      super.shopsUnitModelList = value;
+    });
+  }
+
+  late final _$checkedStoreItemsAtom =
+      Atom(name: 'ShopsStatePerformer.checkedStoreItems', context: context);
+
+  @override
+  List<Map<String, dynamic>> get checkedStoreItems {
+    _$checkedStoreItemsAtom.reportRead();
+    return super.checkedStoreItems;
+  }
+
+  @override
+  set checkedStoreItems(List<Map<String, dynamic>> value) {
+    _$checkedStoreItemsAtom.reportWrite(value, super.checkedStoreItems, () {
+      super.checkedStoreItems = value;
+    });
+  }
+
+  late final _$checkedAddressItemsAtom =
+      Atom(name: 'ShopsStatePerformer.checkedAddressItems', context: context);
+
+  @override
+  List<Map<String, dynamic>> get checkedAddressItems {
+    _$checkedAddressItemsAtom.reportRead();
+    return super.checkedAddressItems;
+  }
+
+  @override
+  set checkedAddressItems(List<Map<String, dynamic>> value) {
+    _$checkedAddressItemsAtom.reportWrite(value, super.checkedAddressItems, () {
+      super.checkedAddressItems = value;
+    });
+  }
+
   late final _$checkBoxValuesAtom =
       Atom(name: 'ShopsStatePerformer.checkBoxValues', context: context);
 
@@ -98,38 +162,6 @@ mixin _$ShopsState on ShopsStatePerformer, Store {
     });
   }
 
-  late final _$checkedStoreItemsAtom =
-      Atom(name: 'ShopsStatePerformer.checkedStoreItems', context: context);
-
-  @override
-  ObservableList<Map<String, dynamic>> get checkedStoreItems {
-    _$checkedStoreItemsAtom.reportRead();
-    return super.checkedStoreItems;
-  }
-
-  @override
-  set checkedStoreItems(ObservableList<Map<String, dynamic>> value) {
-    _$checkedStoreItemsAtom.reportWrite(value, super.checkedStoreItems, () {
-      super.checkedStoreItems = value;
-    });
-  }
-
-  late final _$checkedAddressItemsAtom =
-      Atom(name: 'ShopsStatePerformer.checkedAddressItems', context: context);
-
-  @override
-  ObservableList<Map<String, dynamic>> get checkedAddressItems {
-    _$checkedAddressItemsAtom.reportRead();
-    return super.checkedAddressItems;
-  }
-
-  @override
-  set checkedAddressItems(ObservableList<Map<String, dynamic>> value) {
-    _$checkedAddressItemsAtom.reportWrite(value, super.checkedAddressItems, () {
-      super.checkedAddressItems = value;
-    });
-  }
-
   late final _$getAllShopsAsyncAction =
       AsyncAction('ShopsStatePerformer.getAllShops', context: context);
 
@@ -155,26 +187,37 @@ mixin _$ShopsState on ShopsStatePerformer, Store {
     return _$getShopByIDAsyncAction.run(() => super.getShopByID(id: id));
   }
 
+  late final _$getShopByIDtoListAsyncAction =
+      AsyncAction('ShopsStatePerformer.getShopByIDtoList', context: context);
+
+  @override
+  Future<void> getShopByIDtoList({required List<Map<String, dynamic>> items}) {
+    return _$getShopByIDtoListAsyncAction
+        .run(() => super.getShopByIDtoList(items: items));
+  }
+
   late final _$ShopsStatePerformerActionController =
       ActionController(name: 'ShopsStatePerformer', context: context);
 
   @override
-  void updateCheckBox({required int index, bool isAddress = false}) {
+  void updateCheckBox(
+      {required int index, int? branchIndex, bool isAddress = false}) {
     final _$actionInfo = _$ShopsStatePerformerActionController.startAction(
         name: 'ShopsStatePerformer.updateCheckBox');
     try {
-      return super.updateCheckBox(index: index, isAddress: isAddress);
+      return super.updateCheckBox(
+          index: index, branchIndex: branchIndex, isAddress: isAddress);
     } finally {
       _$ShopsStatePerformerActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void checkBoxReset() {
+  void checkBoxReset({bool isAddress = false}) {
     final _$actionInfo = _$ShopsStatePerformerActionController.startAction(
         name: 'ShopsStatePerformer.checkBoxReset');
     try {
-      return super.checkBoxReset();
+      return super.checkBoxReset(isAddress: isAddress);
     } finally {
       _$ShopsStatePerformerActionController.endAction(_$actionInfo);
     }
@@ -184,12 +227,14 @@ mixin _$ShopsState on ShopsStatePerformer, Store {
   String toString() {
     return '''
 shops: ${shops},
+chosenAddressItems: ${chosenAddressItems},
+shopsUnitModelList: ${shopsUnitModelList},
+checkedStoreItems: ${checkedStoreItems},
+checkedAddressItems: ${checkedAddressItems},
 checkBoxValues: ${checkBoxValues},
 addressCheckBoxValues: ${addressCheckBoxValues},
 getError: ${getError},
 shopsUnitModel: ${shopsUnitModel},
-checkedStoreItems: ${checkedStoreItems},
-checkedAddressItems: ${checkedAddressItems},
 isAnyCheckBoxSelected: ${isAnyCheckBoxSelected}
     ''';
   }

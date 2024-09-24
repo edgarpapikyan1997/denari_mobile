@@ -50,8 +50,7 @@ class _ProfileCodePageState extends State<ProfileCodePage> {
         if (value == 'true') {
           showModalSheet<void>(
             context: context,
-            child:
-                SuccessOperationSheet(message: 'profile.update_success'.tr()),
+            child: SuccessOperationSheet(message: 'profile.update_success'.tr()),
           ).then((value) => context.goNamed(Routes.profile));
         } else if (value != null) {
           Message.show(value);

@@ -74,7 +74,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
     final difference = now.difference(date).inDays;
     if (difference == 0) return "Today";
     if (difference == 1) return "Yesterday";
-    return DateFormat('MMMM dd, yyyy').format(date);
+    return DateFormat('MMMM, dd, yyyy').format(date);
   }
 
   @override
@@ -112,15 +112,13 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                       GestureDetector(
                           onTap: () {
                             context.pushNamed(
-                              'transactionsFilter', // Use the route name here
+                              'transactionsFilter',
                               pathParameters: {
                                 'startDate': items.last!.date.toString(),
                                 'endDate': items.first!.date.toString(),
                               },
                             );
-                            // context.push(
-                            //   '/transactions/transactionsFilter',
-                            // );
+
                           },
                           child: Assets.media.icons.filter.svg()),
                     ],

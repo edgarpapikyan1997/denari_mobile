@@ -3,7 +3,6 @@ import 'package:denari_app/data/transactions/model/send_to_contact/send_to_conta
 import 'package:denari_app/data/transactions/model/transaction_model.dart';
 import 'package:denari_app/data/transactions/repositoriy/transactions_repository.dart';
 import 'package:denari_app/utils/env/config.dart';
-import 'package:denari_app/utils/network/utils/response_helper.dart';
 import 'package:dio/dio.dart';
 import '../../model/transaction_receive_model.dart';
 
@@ -78,6 +77,7 @@ final class ImplTransactionsRepository extends TransactionsRepository {
       queryParameters: queryParameters,
     );
 
+    print(response.data);
     final List<dynamic> transactionsData = response.data['transactions'];
     final List<TransactionReceiveModel?> transactionsList = transactionsData
         .map((transaction) => TransactionReceiveModel.fromJson(

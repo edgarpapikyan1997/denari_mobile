@@ -141,10 +141,12 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
                                               Expanded(
                                                 child: CupertinoDatePicker(
                                                   maximumDate: DateTime.now(),
-                                                  minimumDate: minimumDate,
+                                                  minimumDate:
+                                                      datePickerState.startDate,
                                                   mode: CupertinoDatePickerMode
                                                       .date,
-                                                  initialDateTime: minimumDate,
+                                                  initialDateTime:
+                                                      datePickerState.startDate,
                                                   onDateTimeChanged:
                                                       (DateTime value) {
                                                     datePickerState
@@ -316,13 +318,15 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
                               const Delimiter(8),
                               Expanded(
                                 child: CustomButton(
-                                    isEnabled:
-                                        _shopsState.isAnyCheckBoxSelected,
+                                    isEnabled: true,
                                     isWhite: false,
                                     title: 'main.apply'.tr(),
                                     onTap: () async {
                                       _loadingState.startLoading();
-                                      _transactionsState.getTransactionsHistory();
+                                      _transactionsState.getTransactionsHistory(
+                                        startDate: datePickerState.startDate,
+                                        endDate: datePickerState.endDate,
+                                      );
                                     }),
                               ),
                             ],

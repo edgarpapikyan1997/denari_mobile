@@ -55,7 +55,7 @@ class _ProfileCodePageState extends State<ProfileCodePage> {
                 SuccessOperationSheet(message: 'profile.update_success'.tr()),
           ).then((value) {
             profileUpdateListener.onUpdateProfile();
-            return context.goNamed(Routes.profile, extra: widget.model);
+            return context.goNamed(Routes.profile);
           });
         } else if (value != null) {
           Message.show(value);

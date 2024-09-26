@@ -5,6 +5,7 @@ import 'package:denari_app/store/profile/profile_state.dart';
 import 'package:denari_app/utils/di/config.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
+import 'package:denari_app/view/screens/profile/listeners/profile_update_listener.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:denari_app/view/screens/profile/widgets/code_pop_sheet.dart';
 import 'package:denari_app/view/screens/profile/widgets/success_operation_sheet.dart';
@@ -52,7 +53,10 @@ class _ProfileCodePageState extends State<ProfileCodePage> {
             context: context,
             child:
                 SuccessOperationSheet(message: 'profile.update_success'.tr()),
-          ).then((value) => context.goNamed(Routes.profile));
+          ).then((value) {
+            profileUpdateListener.onUpdateProfile();
+            return context.goNamed(Routes.profile);
+          });
         } else if (value != null) {
           Message.show(value);
         }

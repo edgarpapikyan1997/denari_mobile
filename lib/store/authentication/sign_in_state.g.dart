@@ -8,30 +8,31 @@ part of 'sign_in_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$SignInState on _SignInState, Store {
+mixin _$SignInState on ImplSignInState, Store {
   Computed<bool>? _$isPasswordValidComputed;
 
   @override
   bool get isPasswordValid =>
       (_$isPasswordValidComputed ??= Computed<bool>(() => super.isPasswordValid,
-              name: '_SignInState.isPasswordValid'))
+              name: 'ImplSignInState.isPasswordValid'))
           .value;
   Computed<bool>? _$isPhoneValidComputed;
 
   @override
   bool get isPhoneValid =>
       (_$isPhoneValidComputed ??= Computed<bool>(() => super.isPhoneValid,
-              name: '_SignInState.isPhoneValid'))
+              name: 'ImplSignInState.isPhoneValid'))
           .value;
   Computed<bool>? _$loginButtonEnabledComputed;
 
   @override
   bool get loginButtonEnabled => (_$loginButtonEnabledComputed ??=
           Computed<bool>(() => super.loginButtonEnabled,
-              name: '_SignInState.loginButtonEnabled'))
+              name: 'ImplSignInState.loginButtonEnabled'))
       .value;
 
-  late final _$signInAtom = Atom(name: '_SignInState.signIn', context: context);
+  late final _$signInAtom =
+      Atom(name: 'ImplSignInState.signIn', context: context);
 
   @override
   String? get signIn {
@@ -47,7 +48,7 @@ mixin _$SignInState on _SignInState, Store {
   }
 
   late final _$passwordAtom =
-      Atom(name: '_SignInState.password', context: context);
+      Atom(name: 'ImplSignInState.password', context: context);
 
   @override
   String get password {
@@ -62,7 +63,8 @@ mixin _$SignInState on _SignInState, Store {
     });
   }
 
-  late final _$phoneAtom = Atom(name: '_SignInState.phone', context: context);
+  late final _$phoneAtom =
+      Atom(name: 'ImplSignInState.phone', context: context);
 
   @override
   PhoneNumber? get phone {
@@ -78,7 +80,7 @@ mixin _$SignInState on _SignInState, Store {
   }
 
   late final _$loadingAtom =
-      Atom(name: '_SignInState.loading', context: context);
+      Atom(name: 'ImplSignInState.loading', context: context);
 
   @override
   bool get loading {
@@ -94,35 +96,35 @@ mixin _$SignInState on _SignInState, Store {
   }
 
   late final _$loginAsyncAction =
-      AsyncAction('_SignInState.login', context: context);
+      AsyncAction('ImplSignInState.login', context: context);
 
   @override
   Future<void> login() {
     return _$loginAsyncAction.run(() => super.login());
   }
 
-  late final _$_SignInStateActionController =
-      ActionController(name: '_SignInState', context: context);
+  late final _$ImplSignInStateActionController =
+      ActionController(name: 'ImplSignInState', context: context);
 
   @override
   void setPassword(String value) {
-    final _$actionInfo = _$_SignInStateActionController.startAction(
-        name: '_SignInState.setPassword');
+    final _$actionInfo = _$ImplSignInStateActionController.startAction(
+        name: 'ImplSignInState.setPassword');
     try {
       return super.setPassword(value);
     } finally {
-      _$_SignInStateActionController.endAction(_$actionInfo);
+      _$ImplSignInStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPhone(PhoneNumber value) {
-    final _$actionInfo = _$_SignInStateActionController.startAction(
-        name: '_SignInState.setPhone');
+    final _$actionInfo = _$ImplSignInStateActionController.startAction(
+        name: 'ImplSignInState.setPhone');
     try {
       return super.setPhone(value);
     } finally {
-      _$_SignInStateActionController.endAction(_$actionInfo);
+      _$ImplSignInStateActionController.endAction(_$actionInfo);
     }
   }
 

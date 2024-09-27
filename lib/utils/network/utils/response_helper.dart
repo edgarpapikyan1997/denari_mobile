@@ -9,4 +9,9 @@ extension ResponseHelper<T> on Response<T> {
     }
     return fromJson.call(value);
   }
+
+  List<K> list<K>(K Function(Map<String, dynamic> json) fromJson) {
+    final values = data!  as List<dynamic>;
+    return values.map((e) => fromJson.call(e as Map<String, dynamic>)).toList();
+  }
 }

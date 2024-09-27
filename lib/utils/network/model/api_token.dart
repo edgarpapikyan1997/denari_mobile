@@ -6,7 +6,7 @@ part 'api_token.g.dart';
 class ApiToken {
   @JsonKey(defaultValue: '')
   final String token;
-  @JsonKey(name: 'refresh_token', defaultValue: '')
+  @JsonKey(name: 'refreshToken', defaultValue: '')
   final String refreshToken;
   @JsonKey(name: 'expires_in', defaultValue: 0)
   final int expiresIn;

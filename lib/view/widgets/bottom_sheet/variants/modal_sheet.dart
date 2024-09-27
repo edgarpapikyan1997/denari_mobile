@@ -9,16 +9,12 @@ import '../popover.dart';
 Future<T?> showModalSheet<T>({
   required BuildContext context,
   required Widget child,
-  bool enableDrag = true,
-  bool isDismissible = true,
-
 }) {
   return showModalBottomSheet<T>(
-    enableDrag: enableDrag,
-    isDismissible: isDismissible,
     context: context,
     backgroundColor: AppColors.white,
     useRootNavigator: true,
+    isScrollControlled: true,
     builder: (context) => child,
   );
 }

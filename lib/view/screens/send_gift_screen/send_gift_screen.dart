@@ -1,7 +1,4 @@
-import 'package:denari_app/constants/app_sizes/app_sizes.dart';
-import 'package:denari_app/data/gift_card/repository/impl/gift_card_repository_impl.dart';
 import 'package:denari_app/store/brand_item_select_state/brand_item_select_state.dart';
-import 'package:denari_app/store/gift_card_balance_state/gift_card_balance_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:denari_app/view/screens/send_gift_screen/gift_card_categories_widgets/item_selector_widget.dart';
@@ -13,13 +10,6 @@ import 'package:go_router/go_router.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../store/categories_state/categories_state.dart';
 import '../../../../utils/themes/app_colors.dart';
-import '../../../constants/app_bar_type.dart';
-import '../../../constants/categories.dart';
-import '../../../data/token/repository/impl/token_repository_impl.dart';
-import '../../../store/loading_state/loading_state.dart';
-import '../../../store/token_balance_state/token_balance_state.dart';
-import '../../../utils/di/config.dart';
-import '../../widgets/category/category.dart';
 import '../../widgets/category/category_field_generator.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/custom_button.dart';
@@ -32,62 +22,42 @@ class SendGiftScreen extends StatefulWidget {
 }
 
 class _SendGiftScreenState extends State<SendGiftScreen> {
-  final LoadingState _loadingState = LoadingState();
-  final TokenBalanceState _tokenBalanceState =
-      TokenBalanceState(tokenRepository: di.get<ImplTokenRepository>());
-  final GiftCardBalanceState _giftCardBalanceState = GiftCardBalanceState(
-      giftCardRepository: di.get<ImplGiftCardRepository>());
   final BrandItemSelectState sendGiftItemSelectState = BrandItemSelectState();
   final BrandItemSelectState tokenItemSelectState = BrandItemSelectState();
   CategoriesState? categoriesState = CategoriesState();
-  late final List<Category> categories;
-
   int? items = 15;
-  bool isToken = true;
+  bool isToken = false;
+
+  final categories = [
+    {
+      'categoryName': 'giftCard.giftCard'.tr(),
+      'categoryIcon': Assets.media.icons.card.svg()
+    },
+    {
+      'categoryName': 'balance.tokens'.tr(),
+      'categoryIcon': Assets.media.icons.tokenWhite.svg()
+    },
+  ];
 
   @override
   void initState() {
     super.initState();
-    initPrefs();
-    categoriesState?.currentCategory == categories[0].name
-        ? isToken = false
-        : isToken = true;
-  }
-
-  Future<void> initPrefs() async {
-    _loadingState.startLoading();
-    categories = [
-      Category(type: CategoryType.giftCard),
-      Category(type: CategoryType.tokens),
-    ];
     initCategories();
-    await _tokenBalanceState.getTokenBalance();
-    await _tokenBalanceState.getTokenBalanceHistory();
-    await _giftCardBalanceState.getGiftCardBalance();
-    await _giftCardBalanceState.getGiftCardBalanceHistory();
-    _loadingState.stopLoading();
   }
 
   initCategories() {
-    categoriesState?.selectCategory(
-        categoryName: categories[0].name, newCategoryType: categories[0].type);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+    categoriesState?.selectCategory(categories[0]['categoryName'] as String);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: AppSizes.prefSizes,
+        preferredSize: const Size(0, 88),
         child: CustomAppBar(
-          appBarType: AppBarType.regular,
           leadingIcon: GestureDetector(
               onTap: () {
-                context.pop();
+                context.go('/');
               },
               child: Assets.media.icons.chevronLeft.svg()),
           title: Text(
@@ -97,145 +67,66 @@ class _SendGiftScreenState extends State<SendGiftScreen> {
         ),
       ),
       body: Observer(builder: (context) {
-        return PaddingUtility.only(
-          top: 16,
-          left: 16,
-          right: 16,
-          bottom: 35,
+        return PaddingUtility(
+          all: 16,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CategoryFieldGenerator(
                 categories: categories,
                 categoriesState: categoriesState!,
-                justSelector: true,
               ),
               const SizedBox(
                 height: 24,
               ),
-              _loadingState.isLoading == true
-                  ? const Expanded(
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: CircularProgressIndicator()),
+              categoriesState?.currentCategory ==
+                      categories[0]['categoryName'].toString()
+                  ? Expanded(
+                      child: ItemSelectorWidget(
+                        items: items,
+                        brandItemSelectState: sendGiftItemSelectState,
+                        isToken: false,
+                        previewTitle: 'giftCard.selectGift'.tr(),
+                      ),
                     )
                   : Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          categoriesState?.currentCategory == categories[0].name
-                              ? Expanded(
-                                  child: ItemSelectorWidget(
-                                    giftItems:
-                                        _giftCardBalanceState.giftCardModels,
-                                    sendGiftItemSelectState:
-                                        sendGiftItemSelectState,
-                                    isToken: false,
-                                    previewTitle: 'giftCard.selectGift'.tr(),
-                                  ),
-                                )
-                              : Expanded(
-                                  child: ItemSelectorWidget(
-                                    tokenItems: _tokenBalanceState.tokenModels,
-                                    tokenItemSelectState: tokenItemSelectState,
-                                    isToken: true,
-                                    previewTitle:
-                                        'giftCard.totalBalanceTokens'.tr(),
-                                    tealButton: BalanceWidget(
-                                      isTokenBalance: true,
-                                      balance:
-                                          _tokenBalanceState.balance!.toInt(),
-                                      textStyle: context.theme.headline2.bold,
-                                      tokenIconHeight: 20,
-                                      tokenIconWidth: 18,
-                                    ),
-                                  ),
-                                ),
-                          CustomButton(
-                            isEnabled: true,
-                            isWhite: false,
-                            title: 'giftCard.continue'.tr(),
-                            onTap: () {
-                              context.pushNamed(
-                                "sendGiftCardScreen",
-                                extra: BrandItemWidget(
-                                  wrapperColor: AppColors.whiteGrey,
-                                  brandItemWrapperColor: AppColors.whiteGrey,
-                                  isToken: categoriesState?.currentCategory ==
-                                          categories[0].name
-                                      ? isToken = false
-                                      : isToken = true,
-                                  avatar: isToken
-                                      ? _tokenBalanceState
-                                          .tokenModels[
-                                              tokenItemSelectState.index]
-                                          .imageUrl
-                                      : _giftCardBalanceState
-                                          .giftCardModels[
-                                              sendGiftItemSelectState.index]
-                                          .imageUrl,
-                                  brandName: isToken
-                                      ? _tokenBalanceState
-                                          .tokenModels[
-                                              tokenItemSelectState.index]
-                                          .name
-                                      : _giftCardBalanceState
-                                          .giftCardModels[
-                                              sendGiftItemSelectState.index]
-                                          .name,
-                                  tokenBalance: isToken
-                                      ? _tokenBalanceState
-                                          .tokenModels[
-                                              tokenItemSelectState.index]
-                                          .shopUserTokens![0]
-                                          .tokenBalance
-                                          .toInt()
-                                      : _giftCardBalanceState
-                                          .giftCardModels[
-                                              sendGiftItemSelectState.index]
-                                          .shopGiftCardModel![0]
-                                          .giftCardBalance,
-                                  shopId: isToken
-                                      ? _tokenBalanceState
-                                          .tokenModels[
-                                              tokenItemSelectState.index]
-                                          .uniqueId
-                                      : _giftCardBalanceState
-                                          .giftCardModels[
-                                              sendGiftItemSelectState.index]
-                                          .uniqueId,
-                                  balanceWidgets: [
-                                    BalanceWidget(
-                                      balance: isToken
-                                          ? _tokenBalanceState
-                                              .tokenModels[
-                                                  tokenItemSelectState.index]
-                                              .shopUserTokens![0]
-                                              .tokenBalance
-                                              .toInt()
-                                          : _giftCardBalanceState
-                                              .giftCardModels[
-                                                  sendGiftItemSelectState.index]
-                                              .shopGiftCardModel![0]
-                                              .giftCardBalance,
-                                      isTokenBalance: isToken,
-                                      tokenIconHeight: 14,
-                                      tokenIconWidth: 13,
-                                      textStyle: context.theme.headline4,
-                                    )
-                                  ],
-                                  addDivider: false,
-                                  topPadding: 8,
-                                  bottomPadding: 8,
-                                  leftPadding: 12,
-                                  rightPadding: 12,
-                                ),
-                              );
-                            },
-                          ),
-                        ],
+                      child: ItemSelectorWidget(
+                        items: items,
+                        brandItemSelectState: tokenItemSelectState,
+                        isToken: true,
+                        previewTitle: 'giftCard.totalBalanceTokens'.tr(),
+                        tealButton: BalanceWidget(
+                          isTokenBalance: true,
+                          balance: 50,
+                          textStyle: context.theme.headline2.bold,
+                          tokenIconHeight: 20,
+                          tokenIconWidth: 18,
+                        ),
                       ),
                     ),
+              CustomButton(
+                isEnabled: true,
+                isWhite: false,
+                title: 'giftCard.continue'.tr(),
+                onTap: () {
+                  context.goNamed(
+                    "sendGiftCardScreen",
+                    extra: BrandItemWidget(
+                      isToken: categoriesState?.currentCategory ==
+                          categories[0]['categoryName'] ? false : true,
+                      avatar: Assets.media.images.toyStory.path,
+                      brandName: 'McDonalds',
+                      tokenBalance: 50,
+                      addDivider: false,
+                      topPadding: 8,
+                      bottomPadding: 8,
+                      leftPadding: 12,
+                      rightPadding: 12,
+                      wrapperColor: AppColors.whiteGrey,
+                    ),
+                  );
+                },
+              )
             ],
           ),
         );

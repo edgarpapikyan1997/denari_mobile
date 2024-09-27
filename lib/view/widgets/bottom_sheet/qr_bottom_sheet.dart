@@ -16,7 +16,6 @@ void showQRBottomSheet({
   required String description,
   required String userID,
   bool isEnabled = false,
-
   String? token,
 }) {
   showModalBottomSheet(

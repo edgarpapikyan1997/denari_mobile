@@ -1,4 +1,4 @@
-import 'package:denari_app/data/authentication/model/reset_pass_model.dart';
+import 'package:denari_app/data/authentication/model/reset_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/network/utils/use_case.dart';
@@ -7,12 +7,12 @@ import 'package:mobx/mobx.dart';
 
 part 'forgot_state.g.dart';
 
-class ForgotState = ImplForgotState with _$ForgotState;
+class ForgotState = _ForgotState with _$ForgotState;
 
-abstract class ImplForgotState with Store {
+abstract class _ForgotState with Store {
   final AuthRepository _repository;
 
-  ImplForgotState({required AuthRepository authRepository})
+  _ForgotState({required AuthRepository authRepository})
       : _repository = authRepository;
 
   @observable
@@ -73,13 +73,12 @@ abstract class ImplForgotState with Store {
   @action
   Future<void> changePassword() async {
     loading = true;
-    changePasswordError = null;
-    final model = ResetPassModel(
+    final model = ResetModel(
       newPassword: password,
       phone: phone.print(),
       code: code,
     );
-    (await handle(() => _repository.resetPassword(model))).then(
+    (await handle(() => _repository.reset(model))).then(
       (data) => changePasswordError = 'true',
       (error) => changePasswordError = error,
     );
@@ -89,7 +88,6 @@ abstract class ImplForgotState with Store {
   @action
   Future<void> getCode() async {
     loading = true;
-    codeSent = null;
     (await handle(() => _repository.verify(phone.print()))).then(
       (data) => codeSent = 'true',
       (error) => codeSent = error,

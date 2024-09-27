@@ -11,13 +11,14 @@ class BrandItemList extends StatefulWidget {
       {super.key, required this.brandItems, this.itemsToLoad = 8});
 
   @override
-  BrandItemListState createState() => BrandItemListState();
+  _BrandItemListState createState() => _BrandItemListState();
 }
 
-class BrandItemListState extends State<BrandItemList> {
+class _BrandItemListState extends State<BrandItemList> {
   final ScrollController _scrollController = ScrollController();
   BrandItemSelectState brandItemSelectState = BrandItemSelectState();
   List<BrandItemWidget> _displayedItems = [];
+  final int _itemsToLoad = 9;
   bool _isLoading = false;
 
   @override
@@ -30,6 +31,7 @@ class BrandItemListState extends State<BrandItemList> {
         _loadMoreItems();
       }
     });
+    print(_displayedItems);
   }
 
   @override
@@ -45,6 +47,8 @@ class BrandItemListState extends State<BrandItemList> {
     setState(() {
       _isLoading = true;
     });
+
+    // Simulate network delay
     await Future.delayed(const Duration(seconds: 1));
     setState(() {
       final nextItems = widget.brandItems
@@ -72,6 +76,7 @@ class BrandItemListState extends State<BrandItemList> {
               childCount: _displayedItems.length,
             ),
           ),
+          // Show loading indicator at the end of the list
           if (_isLoading)
             const SliverToBoxAdapter(
               child: Padding(

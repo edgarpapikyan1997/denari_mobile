@@ -8,45 +8,45 @@ part of 'forgot_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$ForgotState on ImplForgotState, Store {
+mixin _$ForgotState on _ForgotState, Store {
   Computed<bool>? _$isPasswordValidComputed;
 
   @override
   bool get isPasswordValid =>
       (_$isPasswordValidComputed ??= Computed<bool>(() => super.isPasswordValid,
-              name: 'ImplForgotState.isPasswordValid'))
+              name: '_ForgotState.isPasswordValid'))
           .value;
   Computed<bool>? _$isPhoneValidComputed;
 
   @override
   bool get isPhoneValid =>
       (_$isPhoneValidComputed ??= Computed<bool>(() => super.isPhoneValid,
-              name: 'ImplForgotState.isPhoneValid'))
+              name: '_ForgotState.isPhoneValid'))
           .value;
   Computed<bool>? _$isCodeValidComputed;
 
   @override
   bool get isCodeValid =>
       (_$isCodeValidComputed ??= Computed<bool>(() => super.isCodeValid,
-              name: 'ImplForgotState.isCodeValid'))
+              name: '_ForgotState.isCodeValid'))
           .value;
   Computed<bool>? _$changeButtonEnabledComputed;
 
   @override
   bool get changeButtonEnabled => (_$changeButtonEnabledComputed ??=
           Computed<bool>(() => super.changeButtonEnabled,
-              name: 'ImplForgotState.changeButtonEnabled'))
+              name: '_ForgotState.changeButtonEnabled'))
       .value;
   Computed<bool>? _$sendButtonEnabledComputed;
 
   @override
   bool get sendButtonEnabled => (_$sendButtonEnabledComputed ??= Computed<bool>(
           () => super.sendButtonEnabled,
-          name: 'ImplForgotState.sendButtonEnabled'))
+          name: '_ForgotState.sendButtonEnabled'))
       .value;
 
   late final _$changePasswordErrorAtom =
-      Atom(name: 'ImplForgotState.changePasswordError', context: context);
+      Atom(name: '_ForgotState.changePasswordError', context: context);
 
   @override
   String? get changePasswordError {
@@ -62,7 +62,7 @@ mixin _$ForgotState on ImplForgotState, Store {
   }
 
   late final _$passwordAtom =
-      Atom(name: 'ImplForgotState.password', context: context);
+      Atom(name: '_ForgotState.password', context: context);
 
   @override
   String get password {
@@ -78,7 +78,7 @@ mixin _$ForgotState on ImplForgotState, Store {
   }
 
   late final _$passwordRepeatAtom =
-      Atom(name: 'ImplForgotState.passwordRepeat', context: context);
+      Atom(name: '_ForgotState.passwordRepeat', context: context);
 
   @override
   String get passwordRepeat {
@@ -93,8 +93,7 @@ mixin _$ForgotState on ImplForgotState, Store {
     });
   }
 
-  late final _$phoneAtom =
-      Atom(name: 'ImplForgotState.phone', context: context);
+  late final _$phoneAtom = Atom(name: '_ForgotState.phone', context: context);
 
   @override
   PhoneNumber? get phone {
@@ -109,7 +108,7 @@ mixin _$ForgotState on ImplForgotState, Store {
     });
   }
 
-  late final _$codeAtom = Atom(name: 'ImplForgotState.code', context: context);
+  late final _$codeAtom = Atom(name: '_ForgotState.code', context: context);
 
   @override
   String get code {
@@ -125,7 +124,7 @@ mixin _$ForgotState on ImplForgotState, Store {
   }
 
   late final _$loadingAtom =
-      Atom(name: 'ImplForgotState.loading', context: context);
+      Atom(name: '_ForgotState.loading', context: context);
 
   @override
   bool get loading {
@@ -141,7 +140,7 @@ mixin _$ForgotState on ImplForgotState, Store {
   }
 
   late final _$codeSentAtom =
-      Atom(name: 'ImplForgotState.codeSent', context: context);
+      Atom(name: '_ForgotState.codeSent', context: context);
 
   @override
   String? get codeSent {
@@ -157,7 +156,7 @@ mixin _$ForgotState on ImplForgotState, Store {
   }
 
   late final _$changePasswordAsyncAction =
-      AsyncAction('ImplForgotState.changePassword', context: context);
+      AsyncAction('_ForgotState.changePassword', context: context);
 
   @override
   Future<void> changePassword() {
@@ -165,57 +164,57 @@ mixin _$ForgotState on ImplForgotState, Store {
   }
 
   late final _$getCodeAsyncAction =
-      AsyncAction('ImplForgotState.getCode', context: context);
+      AsyncAction('_ForgotState.getCode', context: context);
 
   @override
   Future<void> getCode() {
     return _$getCodeAsyncAction.run(() => super.getCode());
   }
 
-  late final _$ImplForgotStateActionController =
-      ActionController(name: 'ImplForgotState', context: context);
+  late final _$_ForgotStateActionController =
+      ActionController(name: '_ForgotState', context: context);
 
   @override
   void setPassword(String value) {
-    final _$actionInfo = _$ImplForgotStateActionController.startAction(
-        name: 'ImplForgotState.setPassword');
+    final _$actionInfo = _$_ForgotStateActionController.startAction(
+        name: '_ForgotState.setPassword');
     try {
       return super.setPassword(value);
     } finally {
-      _$ImplForgotStateActionController.endAction(_$actionInfo);
+      _$_ForgotStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPasswordRepeat(String value) {
-    final _$actionInfo = _$ImplForgotStateActionController.startAction(
-        name: 'ImplForgotState.setPasswordRepeat');
+    final _$actionInfo = _$_ForgotStateActionController.startAction(
+        name: '_ForgotState.setPasswordRepeat');
     try {
       return super.setPasswordRepeat(value);
     } finally {
-      _$ImplForgotStateActionController.endAction(_$actionInfo);
+      _$_ForgotStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPhone(PhoneNumber value) {
-    final _$actionInfo = _$ImplForgotStateActionController.startAction(
-        name: 'ImplForgotState.setPhone');
+    final _$actionInfo = _$_ForgotStateActionController.startAction(
+        name: '_ForgotState.setPhone');
     try {
       return super.setPhone(value);
     } finally {
-      _$ImplForgotStateActionController.endAction(_$actionInfo);
+      _$_ForgotStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setCode(String value) {
-    final _$actionInfo = _$ImplForgotStateActionController.startAction(
-        name: 'ImplForgotState.setCode');
+    final _$actionInfo = _$_ForgotStateActionController.startAction(
+        name: '_ForgotState.setCode');
     try {
       return super.setCode(value);
     } finally {
-      _$ImplForgotStateActionController.endAction(_$actionInfo);
+      _$_ForgotStateActionController.endAction(_$actionInfo);
     }
   }
 

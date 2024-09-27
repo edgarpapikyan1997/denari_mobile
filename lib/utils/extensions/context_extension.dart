@@ -183,11 +183,11 @@ extension ThemeDataHelper on ThemeData {
 
 extension ElevatedButtonHelper on ButtonStyle {
   ButtonStyle buttonColor(Color color) => copyWith(
-        shadowColor: WidgetStateProperty.all(color),
-        foregroundColor: WidgetStateProperty.all(AppColors.white),
-        backgroundColor: WidgetStateProperty.resolveWith(
+        shadowColor: MaterialStateProperty.all(color),
+        foregroundColor: MaterialStateProperty.all(AppColors.white),
+        backgroundColor: MaterialStateProperty.resolveWith(
           (states) {
-            return states.contains(WidgetState.disabled)
+            return states.contains(MaterialState.disabled)
                 ? color.withOpacity(0.5)
                 : color;
           },
@@ -196,7 +196,7 @@ extension ElevatedButtonHelper on ButtonStyle {
 
   ButtonStyle elevationSize(double elevation) {
     return copyWith(
-      elevation: WidgetStateProperty.all(
+      elevation: MaterialStateProperty.all(
         elevation,
       ),
     );
@@ -204,7 +204,7 @@ extension ElevatedButtonHelper on ButtonStyle {
 
   ButtonStyle paddingAll(double padding) {
     return copyWith(
-      padding: WidgetStateProperty.all(
+      padding: MaterialStateProperty.all(
         EdgeInsets.all(padding),
       ),
     );
@@ -212,14 +212,14 @@ extension ElevatedButtonHelper on ButtonStyle {
 
   ButtonStyle paddingVertical(double padding) {
     return copyWith(
-      padding: WidgetStateProperty.all(
+      padding: MaterialStateProperty.all(
         EdgeInsets.symmetric(vertical: padding),
       ),
     );
   }
 
   ButtonStyle get removePaddings => copyWith(
-        padding: WidgetStateProperty.all(
+        padding: MaterialStateProperty.all(
           EdgeInsets.zero,
         ),
       );
@@ -228,7 +228,7 @@ extension ElevatedButtonHelper on ButtonStyle {
     Color color,
   ) {
     return copyWith(
-      foregroundColor: WidgetStateProperty.all(
+      foregroundColor: MaterialStateProperty.all(
         color,
       ),
     );
@@ -251,13 +251,9 @@ extension TextStyleHelpers on TextStyle {
 
   TextStyle get alertRed => copyWith(color: AppColors.alertRed);
 
-  TextStyle get completed => copyWith(color: AppColors.greenDark);
-
   TextStyle get lightGreyText => copyWith(color: AppColors.lightGreyText);
 
   TextStyle get greyLight => copyWith(color: AppColors.greyLight);
-
-  TextStyle get statusOnHold => copyWith(color: AppColors.yellowDark);
 
   TextStyle size([double? fontSize]) => copyWith(fontSize: fontSize);
 
@@ -268,8 +264,6 @@ extension TextStyleHelpers on TextStyle {
   TextStyle get semiBold => copyWith(fontWeight: FontWeight.w600);
 
   TextStyle get bold => copyWith(fontWeight: FontWeight.w700);
-
-  TextStyle get height1 =>  copyWith(height: 1.4);
 
   TextStyle get regularItalic => copyWith(
         fontWeight: FontWeight.w400,
@@ -285,8 +279,6 @@ extension TextStyleHelpers on TextStyle {
         fontWeight: FontWeight.w600,
         fontStyle: FontStyle.italic,
       );
-
-
 }
 
 extension GlobalKeyEx on GlobalKey {

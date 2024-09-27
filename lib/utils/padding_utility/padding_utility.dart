@@ -8,17 +8,17 @@ class PaddingUtility extends Padding {
     double all = defaultSize,
     super.child,
   }) : super(
-          padding: EdgeInsets.all(all),
-        );
+    padding: EdgeInsets.all(all),
+  );
 
   PaddingUtility.symmetric({
     super.key,
-    double horizontal = 0,
-    double vertical = 0,
+    double horizontal = defaultSize,
+    double vertical = defaultSize,
     required Widget super.child,
   }) : super(
-            padding: EdgeInsets.symmetric(
-                horizontal: horizontal, vertical: vertical));
+      padding: EdgeInsets.symmetric(
+          horizontal: horizontal, vertical: vertical));
 
   PaddingUtility.only({
     super.key,
@@ -28,6 +28,6 @@ class PaddingUtility extends Padding {
     double right = 0,
     required Widget super.child,
   }) : super(
-            padding: EdgeInsets.only(
-                top: top, bottom: bottom, left: left, right: right));
+      padding: EdgeInsets.only(
+          top: top, bottom: bottom, left: left, right: right));
 }

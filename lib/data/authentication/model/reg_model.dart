@@ -7,7 +7,7 @@ class RegModel {
   @JsonKey(defaultValue: '')
   final String name;
   @JsonKey(defaultValue: '')
-  final String? email;
+  final String email;
   @JsonKey(defaultValue: '')
   final String password;
   @JsonKey(defaultValue: '')
@@ -17,7 +17,7 @@ class RegModel {
 
   const RegModel({
     required this.name,
-     this.email,
+    required this.email,
     required this.password,
     required this.phone,
     required this.code,

@@ -5,9 +5,9 @@ import 'package:denari_app/model/qr_id.dart';
 GetIt getIt = GetIt.instance;
 
 class ServiceLocator {
-  static void configure() {
-    getIt.registerSingleton<QRIdReceiver>(QRIdReceiver());
-    getIt.registerSingleton<RateAppState>(RateAppState());
+  static void configure()  {
+     getIt.registerSingleton<QRIdReceiver>(QRIdReceiver());
+     getIt.registerSingleton<RateAppState>(RateAppState());
 
   }
 }

@@ -1,39 +1,17 @@
-import 'dart:ui';
 import 'package:mobx/mobx.dart';
-
-import '../../constants/categories.dart';
 
 part 'categories_state.g.dart';
 
-class CategoriesState = CategoriesStatePerformer with _$CategoriesState;
+class CategoriesState = _CategoriesState with _$CategoriesState;
 
-abstract class CategoriesStatePerformer with Store {
+abstract class _CategoriesState with Store {
+
   @observable
   String? currentCategory;
 
-  @observable
-  CategoryType? categoryType;
-
-  @observable
-  Color? itemColor;
-
-  @observable
-  ObservableList<CategoryType> selectedCategories = ObservableList<CategoryType>();
 
   @action
-  void addCategory(CategoryType categoryType) {
-    selectedCategories.add(categoryType);
-  }
-
-  @action
-  void removeCategory(CategoryType categoryType) {
-    selectedCategories.remove(categoryType);
-  }
-
-  @action
-  void selectCategory(
-      {required String categoryName, required CategoryType newCategoryType}) {
+  void selectCategory(String categoryName) {
     currentCategory = categoryName;
-    categoryType = newCategoryType;
   }
 }

@@ -8,13 +8,13 @@ import 'package:mobx/mobx.dart';
 
 part 'sign_up_state.g.dart';
 
-class SignUpState = ImplSignUpState with _$SignUpState;
+class SignUpState = _SignUpState with _$SignUpState;
 
-abstract class ImplSignUpState with Store {
+abstract class _SignUpState with Store {
   final AuthRepository _repository;
   final TokenPreferences _tokenPreferences;
 
-  ImplSignUpState({
+  _SignUpState({
     required AuthRepository authRepository,
     required TokenPreferences tokenPreferences,
   })  : _repository = authRepository,
@@ -30,7 +30,7 @@ abstract class ImplSignUpState with Store {
   void setName(String value) => name = value;
 
   @observable
-  String? email = "";
+  String email = "";
 
   @action
   void setEmail(String value) => email = value;
@@ -63,13 +63,10 @@ abstract class ImplSignUpState with Store {
   bool get isNameValid => name.isNotEmpty;
 
   @computed
-  bool get isEmailValid {
-    email ??= "";
-    RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email!) ||
-        email!.isEmpty;
-    return true;
-  }
+  bool get isEmailValid =>
+      RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          .hasMatch(email) ||
+      email.isEmpty;
 
   @computed
   bool get isPasswordValid => password.length >= 8;
@@ -86,29 +83,27 @@ abstract class ImplSignUpState with Store {
   @computed
   bool get createButtonEnabled =>
       isNameValid &&
-          isEmailValid &&
-          isPasswordValid &&
-          isPhoneValid &&
-          !loading;
+      isEmailValid &&
+      isPasswordValid &&
+      isPhoneValid &&
+      !loading;
 
   @action
   Future<void> register() async {
-    if (!createButtonEnabled) return;
-
     loading = true;
     final model = RegModel(
       name: name,
-      email: email == null || email!.isEmpty ? "" : email,
+      email: email,
       password: password,
       phone: phone.print(),
       code: code,
     );
     (await handle(() => _repository.register(model))).then(
-          (data) {
+      (data) {
         _tokenPreferences.setToken(data);
         signUp = 'true';
       },
-          (error) => signUp = error,
+      (error) => signUp = error,
     );
     loading = false;
   }
@@ -117,8 +112,8 @@ abstract class ImplSignUpState with Store {
   Future<void> getCode() async {
     loading = true;
     (await handle(() => _repository.verify(phone.print()))).then(
-          (data) => codeSent = 'true',
-          (error) => codeSent = error,
+      (data) => codeSent = 'true',
+      (error) => codeSent = error,
     );
     loading = false;
   }

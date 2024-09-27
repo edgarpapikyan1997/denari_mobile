@@ -9,9 +9,6 @@ part of 'token_model.dart';
 TokenModel _$TokenModelFromJson(Map<String, dynamic> json) => TokenModel(
       uniqueId: json['UniqueID'] as String? ?? '',
       name: json['name'] as String? ?? '',
-      imageUrl: json['imageUrl'] as String? ?? '',
-      description: json['description'] as String? ?? '',
-      inviteCode: json['inviteCode'] as String? ?? '',
       shopUserTokens: (json['shopUserTokens'] as List<dynamic>?)
               ?.map((e) => ShopUserToken.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -28,9 +25,6 @@ Map<String, dynamic> _$TokenModelToJson(TokenModel instance) =>
     <String, dynamic>{
       'UniqueID': instance.uniqueId,
       'name': instance.name,
-      'imageUrl': instance.imageUrl,
-      'description': instance.description,
-      'inviteCode': instance.inviteCode,
       'openTime': instance.openTime?.toIso8601String(),
       'closedTime': instance.closedTime?.toIso8601String(),
       'shopUserTokens': instance.shopUserTokens,

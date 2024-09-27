@@ -8,9 +8,9 @@ part of 'bottom_nav_bar_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$BottomNavBarState on ImplBottomNavBarState, Store {
+mixin _$BottomNavBarState on _BottomNavBarState, Store {
   late final _$indexAtom =
-      Atom(name: 'ImplBottomNavBarState.index', context: context);
+      Atom(name: '_BottomNavBarState.index', context: context);
 
   @override
   int get index {
@@ -25,41 +25,24 @@ mixin _$BottomNavBarState on ImplBottomNavBarState, Store {
     });
   }
 
-  late final _$previousAtom =
-      Atom(name: 'ImplBottomNavBarState.previous', context: context);
-
-  @override
-  int get previous {
-    _$previousAtom.reportRead();
-    return super.previous;
-  }
-
-  @override
-  set previous(int value) {
-    _$previousAtom.reportWrite(value, super.previous, () {
-      super.previous = value;
-    });
-  }
-
-  late final _$ImplBottomNavBarStateActionController =
-      ActionController(name: 'ImplBottomNavBarState', context: context);
+  late final _$_BottomNavBarStateActionController =
+      ActionController(name: '_BottomNavBarState', context: context);
 
   @override
   void changeIndex(dynamic newIndex) {
-    final _$actionInfo = _$ImplBottomNavBarStateActionController.startAction(
-        name: 'ImplBottomNavBarState.changeIndex');
+    final _$actionInfo = _$_BottomNavBarStateActionController.startAction(
+        name: '_BottomNavBarState.changeIndex');
     try {
       return super.changeIndex(newIndex);
     } finally {
-      _$ImplBottomNavBarStateActionController.endAction(_$actionInfo);
+      _$_BottomNavBarStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   String toString() {
     return '''
-index: ${index},
-previous: ${previous}
+index: ${index}
     ''';
   }
 }

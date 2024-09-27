@@ -3,9 +3,9 @@ import 'package:mobx/mobx.dart';
 
 part 'search_field_state.g.dart';
 
-class SearchFieldState = ImplSearchFieldState with _$SearchFieldState;
+class SearchFieldState = _SearchFieldState with _$SearchFieldState;
 
-abstract class ImplSearchFieldState with Store {
+abstract class _SearchFieldState with Store {
   @observable
   bool showCancel = false;
 

@@ -1,10 +1,9 @@
-import 'package:denari_app/constants/app_bar_type.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../store/token_balance_state/token_balance_state.dart';
-import '../../widgets/bottom_sheet/item_info_bottom_sheet.dart';
+import '../../widgets/bottom_sheet/Item_info_bottom_sheet.dart';
 import '../../widgets/brand_item/brand_item_list.dart';
 import '../../widgets/brand_item/brand_item_widget.dart';
 import '../../widgets/custom_app_bar.dart';
@@ -30,8 +29,6 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
     final brandItems = [
       for (var i = 0; i < 10; ++i)
         BrandItemWidget(
-          topPadding: 16,
-          addDivider: true,
           avatar: Assets.media.images.toyStory.path,
           brandName: '$brandName$i',
           tokenBalance: _tokenBalanceState.balance,
@@ -39,11 +36,8 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
             onTap: () {
               showItemInfoBottomSheet(
                 /// must be changed to data from backend
-              firstButtonTitle: 'Send',
-                secondButtonTitle: 'Use',
-                onConfirmFirst: () {},
                 context: context,
-                onConfirmSecond: () {
+                onConfirm: () {
                   context.pop();
                 },
                 addButtons: true,
@@ -66,7 +60,6 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
       appBar: PreferredSize(
         preferredSize: const Size(0, 88),
         child: CustomAppBar(
-          appBarType: AppBarType.regular,
           leadingIcon: GestureDetector(
             onTap: () {
               context.go('/');
@@ -96,7 +89,10 @@ class _MyGiftCardsScreenState extends State<MyGiftCardsScreen> {
                     height: 15,
                   ),
                   PreviewBanner(
-                    leadingBanner: 'giftCard.giftCards'.tr(),
+                    leadingBanner: Text(
+                      'giftCard.giftCards'.tr(),
+                      style: context.theme.headline2.bold,
+                    ),
                     bannerUnderText: 'giftCard.manageGifts'.tr(),
                   ),
                   const SizedBox(

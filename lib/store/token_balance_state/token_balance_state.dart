@@ -4,20 +4,21 @@ import 'dart:math';
 
 import '../../data/token/model/token_balance/token_balance_model.dart';
 import '../../data/token/model/token_model.dart';
+import '../../utils/network/utils/use_case.dart';
 
 part 'token_balance_state.g.dart';
 
-class TokenBalanceState = ImplTokenBalanceState with _$TokenBalanceState;
+class TokenBalanceState = _TokenBalanceState with _$TokenBalanceState;
 
-abstract class ImplTokenBalanceState with Store {
+abstract class _TokenBalanceState with Store {
   final TokenRepository? _tokenRepository;
 
-  ImplTokenBalanceState({
+  _TokenBalanceState({
     required TokenRepository? tokenRepository,
   }) : _tokenRepository = tokenRepository;
 
   @observable
-  int? balance = 0;
+  int balance = 0;
 
   @observable
   List<TokenModel> tokenModels = [];
@@ -33,24 +34,22 @@ abstract class ImplTokenBalanceState with Store {
 
   @action
   Future<void> getTokenBalance() async {
-    try {
-      final data = await _tokenRepository!.getTokenBalance();
-      tokenBalance = data;
-      balance = int.parse(tokenBalance!.totalBalance);
-    } catch (error) {
-      getError = error.toString();
-      balance = 0;
+    (await handle(() => _tokenRepository!.getTokenBalance())).then(
+      (data) => tokenBalance = data,
+      (error) => getError = error,
+    );
+    if (tokenBalance?.totalBalance != 0 && tokenBalance?.totalBalance != null) {
+      getTokenBalanceHistory();
     }
   }
 
   @action
   Future<void> getTokenBalanceHistory() async {
-    try {
-      final List<TokenModel> data = await _tokenRepository!.getUserTokenBalanceHistory();
-      tokenModels = data;
-    } catch (error) {
-      getError = error.toString();
-    }
+    (await handle(() => _tokenRepository!.getUserTokenBalanceHistory())).then(
+      (data) => tokenModels = data,
+      (error) => getError = error,
+    );
+    print(tokenModels);
   }
 
   @action
@@ -60,6 +59,3 @@ abstract class ImplTokenBalanceState with Store {
     return brandToken;
   }
 }
-
-
-

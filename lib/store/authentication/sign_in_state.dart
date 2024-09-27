@@ -8,13 +8,13 @@ import 'package:mobx/mobx.dart';
 
 part 'sign_in_state.g.dart';
 
-class SignInState = ImplSignInState with _$SignInState;
+class SignInState = _SignInState with _$SignInState;
 
-abstract class ImplSignInState with Store {
+abstract class _SignInState with Store {
   final AuthRepository _repository;
   final TokenPreferences _tokenPreferences;
 
-  ImplSignInState({
+  _SignInState({
     required AuthRepository authRepository,
     required TokenPreferences tokenPreferences,
   })  : _repository = authRepository,

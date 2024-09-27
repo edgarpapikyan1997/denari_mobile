@@ -8,9 +8,9 @@ part of 'brand_item_select_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$BrandItemSelectState on ImplBrandItemSelectState, Store {
+mixin _$BrandItemSelectState on _BrandItemSelectState, Store {
   late final _$brandItemWidgetAtom =
-      Atom(name: 'ImplBrandItemSelectState.brandItemWidget', context: context);
+      Atom(name: '_BrandItemSelectState.brandItemWidget', context: context);
 
   @override
   BrandItemWidget? get brandItemWidget {
@@ -26,7 +26,7 @@ mixin _$BrandItemSelectState on ImplBrandItemSelectState, Store {
   }
 
   late final _$indexAtom =
-      Atom(name: 'ImplBrandItemSelectState.index', context: context);
+      Atom(name: '_BrandItemSelectState.index', context: context);
 
   @override
   int get index {
@@ -42,7 +42,7 @@ mixin _$BrandItemSelectState on ImplBrandItemSelectState, Store {
   }
 
   late final _$indexesAtom =
-      Atom(name: 'ImplBrandItemSelectState.indexes', context: context);
+      Atom(name: '_BrandItemSelectState.indexes', context: context);
 
   @override
   List<int> get indexes {
@@ -57,39 +57,39 @@ mixin _$BrandItemSelectState on ImplBrandItemSelectState, Store {
     });
   }
 
-  late final _$ImplBrandItemSelectStateActionController =
-      ActionController(name: 'ImplBrandItemSelectState', context: context);
+  late final _$_BrandItemSelectStateActionController =
+      ActionController(name: '_BrandItemSelectState', context: context);
 
   @override
   void setItemWidget(BrandItemWidget newValue) {
-    final _$actionInfo = _$ImplBrandItemSelectStateActionController.startAction(
-        name: 'ImplBrandItemSelectState.setItemWidget');
+    final _$actionInfo = _$_BrandItemSelectStateActionController.startAction(
+        name: '_BrandItemSelectState.setItemWidget');
     try {
       return super.setItemWidget(newValue);
     } finally {
-      _$ImplBrandItemSelectStateActionController.endAction(_$actionInfo);
+      _$_BrandItemSelectStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void selectItem(int newIndex) {
-    final _$actionInfo = _$ImplBrandItemSelectStateActionController.startAction(
-        name: 'ImplBrandItemSelectState.selectItem');
+    final _$actionInfo = _$_BrandItemSelectStateActionController.startAction(
+        name: '_BrandItemSelectState.selectItem');
     try {
       return super.selectItem(newIndex);
     } finally {
-      _$ImplBrandItemSelectStateActionController.endAction(_$actionInfo);
+      _$_BrandItemSelectStateActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void selectItems(List<int> newValues) {
-    final _$actionInfo = _$ImplBrandItemSelectStateActionController.startAction(
-        name: 'ImplBrandItemSelectState.selectItems');
+    final _$actionInfo = _$_BrandItemSelectStateActionController.startAction(
+        name: '_BrandItemSelectState.selectItems');
     try {
       return super.selectItems(newValues);
     } finally {
-      _$ImplBrandItemSelectStateActionController.endAction(_$actionInfo);
+      _$_BrandItemSelectStateActionController.endAction(_$actionInfo);
     }
   }
 

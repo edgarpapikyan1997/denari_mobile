@@ -11,13 +11,14 @@ class BrandItemList extends StatefulWidget {
       {super.key, required this.brandItems, this.itemsToLoad = 8});
 
   @override
-  BrandItemListState createState() => BrandItemListState();
+  _BrandItemListState createState() => _BrandItemListState();
 }
 
-class BrandItemListState extends State<BrandItemList> {
+class _BrandItemListState extends State<BrandItemList> {
   final ScrollController _scrollController = ScrollController();
   BrandItemSelectState brandItemSelectState = BrandItemSelectState();
   List<BrandItemWidget> _displayedItems = [];
+  final int _itemsToLoad = 9;
   bool _isLoading = false;
 
   @override
@@ -30,6 +31,7 @@ class BrandItemListState extends State<BrandItemList> {
         _loadMoreItems();
       }
     });
+    print(_displayedItems);
   }
 
   @override

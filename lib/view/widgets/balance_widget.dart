@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../gen/assets.gen.dart';
 
 class BalanceWidget extends StatelessWidget {
-  final String? leadingTitle;
   final bool isTokenBalance;
   final bool addPlusChar;
   final double tokenIconHeight;
@@ -18,20 +17,18 @@ class BalanceWidget extends StatelessWidget {
 
   const BalanceWidget({
     super.key,
-    this.leadingTitle,
     this.isTokenBalance = false,
-    this.addPlusChar = false,
+    required this.textStyle,
+    required this.balance,
     this.tokenIconHeight = 25,
     this.tokenIconWidth = 28,
+    this.addPlusChar = false,
+    this.title = "",
     this.horizontalPadding = 0,
     this.verticalPadding = 0,
-    required this.balance,
-    required this.textStyle,
-    this.title = "",
     this.color,
     this.onTap,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +46,6 @@ class BalanceWidget extends StatelessWidget {
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  leadingTitle != null
-                      ? Text(
-                          "$leadingTitle ",
-                          style: textStyle,
-                        )
-                      : const SizedBox(),
                   Assets.media.icons.token
                       .svg(height: tokenIconHeight, width: tokenIconWidth),
                   const SizedBox(width: 4),
@@ -65,9 +56,7 @@ class BalanceWidget extends StatelessWidget {
                 ],
               )
             : Text(
-                leadingTitle != null
-                    ? '$leadingTitle $balance ${'balance.ld'.tr()}'
-                    : '$balance ${'balance.ld'.tr()}',
+                '$balance ${'balance.ld'.tr()}',
                 style: textStyle,
               ),
       ),

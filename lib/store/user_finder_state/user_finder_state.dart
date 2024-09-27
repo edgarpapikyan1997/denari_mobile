@@ -24,7 +24,6 @@ abstract class ImplUserFinderState with Store {
   Future<void> findUser(String contactInfo) async {
     (await handle(() => _userFinderRepository.findUser(contactInfo))).then(
       (data) {
-        print(data);
         contactExist = data;
       },
       (error) => contactInfoError = error,

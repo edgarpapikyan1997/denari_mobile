@@ -78,9 +78,6 @@ final class ImplTransactionsRepository extends TransactionsRepository {
       '${_config.host}/transactions/user',
       queryParameters: queryParameters,
     );
-    print(response.data);
-
-    print(response.statusCode);
     final List<dynamic> transactionsData = response.data['transactions'];
     final List<TransactionReceiveModel?> transactionsList = transactionsData
         .map((transaction) => TransactionReceiveModel.fromJson(

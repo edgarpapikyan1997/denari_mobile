@@ -1,6 +1,3 @@
-// search_field_state.dart
-import 'package:denari_app/data/transactions/model/transaction_receive_model.dart';
-import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:mobx/mobx.dart';
 part 'search_field_state.g.dart';
 

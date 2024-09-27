@@ -1,7 +1,6 @@
 import 'package:denari_app/data/gift_card/model/gift_card_model.dart';
 import 'package:denari_app/data/gift_card/repository/gift_card_repository.dart';
 import 'package:mobx/mobx.dart';
-import 'dart:math';
 import '../../data/gift_card/model/gift_card_balance/gift_card_balance_model.dart';
 
 

@@ -1,5 +1,4 @@
 import 'package:denari_app/gen/assets.gen.dart';
-import 'package:denari_app/store/date_picker_state/date_picker_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
 import 'package:flutter/cupertino.dart';

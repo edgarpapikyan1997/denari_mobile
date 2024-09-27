@@ -8,15 +8,11 @@ import 'package:denari_app/view/widgets/preview_banner/preview_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pinput/pinput.dart';
-
-import '../../../../data/shops/shop_branch_model/shop_branch_model.dart';
 import '../../../../data/shops/shops_repository/impl/shops_repository.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../store/loading_state/loading_state.dart';
 import '../../../../store/shops/shops_state/shops_state.dart';
 import '../../../../utils/di/config.dart';
-import '../../../../utils/themes/app_colors.dart';
 import '../../../widgets/brand_item/brand_item_widget.dart';
 import 'branch_list_screen_generator.dart';
 

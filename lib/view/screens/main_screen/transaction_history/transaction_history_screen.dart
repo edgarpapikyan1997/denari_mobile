@@ -1,35 +1,23 @@
-import 'package:denari_app/constants/bottom_sheet_type.dart';
 import 'package:denari_app/data/transactions/model/transaction_receive_model.dart';
-import 'package:denari_app/store/brand_item_select_state/brand_item_select_state.dart';
 import 'package:denari_app/store/loading_state/loading_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
-import 'package:denari_app/view/screens/send_gift_screen/gift_card_categories_widgets/item_selector_widget.dart';
 import 'package:denari_app/view/widgets/balance_widget.dart';
 import 'package:denari_app/view/widgets/bottom_sheet/item_info.dart';
-import 'package:denari_app/view/widgets/bottom_sheet/variants/modal_sheet.dart';
 import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
-import 'package:denari_app/view/widgets/preview_banner/preview_banner.dart';
 import 'package:denari_app/view/widgets/status_widget/status_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../gen/assets.gen.dart';
-import '../../../../../store/categories_state/categories_state.dart';
 import '../../../../../utils/themes/app_colors.dart';
 import '../../../../constants/app_bar_type.dart';
 import '../../../../constants/app_sizes/app_sizes.dart';
-import '../../../../constants/categories.dart';
 import '../../../../data/transactions/model/transaction_filter_model.dart';
 import '../../../../data/transactions/repositoriy/transactions_repository.dart';
-import '../../../../store/token_balance_state/token_balance_state.dart';
 import '../../../../store/transactions/transactions_state.dart';
 import '../../../../utils/di/config.dart';
 import '../../../widgets/bottom_sheet/item_info_bottom_sheet.dart';
-import '../../../widgets/bottom_sheet/custom_bottom_sheet.dart';
-import '../../../widgets/brand_item/brand_item_list.dart';
-import '../../../widgets/category/category.dart';
-import '../../../widgets/category/category_field_generator.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../../../widgets/no_data_widget.dart';
 
@@ -133,19 +121,6 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                                       .filterModel?.storeNames);
                               _loadingState.stopLoading();
                             }
-
-                            print(_transactionsState.filterModel);
-                            /*
-                                await _transactionsState
-                                          .getTransactionsHistory(
-                                        stores: shopsState.checkedStoreItems
-                                            .map((storeItem) =>
-                                                storeItem.values.toString())
-                                            .toList(),
-                                        startDate: datePickerState.startDate,
-                                        endDate: datePickerState.endDate,
-                                      );
-                              */
                           },
                           child: Assets.media.icons.filter.svg()),
                     ],

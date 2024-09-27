@@ -117,14 +117,16 @@ class TokenInterceptor extends QueuedInterceptor {
     try {
       await preferencesRepository.setToken(token);
     } catch (e) {
-
+      rethrow;
     }
   }
 
   Future<void> clearToken() async {
     try {
       await preferencesRepository.deleteToken();
-    } catch (e) {}
+    } catch (e) {
+      rethrow;
+    }
   }
 
   static bool _shouldRefresh(Response<dynamic>? response) =>

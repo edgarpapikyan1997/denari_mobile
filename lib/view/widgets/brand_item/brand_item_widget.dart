@@ -1,8 +1,6 @@
 import 'package:denari_app/utils/extensions/context_extension.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
-import 'package:denari_app/view/widgets/preview_banner/preview_banner.dart';
-import 'package:denari_app/view/widgets/status_widget/status_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../utils/themes/app_colors.dart';

@@ -17,10 +17,8 @@ import 'package:go_router/go_router.dart';
 import '../../../../constants/app_bar_type.dart';
 import '../../../../constants/categories.dart';
 import '../../../../data/shops/shops_repository/impl/shops_repository.dart';
-import '../../../../data/transactions/repositoriy/transactions_repository.dart';
 import '../../../../gen/assets.gen.dart';
 import '../../../../store/categories_state/categories_state.dart';
-import '../../../../store/transactions/transactions_state.dart';
 import '../../../../utils/di/config.dart';
 import '../../../../utils/themes/app_colors.dart';
 import '../../../widgets/bottom_sheet/variants/modal_sheet.dart';
@@ -51,8 +49,7 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
   final ShopsState shopsState = ShopsState(
     shopsRepository: di.get<ImplShopsRepository>(),
   );
-  final TransactionsState _transactionsState = TransactionsState(
-      transactionsRepository: di.get<TransactionsRepository>());
+
   DateTime? minimumDate;
   final RangeConfiguratorState rangeConfiguratorState =
       RangeConfiguratorState();
@@ -219,7 +216,7 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
                                                     onDateTimeChanged:
                                                         (DateTime value) {
                                                       if (value.isBefore(
-                                                          DateTime.now())) ;
+                                                          DateTime.now())) {}
                                                       datePickerState
                                                           .setEndDate(value);
                                                     },

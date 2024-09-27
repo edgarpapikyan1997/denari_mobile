@@ -45,7 +45,7 @@ class ItemInfo extends StatelessWidget {
           title,
           style: titleStyle ?? context.theme.body4.semiBold,
         ),
-        SizedBox(
+        const SizedBox(
           width: 8,
         ),
         value,

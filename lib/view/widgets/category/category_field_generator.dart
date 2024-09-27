@@ -77,7 +77,6 @@ class CategoryFieldGenerator extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: categories.asMap().entries.map((entry) {
-          int index = entry.key;
           Category category = entry.value;
           return PaddingUtility.only(
             right: 8,

@@ -1,4 +1,3 @@
-import 'package:denari_app/data/transactions/model/transaction_receive_model.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -145,12 +144,12 @@ class _SearchScreenState extends State<SearchScreen> {
                       itemCount: searchState.filteredSuggestions.length,
                       itemBuilder: (context, index) {
                         final item = searchState.filteredSuggestions[index];
-                        final DateTime? currentDate = DateTime.parse(item.date);
+                        final DateTime currentDate = DateTime.parse(item.date);
                         final DateTime? previousDate = index > 0
                             ? DateTime.parse(searchState.filteredSuggestions[index - 1].date)
                             : null;
                         bool showDateHeader = previousDate == null ||
-                            currentDate?.day != previousDate.day;
+                            currentDate.day != previousDate.day;
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -194,7 +193,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   image: item.shop.imageUrl,
                                   itemTitle: item.shop.name,
                                   dateTime: DateFormat('MMMM d, y, HH:mm')
-                                      .format(currentDate!),
+                                      .format(currentDate),
                                   itemInfoCost: "${item.amountGiftCardsUsing}",
                                   tokenBalance: BalanceWidget(
                                     color: AppColors.whiteGrey,

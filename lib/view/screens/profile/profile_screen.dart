@@ -3,6 +3,7 @@ import 'package:denari_app/data/profile/repository/profile_repository.dart';
 import 'package:denari_app/store/profile/profile_state.dart';
 import 'package:denari_app/utils/di/config.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
+import 'package:denari_app/view/screens/profile/listeners/profile_update_listener.dart';
 import 'package:denari_app/view/screens/profile/widgets/profile_menu.dart';
 import 'package:denari_app/view/screens/profile/widgets/user_banner.dart';
 import 'package:denari_app/view/widgets/message.dart';
@@ -27,6 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     _state.getProfile();
+    profileUpdateListener.addListener(_onUpdateProfile);
     reaction(
       (reaction) => _state.getError,
       (value) {
@@ -37,6 +39,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       equals: (_, __) => false,
     );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    profileUpdateListener.removeListener(_onUpdateProfile);
+    super.dispose();
   }
 
   @override
@@ -58,5 +66,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
+  }
+
+  void _onUpdateProfile() {
+    _state.getProfile();
   }
 }

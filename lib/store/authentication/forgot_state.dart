@@ -73,6 +73,7 @@ abstract class ImplForgotState with Store {
   @action
   Future<void> changePassword() async {
     loading = true;
+    changePasswordError = null;
     final model = ResetPassModel(
       newPassword: password,
       phone: phone.print(),
@@ -88,6 +89,7 @@ abstract class ImplForgotState with Store {
   @action
   Future<void> getCode() async {
     loading = true;
+    codeSent = null;
     (await handle(() => _repository.verify(phone.print()))).then(
       (data) => codeSent = 'true',
       (error) => codeSent = error,

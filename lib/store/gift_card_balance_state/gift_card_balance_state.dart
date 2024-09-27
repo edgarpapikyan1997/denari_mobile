@@ -51,11 +51,4 @@ abstract class ImplGiftCardBalanceState with Store {
       getError = error.toString();
     }
   }
-
-  @action
-  int getGiftBalanceByBrand({String? brand}) {
-    Random random = Random();
-    int brandGift = random.nextInt(100);
-    return brandGift;
-  }
 }

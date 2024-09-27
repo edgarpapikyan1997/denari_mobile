@@ -93,20 +93,6 @@ mixin _$GiftCardBalanceState on ImplGiftCardBalanceState, Store {
         .run(() => super.getGiftCardBalanceHistory());
   }
 
-  late final _$ImplGiftCardBalanceStateActionController =
-      ActionController(name: 'ImplGiftCardBalanceState', context: context);
-
-  @override
-  int getGiftBalanceByBrand({String? brand}) {
-    final _$actionInfo = _$ImplGiftCardBalanceStateActionController.startAction(
-        name: 'ImplGiftCardBalanceState.getGiftBalanceByBrand');
-    try {
-      return super.getGiftBalanceByBrand(brand: brand);
-    } finally {
-      _$ImplGiftCardBalanceStateActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''

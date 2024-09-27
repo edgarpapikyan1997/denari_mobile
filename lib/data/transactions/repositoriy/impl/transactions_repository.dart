@@ -57,10 +57,12 @@ final class ImplTransactionsRepository extends TransactionsRepository {
     final Map<String, dynamic> queryParameters = {};
 
     if (startDate != null) {
-      queryParameters['startDate'] = startDate.toIso8601String();
+      // Format the start date to 'YYYY-MM-DD'
+      queryParameters['startDate'] = startDate.toIso8601String().split('T').first; // This extracts the date part only
     }
     if (endDate != null) {
-      queryParameters['endDate'] = endDate.toIso8601String();
+      // Format the end date to 'YYYY-MM-DD'
+      queryParameters['endDate'] = endDate.toIso8601String().split('T').first; // This extracts the date part only
     }
     if (stores != null && stores.isNotEmpty) {
       queryParameters['stores'] = stores.join(',');
@@ -76,8 +78,9 @@ final class ImplTransactionsRepository extends TransactionsRepository {
       '${_config.host}/transactions/user',
       queryParameters: queryParameters,
     );
-
     print(response.data);
+
+    print(response.statusCode);
     final List<dynamic> transactionsData = response.data['transactions'];
     final List<TransactionReceiveModel?> transactionsList = transactionsData
         .map((transaction) => TransactionReceiveModel.fromJson(

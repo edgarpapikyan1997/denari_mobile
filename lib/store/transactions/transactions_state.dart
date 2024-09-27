@@ -1,6 +1,7 @@
 import 'package:denari_app/data/transactions/repositoriy/transactions_repository.dart';
 import 'package:mobx/mobx.dart';
 import '../../data/transactions/model/send_to_contact/send_to_contact_model.dart';
+import '../../data/transactions/model/transaction_filter_model.dart';
 import '../../data/transactions/model/transaction_model.dart';
 import '../../data/transactions/model/transaction_receive_model.dart';
 import '../../utils/network/utils/use_case.dart';
@@ -24,6 +25,9 @@ abstract class ImplTransactionsState with Store {
 
   @observable
   List<TransactionReceiveModel?> transactionHistoryModels = [];
+
+  @observable
+  TransactionFilterModel? filterModel;
 
   @observable
   String? getError;
@@ -72,7 +76,8 @@ abstract class ImplTransactionsState with Store {
       List<String>? stores,
       int? minAmount,
       int? maxAmount}) async {
-    (await handle(() => _transactionsRepository.getTransactionsHistory(
+    (await handle(() =>
+        _transactionsRepository.getTransactionsHistory(
       startDate: startDate,
       endDate: endDate,
       stores: stores,

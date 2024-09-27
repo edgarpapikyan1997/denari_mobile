@@ -1,5 +1,7 @@
 import 'package:denari_app/constants/app_sizes/app_sizes.dart';
+import 'package:denari_app/data/transactions/model/transaction_filter_model.dart';
 import 'package:denari_app/store/date_picker_state/date_picker_state.dart';
+import 'package:denari_app/store/filters/range_state/range_configurator_state.dart';
 import 'package:denari_app/store/loading_state/loading_state.dart';
 import 'package:denari_app/store/shops/shops_state/shops_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
@@ -25,7 +27,7 @@ import '../../../widgets/bottom_sheet/variants/modal_sheet.dart';
 import '../../../widgets/category/category.dart';
 import '../../../widgets/category/category_field_generator.dart';
 import '../../../widgets/data_picker/data_picker.dart';
-import '../../../widgets/filter_widgets/distance_configurator/distance_configurator.dart';
+import '../../../widgets/filter_widgets/distance_configurator/range_configurator.dart';
 
 class TransactionHistoryFilter extends StatefulWidget {
   final String? startDate;
@@ -46,16 +48,17 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
   final LoadingState _loadingState = LoadingState();
   final DatePickerState datePickerState = DatePickerState();
   final CategoriesState categoriesState = CategoriesState();
-  final ShopsState _shopsState = ShopsState(
+  final ShopsState shopsState = ShopsState(
     shopsRepository: di.get<ImplShopsRepository>(),
   );
   final TransactionsState _transactionsState = TransactionsState(
       transactionsRepository: di.get<TransactionsRepository>());
-
   DateTime? minimumDate;
+  final RangeConfiguratorState rangeConfiguratorState =
+      RangeConfiguratorState();
+
   late final List<Category> categories;
   late final List<Category> timeRange;
-  List<String>? selectedShops;
 
   @override
   void initState() {
@@ -74,7 +77,7 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
     initPrefs();
   }
 
-  void initPrefs() {
+  Future<void> initPrefs() async {
     _loadingState.startLoading();
     timeRange = [
       Category(type: CategoryType.today, iconColor: categoriesState.itemColor),
@@ -83,6 +86,7 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
       Category(
           type: CategoryType.thisMonth, iconColor: categoriesState.itemColor),
     ];
+    rangeConfiguratorState.configure(0, 10000);
     _loadingState.stopLoading();
   }
 
@@ -110,201 +114,238 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
             right: 16,
             bottom: 16,
             child: datePickerState.startDate != null
-                ? Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Column(
-                        children: [
-                          PreviewBanner(
-                            leadingBanner: 'transaction.date'.tr(),
-                            bannerUnderText: 'transaction.selectOptions'.tr(),
-                          ),
-                          const Delimiter(16),
-                          Row(
+                ? SizedBox(
+                    height: context.height,
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        Positioned(
+                          child: Column(
                             children: [
-                              Expanded(
-                                child: DataPicker(
-                                  sourceDate: datePickerState.startDate,
-                                  onTap: () {
-                                    showModalSheet(
-                                      isDismissible: false,
-                                      enableDrag: false,
-                                      context: context,
-                                      child: PaddingUtility.only(
-                                        bottom: 50,
-                                        left: 16,
-                                        right: 16,
-                                        child: SizedBox(
-                                          height: context.height / 2.2,
-                                          child: Column(
-                                            children: [
-                                              Expanded(
-                                                child: CupertinoDatePicker(
-                                                  maximumDate: DateTime.now(),
-                                                  minimumDate:
-                                                      datePickerState.startDate,
-                                                  mode: CupertinoDatePickerMode
-                                                      .date,
-                                                  initialDateTime:
-                                                      datePickerState.startDate,
-                                                  onDateTimeChanged:
-                                                      (DateTime value) {
-                                                    datePickerState
-                                                        .setStartDate(value);
-                                                    datePickerState.endDate =
-                                                        null;
-                                                  },
+                              PreviewBanner(
+                                leadingBanner: 'transaction.date'.tr(),
+                                bannerUnderText:
+                                    'transaction.selectOptions'.tr(),
+                              ),
+                              const Delimiter(16),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: DataPicker(
+                                      sourceDate: datePickerState.startDate,
+                                      onTap: () {
+                                        showModalSheet(
+                                          isDismissible: false,
+                                          enableDrag: false,
+                                          context: context,
+                                          child: PaddingUtility.only(
+                                            bottom: 50,
+                                            left: 16,
+                                            right: 16,
+                                            child: SizedBox(
+                                              height: context.height / 2.2,
+                                              child: Column(
+                                                children: [
+                                                  Expanded(
+                                                    child: CupertinoDatePicker(
+                                                      maximumDate:
+                                                          DateTime.now(),
+                                                      minimumDate:
+                                                          datePickerState
+                                                              .startDate,
+                                                      mode:
+                                                          CupertinoDatePickerMode
+                                                              .date,
+                                                      initialDateTime:
+                                                          datePickerState
+                                                              .startDate,
+                                                      onDateTimeChanged:
+                                                          (DateTime value) {
+                                                        datePickerState
+                                                            .setStartDate(
+                                                                value);
+                                                        datePickerState
+                                                            .endDate = null;
+                                                      },
+                                                    ),
+                                                  ),
+                                                  const Delimiter(32),
+                                                  CustomButton(
+                                                    isEnabled: true,
+                                                    isWhite: false,
+                                                    onTap: () async {
+                                                      await Future.delayed(
+                                                          const Duration(
+                                                              milliseconds:
+                                                                  300));
+                                                      context.pop();
+                                                    },
+                                                    title: 'main.apply'.tr(),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  const Delimiter(8),
+                                  Expanded(
+                                      child: DataPicker(
+                                    sourceDate: datePickerState.endDate,
+                                    onTap: () {
+                                      showModalSheet(
+                                        context: context,
+                                        child: PaddingUtility.only(
+                                          bottom: 50,
+                                          left: 16,
+                                          right: 16,
+                                          child: SizedBox(
+                                            height: context.height / 2.2,
+                                            child: Column(
+                                              children: [
+                                                Expanded(
+                                                  child: CupertinoDatePicker(
+                                                    maximumDate: DateTime.now(),
+                                                    minimumDate: datePickerState
+                                                        .startDate,
+                                                    mode:
+                                                        CupertinoDatePickerMode
+                                                            .date,
+                                                    initialDateTime:
+                                                        datePickerState
+                                                            .startDate,
+                                                    onDateTimeChanged:
+                                                        (DateTime value) {
+                                                      if (value.isBefore(
+                                                          DateTime.now())) ;
+                                                      datePickerState
+                                                          .setEndDate(value);
+                                                    },
+                                                  ),
                                                 ),
-                                              ),
-                                              const Delimiter(32),
-                                              CustomButton(
-                                                isEnabled: true,
-                                                isWhite: false,
-                                                onTap: () async {
-                                                  await Future.delayed(
-                                                      const Duration(
-                                                          milliseconds: 300));
-                                                  context.pop();
-                                                },
-                                                title: 'main.apply'.tr(),
-                                              ),
-                                            ],
+                                                const Delimiter(32),
+                                                CustomButton(
+                                                  isEnabled: true,
+                                                  isWhite: false,
+                                                  onTap: () async {
+                                                    await Future.delayed(
+                                                        const Duration(
+                                                            milliseconds: 300));
+                                                    context.pop();
+                                                  },
+                                                  title: 'main.apply'.tr(),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                ),
+                                      );
+                                    },
+                                  )),
+                                ],
                               ),
-                              const Delimiter(8),
-                              Expanded(
-                                  child: DataPicker(
-                                sourceDate: datePickerState.endDate,
+                              const Delimiter(16),
+                              CategoryFieldGenerator(
+                                isRow: true,
+                                justSelector: true,
+                                unselectedColor: AppColors.borderColor,
+                                categories: timeRange,
+                                categoriesState: categoriesState,
                                 onTap: () {
-                                  showModalSheet(
-                                    context: context,
-                                    child: PaddingUtility.only(
-                                      bottom: 50,
-                                      left: 16,
-                                      right: 16,
-                                      child: SizedBox(
-                                        height: context.height / 2.2,
-                                        child: Column(
-                                          children: [
-                                            Expanded(
-                                              child: CupertinoDatePicker(
-                                                maximumDate: DateTime.now(),
-                                                minimumDate:
-                                                    datePickerState.startDate,
-                                                mode: CupertinoDatePickerMode
-                                                    .date,
-                                                initialDateTime:
-                                                    datePickerState.startDate,
-                                                onDateTimeChanged:
-                                                    (DateTime value) {
-                                                  if (value.isBefore(
-                                                      DateTime.now())) ;
-                                                  datePickerState
-                                                      .setEndDate(value);
-                                                },
-                                              ),
-                                            ),
-                                            const Delimiter(32),
-                                            CustomButton(
-                                              isEnabled: true,
-                                              isWhite: false,
-                                              onTap: () async {
-                                                await Future.delayed(
-                                                    const Duration(
-                                                        milliseconds: 300));
-                                                context.pop();
-                                              },
-                                              title: 'main.apply'.tr(),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  );
+                                  switch (categoriesState.categoryType) {
+                                    case CategoryType.today:
+                                      datePickerState.startDate =
+                                          DateTime.now();
+                                      datePickerState.endDate = DateTime.now();
+                                      break;
+                                    case CategoryType.thisWeek:
+                                      DateTime now = DateTime.now();
+                                      int currentDayOfWeek = now.weekday;
+                                      int daysToSubtract =
+                                          currentDayOfWeek - DateTime.monday;
+                                      datePickerState.startDate = now.subtract(
+                                          Duration(days: daysToSubtract));
+                                      datePickerState.endDate = now;
+
+                                      break;
+                                    case CategoryType.thisMonth:
+                                      DateTime now = DateTime.now();
+                                      DateTime firstDayOfMonth =
+                                          DateTime(now.year, now.month, 1);
+                                      datePickerState.startDate =
+                                          firstDayOfMonth;
+                                      datePickerState.endDate = now;
+                                      break;
+                                    default:
+                                      break;
+                                  }
                                 },
-                              )),
-                            ],
-                          ),
-                          const Delimiter(16),
-                          CategoryFieldGenerator(
-                            isRow: true,
-                            justSelector: true,
-                            unselectedColor: AppColors.borderColor,
-                            categories: timeRange,
-                            categoriesState: categoriesState,
-                            onTap: () {},
-                          ),
-                          const Delimiter(32),
-                          PreviewBanner(
-                            leadingBanner: 'transaction.amountRange'.tr(),
-                            bannerUnderText: 'transaction.enterAmount'.tr(),
-                          ),
-                          const Delimiter(16),
-                          const DistanceConfigurator(
-                            rangeFrom: 0,
-                            rangeTo: 10000,
-                            configuratorLabel: 'LD',
-                          ),
-                          const Delimiter(32),
-                          Observer(
-                            builder: (_) {
-                              return PreviewBanner(
+                              ),
+                              const Delimiter(32),
+                              PreviewBanner(
+                                leadingBanner: 'transaction.amountRange'.tr(),
+                                bannerUnderText: 'transaction.enterAmount'.tr(),
+                              ),
+                              const Delimiter(16),
+                              RangeConfigurator(
+                                configuratorLabel: 'LD',
+                                rangeConfiguratorState: rangeConfiguratorState,
+                              ),
+                              const Delimiter(32),
+                              PreviewBanner(
                                 leadingBanner: 'transaction.stores'.tr(),
                                 bannerUnderText:
-                                    _shopsState.checkedStoreItems.isNotEmpty
-                                        ? _shopsState.checkedStoreItems
+                                    shopsState.checkedStoreItems.isNotEmpty
+                                        ? shopsState.checkedStoreItems
                                             .map((item) => item.values.first)
                                             .join(', ')
                                         : 'transaction.notChosen'.tr(),
                                 tealButton: GestureDetector(
                                   onTap: () async {
-                                    _shopsState.checkedStoreItems =
+                                    shopsState.checkedStoreItems =
                                         await context.pushNamed(
                                       'storeListScreen',
                                     ) as List<Map<String, dynamic>>;
                                   },
                                   child: Assets.media.icons.chevronRight.svg(),
                                 ),
-                              );
-                            },
+                              ),
+                              const Delimiter(32),
+                              PreviewBanner(
+                                leadingBanner: 'transaction.branch'.tr(),
+                                previewStyle:
+                                    shopsState.checkedStoreItems.isNotEmpty
+                                        ? context.theme.headline2.bold
+                                        : context
+                                            .theme.headline2.bold.lightGreyText,
+                                bannerUnderText:
+                                    shopsState.checkedAddressItems.isNotEmpty
+                                        ? shopsState.checkedAddressItems
+                                            .map((item) => item.values.first)
+                                            .join(', ')
+                                        : 'transaction.notChosen'.tr(),
+                                tealButton: GestureDetector(
+                                  onTap: () async {
+                                    if (shopsState
+                                            .checkedStoreItems.isNotEmpty ==
+                                        true) {
+                                      shopsState.checkedAddressItems =
+                                          (await context.pushNamed(
+                                                  'branchListScreen',
+                                                  extra: shopsState
+                                                      .checkedStoreItems))
+                                              as List<Map<String, dynamic>>;
+                                    }
+                                  },
+                                  child: Assets.media.icons.chevronRight.svg(),
+                                ),
+                              ),
+                            ],
                           ),
-                          const Delimiter(32),
-                          PreviewBanner(
-                            leadingBanner: 'transaction.branch'.tr(),
-                            previewStyle: _shopsState
-                                    .checkedStoreItems.isNotEmpty
-                                ? context.theme.headline2.bold
-                                : context.theme.headline2.bold.lightGreyText,
-                            bannerUnderText:
-                                _shopsState.checkedAddressItems.isNotEmpty
-                                    ? _shopsState.checkedAddressItems
-                                        .map((item) => item.values.first)
-                                        .join(', ')
-                                    : 'transaction.notChosen'.tr(),
-                            tealButton: GestureDetector(
-                              onTap: () async {
-                                if (_shopsState.checkedStoreItems.isNotEmpty ==
-                                    true) {
-                                  _shopsState.checkedAddressItems =
-                                      (await context.pushNamed(
-                                              'branchListScreen',
-                                              extra: _shopsState
-                                                  .checkedStoreItems))
-                                          as List<Map<String, dynamic>>;
-                                }
-                              },
-                              child: Assets.media.icons.chevronRight.svg(),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Positioned(
-                        child: PaddingUtility.only(
+                        ),
+                        PaddingUtility.only(
                           bottom: 36,
                           child: Row(
                             children: [
@@ -313,7 +354,15 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
                                     isEnabled: true,
                                     isWhite: true,
                                     title: 'shops.reset'.tr(),
-                                    onTap: () {}),
+                                    onTap: () {
+                                      categoriesState.unselectCategory();
+                                      shopsState.checkBoxReset(
+                                          isAddress: false);
+                                      shopsState.checkBoxReset(isAddress: true);
+                                      rangeConfiguratorState.resetRange();
+                                      datePickerState.resetDate(
+                                          widget.startDate, widget.endDate);
+                                    }),
                               ),
                               const Delimiter(8),
                               Expanded(
@@ -323,17 +372,25 @@ class _TransactionHistoryFilterState extends State<TransactionHistoryFilter> {
                                     title: 'main.apply'.tr(),
                                     onTap: () async {
                                       _loadingState.startLoading();
-                                      _transactionsState.getTransactionsHistory(
+                                      context.pop(TransactionFilterModel(
+                                        rangeFrom:
+                                            rangeConfiguratorState.rangeFrom,
+                                        rangeTo: rangeConfiguratorState.rangeTo,
                                         startDate: datePickerState.startDate,
                                         endDate: datePickerState.endDate,
-                                      );
+                                        storeNames: shopsState.checkedStoreItems
+                                            .map((item) =>
+                                                item.values.toString())
+                                            .toList(),
+                                      ));
+                                      _loadingState.stopLoading();
                                     }),
                               ),
                             ],
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   )
                 : const SizedBox());
       }),

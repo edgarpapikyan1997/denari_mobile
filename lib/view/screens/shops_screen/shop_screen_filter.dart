@@ -1,4 +1,5 @@
 import 'package:denari_app/store/categories_state/categories_state.dart';
+import 'package:denari_app/store/filters/range_state/range_configurator_state.dart';
 import 'package:denari_app/store/filters/switcher_state/switcher_state.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/padding_utility/padding_utility.dart';
@@ -15,7 +16,7 @@ import '../../../store/loading_state/loading_state.dart';
 import '../../../utils/themes/app_colors.dart';
 import '../../widgets/category/category.dart';
 import '../../widgets/custom_app_bar.dart';
-import '../../widgets/filter_widgets/distance_configurator/distance_configurator.dart';
+import '../../widgets/filter_widgets/distance_configurator/range_configurator.dart';
 import '../../widgets/filter_widgets/distance_configurator/switcher_widget.dart';
 
 class ShopScreenFilter extends StatefulWidget {
@@ -33,6 +34,8 @@ class _ShopScreenFilterState extends State<ShopScreenFilter> {
   final CategoriesState categoriesState = CategoriesState();
   late final List<Category> categories;
   late final List<Category> locationCategories;
+  final RangeConfiguratorState rangeConfiguratorState =
+      RangeConfiguratorState();
 
   @override
   void initState() {
@@ -65,6 +68,7 @@ class _ShopScreenFilterState extends State<ShopScreenFilter> {
           type: CategoryType.belarusian, iconColor: categoriesState.itemColor),
     ];
     initCategories();
+    rangeConfiguratorState.configure(0, 100);
     _loadingState.stopLoading();
   }
 
@@ -113,14 +117,16 @@ class _ShopScreenFilterState extends State<ShopScreenFilter> {
                 bannerUnderText: 'shops.enterMinMaxDistance'.tr(),
               ),
               const Delimiter(16),
-              const DistanceConfigurator(rangeFrom: 0, rangeTo: 100, configuratorLabel: 'km',),
+              RangeConfigurator(
+                configuratorLabel: 'km',
+                rangeConfiguratorState: rangeConfiguratorState,
+              ),
               const Delimiter(32),
               PreviewBanner(
                 leadingBanner: 'shops.workingNow'.tr(),
                 tealButton: SwitcherWidget(
                   switcherState: _switcherState,
-                  onTap: () {
-                  },
+                  onTap: () {},
                 ),
               ),
               const Delimiter(32),

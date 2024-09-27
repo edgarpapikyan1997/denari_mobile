@@ -30,7 +30,6 @@ abstract class ShopsStatePerformer with Store {
   @observable
   List<Map<String, dynamic>> checkedAddressItems = [];
 
-
   @observable
   ObservableList<bool> checkBoxValues = ObservableList<bool>();
 
@@ -49,10 +48,13 @@ abstract class ShopsStatePerformer with Store {
 
     bool anyAddressSelected = addressCheckBoxValues.contains(true);
 
-    bool anyItemsSelected = checkedStoreItems.isNotEmpty || checkedAddressItems.isNotEmpty;
+    bool anyItemsSelected =
+        checkedStoreItems.isNotEmpty || checkedAddressItems.isNotEmpty;
 
     return anyStoreSelected || anyAddressSelected || anyItemsSelected;
   }
+
+  @action
   @action
   void updateCheckBox({
     required int index,
@@ -65,16 +67,19 @@ abstract class ShopsStatePerformer with Store {
       if (checkBoxValues[index]) {
         checkedStoreItems.add({shops[index].id: shops[index].name});
       } else {
-        checkedStoreItems.removeWhere((element) => element.containsKey(shops[index].id));
+        checkedStoreItems
+            .removeWhere((element) => element.containsKey(shops[index].id));
       }
     } else {
-      // For branch-level checkboxes
-      int addressIndex = index * shopsUnitModelList[index].branch.length + branchIndex!;
-      addressCheckBoxValues[addressIndex] = !addressCheckBoxValues[addressIndex];
+      int addressIndex =
+          index * shopsUnitModelList[index].branch.length + branchIndex!;
+      addressCheckBoxValues[addressIndex] =
+          !addressCheckBoxValues[addressIndex];
 
       if (addressCheckBoxValues[addressIndex]) {
         checkedAddressItems.add({
-          shopsUnitModelList[index].uniqueID: "${shopsUnitModelList[index].branch[branchIndex].street}, ${shopsUnitModelList[index].branch[branchIndex].city}"
+          shopsUnitModelList[index].uniqueID:
+              "${shopsUnitModelList[index].branch[branchIndex].street}, ${shopsUnitModelList[index].branch[branchIndex].city}"
         });
       } else {
         checkedAddressItems.removeWhere((element) =>
@@ -94,15 +99,13 @@ abstract class ShopsStatePerformer with Store {
     if (isAddress) {
       for (int i = 0; i < checkBoxValues.length; i++) {
         checkBoxValues[i] = false;
-        checkedStoreItems.clear();
-        checkedStoreItems = ObservableList<Map<String, dynamic>>();
       }
+      checkedStoreItems = [];
     } else {
       for (int i = 0; i < addressCheckBoxValues.length; i++) {
         addressCheckBoxValues[i] = false;
-        checkedAddressItems.clear();
-        checkedAddressItems = ObservableList<Map<String, dynamic>>();
       }
+      checkedAddressItems = [];
     }
   }
 

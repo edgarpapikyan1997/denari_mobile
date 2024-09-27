@@ -1,3 +1,4 @@
+import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:mobx/mobx.dart';
 
 part 'date_picker_state.g.dart';
@@ -14,7 +15,6 @@ abstract class ImplDatePickerState with Store {
   @observable
   List<String> branches = [];
 
-
   @action
   void setStartDate(
     DateTime newValue,
@@ -27,5 +27,12 @@ abstract class ImplDatePickerState with Store {
     DateTime newValue,
   ) {
     endDate = newValue;
+  }
+
+  void resetDate(String? defaultStart, String? defaultEnd) {
+    if (defaultStart != null) {
+      startDate = defaultStart.toDate();
+      endDate = null;
+    }
   }
 }

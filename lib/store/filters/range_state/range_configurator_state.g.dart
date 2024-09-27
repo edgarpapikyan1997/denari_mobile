@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'distance_configurator_state.dart';
+part of 'range_configurator_state.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,7 +8,7 @@ part of 'distance_configurator_state.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$DistanceConfiguratorState on DistanceConfiguratorImpl, Store {
+mixin _$RangeConfiguratorState on DistanceConfiguratorImpl, Store {
   Computed<RangeValues>? _$currentRangeValuesComputed;
 
   @override
@@ -17,35 +17,35 @@ mixin _$DistanceConfiguratorState on DistanceConfiguratorImpl, Store {
               name: 'DistanceConfiguratorImpl.currentRangeValues'))
       .value;
 
-  late final _$fromAtom =
-      Atom(name: 'DistanceConfiguratorImpl.from', context: context);
+  late final _$rangeFromAtom =
+      Atom(name: 'DistanceConfiguratorImpl.rangeFrom', context: context);
 
   @override
-  int get from {
-    _$fromAtom.reportRead();
-    return super.from;
+  int get rangeFrom {
+    _$rangeFromAtom.reportRead();
+    return super.rangeFrom;
   }
 
   @override
-  set from(int value) {
-    _$fromAtom.reportWrite(value, super.from, () {
-      super.from = value;
+  set rangeFrom(int value) {
+    _$rangeFromAtom.reportWrite(value, super.rangeFrom, () {
+      super.rangeFrom = value;
     });
   }
 
-  late final _$toAtom =
-      Atom(name: 'DistanceConfiguratorImpl.to', context: context);
+  late final _$rangeToAtom =
+      Atom(name: 'DistanceConfiguratorImpl.rangeTo', context: context);
 
   @override
-  int get to {
-    _$toAtom.reportRead();
-    return super.to;
+  int get rangeTo {
+    _$rangeToAtom.reportRead();
+    return super.rangeTo;
   }
 
   @override
-  set to(int value) {
-    _$toAtom.reportWrite(value, super.to, () {
-      super.to = value;
+  set rangeTo(int value) {
+    _$rangeToAtom.reportWrite(value, super.rangeTo, () {
+      super.rangeTo = value;
     });
   }
 
@@ -64,10 +64,21 @@ mixin _$DistanceConfiguratorState on DistanceConfiguratorImpl, Store {
   }
 
   @override
+  void resetRange() {
+    final _$actionInfo = _$DistanceConfiguratorImplActionController.startAction(
+        name: 'DistanceConfiguratorImpl.resetRange');
+    try {
+      return super.resetRange();
+    } finally {
+      _$DistanceConfiguratorImplActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-from: ${from},
-to: ${to},
+rangeFrom: ${rangeFrom},
+rangeTo: ${rangeTo},
 currentRangeValues: ${currentRangeValues}
     ''';
   }

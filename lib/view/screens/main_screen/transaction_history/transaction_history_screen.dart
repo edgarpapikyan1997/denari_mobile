@@ -20,6 +20,7 @@ import '../../../../../utils/themes/app_colors.dart';
 import '../../../../constants/app_bar_type.dart';
 import '../../../../constants/app_sizes/app_sizes.dart';
 import '../../../../constants/categories.dart';
+import '../../../../data/transactions/model/transaction_filter_model.dart';
 import '../../../../data/transactions/repositoriy/transactions_repository.dart';
 import '../../../../store/token_balance_state/token_balance_state.dart';
 import '../../../../store/transactions/transactions_state.dart';
@@ -48,8 +49,6 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
   Color? statusColor;
   TextStyle? textStyleColor;
   final ScrollController _scrollController = ScrollController();
-
-  String? status = "cancelled";
 
   @override
   void initState() {
@@ -110,15 +109,43 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                         width: 16,
                       ),
                       GestureDetector(
-                          onTap: () {
-                            context.pushNamed(
+                          onTap: () async {
+                            final result = await context.pushNamed(
                               'transactionsFilter',
                               pathParameters: {
                                 'startDate': items.last!.date.toString(),
                                 'endDate': items.first!.date.toString(),
                               },
                             );
+                            if (result is TransactionFilterModel) {
+                              _loadingState.startLoading();
+                              _transactionsState.filterModel = result;
+                              await _transactionsState.getTransactionsHistory(
+                                  endDate:
+                                      _transactionsState.filterModel?.endDate,
+                                  startDate:
+                                      _transactionsState.filterModel?.startDate,
+                                  minAmount:
+                                      _transactionsState.filterModel?.rangeFrom,
+                                  maxAmount:
+                                      _transactionsState.filterModel?.rangeTo,
+                                  stores: _transactionsState
+                                      .filterModel?.storeNames);
+                              _loadingState.stopLoading();
+                            }
 
+                            print(_transactionsState.filterModel);
+                            /*
+                                await _transactionsState
+                                          .getTransactionsHistory(
+                                        stores: shopsState.checkedStoreItems
+                                            .map((storeItem) =>
+                                                storeItem.values.toString())
+                                            .toList(),
+                                        startDate: datePickerState.startDate,
+                                        endDate: datePickerState.endDate,
+                                      );
+                              */
                           },
                           child: Assets.media.icons.filter.svg()),
                     ],

@@ -30,6 +30,8 @@ abstract class CategoriesStatePerformer with Store {
     selectedCategories.remove(categoryType);
   }
 
+
+
   @action
   void selectCategory(
       {required String categoryName, required CategoryType newCategoryType}) {

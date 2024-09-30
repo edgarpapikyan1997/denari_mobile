@@ -1,25 +1,43 @@
 import 'package:denari_app/data/authentication/model/reg_model.dart';
-import 'package:denari_app/data/profile/model/profile.dart';
-import 'package:denari_app/view/screens/authentication/code/sign_up_code_screen.dart';
-import 'package:denari_app/view/screens/authentication/sign_up/sign_up_screen.dart';
+import 'package:denari_app/data/profile/model/profile_model.dart';
+import 'package:denari_app/store/categories_state/categories_state.dart';
 import 'package:denari_app/view/screens/main_screen/token_balance_screen.dart';
+import 'package:denari_app/view/screens/profile/pages/change_password_page.dart';
 import 'package:denari_app/view/screens/profile/pages/code_page.dart';
+import 'package:denari_app/view/screens/profile/pages/create_password_page.dart';
+import 'package:denari_app/view/screens/profile/pages/forgot_code_page.dart';
+import 'package:denari_app/view/screens/profile/pages/forgot_page.dart';
 import 'package:denari_app/view/screens/profile/pages/profile_page.dart';
+import 'package:denari_app/view/screens/search_screen/search_screen.dart';
 import 'package:denari_app/view/screens/send_gift_screen/send_gift_card_screen.dart';
+import 'package:denari_app/view/screens/shops_screen/chosen_category_screen.dart';
+import 'package:denari_app/view/screens/shops_screen/shop_screen_filter.dart';
+import 'package:denari_app/view/screens/store_field_screen/alliance_screen/alliance_screen.dart';
+import 'package:denari_app/view/screens/store_field_screen/store_field_item_screen.dart';
 import 'package:denari_app/view/widgets/brand_item/brand_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../data/authentication/model/reset_model.dart';
+import '../data/authentication/model/reset_pass_model.dart';
+import '../data/shops/shop_unit_model/shop_unit_model.dart';
 import '../view/screens/authentication/code/forgot_code_screen.dart';
+import '../view/screens/authentication/code/sign_up_code_screen.dart';
 import '../view/screens/authentication/forgot/forgot_screen.dart';
 import '../view/screens/authentication/password/create_password_screen.dart';
 import '../view/screens/authentication/sign_in/sign_in_screen.dart';
+import '../view/screens/authentication/sign_up/sign_up_screen.dart';
 import '../view/screens/main_screen/main_screen.dart';
-import '../view/screens/notification_screen.dart';
+import '../view/screens/main_screen/my_gift_cards_screen.dart';
+import '../view/screens/main_screen/transaction_history/transaction_history_filter.dart';
+import '../view/screens/main_screen/transaction_history/transaction_history_screen.dart';
+import '../view/screens/map_screen/map_screen.dart';
+import '../view/screens/notifications/notification_screen.dart';
 import '../view/screens/profile/profile_screen.dart';
+import '../view/screens/qr/qr_scanner/qr_scanner_screen.dart';
 import '../view/screens/send_gift_screen/send_gift_screen.dart';
-import '../view/screens/shop_screen.dart';
+import '../view/screens/shops_screen/shop_screen.dart';
+import '../view/screens/store_field_screen/widgets/store_field_arguments.dart';
+import '../view/screens/store_list_screen/branch_list_screen/branch_list_screen.dart';
+import '../view/screens/store_list_screen/store_list_screen.dart';
 import '../view/widgets/scaffold_nav_bar.dart';
 import 'listeners/auth_listener.dart';
 
@@ -42,45 +60,160 @@ final GoRouter router = GoRouter(
                 return const TokenBalanceScreen();
               },
             ),
+            GoRoute(
+                path: 'myGiftCardsScreen',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const MyGiftCardsScreen();
+                })
           ],
         ),
         GoRoute(
-          path: '/notifications',
+          name: Routes.notifications,
+          path: '/${Routes.notifications}',
+          builder: (context, state) => const NotificationScreen(),
+        ),
+        GoRoute(
+          path: '/shopsScreen',
           builder: (context, state) {
-            return const NotificationScreen();
+            return const ShopsScreen();
           },
         ),
         GoRoute(
-          path: '/shopScreen',
+          path: '/chosenCategoryScreen',
           builder: (context, state) {
-            return const ShopScreen();
+            final CategoriesState? categoriesState =
+                state.extra as CategoriesState?;
+            return ChosenCategoryScreen(
+              categoriesState: categoriesState,
+            );
           },
         ),
+        GoRoute(
+          path: '/shopScreenFilter',
+          builder: (context, state) {
+            return const ShopScreenFilter();
+          },
+        ),
+        GoRoute(
+            path: '/alliance',
+            builder: (context, state) {
+              return AllianceScreen(
+                isAlliance: state.extra as bool?,
+              );
+            }),
         GoRoute(
           name: Routes.profile,
           path: '/${Routes.profile}',
-          builder: (context, state) {
-            return const ProfileScreen();
-          },
+          builder: (context, state) => const ProfileScreen(),
           routes: [
             GoRoute(
               name: Routes.profileData,
               path: Routes.profileData,
               builder: (context, state) => ProfilePage(
-                profile: state.extra as Profile,
+                profile: state.extra as ProfileModel,
               ),
               routes: [
                 GoRoute(
                   name: Routes.profileCode,
                   path: Routes.code,
                   builder: (context, state) =>
-                      ProfileCodePage(model: state.extra as Profile),
+                      ProfileCodePage(model: state.extra as ProfileModel),
+                ),
+              ],
+            ),
+            GoRoute(
+              name: Routes.profilePassword,
+              path: Routes.password,
+              builder: (context, state) => const ChangePasswordPage(),
+              routes: [
+                GoRoute(
+                  name: Routes.profileForgot,
+                  path: Routes.forgot,
+                  builder: (context, state) => const ForgotPage(),
+                  routes: [
+                    GoRoute(
+                      name: Routes.profileForgotCode,
+                      path: Routes.code,
+                      builder: (context, state) =>
+                          ForgotCodePage(model: state.extra as ResetPassModel),
+                      routes: [
+                        GoRoute(
+                          name: Routes.profileReset,
+                          path: Routes.password,
+                          builder: (context, state) => CreatePasswordPage(
+                              model: state.extra as ResetPassModel),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '/searchScreen',
+      builder: (context, state) {
+        final items = state.extra as List<dynamic>;
+        return SearchScreen(
+          items: items,
+        );
+      },
+    ),
+    GoRoute(
+        path: '/transactions',
+        builder: (context, state) {
+          return const TransactionHistoryScreen();
+        },
+        routes: [
+          GoRoute(
+            path: 'transactionsFilter/:startDate/:endDate',
+            name: 'transactionsFilter',
+            builder: (context, state) => TransactionHistoryFilter(
+              startDate: state.pathParameters['startDate'],
+              endDate: state.pathParameters['endDate'],
+            ),
+          ),
+        ]),
+    GoRoute(
+      path: '/storeListScreen',
+      name: 'storeListScreen',
+      builder: (context, state) {
+        return const StoreListScreen(
+        );
+      },
+    ),
+    GoRoute(
+      path: '/branchListScreen',
+      name: 'branchListScreen',
+      builder: (context, state) {
+        final shopItems = (state.extra as List<dynamic>?)
+            ?.map((e) => e as Map<String, dynamic>)
+            .toList();
+        return BranchListScreen(
+          chosenItems: shopItems,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/storeFieldItemScreen',
+      builder: (context, state) {
+        final args = state.extra as StoreFieldItemArguments?;
+        return StoreFieldItemScreen(
+          uniqueID: args?.uniqueID,
+          isQRScanned: args?.isQRScanned,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/mapScreen',
+      builder: (context, state) {
+        return MapScreen(
+          storeData: state.extra as ShopsUnitModel,
+        );
+      },
     ),
     GoRoute(
         path: '/sendGift',
@@ -92,11 +225,16 @@ final GoRouter router = GoRouter(
               name: 'sendGiftCardScreen',
               path: 'sendGiftCardScreen',
               builder: (context, state) {
-                BrandItemWidget brandItemWidget =
-                    state.extra as BrandItemWidget;
+                BrandItemWidget? brandItemWidget =
+                    state.extra as BrandItemWidget?;
                 return SendGiftCardScreen(brandItemWidget: brandItemWidget);
               }),
         ]),
+    GoRoute(
+        path: '/qrScanner',
+        builder: (context, state) {
+          return const QrScannerScreen();
+        }),
     GoRoute(
       name: Routes.signIn,
       path: '/${Routes.signIn}',
@@ -111,13 +249,13 @@ final GoRouter router = GoRouter(
               name: Routes.forgotCode,
               path: Routes.code,
               builder: (context, state) =>
-                  ForgotCodeScreen(model: state.extra as ResetModel),
+                  ForgotCodeScreen(model: state.extra as ResetPassModel),
               routes: [
                 GoRoute(
                   name: Routes.password,
                   path: Routes.password,
-                  builder: (context, state) =>
-                      CreatePasswordScreen(model: state.extra as ResetModel),
+                  builder: (context, state) => CreatePasswordScreen(
+                      model: state.extra as ResetPassModel),
                 ),
               ],
             ),
@@ -165,4 +303,9 @@ final class Routes {
   static const password = 'password';
   static const profile = 'profile';
   static const profileData = 'data';
+  static const profilePassword = 'p-password';
+  static const profileForgot = 'p-forgot';
+  static const profileForgotCode = 'p-f-forgot';
+  static const profileReset = 'p-reset';
+  static const notifications = 'notifications';
 }

@@ -1,4 +1,4 @@
-import 'package:denari_app/data/authentication/model/reset_model.dart';
+import 'package:denari_app/data/authentication/model/reset_pass_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
 import 'package:denari_app/store/authentication/forgot_state.dart';
 import 'package:denari_app/utils/di/config.dart';
@@ -16,7 +16,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
 class ForgotCodeScreen extends StatefulWidget {
-  final ResetModel model;
+  final ResetPassModel model;
 
   const ForgotCodeScreen({super.key, required this.model});
 
@@ -84,7 +84,7 @@ class _ForgotCodeScreenState extends State<ForgotCodeScreen> {
                   onPressed: _state.isCodeValid
                       ? () => context.goNamed(
                             Routes.password,
-                            extra: ResetModel(
+                            extra: ResetPassModel(
                               phone: _state.phone!.completeNumber,
                               code: _state.code,
                               newPassword: '',

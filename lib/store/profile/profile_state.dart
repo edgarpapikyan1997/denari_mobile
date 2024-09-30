@@ -1,5 +1,5 @@
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
-import 'package:denari_app/data/profile/model/profile.dart';
+import 'package:denari_app/data/profile/model/profile_model.dart';
 import 'package:denari_app/data/profile/repository/profile_repository.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/network/utils/use_case.dart';
@@ -8,20 +8,20 @@ import 'package:mobx/mobx.dart';
 
 part 'profile_state.g.dart';
 
-class ProfileState = _ProfileState with _$ProfileState;
+class ProfileState = ImplProfileState with _$ProfileState;
 
-abstract class _ProfileState with Store {
+abstract class ImplProfileState with Store {
   final AuthRepository _authRepository;
   final ProfileRepository _profileRepository;
 
-  _ProfileState({
+  ImplProfileState({
     required AuthRepository authRepository,
     required ProfileRepository profileRepository,
   })  : _authRepository = authRepository,
         _profileRepository = profileRepository;
 
   @observable
-  Profile profile = Profile.fromJson({});
+  ProfileModel profile = ProfileModel.fromJson({});
 
   @observable
   String? getError;
@@ -119,7 +119,7 @@ abstract class _ProfileState with Store {
   @action
   Future<void> updateProfile() async {
     loading = true;
-    final uProfile = Profile(
+    final uProfile = ProfileModel(
       name: name,
       email: email,
       phone: phone.print(),
@@ -127,6 +127,9 @@ abstract class _ProfileState with Store {
       dateOfBirth: birthday?.print() ?? '',
       createdAt: profile.createdAt,
       code: code,
+      allowGPSLocation: profile.allowGPSLocation,
+      transactionNotification: profile.transactionNotification,
+      advertisements: profile.advertisements,
     );
     (await handle(() => _profileRepository.updateProfile(uProfile))).then(
       (data) => updateError = 'true',

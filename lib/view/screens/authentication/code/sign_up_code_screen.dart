@@ -90,6 +90,7 @@ class _SignUpCodeScreenState extends State<SignUpCodeScreen> {
                     }
                     return Align(
                       alignment: Alignment.centerLeft,
+
                       child: ResendTimer(
                         onResend: () => _state.getCode(),
                       ),

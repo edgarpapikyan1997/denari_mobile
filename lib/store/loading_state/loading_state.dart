@@ -2,9 +2,9 @@ import 'package:mobx/mobx.dart';
 
 part 'loading_state.g.dart';
 
-class LoadingState = _LoadingState with _$LoadingState;
+class LoadingState = ImplLoadingState with _$LoadingState;
 
-abstract class _LoadingState with Store {
+abstract class ImplLoadingState with Store {
   @observable
   bool isLoading = false;
 

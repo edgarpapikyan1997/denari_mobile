@@ -1,5 +1,5 @@
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
-import 'package:denari_app/data/profile/model/profile.dart';
+import 'package:denari_app/data/profile/model/profile_model.dart';
 import 'package:denari_app/data/profile/repository/profile_repository.dart';
 import 'package:denari_app/store/profile/profile_state.dart';
 import 'package:denari_app/utils/di/config.dart';
@@ -19,7 +19,7 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
 class ProfilePage extends StatefulWidget {
-  final Profile profile;
+  final ProfileModel profile;
 
   const ProfilePage({super.key, required this.profile});
 
@@ -45,7 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
       (reaction) => _state.codeSentError,
       (value) {
         if (value == 'true') {
-          final profile = Profile(
+          final profile = ProfileModel(
             name: _state.name,
             email: _state.email,
             phone: _state.phone.print(),
@@ -53,6 +53,9 @@ class _ProfilePageState extends State<ProfilePage> {
             dateOfBirth: _state.birthday.toString(),
             createdAt: _state.profile.createdAt,
             code: _state.code,
+            allowGPSLocation: _state.profile.allowGPSLocation,
+            transactionNotification: _state.profile.transactionNotification,
+            advertisements: _state.profile.advertisements,
           );
           context.goNamed(Routes.profileCode, extra: profile);
         } else if (value != null) {

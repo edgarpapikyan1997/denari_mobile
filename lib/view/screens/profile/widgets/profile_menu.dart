@@ -1,8 +1,12 @@
-import 'package:denari_app/data/profile/model/profile.dart';
+import 'package:denari_app/data/profile/model/profile_model.dart';
+import 'package:denari_app/data/profile/repository/profile_repository.dart';
 import 'package:denari_app/gen/assets.gen.dart';
+import 'package:denari_app/store/profile/profile_state.dart';
+import 'package:denari_app/utils/di/config.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/utils/go_router.dart';
 import 'package:denari_app/utils/listeners/auth_listener.dart';
+import 'package:denari_app/utils/network/utils/use_case.dart';
 import 'package:denari_app/utils/themes/app_colors.dart';
 import 'package:denari_app/view/screens/profile/widgets/delete_sheet.dart';
 import 'package:denari_app/view/screens/profile/widgets/location_sheet.dart';
@@ -12,9 +16,13 @@ import 'package:denari_app/view/widgets/bottom_sheet/variants/modal_sheet.dart';
 import 'package:denari_app/view/widgets/buttons/button_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '../../../widgets/message.dart';
+import 'invite_sheet.dart';
 
 class ProfileMenu extends StatelessWidget {
-  final Profile profile;
+  final ProfileModel profile;
 
   const ProfileMenu({
     super.key,
@@ -39,7 +47,7 @@ class ProfileMenu extends StatelessWidget {
           ButtonMenu(
             label: 'profile.change_password'.tr(),
             svg: Assets.media.icons.lock.path,
-            onPressed: () => {},
+            onPressed: () => context.goNamed(Routes.profilePassword),
           ),
           const Divider(height: 1),
           ButtonMenu(
@@ -47,8 +55,9 @@ class ProfileMenu extends StatelessWidget {
             svg: Assets.media.icons.bellRing.path,
             onPressed: () => showModalSheet(
               context: context,
-              child: const NotificationsSheet(),
-            ),
+              child: NotificationsSheet(profile: profile),
+            ).then((value) =>
+                Provider.of<ProfileState>(context, listen: false).getProfile()),
           ),
           const Divider(height: 1),
           ButtonMenu(
@@ -56,14 +65,18 @@ class ProfileMenu extends StatelessWidget {
             svg: Assets.media.icons.pinned.path,
             onPressed: () => showModalSheet(
               context: context,
-              child: const LocationSheet(),
-            ),
+              child: LocationSheet(profile: profile),
+            ).then((value) =>
+                Provider.of<ProfileState>(context, listen: false).getProfile()),
           ),
           const Divider(height: 1),
           ButtonMenu(
             label: 'profile.invite_friends'.tr(),
             svg: Assets.media.icons.sendToBack.path,
-            onPressed: () => {},
+            onPressed: () => showModalSheet<void>(
+              context: context,
+              child: const InviteSheet(),
+            ),
           ),
           const Divider(height: 1),
           ButtonMenu(
@@ -73,7 +86,7 @@ class ProfileMenu extends StatelessWidget {
             onPressed: () => showModalSheet<bool>(
               context: context,
               child: const DeleteSheet(),
-            ),
+            ).then((value) => value == true ? _deleteAccount() : null),
           ),
           const Divider(height: 1),
           ButtonMenu(
@@ -87,6 +100,15 @@ class ProfileMenu extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  _deleteAccount() async {
+    final result =
+        await handle(() => di.get<ProfileRepository>().deleteProfile());
+    result.then(
+      (value) => authListener.logout(),
+      (error) => Message.show(error),
     );
   }
 }

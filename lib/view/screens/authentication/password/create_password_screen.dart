@@ -1,4 +1,4 @@
-import 'package:denari_app/data/authentication/model/reset_model.dart';
+import 'package:denari_app/data/authentication/model/reset_pass_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
 import 'package:denari_app/store/authentication/forgot_state.dart';
 import 'package:denari_app/utils/di/config.dart';
@@ -16,7 +16,7 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:mobx/mobx.dart';
 
 class CreatePasswordScreen extends StatefulWidget {
-  final ResetModel model;
+  final ResetPassModel model;
 
   const CreatePasswordScreen({super.key, required this.model});
 

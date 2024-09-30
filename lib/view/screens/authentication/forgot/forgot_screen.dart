@@ -1,4 +1,4 @@
-import 'package:denari_app/data/authentication/model/reset_pass_model.dart';
+import 'package:denari_app/data/authentication/model/reset_model.dart';
 import 'package:denari_app/data/authentication/repository/auth_repository.dart';
 import 'package:denari_app/store/authentication/forgot_state.dart';
 import 'package:denari_app/utils/di/config.dart';
@@ -34,7 +34,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
         if (value == 'true') {
           context.goNamed(
             Routes.forgotCode,
-            extra: ResetPassModel(
+            extra: ResetModel(
               phone: _state.phone!.completeNumber,
               code: '',
               newPassword: '',

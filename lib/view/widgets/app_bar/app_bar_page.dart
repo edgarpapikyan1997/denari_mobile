@@ -17,15 +17,14 @@ class AppBarPage extends StatelessWidget implements PreferredSizeWidget {
           16.0, MediaQuery.paddingOf(context).top, 16.0, 0.0),
       child: Row(
         children: [
-          if (context.canPop())
-            SizedBox.square(
-              dimension: 24,
-              child: InkWell(
-                onTap: onPop ?? context.pop,
-                borderRadius: BorderRadius.circular(8),
-                child: Assets.media.icons.chevronLeft.svg(),
-              ),
+          SizedBox.square(
+            dimension: 24,
+            child: InkWell(
+              onTap: onPop ?? context.pop,
+              borderRadius: BorderRadius.circular(8),
+              child: Assets.media.icons.chevronLeft.svg(),
             ),
+          ),
           Flexible(
             child: Center(
               child: Text(
@@ -34,7 +33,7 @@ class AppBarPage extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
           ),
-          if (context.canPop()) const Delimiter(24),
+          const Delimiter(24),
         ],
       ),
     );

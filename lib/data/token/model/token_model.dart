@@ -10,14 +10,9 @@ class TokenModel {
   final String uniqueId;
   @JsonKey(defaultValue: '')
   final String name;
-  @JsonKey(defaultValue: '')
-  final String imageUrl;
-  @JsonKey(defaultValue: '')
-  final String? description;
-  @JsonKey(defaultValue: '')
-  final String? inviteCode;
 
   final DateTime? openTime;
+
   final DateTime? closedTime;
 
   @JsonKey(defaultValue: [])
@@ -26,9 +21,6 @@ class TokenModel {
   const TokenModel({
     required this.uniqueId,
     required this.name,
-    required this.imageUrl,
-    this.description,
-    this.inviteCode,
     required this.shopUserTokens,
     this.openTime,
     this.closedTime,
@@ -42,9 +34,6 @@ class TokenModel {
   TokenModel copyWith({
     String? uniqueId,
     String? name,
-    String? imageUrl,
-    String? description,
-    String? inviteCode,
     DateTime? openTime,
     DateTime? closedTime,
     List<ShopUserToken>? shopUserTokens,
@@ -52,9 +41,6 @@ class TokenModel {
     return TokenModel(
       uniqueId: uniqueId ?? this.uniqueId,
       name: name ?? this.name,
-      imageUrl: imageUrl ?? this.imageUrl,
-      description: description ?? this.description,
-      inviteCode: inviteCode ?? this.inviteCode,
       openTime: openTime ?? this.openTime,
       closedTime: closedTime ?? this.closedTime,
       shopUserTokens: shopUserTokens ?? this.shopUserTokens,

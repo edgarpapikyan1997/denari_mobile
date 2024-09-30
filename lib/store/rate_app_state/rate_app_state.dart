@@ -2,9 +2,9 @@ import 'package:mobx/mobx.dart';
 
 part 'rate_app_state.g.dart';
 
-class RateAppState = ImplRateAppState with _$RateAppState;
+class RateAppState = _RateAppState with _$RateAppState;
 
-abstract class ImplRateAppState with Store {
+abstract class _RateAppState with Store {
   @observable
   int index = 0;
 

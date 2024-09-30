@@ -1,10 +1,10 @@
-import 'package:denari_app/data/profile/model/profile_model.dart';
+import 'package:denari_app/data/profile/model/profile.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
 import 'package:denari_app/view/widgets/delimiter.dart';
 import 'package:flutter/material.dart';
 
 class UserData extends StatelessWidget {
-  final ProfileModel profile;
+  final Profile profile;
 
   const UserData({super.key, required this.profile});
 

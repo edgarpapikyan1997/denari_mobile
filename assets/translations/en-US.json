@@ -7,7 +7,6 @@
     "transactionHistory": "Transaction\n History",
     "rangeOfProducts": "The entire range of products",
     "topCategories": "Top shop categories",
-    "noCategories" : "No categories selected",
     "popularStores": "Popular stores ",
     "seeAll": "See all",
     "food": "Food",
@@ -24,19 +23,9 @@
     "nothingFound": "Nothing found",
     "trySearchAgain": "Try searching again.",
     "navBarQR": "My QR code",
-    "qrOfTransaction": "QR code of the Transaction",
-    "showThisQr": "Show this QR code to the seller to get bonuses or pay with a gift card",
-    "getTokens": "To get tokens for a purchase or use the accumulated points, show the screen to the seller in the store.",
-    "dontLeaveScreen": "Please do not leave the screen before confirming the purchase.",
-    "error_adv": "Error get advertisements",
-    "userFound": "User found",
-    "giftWillSend": "The gift will be sent directly to",
-    "tokenWillSend": "The tokens will be sent directly to",
-    "backToHome": "Back to Home",
-    "apply" : "Apply"
+    "getTokens": "To get tokens for a purchase or use the accumulated points, show the screen to the seller in the store."
   },
   "balance": {
-    "balance": "Balance:",
     "tokenBalance": "Token Balance",
     "viewEarnedToken": "View your earned token",
     "tokens": "Tokens",
@@ -44,7 +33,7 @@
     "emptyBalance": "Balance is empty",
     "emptyBalanceDescription": "To receive tokens, you must make a purchase using a gift card."
   },
-  "sign": {
+  "sign" : {
     "in": "Sign in",
     "up": "Sign up",
     "out": "Sign out",
@@ -111,10 +100,9 @@
     "yourPurchase": "Your purchase of $",
     "at": "at",
     "earnedYou": "earned you",
-    "wouldYouRate": "How would you rate your experience?",
-    "userNotFound": "The user was not found"
+    "wouldYouRate": "How would you rate your experience?"
   },
-  "profile": {
+  "profile" : {
     "data": "Profile data",
     "change_password": "Change Password",
     "notifications": "Notifications",
@@ -144,93 +132,6 @@
     "you_want_stop_verification": "Do you want to stop the verification process?",
     "update_success": "Profile data saved successfully",
     "stop": "Stop",
-    "continue": "Continue",
-    "enter_valid_password": "Enter a valid password",
-    "enter_new_password": "Enter a new password",
-    "save_pass_success": "Password saved successfully",
-    "invite_desc": "Share the benefits of Denari app with your friends!",
-    "email_or_phone": "Enter email or phone number",
-    "send_invite": "Send Invitation",
-    "invite_error": "incorrect invite",
-    "invite_success": "Congratulations! You've earned tokens for inviting a friend!",
-    "invite_success_desc": "You’ve successfully invited a friend to join Denari app.",
-    "tokens": "+{} tokens"
-  },
-  "notifications": {
-    "no": "No notification",
-    "empty": "There are no new events or messages requiring your attention at this time."
-  },
-  "shops": {
-    "allShops": "See all shops",
-    "shops": "Shops",
-    "all": "All",
-    "location": "Location",
-    "selectLocation": "Select store location",
-    "city": "City",
-    "town": "Town",
-    "distanceToStore": "Distance to store",
-    "enterMinMaxDistance": "Enter the minimum and maximum distance to the store.",
-    "filters": "Filters",
-    "workingNow": "Working now",
-    "category": "Category",
-    "italian": "Italian",
-    "desert": "Desert",
-    "armenian": "Armenian",
-    "georgian": "Georgian",
-    "belarusian": "Belarusian",
-    "reset": "Reset",
-    "cashbackRate": "Cahsback\nRate",
-    "currentBalance": "Current\nBalance",
-    "tokenBalance": "Token\nBalance",
-    "giftCardOptions": "Gift Card Options",
-    "redemeToken": "Redeme Token",
-    "newPurchase": "New Purchase",
-    "branches": "Branches",
-    "alliance": "Alliance",
-    "allianceSec": "Sky team alliance to share all your airmiles",
-    "selectAmount": "Select the amount and number of tokens to be withdrawn.",
-    "redeemGift": "Redeem from Gift Cards",
-    "redeemToken": "Redeem from Tokens",
-    "max": "max",
-    "dailyFrom": "Daily from"
-  },
-  "status": {
-    "onHold": "On Hold",
-    "completed": "Completed",
-    "cancelled": "Cancelled"
-  },
-  "qr": {
-    "generateQR": "Generate QR code",
-    "scanningError": "Scanning error occurred"
-  },
-  "transaction": {
-    "transactionSent": "Transaction sent: status onHold",
-    "transactionError": "Something went wrong",
-    "tryRestart": "Try restarting your screen",
-    "transactionIDError": "Can't get Transaction ID : TRY AGAIN",
-    "transaction": "Transaction",
-    "id": "ID:",
-    "status": "Status",
-    "storeAddress": "Store Address",
-    "details": "Details",
-    "commentByStore": "Comment by Store",
-    "transactionAmount": "Transaction Amount",
-    "tokensAddedAmount": "Tokens added amount",
-    "amountTokensUser": "Amount tokens used",
-    "amountGiftCardsUsed": "Amount gift cards used",
-    "noTransaction": "No transaction",
-    "noTransactionDescription": "The transaction history begins after making the first purchase with the card.",
-    "date" : "Date",
-    "selectOptions" : "Select a start and end date or choose from preset options.",
-    "today" : "Today",
-    "thisWeek" : "This Week",
-    "thisMonth" : "This Month",
-     "amountRange" : "Amount Range",
-    "enterAmount" : "Enter the minimum and maximum amount.",
-   "stores" : "Stores",
-    "notChosen" : "not chosen",
-     "selectFromList" : "Select a store from the list",
-    "branch" : "Branch"
-
+    "continue": "Continue"
   }
 }

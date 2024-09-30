@@ -8,7 +8,7 @@ part of 'api_token.dart';
 
 ApiToken _$ApiTokenFromJson(Map<String, dynamic> json) => ApiToken(
       token: json['token'] as String? ?? '',
-      refreshToken: json['refreshToken'] as String? ?? '',
+      refreshToken: json['refresh_token'] as String? ?? '',
       expiresIn: (json['expires_in'] as num?)?.toInt() ?? 0,
       refreshExpiresIn: (json['refresh_expires_in'] as num?)?.toInt() ?? 0,
       tokenType: json['token_type'] as String? ?? '',
@@ -18,7 +18,7 @@ ApiToken _$ApiTokenFromJson(Map<String, dynamic> json) => ApiToken(
 
 Map<String, dynamic> _$ApiTokenToJson(ApiToken instance) => <String, dynamic>{
       'token': instance.token,
-      'refreshToken': instance.refreshToken,
+      'refresh_token': instance.refreshToken,
       'expires_in': instance.expiresIn,
       'refresh_expires_in': instance.refreshExpiresIn,
       'token_type': instance.tokenType,

@@ -3,14 +3,12 @@ import 'package:denari_app/data/profile/repository/profile_repository.dart';
 import 'package:denari_app/store/profile/profile_state.dart';
 import 'package:denari_app/utils/di/config.dart';
 import 'package:denari_app/utils/extensions/extensions.dart';
-import 'package:denari_app/view/screens/profile/listeners/profile_update_listener.dart';
 import 'package:denari_app/view/screens/profile/widgets/profile_menu.dart';
 import 'package:denari_app/view/screens/profile/widgets/user_banner.dart';
 import 'package:denari_app/view/widgets/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
-import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -28,7 +26,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     _state.getProfile();
-    profileUpdateListener.addListener(_onUpdateProfile);
     reaction(
       (reaction) => _state.getError,
       (value) {
@@ -42,12 +39,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   @override
-  void dispose() {
-    profileUpdateListener.removeListener(_onUpdateProfile);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -56,19 +47,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           builder: (context) => UserBanner(profile: _state.profile),
         ),
       ),
-      body: Provider(
-        create: (context) => _state,
-        child: SafeArea(
-          minimum: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-          child: Observer(
-            builder: (context) => ProfileMenu(profile: _state.profile),
-          ),
+      body: SafeArea(
+        minimum: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        child: Observer(
+          builder: (context) => ProfileMenu(profile: _state.profile),
         ),
       ),
     );
-  }
-
-  void _onUpdateProfile() {
-    _state.getProfile();
   }
 }

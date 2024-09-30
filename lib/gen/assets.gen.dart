@@ -53,15 +53,8 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/Other.svg
   SvgGenImage get other => const SvgGenImage('assets/media/icons/Other.svg');
 
-  /// File path: assets/media/icons/Pin.svg
-  SvgGenImage get pin => const SvgGenImage('assets/media/icons/Pin.svg');
-
   /// File path: assets/media/icons/Token.svg
   SvgGenImage get token => const SvgGenImage('assets/media/icons/Token.svg');
-
-  /// File path: assets/media/icons/alarm-bell.svg
-  SvgGenImage get alarmBell =>
-      const SvgGenImage('assets/media/icons/alarm-bell.svg');
 
   /// File path: assets/media/icons/bell-ring.svg
   SvgGenImage get bellRing =>
@@ -69,13 +62,6 @@ class $AssetsMediaIconsGen {
 
   /// File path: assets/media/icons/bell.svg
   SvgGenImage get bell => const SvgGenImage('assets/media/icons/bell.svg');
-
-  /// File path: assets/media/icons/bigPin.svg
-  SvgGenImage get bigPin => const SvgGenImage('assets/media/icons/bigPin.svg');
-
-  /// File path: assets/media/icons/calendar-days.svg
-  SvgGenImage get calendarDays =>
-      const SvgGenImage('assets/media/icons/calendar-days.svg');
 
   /// File path: assets/media/icons/camera.svg
   SvgGenImage get camera => const SvgGenImage('assets/media/icons/camera.svg');
@@ -95,13 +81,6 @@ class $AssetsMediaIconsGen {
   SvgGenImage get circleUserRound =>
       const SvgGenImage('assets/media/icons/circle-user-round.svg');
 
-  /// File path: assets/media/icons/clock.svg
-  SvgGenImage get clock => const SvgGenImage('assets/media/icons/clock.svg');
-
-  /// File path: assets/media/icons/close-left.svg
-  SvgGenImage get closeLeft =>
-      const SvgGenImage('assets/media/icons/close-left.svg');
-
   /// File path: assets/media/icons/credit-card-1.svg
   SvgGenImage get creditCard1 =>
       const SvgGenImage('assets/media/icons/credit-card-1.svg');
@@ -117,9 +96,6 @@ class $AssetsMediaIconsGen {
   SvgGenImage get drawerSend =>
       const SvgGenImage('assets/media/icons/drawer-send.svg');
 
-  /// File path: assets/media/icons/filter.svg
-  SvgGenImage get filter => const SvgGenImage('assets/media/icons/filter.svg');
-
   /// File path: assets/media/icons/fireworks.svg
   SvgGenImage get fireworks =>
       const SvgGenImage('assets/media/icons/fireworks.svg');
@@ -127,18 +103,11 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/food.svg
   SvgGenImage get food => const SvgGenImage('assets/media/icons/food.svg');
 
-  /// File path: assets/media/icons/handShake.svg
-  SvgGenImage get handShake =>
-      const SvgGenImage('assets/media/icons/handShake.svg');
-
   /// File path: assets/media/icons/house.svg
   SvgGenImage get house => const SvgGenImage('assets/media/icons/house.svg');
 
   /// File path: assets/media/icons/image-8.svg
   SvgGenImage get image8 => const SvgGenImage('assets/media/icons/image-8.svg');
-
-  /// File path: assets/media/icons/info.svg
-  SvgGenImage get info => const SvgGenImage('assets/media/icons/info.svg');
 
   /// File path: assets/media/icons/lock.svg
   SvgGenImage get lock => const SvgGenImage('assets/media/icons/lock.svg');
@@ -146,22 +115,11 @@ class $AssetsMediaIconsGen {
   /// File path: assets/media/icons/log-out.svg
   SvgGenImage get logOut => const SvgGenImage('assets/media/icons/log-out.svg');
 
-  /// File path: assets/media/icons/map.svg
-  SvgGenImage get map => const SvgGenImage('assets/media/icons/map.svg');
-
-  /// File path: assets/media/icons/phone-call.svg
-  SvgGenImage get phoneCall =>
-      const SvgGenImage('assets/media/icons/phone-call.svg');
-
   /// File path: assets/media/icons/pinned.svg
   SvgGenImage get pinned => const SvgGenImage('assets/media/icons/pinned.svg');
 
   /// File path: assets/media/icons/qr-code.svg
   SvgGenImage get qrCode => const SvgGenImage('assets/media/icons/qr-code.svg');
-
-  /// File path: assets/media/icons/rate_icon.svg
-  SvgGenImage get rateIcon =>
-      const SvgGenImage('assets/media/icons/rate_icon.svg');
 
   /// File path: assets/media/icons/safety-warning-heat.svg
   SvgGenImage get safetyWarningHeat =>
@@ -203,38 +161,26 @@ class $AssetsMediaIconsGen {
         clothing,
         groceries,
         other,
-        pin,
         token,
-        alarmBell,
         bellRing,
         bell,
-        bigPin,
-        calendarDays,
         camera,
         card,
         chevronLeft,
         chevronRight,
         circleUserRound,
-        clock,
-        closeLeft,
         creditCard1,
         creditCardSync,
         delTe,
         drawerSend,
-        filter,
         fireworks,
         food,
-        handShake,
         house,
         image8,
-        info,
         lock,
         logOut,
-        map,
-        phoneCall,
         pinned,
         qrCode,
-        rateIcon,
         safetyWarningHeat,
         scanLine,
         search,
@@ -250,13 +196,9 @@ class $AssetsMediaIconsGen {
 class $AssetsMediaImagesGen {
   const $AssetsMediaImagesGen();
 
-  /// File path: assets/media/images/Frame.png
-  AssetGenImage get frame =>
-      const AssetGenImage('assets/media/images/Frame.png');
-
-  /// File path: assets/media/images/cog-icon.png
-  AssetGenImage get cogIcon =>
-      const AssetGenImage('assets/media/images/cog-icon.png');
+  /// File path: assets/media/images/Coffe.png
+  AssetGenImage get coffe =>
+      const AssetGenImage('assets/media/images/Coffe.png');
 
   /// File path: assets/media/images/credit-card-1.png
   AssetGenImage get creditCard1 =>
@@ -274,17 +216,13 @@ class $AssetsMediaImagesGen {
   AssetGenImage get fireworks =>
       const AssetGenImage('assets/media/images/fireworks.png');
 
+  /// File path: assets/media/images/image 9.png
+  AssetGenImage get image9 =>
+      const AssetGenImage('assets/media/images/image 9.png');
+
   /// File path: assets/media/images/ratedStar.png
   AssetGenImage get ratedStar =>
       const AssetGenImage('assets/media/images/ratedStar.png');
-
-  /// File path: assets/media/images/safety-warning-heat.png
-  AssetGenImage get safetyWarningHeat =>
-      const AssetGenImage('assets/media/images/safety-warning-heat.png');
-
-  /// File path: assets/media/images/skyteam.png
-  AssetGenImage get skyteam =>
-      const AssetGenImage('assets/media/images/skyteam.png');
 
   /// File path: assets/media/images/star.png
   AssetGenImage get star => const AssetGenImage('assets/media/images/star.png');
@@ -293,19 +231,22 @@ class $AssetsMediaImagesGen {
   AssetGenImage get taskListClock =>
       const AssetGenImage('assets/media/images/task-list-clock.png');
 
+  /// File path: assets/media/images/toy_story.png
+  AssetGenImage get toyStory =>
+      const AssetGenImage('assets/media/images/toy_story.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
-        frame,
-        cogIcon,
+        coffe,
         creditCard1,
         cryptoCurrencyNamecoin,
         filledStar,
         fireworks,
+        image9,
         ratedStar,
-        safetyWarningHeat,
-        skyteam,
         star,
-        taskListClock
+        taskListClock,
+        toyStory
       ];
 }
 

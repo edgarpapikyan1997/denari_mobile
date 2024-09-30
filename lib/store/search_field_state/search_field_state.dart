@@ -1,9 +1,11 @@
+// search_field_state.dart
 import 'package:mobx/mobx.dart';
+
 part 'search_field_state.g.dart';
 
-class SearchFieldState = ImplSearchFieldState with _$SearchFieldState;
+class SearchFieldState = _SearchFieldState with _$SearchFieldState;
 
-abstract class ImplSearchFieldState with Store {
+abstract class _SearchFieldState with Store {
   @observable
   bool showCancel = false;
 
@@ -11,20 +13,18 @@ abstract class ImplSearchFieldState with Store {
   bool showSuggestion = false;
 
   @observable
-  ObservableList<dynamic> filteredSuggestions =
-      ObservableList<dynamic>();
+  ObservableList<String> filteredSuggestions = ObservableList<String>();
 
   @action
-  void filterSuggestions(String query, List<dynamic> searchList) {
+  void filterSuggestions(String query, List<String> searchList) {
     if (query.isEmpty) {
-      filteredSuggestions = ObservableList<dynamic>();
+      filteredSuggestions = ObservableList<String>();
     } else {
-      filteredSuggestions = ObservableList<dynamic>.of(
+      filteredSuggestions = ObservableList<String>.of(
         searchList.where(
-              (item) => item.shop.name.toLowerCase().contains(query.toLowerCase()),
+              (item) => item.toLowerCase().contains(query.toLowerCase()),
         ),
       );
     }
   }
-
 }
